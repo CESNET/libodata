@@ -1,0 +1,36 @@
+cmake_minimum_required(VERSION 3.0)
+project (odata-client)
+
+# dependencies
+set(EXTERNAL_PROJECTS_PREFIX ${CMAKE_BINARY_DIR}/external-projects)
+
+include(ExternalProject)
+
+ExternalProject_Add(Externalrestclient-cpp
+     PREFIX "${EXTERNAL_PROJECTS_PREFIX}"
+     GIT_REPOSITORY "https://github.com/mrtazz/restclient-cpp.git"
+     GIT_TAG "master"
+     CONFIGURE_COMMAND autoreconf --force --install COMMAND ./configure --prefix=<INSTALL_DIR>
+     BUILD_COMMAND ${MAKE}
+     BUILD_IN_SOURCE 1
+     )
+
+set(REST_CLIENT_INCLUDE_DIR ${EXTERNAL_PROJECTS_PREFIX}/include/restclient-cpp)
+
+message(STATUS "restclient-cpp include: ${REST_CLIENT_INCLUDE_DIR}")
+
+#project definition
+include_directories(${EXTERNAL_PROJECTS_PREFIX}/include)
+
+add_executable(${PROJECT_NAME} src/main.cpp)
+
+add_library(restclient-cpp SHARED IMPORTED)
+set_target_properties(restclient-cpp PROPERTIES IMPORTED_LOCATION ${EXTERNAL_PROJECTS_PREFIX}/lib/librestclient-cpp.a)
+target_link_libraries(${PROJECT_NAME} restclient-cpp)
+
+find_package(CURL REQUIRED)
+target_link_libraries(${PROJECT_NAME} ${CURL_LIBRARIES})
+
+add_dependencies(${PROJECT_NAME} Externalrestclient-cpp)
+
+add_definitions(-Wall -std=c++14 -pedantic -Wextra)
