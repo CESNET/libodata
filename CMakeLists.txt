@@ -10,7 +10,7 @@ ExternalProject_Add(Externalrestclient-cpp
      PREFIX "${EXTERNAL_PROJECTS_PREFIX}"
      GIT_REPOSITORY "https://github.com/mrtazz/restclient-cpp.git"
      GIT_TAG "master"
-     CONFIGURE_COMMAND autoreconf --force --install COMMAND ./configure --prefix=<INSTALL_DIR>
+     CONFIGURE_COMMAND autoreconf --install COMMAND ./configure --prefix=<INSTALL_DIR>
      BUILD_COMMAND ${MAKE}
      BUILD_IN_SOURCE 1
      )
@@ -33,4 +33,4 @@ target_link_libraries(${PROJECT_NAME} ${CURL_LIBRARIES})
 
 add_dependencies(${PROJECT_NAME} Externalrestclient-cpp)
 
-add_definitions(-Wall -std=c++14 -pedantic -Wextra)
+add_definitions(-Wall -std=c++14 -pedantic -Wextra -Werror)
