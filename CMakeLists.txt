@@ -33,4 +33,4 @@ target_link_libraries(${PROJECT_NAME} ${CURL_LIBRARIES})
 
 add_dependencies(${PROJECT_NAME} Externalrestclient-cpp)
 
-add_definitions(-Wall -std=c++14 -pedantic -Wextra -Werror)
+add_definitions(-Wall -std=c++14 -pedantic -Wextra)
