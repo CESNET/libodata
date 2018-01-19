@@ -13,6 +13,7 @@ ExternalProject_Add(Externalrestclient-cpp
      CONFIGURE_COMMAND autoreconf --install COMMAND ./configure --prefix=<INSTALL_DIR>
      BUILD_COMMAND ${MAKE}
      BUILD_IN_SOURCE 1
+     UPDATE_COMMAND ""
      )
 
 set(REST_CLIENT_INCLUDE_DIR ${EXTERNAL_PROJECTS_PREFIX}/include/restclient-cpp)
