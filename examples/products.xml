@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xml:base="https://dhr1.cesnet.cz/odata/v1/Products('95905fd2-3ccc-40d6-a9c5-d825d3fdce5f')/">
+  <id>https://dhr1.cesnet.cz/odata/v1/Products('95905fd2-3ccc-40d6-a9c5-d825d3fdce5f')/Products</id>
+  <title type="text">Products</title>
+  <updated>2018-01-22T07:57:10.723Z</updated>
+  <author>
+    <name/>
+  </author>
+  <link href="Products" rel="self" title="Products"/>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/Products('95905fd2-3ccc-40d6-a9c5-d825d3fdce5f')/Products('Quicklook')</id>
+    <title type="text">QL-S3A_SL_1_RBT____20170326T102022_20170326T102322_20170326T122723_0179_016_008_2159_SVL_O_NR_002</title>
+    <updated>2017-03-27T23:14:20.747Z</updated>
+    <category term="DHuS.Product" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="Products('Quicklook')" rel="edit" title="Product"/>
+    <link href="Products('Quicklook')/$value" rel="edit-media" type="application/octet-stream"/>
+    <link href="Products('Quicklook')/Products" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Products" title="Products" type="application/atom+xml;type=feed"/>
+    <link href="Products('Quicklook')/Nodes" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Nodes" title="Nodes" type="application/atom+xml;type=feed"/>
+    <link href="Products('Quicklook')/Attributes" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Attributes" title="Attributes" type="application/atom+xml;type=feed"/>
+    <link href="Products('Quicklook')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/octet-stream" src="Products('Quicklook')/$value"/>
+    <m:properties>
+      <d:Id>Quicklook</d:Id>
+      <d:Name>QL-S3A_SL_1_RBT____20170326T102022_20170326T102322_20170326T122723_0179_016_008_2159_SVL_O_NR_002</d:Name>
+      <d:ContentType>image/jpeg</d:ContentType>
+      <d:ContentLength>65161</d:ContentLength>
+      <d:ChildrenNumber>2</d:ChildrenNumber>
+      <d:Value m:null="true"/>
+      <d:CreationDate>2017-03-27T22:02:53.618</d:CreationDate>
+      <d:IngestionDate>2017-03-27T23:14:20.747</d:IngestionDate>
+      <d:EvictionDate m:null="true"/>
+      <d:ContentDate m:type="DHuS.TimeRange">
+        <d:Start>2017-03-26T10:33:43.253</d:Start>
+        <d:End>2017-03-26T10:36:43.253</d:End>
+      </d:ContentDate>
+      <d:Checksum m:type="DHuS.Checksum">
+        <d:Algorithm>MD5</d:Algorithm>
+        <d:Value>F23A41C76F05764CA8EB4E5CEB0EB663</d:Value>
+      </d:Checksum>
+      <d:ContentGeometry>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;41.932,-10.189 41.8777,-9.57869 41.82,-8.96943 41.7592,-8.3613 41.6951,-7.75435 41.6278,-7.14862 41.545,-6.52919 41.4743,-5.93099 41.4012,-5.32974 41.3158,-4.72251 41.2403,-4.12545 41.147,-3.52378 41.0643,-2.9409 40.9705,-2.34492 40.8715,-1.74686 40.776,-1.16506 40.6792,-0.570553 40.5752,0.010017 40.4651,0.59208 40.3503,1.18231 40.2361,1.75719 40.127,2.33444 40.0053,2.91043 39.8804,3.49219 39.7604,4.07048 39.6291,4.63315 39.5015,5.20812 39.3699,5.77334 39.2331,6.33129 39.0978,6.89522 39.0426,7.11522 41.5946,8.21338 44.1781,9.41999 46.748,10.7332 49.3018,12.1729 49.3642,11.9111 49.5226,11.2652 49.6827,10.6006 49.8365,9.93534 49.9933,9.25879 50.1361,8.59116 50.2837,7.90685 50.417,7.22622 50.555,6.53937 50.6872,5.85279 50.8152,5.16429 50.9337,4.45235 51.0513,3.76321 51.1713,3.04785 51.2812,2.34611 51.3899,1.62823 51.4834,0.912304 51.5887,0.192775 51.6779,-0.51844 51.7617,-1.24214 51.8499,-1.96781 51.933,-2.70956 52.0078,-3.44171 52.078,-4.17626 52.1436,-4.91303 52.2016,-5.6384 52.2541,-6.3909 52.3127,-7.13529 52.3502,-7.86439 52.4021,-8.62535 49.776,-9.00591 47.1483,-9.39472 44.5191,-9.79141 41.932,-10.189&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:ContentGeometry>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/Products('95905fd2-3ccc-40d6-a9c5-d825d3fdce5f')/Products('Thumbnail')</id>
+    <title type="text">THUMBS3A_SL_1_RBT____20170326T102022_20170326T102322_20170326T122723_0179_016_008_2159_SVL_O_NR_002</title>
+    <updated>2017-03-27T23:14:20.747Z</updated>
+    <category term="DHuS.Product" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="Products('Thumbnail')" rel="edit" title="Product"/>
+    <link href="Products('Thumbnail')/$value" rel="edit-media" type="application/octet-stream"/>
+    <link href="Products('Thumbnail')/Products" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Products" title="Products" type="application/atom+xml;type=feed"/>
+    <link href="Products('Thumbnail')/Nodes" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Nodes" title="Nodes" type="application/atom+xml;type=feed"/>
+    <link href="Products('Thumbnail')/Attributes" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Attributes" title="Attributes" type="application/atom+xml;type=feed"/>
+    <link href="Products('Thumbnail')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/octet-stream" src="Products('Thumbnail')/$value"/>
+    <m:properties>
+      <d:Id>Thumbnail</d:Id>
+      <d:Name>THUMBS3A_SL_1_RBT____20170326T102022_20170326T102322_20170326T122723_0179_016_008_2159_SVL_O_NR_002</d:Name>
+      <d:ContentType>image/jpeg</d:ContentType>
+      <d:ContentLength>2400</d:ContentLength>
+      <d:ChildrenNumber>2</d:ChildrenNumber>
+      <d:Value m:null="true"/>
+      <d:CreationDate>2017-03-27T22:02:53.618</d:CreationDate>
+      <d:IngestionDate>2017-03-27T23:14:20.747</d:IngestionDate>
+      <d:EvictionDate m:null="true"/>
+      <d:ContentDate m:type="DHuS.TimeRange">
+        <d:Start>2017-03-26T10:33:43.253</d:Start>
+        <d:End>2017-03-26T10:36:43.253</d:End>
+      </d:ContentDate>
+      <d:Checksum m:type="DHuS.Checksum">
+        <d:Algorithm>MD5</d:Algorithm>
+        <d:Value>F23A41C76F05764CA8EB4E5CEB0EB663</d:Value>
+      </d:Checksum>
+      <d:ContentGeometry>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;41.932,-10.189 41.8777,-9.57869 41.82,-8.96943 41.7592,-8.3613 41.6951,-7.75435 41.6278,-7.14862 41.545,-6.52919 41.4743,-5.93099 41.4012,-5.32974 41.3158,-4.72251 41.2403,-4.12545 41.147,-3.52378 41.0643,-2.9409 40.9705,-2.34492 40.8715,-1.74686 40.776,-1.16506 40.6792,-0.570553 40.5752,0.010017 40.4651,0.59208 40.3503,1.18231 40.2361,1.75719 40.127,2.33444 40.0053,2.91043 39.8804,3.49219 39.7604,4.07048 39.6291,4.63315 39.5015,5.20812 39.3699,5.77334 39.2331,6.33129 39.0978,6.89522 39.0426,7.11522 41.5946,8.21338 44.1781,9.41999 46.748,10.7332 49.3018,12.1729 49.3642,11.9111 49.5226,11.2652 49.6827,10.6006 49.8365,9.93534 49.9933,9.25879 50.1361,8.59116 50.2837,7.90685 50.417,7.22622 50.555,6.53937 50.6872,5.85279 50.8152,5.16429 50.9337,4.45235 51.0513,3.76321 51.1713,3.04785 51.2812,2.34611 51.3899,1.62823 51.4834,0.912304 51.5887,0.192775 51.6779,-0.51844 51.7617,-1.24214 51.8499,-1.96781 51.933,-2.70956 52.0078,-3.44171 52.078,-4.17626 52.1436,-4.91303 52.2016,-5.6384 52.2541,-6.3909 52.3127,-7.13529 52.3502,-7.86439 52.4021,-8.62535 49.776,-9.00591 47.1483,-9.39472 44.5191,-9.79141 41.932,-10.189&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:ContentGeometry>
+    </m:properties>
+  </entry>
+</feed>
