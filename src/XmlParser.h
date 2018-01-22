@@ -10,7 +10,15 @@ class Entry;
 
 class XmlParser {
 public:
+    XmlParser() = default;
+    ~XmlParser() = default;
+    XmlParser(
+        const XmlParser&) = delete;
+    XmlParser& operator=(
+        const XmlParser&) = delete;
     std::vector<Entry> parseList(
+        const std::string& xml) const;
+    std::string parseFilename(
         const std::string& xml) const;
 };
 

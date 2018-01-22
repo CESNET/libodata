@@ -2,6 +2,7 @@
 #include "Entry.h"
 #include "XmlParser.h"
 
+namespace {
 constexpr auto LIST_RESPONSE =
         "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
         "<feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:m=\"http://schemas.microsoft.com/ado/2007/08/dataservices/metadata\" xmlns:d=\"http://schemas.microsoft.com/ado/2007/08/dataservices\" xml:base=\"https://dhr1.cesnet.cz/odata/v1/\">\n"
@@ -209,12 +210,37 @@ constexpr auto LIST_RESPONSE =
         "  </entry>\n"
         "</feed>";
 
+constexpr auto FILENAME_RESPONSE = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+        "<entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:m=\"http://schemas.microsoft.com/ado/2007/08/dataservices/metadata\" xmlns:d=\"http://schemas.microsoft.com/ado/2007/08/dataservices\" xml:base=\"https://dhr1.cesnet.cz/odata/v1/Products(\'32d27303-8a3c-4088-8a09-4e4816174d6b\')/\">\n"
+        "  <id>https://dhr1.cesnet.cz/odata/v1/Products(\'32d27303-8a3c-4088-8a09-4e4816174d6b\')/Attributes(\'Filename\')</id>\n"
+        "  <title type=\"text\">Filename</title>\n"
+        "  <updated>2018-01-22T08:14:30.386Z</updated>\n"
+        "  <category term=\"DHuS.Attribute\" scheme=\"http://schemas.microsoft.com/ado/2007/08/dataservices/scheme\"/>\n"
+        "  <link href=\"Attributes(\'Filename\')\" rel=\"edit\" title=\"Attribute\"/>\n"
+        "  <content type=\"application/xml\">\n"
+        "    <m:properties>\n"
+        "      <d:Id>Filename</d:Id>\n"
+        "      <d:Name>Filename</d:Name>\n"
+        "      <d:ContentType>text/plain</d:ContentType>\n"
+        "      <d:ContentLength>65</d:ContentLength>\n"
+        "      <d:Value>S2A_MSIL2A_20170620T100031_N0205_R122_T33UWR_20170620T100453.SAFE</d:Value>\n"
+        "      <d:Category/>\n"
+        "    </m:properties>\n"
+        "  </content>\n"
+        "</entry>";
+}
+
 namespace OData {
 namespace Test {
 TEST(XmlParserTest, TestListParser) {
     XmlParser parser;
     const auto entries = parser.parseList(LIST_RESPONSE);
     ASSERT_EQ(5, entries.size());
+}
+
+TEST(XmlParserTest, TestFilenameParser) {
+    XmlParser parser;
+    ASSERT_EQ("S2A_MSIL2A_20170620T100031_N0205_R122_T33UWR_20170620T100453.SAFE", parser.parseFilename(FILENAME_RESPONSE));
 }
 
 } /* namespace Test */
