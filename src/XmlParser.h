@@ -20,6 +20,8 @@ public:
         const std::string& xml) const;
     std::string parseFilename(
         const std::string& xml) const;
+    std::vector<std::string> parseManifest(
+        const std::string& manifest) const;
 };
 
 } /* namespace OData */

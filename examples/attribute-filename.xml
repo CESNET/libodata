@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xml:base="https://dhr1.cesnet.cz/odata/v1/Products('32d27303-8a3c-4088-8a09-4e4816174d6b')/">
+  <id>https://dhr1.cesnet.cz/odata/v1/Products('32d27303-8a3c-4088-8a09-4e4816174d6b')/Attributes('Filename')</id>
+  <title type="text">Filename</title>
+  <updated>2018-01-22T08:14:30.386Z</updated>
+  <category term="DHuS.Attribute" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+  <link href="Attributes('Filename')" rel="edit" title="Attribute"/>
+  <content type="application/xml">
+    <m:properties>
+      <d:Id>Filename</d:Id>
+      <d:Name>Filename</d:Name>
+      <d:ContentType>text/plain</d:ContentType>
+      <d:ContentLength>65</d:ContentLength>
+      <d:Value>S2A_MSIL2A_20170620T100031_N0205_R122_T33UWR_20170620T100453.SAFE</d:Value>
+      <d:Category/>
+    </m:properties>
+  </content>
+</entry>
