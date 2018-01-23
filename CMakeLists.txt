@@ -21,9 +21,12 @@ set(REST_CLIENT_INCLUDE_DIR ${EXTERNAL_PROJECTS_PREFIX}/include/restclient-cpp)
 message(STATUS "restclient-cpp include: ${REST_CLIENT_INCLUDE_DIR}")
 
 #project definition
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 include_directories(${EXTERNAL_PROJECTS_PREFIX}/include)
 add_library(libodata-client
-    src/Entry.cpp src/Entry.h
+    src/Product.cpp src/Product.h
     src/XmlParser.cpp src/XmlParser.h
     )
 add_executable(${PROJECT_NAME} src/main.cpp)
@@ -48,6 +51,7 @@ add_executable(runtest
     test/main.cpp 
     test/XmlParserTest.cpp
     )
+add_test(tests runtest)
 include_directories(runtest ${GTEST_INCLUDE_DIRS} src)
 target_link_libraries(runtest ${GTEST_LIBRARIES} ${GTEST_MAIN_LIBRARIES} pthread)
 target_link_libraries(runtest tinyxml2)

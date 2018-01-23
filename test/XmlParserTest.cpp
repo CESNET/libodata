@@ -2,14 +2,14 @@
 #include <fstream>
 #include <stdexcept>
 #include <sstream>
-#include "Entry.h"
+#include "Product.h"
 #include "XmlParser.h"
 
 namespace {
 std::string readTestInstance(
     const std::string& filename) {
     std::fstream file("examples/" + filename, std::fstream::in);
-    if(file.is_open()) {
+    if (file.is_open()) {
         std::stringstream buffer;
         buffer << file.rdbuf();
         return buffer.str();
@@ -21,26 +21,27 @@ std::string readTestInstance(
 
 namespace OData {
 namespace Test {
-TEST(XmlParserTest, TestListParser) {
-    XmlParser parser;
-    const auto entries = parser.parseList(readTestInstance("list.xml"));
-    ASSERT_EQ(5, entries.size());
-    ASSERT_THROW(parser.parseList(readTestInstance("attribute-filename.xml")), std::invalid_argument);
-}
-
-TEST(XmlParserTest, TestFilenameParser) {
-    XmlParser parser;
-    ASSERT_EQ("S2A_MSIL2A_20170620T100031_N0205_R122_T33UWR_20170620T100453.SAFE",
-            parser.parseFilename(readTestInstance("attribute-filename.xml")));
-    ASSERT_EQ("S3A_SL_1_RBT____20170326T102022_20170326T102322_20170326T122723_0179_016_008_2159_SVL_O_NR_002.SEN3",
-            parser.parseFilename(readTestInstance("attributes.xml")));
-    ASSERT_THROW(parser.parseFilename(readTestInstance("list.xml")), std::invalid_argument);
-}
 
 TEST(XmlParserTest, TestManifestParser) {
     XmlParser parser;
     const auto entries = parser.parseManifest(readTestInstance("manifest.xml"));
     ASSERT_EQ(88, entries.size());
+}
+
+TEST(XmlParserTest, TestListResponseParser) {
+    XmlParser parser;
+    const auto entries = parser.parseList(readTestInstance("search.xml"));
+    ASSERT_EQ(5, entries.size());
+    ASSERT_EQ(Product("63a6c50d-1bba-45eb-a7db-85ecd334e30b",
+            "S1B_IW_SLC__1SDV_20180121T165029_20180121T165056_009272_010A05_11E9",
+            "2018-01-22T23:06:09.235Z",
+            "S1B_IW_SLC__1SDV_20180121T165029_20180121T165056_009272_010A05_11E9.SAFE"),
+            entries[0]);
+    ASSERT_EQ(Product("725adbf7-dd68-49c2-b466-061fa5b07861",
+                "S1B_IW_SLC__1SDV_20180121T165053_20180121T165120_009272_010A05_A393",
+                "2018-01-22T23:05:33.262Z",
+                "S1B_IW_SLC__1SDV_20180121T165053_20180121T165120_009272_010A05_A393.SAFE"),
+                entries[3]);
 }
 
 } /* namespace Test */

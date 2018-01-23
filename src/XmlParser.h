@@ -6,7 +6,7 @@
 
 namespace OData {
 
-class Entry;
+class Product;
 
 class XmlParser {
 public:
@@ -16,9 +16,7 @@ public:
         const XmlParser&) = delete;
     XmlParser& operator=(
         const XmlParser&) = delete;
-    std::vector<Entry> parseList(
-        const std::string& xml) const;
-    std::string parseFilename(
+    std::vector<Product> parseList(
         const std::string& xml) const;
     std::vector<std::string> parseManifest(
         const std::string& manifest) const;

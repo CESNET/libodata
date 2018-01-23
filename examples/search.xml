@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns="http://www.w3.org/2005/Atom">
+  <title>Data Hub Service search results for: (platformname:Sentinel-1)</title>
+  <subtitle>Displaying 0 to 4 of 5437 total results. Request done in 0 seconds.</subtitle>
+  <updated>2018-01-23T09:23:31.520Z</updated>
+  <author>
+    <name>Data Hub Service</name>
+  </author>
+  <id>https://dhr1.cesnet.cz/search?q=(platformname:Sentinel-1)</id>
+  <opensearch:totalResults>5437</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <opensearch:itemsPerPage>5</opensearch:itemsPerPage>
+  <opensearch:Query role="request" searchTerms="(platformname:Sentinel-1)" startPage="1"/>
+  <link rel="self" type="application/atom+xml" href="https://dhr1.cesnet.cz/search?q=(platformname:Sentinel-1)&amp;start=0&amp;rows=5"/>
+  <link rel="first" type="application/atom+xml" href="https://dhr1.cesnet.cz/search?q=(platformname:Sentinel-1)&amp;start=0&amp;rows=5"/>
+  <link rel="next" type="application/atom+xml" href="https://dhr1.cesnet.cz/search?q=(platformname:Sentinel-1)&amp;start=5&amp;rows=5"/>
+  <link rel="last" type="application/atom+xml" href="https://dhr1.cesnet.cz/search?q=(platformname:Sentinel-1)&amp;start=5436&amp;rows=5"/>
+  <link rel="search" type="application/opensearchdescription+xml" href="opensearch_description.xml"/>
+  <entry>
+    <title>S1B_IW_SLC__1SDV_20180121T165029_20180121T165056_009272_010A05_11E9</title>
+    <link href="https://dhr1.cesnet.cz/odata/v1/Products('63a6c50d-1bba-45eb-a7db-85ecd334e30b')/$value"/>
+    <link rel="alternative" href="https://dhr1.cesnet.cz/odata/v1/Products('63a6c50d-1bba-45eb-a7db-85ecd334e30b')/"/>
+    <link rel="icon" href="https://dhr1.cesnet.cz/odata/v1/Products('63a6c50d-1bba-45eb-a7db-85ecd334e30b')/Products('Quicklook')/$value"/>
+    <id>63a6c50d-1bba-45eb-a7db-85ecd334e30b</id>
+    <summary>Date: 2018-01-21T16:50:29.091Z, Instrument: SAR-C SAR, Mode: VV VH, Satellite: Sentinel-1, Size: 7.7 GB</summary>
+    <date name="ingestiondate">2018-01-22T23:06:09.235Z</date>
+    <date name="beginposition">2018-01-21T16:50:29.091Z</date>
+    <date name="endposition">2018-01-21T16:50:56.049Z</date>
+    <int name="missiondatatakeid">68101</int>
+    <int name="orbitnumber">9272</int>
+    <int name="lastorbitnumber">9272</int>
+    <int name="relativeorbitnumber">146</int>
+    <int name="lastrelativeorbitnumber">146</int>
+    <int name="slicenumber">20</int>
+    <str name="acquisitiontype">NOMINAL</str>
+    <str name="filename">S1B_IW_SLC__1SDV_20180121T165029_20180121T165056_009272_010A05_11E9.SAFE</str>
+    <str name="gmlfootprint">&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;50.070751,12.604648 50.477428,16.220430 48.863400,16.600513 48.458580,13.104511 50.070751,12.604648&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</str>
+    <str name="format">SAFE</str>
+    <str name="identifier">S1B_IW_SLC__1SDV_20180121T165029_20180121T165056_009272_010A05_11E9</str>
+    <str name="instrumentshortname">SAR-C SAR</str>
+    <str name="sensoroperationalmode">IW</str>
+    <str name="instrumentname">Synthetic Aperture Radar (C-band)</str>
+    <str name="swathidentifier">IW1 IW2 IW3</str>
+    <str name="footprint">POLYGON ((12.604648 50.070751,16.220430 50.477428,16.600513 48.863400,13.104511 48.458580,12.604648 50.070751))</str>
+    <str name="platformidentifier">2016-025A</str>
+    <str name="orbitdirection">ASCENDING</str>
+    <str name="polarisationmode">VV VH</str>
+    <str name="productclass">S</str>
+    <str name="producttype">SLC</str>
+    <str name="platformname">Sentinel-1</str>
+    <str name="size">7.7 GB</str>
+    <str name="status">ARCHIVED</str>
+    <str name="uuid">63a6c50d-1bba-45eb-a7db-85ecd334e30b</str>
+  </entry>
+  <entry>
+    <title>S1B_IW_SLC__1SDV_20180121T165004_20180121T165031_009272_010A05_78EB</title>
+    <link href="https://dhr1.cesnet.cz/odata/v1/Products('992d9daa-8919-454b-a3ae-96a3a20beec8')/$value"/>
+    <link rel="alternative" href="https://dhr1.cesnet.cz/odata/v1/Products('992d9daa-8919-454b-a3ae-96a3a20beec8')/"/>
+    <link rel="icon" href="https://dhr1.cesnet.cz/odata/v1/Products('992d9daa-8919-454b-a3ae-96a3a20beec8')/Products('Quicklook')/$value"/>
+    <id>992d9daa-8919-454b-a3ae-96a3a20beec8</id>
+    <summary>Date: 2018-01-21T16:50:04.264Z, Instrument: SAR-C SAR, Mode: VV VH, Satellite: Sentinel-1, Size: 7.7 GB</summary>
+    <date name="ingestiondate">2018-01-22T23:06:04.121Z</date>
+    <date name="beginposition">2018-01-21T16:50:04.264Z</date>
+    <date name="endposition">2018-01-21T16:50:31.224Z</date>
+    <int name="missiondatatakeid">68101</int>
+    <int name="orbitnumber">9272</int>
+    <int name="lastorbitnumber">9272</int>
+    <int name="relativeorbitnumber">146</int>
+    <int name="lastrelativeorbitnumber">146</int>
+    <int name="slicenumber">19</int>
+    <str name="acquisitiontype">NOMINAL</str>
+    <str name="filename">S1B_IW_SLC__1SDV_20180121T165004_20180121T165031_009272_010A05_78EB.SAFE</str>
+    <str name="gmlfootprint">&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;48.586880,13.070670 48.991451,16.573654 47.376522,16.944366 46.973225,13.551931 48.586880,13.070670&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</str>
+    <str name="format">SAFE</str>
+    <str name="identifier">S1B_IW_SLC__1SDV_20180121T165004_20180121T165031_009272_010A05_78EB</str>
+    <str name="instrumentshortname">SAR-C SAR</str>
+    <str name="sensoroperationalmode">IW</str>
+    <str name="instrumentname">Synthetic Aperture Radar (C-band)</str>
+    <str name="swathidentifier">IW1 IW2 IW3</str>
+    <str name="footprint">POLYGON ((13.070670 48.586880,16.573654 48.991451,16.944366 47.376522,13.551931 46.973225,13.070670 48.586880))</str>
+    <str name="platformidentifier">2016-025A</str>
+    <str name="orbitdirection">ASCENDING</str>
+    <str name="polarisationmode">VV VH</str>
+    <str name="productclass">S</str>
+    <str name="producttype">SLC</str>
+    <str name="platformname">Sentinel-1</str>
+    <str name="size">7.7 GB</str>
+    <str name="status">ARCHIVED</str>
+    <str name="uuid">992d9daa-8919-454b-a3ae-96a3a20beec8</str>
+  </entry>
+  <entry>
+    <title>S1A_IW_SLC__1SDV_20180122T053354_20180122T053421_020263_022975_E8D5</title>
+    <link href="https://dhr1.cesnet.cz/odata/v1/Products('a4e24fe8-0d0f-4864-90fb-6bead83ef128')/$value"/>
+    <link rel="alternative" href="https://dhr1.cesnet.cz/odata/v1/Products('a4e24fe8-0d0f-4864-90fb-6bead83ef128')/"/>
+    <link rel="icon" href="https://dhr1.cesnet.cz/odata/v1/Products('a4e24fe8-0d0f-4864-90fb-6bead83ef128')/Products('Quicklook')/$value"/>
+    <id>a4e24fe8-0d0f-4864-90fb-6bead83ef128</id>
+    <summary>Date: 2018-01-22T05:33:54.356Z, Instrument: SAR-C SAR, Mode: VV VH, Satellite: Sentinel-1, Size: 7.65 GB</summary>
+    <date name="ingestiondate">2018-01-22T23:06:04.019Z</date>
+    <date name="beginposition">2018-01-22T05:33:54.356Z</date>
+    <date name="endposition">2018-01-22T05:34:21.451Z</date>
+    <int name="missiondatatakeid">141685</int>
+    <int name="orbitnumber">20263</int>
+    <int name="lastorbitnumber">20263</int>
+    <int name="relativeorbitnumber">66</int>
+    <int name="lastrelativeorbitnumber">66</int>
+    <int name="slicenumber">17</int>
+    <str name="acquisitiontype">NOMINAL</str>
+    <str name="filename">S1A_IW_SLC__1SDV_20180122T053354_20180122T053421_020263_022975_E8D5.SAFE</str>
+    <str name="gmlfootprint">&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;49.482594,11.149922 49.885307,7.602721 51.506836,7.991736 51.101860,11.665391 49.482594,11.149922&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</str>
+    <str name="format">SAFE</str>
+    <str name="identifier">S1A_IW_SLC__1SDV_20180122T053354_20180122T053421_020263_022975_E8D5</str>
+    <str name="instrumentshortname">SAR-C SAR</str>
+    <str name="sensoroperationalmode">IW</str>
+    <str name="instrumentname">Synthetic Aperture Radar (C-band)</str>
+    <str name="swathidentifier">IW1 IW2 IW3</str>
+    <str name="footprint">POLYGON ((11.149922 49.482594,7.602721 49.885307,7.991736 51.506836,11.665391 51.101860,11.149922 49.482594))</str>
+    <str name="platformidentifier">2014-016A</str>
+    <str name="orbitdirection">DESCENDING</str>
+    <str name="polarisationmode">VV VH</str>
+    <str name="productclass">S</str>
+    <str name="producttype">SLC</str>
+    <str name="platformname">Sentinel-1</str>
+    <str name="size">7.65 GB</str>
+    <str name="status">ARCHIVED</str>
+    <str name="uuid">a4e24fe8-0d0f-4864-90fb-6bead83ef128</str>
+  </entry>
+  <entry>
+    <title>S1B_IW_SLC__1SDV_20180121T165053_20180121T165120_009272_010A05_A393</title>
+    <link href="https://dhr1.cesnet.cz/odata/v1/Products('725adbf7-dd68-49c2-b466-061fa5b07861')/$value"/>
+    <link rel="alternative" href="https://dhr1.cesnet.cz/odata/v1/Products('725adbf7-dd68-49c2-b466-061fa5b07861')/"/>
+    <link rel="icon" href="https://dhr1.cesnet.cz/odata/v1/Products('725adbf7-dd68-49c2-b466-061fa5b07861')/Products('Quicklook')/$value"/>
+    <id>725adbf7-dd68-49c2-b466-061fa5b07861</id>
+    <summary>Date: 2018-01-21T16:50:53.913Z, Instrument: SAR-C SAR, Mode: VV VH, Satellite: Sentinel-1, Size: 7.7 GB</summary>
+    <date name="ingestiondate">2018-01-22T23:05:33.262Z</date>
+    <date name="beginposition">2018-01-21T16:50:53.913Z</date>
+    <date name="endposition">2018-01-21T16:51:20.874Z</date>
+    <int name="missiondatatakeid">68101</int>
+    <int name="orbitnumber">9272</int>
+    <int name="lastorbitnumber">9272</int>
+    <int name="relativeorbitnumber">146</int>
+    <int name="lastrelativeorbitnumber">146</int>
+    <int name="slicenumber">21</int>
+    <str name="acquisitiontype">NOMINAL</str>
+    <str name="filename">S1B_IW_SLC__1SDV_20180121T165053_20180121T165120_009272_010A05_A393.SAFE</str>
+    <str name="gmlfootprint">&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;51.553566,12.121534 51.962795,15.858625 50.349442,16.249357 49.942730,12.642264 51.553566,12.121534&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</str>
+    <str name="format">SAFE</str>
+    <str name="identifier">S1B_IW_SLC__1SDV_20180121T165053_20180121T165120_009272_010A05_A393</str>
+    <str name="instrumentshortname">SAR-C SAR</str>
+    <str name="sensoroperationalmode">IW</str>
+    <str name="instrumentname">Synthetic Aperture Radar (C-band)</str>
+    <str name="swathidentifier">IW1 IW2 IW3</str>
+    <str name="footprint">POLYGON ((12.121534 51.553566,15.858625 51.962795,16.249357 50.349442,12.642264 49.942730,12.121534 51.553566))</str>
+    <str name="platformidentifier">2016-025A</str>
+    <str name="orbitdirection">ASCENDING</str>
+    <str name="polarisationmode">VV VH</str>
+    <str name="productclass">S</str>
+    <str name="producttype">SLC</str>
+    <str name="platformname">Sentinel-1</str>
+    <str name="size">7.7 GB</str>
+    <str name="status">ARCHIVED</str>
+    <str name="uuid">725adbf7-dd68-49c2-b466-061fa5b07861</str>
+  </entry>
+  <entry>
+    <title>S1A_IW_SLC__1SDV_20180120T165854_20180120T165921_020241_0228B0_5CDE</title>
+    <link href="https://dhr1.cesnet.cz/odata/v1/Products('434b170e-2b61-4e1a-864c-19db23c84be5')/$value"/>
+    <link rel="alternative" href="https://dhr1.cesnet.cz/odata/v1/Products('434b170e-2b61-4e1a-864c-19db23c84be5')/"/>
+    <link rel="icon" href="https://dhr1.cesnet.cz/odata/v1/Products('434b170e-2b61-4e1a-864c-19db23c84be5')/Products('Quicklook')/$value"/>
+    <id>434b170e-2b61-4e1a-864c-19db23c84be5</id>
+    <summary>Date: 2018-01-20T16:58:54.416Z, Instrument: SAR-C SAR, Mode: VV VH, Satellite: Sentinel-1, Size: 7.63 GB</summary>
+    <date name="ingestiondate">2018-01-21T23:15:26.615Z</date>
+    <date name="beginposition">2018-01-20T16:58:54.416Z</date>
+    <date name="endposition">2018-01-20T16:59:21.393Z</date>
+    <int name="missiondatatakeid">141488</int>
+    <int name="orbitnumber">20241</int>
+    <int name="lastorbitnumber">20241</int>
+    <int name="relativeorbitnumber">44</int>
+    <int name="lastrelativeorbitnumber">44</int>
+    <int name="slicenumber">12</int>
+    <str name="acquisitiontype">NOMINAL</str>
+    <str name="filename">S1A_IW_SLC__1SDV_20180120T165854_20180120T165921_020241_0228B0_5CDE.SAFE</str>
+    <str name="gmlfootprint">&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;48.260593,11.143064 48.661671,14.600340 47.045578,14.969123 46.645618,11.619836 48.260593,11.143064&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</str>
+    <str name="format">SAFE</str>
+    <str name="identifier">S1A_IW_SLC__1SDV_20180120T165854_20180120T165921_020241_0228B0_5CDE</str>
+    <str name="instrumentshortname">SAR-C SAR</str>
+    <str name="sensoroperationalmode">IW</str>
+    <str name="instrumentname">Synthetic Aperture Radar (C-band)</str>
+    <str name="swathidentifier">IW1 IW2 IW3</str>
+    <str name="footprint">POLYGON ((11.143064 48.260593,14.600340 48.661671,14.969123 47.045578,11.619836 46.645618,11.143064 48.260593))</str>
+    <str name="platformidentifier">2014-016A</str>
+    <str name="orbitdirection">ASCENDING</str>
+    <str name="polarisationmode">VV VH</str>
+    <str name="productclass">S</str>
+    <str name="producttype">SLC</str>
+    <str name="platformname">Sentinel-1</str>
+    <str name="size">7.63 GB</str>
+    <str name="status">ARCHIVED</str>
+    <str name="uuid">434b170e-2b61-4e1a-864c-19db23c84be5</str>
+  </entry>
+</feed>
