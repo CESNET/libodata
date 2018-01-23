@@ -26,6 +26,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include_directories(${EXTERNAL_PROJECTS_PREFIX}/include)
 add_library(libodata-client
+    src/Connection.cpp src/Connection.h
     src/Product.cpp src/Product.h
     src/XmlParser.cpp src/XmlParser.h
     )
@@ -33,12 +34,12 @@ add_executable(${PROJECT_NAME} src/main.cpp)
 
 add_library(restclient-cpp SHARED IMPORTED)
 set_target_properties(restclient-cpp PROPERTIES IMPORTED_LOCATION ${EXTERNAL_PROJECTS_PREFIX}/lib/librestclient-cpp.a)
-target_link_libraries(${PROJECT_NAME} restclient-cpp)
 
 find_package(CURL REQUIRED)
 target_link_libraries(${PROJECT_NAME} ${CURL_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} tinyxml2)
 target_link_libraries(${PROJECT_NAME} libodata-client)
+target_link_libraries(${PROJECT_NAME} restclient-cpp)
 
 add_dependencies(${PROJECT_NAME} Externalrestclient-cpp)
 
@@ -56,3 +57,4 @@ include_directories(runtest ${GTEST_INCLUDE_DIRS} src)
 target_link_libraries(runtest ${GTEST_LIBRARIES} ${GTEST_MAIN_LIBRARIES} pthread)
 target_link_libraries(runtest tinyxml2)
 target_link_libraries(runtest libodata-client)
+target_link_libraries(runtest restclient-cpp)

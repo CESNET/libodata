@@ -2,6 +2,7 @@
 #define SRC_PRODUCT_H_
 
 #include <cstdlib>
+#include <iosfwd>
 #include <string>
 #include <vector>
 
@@ -26,6 +27,13 @@ public:
     bool operator==(
         const Product& entry) const;
 
+    void setFiles(
+        std::vector<std::string> files) noexcept;
+    std::string getProductPath() const noexcept;
+
+    void toString(
+        std::ostream& ostr) const;
+
 private:
     std::string id;
     std::string name;
@@ -33,6 +41,10 @@ private:
     std::string filename;
     std::vector<std::string> files;
 };
+
+std::ostream& operator<<(
+    std::ostream& ostr,
+    const Product& product);
 
 } /* namespace OData */
 
