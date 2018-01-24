@@ -50,15 +50,25 @@ void Product::toString(
     ostr << "\t}\n}";
 }
 
+const std::string& Product::getPlatform() const {
+    return platform;
+}
+
+std::string Product::getManifestFilename() const {
+    if (platform == "Sentinel-1" || platform == "Sentinel-2") {
+        return "manifest.safe";
+    } else if(platform == "Sentinel-3") {
+        return "xfdumanifest.xml";
+    } else {
+        return "";
+    }
+}
+
 std::ostream& operator <<(
     std::ostream& ostr,
     const Product& product) {
     product.toString(ostr);
     return ostr;
-}
-
-const std::string& Product::getPlatform() const {
-    return platform;
 }
 
 } /* namespace OData */

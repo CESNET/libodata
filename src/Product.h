@@ -36,6 +36,7 @@ public:
     void toString(
         std::ostream& ostr) const;
     const std::string& getPlatform() const;
+    std::string getManifestFilename() const;
 
 private:
     std::string id;

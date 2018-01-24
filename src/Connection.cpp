@@ -15,10 +15,14 @@ struct Connection::Impl {
         const std::string& username,
         const std::string& password);
     ~Impl() = default;
-    std::string getQuery(const std::string& uri);
-    std::string sendListQuery(const std::string& platform, std::uint32_t offset);
-    std::string sendSafeManifestQuery(const std::string& product_path);
-    std::string sendXfduManifestQuery(const std::string& product_path);
+    std::string getQuery(
+        const std::string& uri);
+    std::string sendListQuery(
+        const std::string& platform,
+        std::uint32_t offset);
+    std::string sendManifestQuery(
+        const std::string& product_path,
+        const std::string& manifest);
 
     RestClient::Connection connection;
     XmlParser response_parser;
@@ -27,7 +31,8 @@ struct Connection::Impl {
 Connection::Impl::Impl(
     const std::string& url,
     const std::string& username,
-    const std::string& password) : connection(url) {
+    const std::string& password) :
+        connection(url) {
     connection.SetBasicAuth(username, password);
 }
 
@@ -48,17 +53,11 @@ std::string Connection::Impl::sendListQuery(
     return getQuery(query.str());
 }
 
-std::string Connection::Impl::sendSafeManifestQuery(
-    const std::string& product_path) {
+std::string Connection::Impl::sendManifestQuery(
+    const std::string& product_path,
+    const std::string& manifest) {
     std::stringstream query;
-    query << "odata/v1/" << product_path << "/Nodes('manifest.safe')/$value";
-    return getQuery(query.str());
-}
-
-std::string Connection::Impl::sendXfduManifestQuery(
-    const std::string& product_path) {
-    std::stringstream query;
-    query << "odata/v1/" << product_path << "/Nodes('xfdumanifest.xml')/$value";
+    query << "odata/v1/" << product_path << "/Nodes('" << manifest << "')/$value";
     return getQuery(query.str());
 }
 
@@ -77,18 +76,16 @@ std::vector<Product> Connection::listProducts(
     std::vector<Product> products;
     while (products.size() < size) {
         auto list = pimpl->response_parser.parseList(pimpl->sendListQuery(platform, products.size()));
-        for (auto& product: list) {
-            std::string manifest;
-            if(product.getPlatform() == "Sentinel-3") {
-                manifest = std::move(pimpl->sendXfduManifestQuery(product.getProductPath()));
-            } else {
-                manifest = std::move(pimpl->sendSafeManifestQuery(product.getProductPath()));
-            }
-            product.setFiles(pimpl->response_parser.parseManifest(manifest));
-        }
         std::move(list.begin(), list.end(), std::back_inserter(products));
     }
     return products;
+}
+
+void Connection::updateProductDetails(
+    Product& product) {
+    product.setFiles(
+        pimpl->response_parser.parseManifest(
+            pimpl->sendManifestQuery(product.getProductPath(), product.getManifestFilename())));
 }
 
 } /* namespace OData */
