@@ -9,18 +9,20 @@ Product::Product(
     std::string id,
     std::string name,
     std::string ingestion_date,
-    std::string filename) :
+    std::string filename,
+    std::string platform) :
         id(std::move(id)),
         name(std::move(name)),
         ingestion_date(std::move(ingestion_date)),
         filename(std::move(filename)),
+        platform(std::move(platform)),
         files() {
 }
 
 bool Product::operator ==(
     const Product& entry) const {
     return id == entry.id && name == entry.name && ingestion_date == entry.ingestion_date && filename == entry.filename
-            && files == entry.files;
+            && platform == entry.platform && files == entry.files;
 }
 
 void Product::setFiles(
@@ -40,6 +42,7 @@ void Product::toString(
          << "\n\tname=" << name
          << "\n\tingestion_date=" << ingestion_date
          << "\n\tfilename=" << filename
+         << "\n\tplatform=" << platform
          << "\n\tfiles {\n";
     for (const auto& file: files) {
         ostr << "\t\t" << file << "\n";
@@ -52,6 +55,10 @@ std::ostream& operator <<(
     const Product& product) {
     product.toString(ostr);
     return ostr;
+}
+
+const std::string& Product::getPlatform() const {
+    return platform;
 }
 
 } /* namespace OData */

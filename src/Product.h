@@ -14,7 +14,8 @@ public:
         std::string id,
         std::string name,
         std::string ingestion_date,
-        std::string filename);
+        std::string filename,
+        std::string platform);
     Product(
         const Product&) = default;
     Product(
@@ -31,14 +32,17 @@ public:
         std::vector<std::string> files) noexcept;
     std::string getProductPath() const noexcept;
 
+
     void toString(
         std::ostream& ostr) const;
+    const std::string& getPlatform() const;
 
 private:
     std::string id;
     std::string name;
     std::string ingestion_date;
     std::string filename;
+    std::string platform;
     std::vector<std::string> files;
 };
 

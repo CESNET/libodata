@@ -17,7 +17,8 @@ struct Connection::Impl {
     ~Impl() = default;
     std::string getQuery(const std::string& uri);
     std::string sendListQuery(const std::string& platform, std::uint32_t offset);
-    std::string sendManifestQuery(const std::string& product_path);
+    std::string sendSafeManifestQuery(const std::string& product_path);
+    std::string sendXfduManifestQuery(const std::string& product_path);
 
     RestClient::Connection connection;
     XmlParser response_parser;
@@ -47,10 +48,17 @@ std::string Connection::Impl::sendListQuery(
     return getQuery(query.str());
 }
 
-std::string Connection::Impl::sendManifestQuery(
+std::string Connection::Impl::sendSafeManifestQuery(
     const std::string& product_path) {
     std::stringstream query;
     query << "odata/v1/" << product_path << "/Nodes('manifest.safe')/$value";
+    return getQuery(query.str());
+}
+
+std::string Connection::Impl::sendXfduManifestQuery(
+    const std::string& product_path) {
+    std::stringstream query;
+    query << "odata/v1/" << product_path << "/Nodes('xfdumanifest.xml')/$value";
     return getQuery(query.str());
 }
 
@@ -70,7 +78,13 @@ std::vector<Product> Connection::listProducts(
     while (products.size() < size) {
         auto list = pimpl->response_parser.parseList(pimpl->sendListQuery(platform, products.size()));
         for (auto& product: list) {
-            product.setFiles(pimpl->response_parser.parseManifest(pimpl->sendManifestQuery(product.getProductPath())));
+            std::string manifest;
+            if(product.getPlatform() == "Sentinel-3") {
+                manifest = std::move(pimpl->sendXfduManifestQuery(product.getProductPath()));
+            } else {
+                manifest = std::move(pimpl->sendSafeManifestQuery(product.getProductPath()));
+            }
+            product.setFiles(pimpl->response_parser.parseManifest(manifest));
         }
         std::move(list.begin(), list.end(), std::back_inserter(products));
     }

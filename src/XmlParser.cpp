@@ -124,7 +124,8 @@ std::vector<Product> XmlParser::parseList(
                 doc.getPropertyValue(entry_node, "uuid"),
                 doc.getPropertyValue(entry_node, "identifier"),
                 doc.getPropertyValue(entry_node, "ingestiondate"),
-                doc.getPropertyValue(entry_node, "filename")));
+                doc.getPropertyValue(entry_node, "filename"),
+                doc.getPropertyValue(entry_node, "platformname")));
     }
     return products;
 }
