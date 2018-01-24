@@ -43,7 +43,7 @@ std::string Connection::Impl::sendListQuery(
     const std::string& platform,
     std::uint32_t offset) {
     std::stringstream query;
-    query << "search?q=(platformname:" << platform << ")&start=" << offset << "&rows=5&orderby=beginposition%20asc";
+    query << "search?q=(platformname:" << platform << ")&start=" << offset << "&rows=2&orderby=beginposition%20asc";
     return getQuery(query.str());
 }
 
