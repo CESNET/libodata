@@ -12,17 +12,17 @@ class Product;
 
 class Connection {
 public:
-    explicit Connection(
-        const std::string& url,
-        const std::string& username,
-        const std::string& password);
-    ~Connection();
-    std::vector<Product> listProducts(const std::string& platform, uint32_t size);
-    void updateProductDetails(Product& product);
+  explicit Connection(
+      const std::string& url,
+      const std::string& username,
+      const std::string& password);
+  ~Connection();
+  std::vector<Product> listProducts(const std::string& platform, uint32_t size);
+  void updateProductDetails(Product& product);
 
 private:
-    struct Impl;
-    std::unique_ptr<Impl> pimpl;
+  struct Impl;
+  std::unique_ptr<Impl> pimpl;
 };
 
 } /* namespace OData */
