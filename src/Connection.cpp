@@ -73,7 +73,11 @@ Connection::listProducts(const std::string& platform, uint32_t size) {
   while (products.size() < size) {
     auto list = pimpl->response_parser.parseList(
         pimpl->sendListQuery(platform, products.size()));
-    std::move(list.begin(), list.end(), std::back_inserter(products));
+    if (list.empty()) {
+      break;
+    } else {
+      std::move(list.begin(), list.end(), std::back_inserter(products));
+    }
   }
   return products;
 }

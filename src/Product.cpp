@@ -10,13 +10,12 @@ Product::Product(
     std::string name,
     std::string ingestion_date,
     std::string filename,
-    std::string platform)
-    : id(std::move(id)),
-      name(std::move(name)),
-      ingestion_date(std::move(ingestion_date)),
-      filename(std::move(filename)),
-      platform(std::move(platform)),
-      files() {
+    std::string platform) noexcept : id(std::move(id)),
+                                     name(std::move(name)),
+                                     ingestion_date(std::move(ingestion_date)),
+                                     filename(std::move(filename)),
+                                     platform(std::move(platform)),
+                                     files() {
 }
 
 bool Product::operator==(const Product& entry) const {
@@ -35,7 +34,7 @@ std::string Product::getProductPath() const noexcept {
   return path.str();
 }
 
-void Product::toString(std::ostream& ostr) const {
+void Product::toString(std::ostream& ostr) const noexcept {
   ostr << "{\n\tid=" << id << "\n\tname=" << name
        << "\n\tingestion_date=" << ingestion_date << "\n\tfilename=" << filename
        << "\n\tplatform=" << platform << "\n\tfiles {\n";
@@ -45,11 +44,11 @@ void Product::toString(std::ostream& ostr) const {
   ostr << "\t}\n}";
 }
 
-const std::string& Product::getPlatform() const {
+const std::string& Product::getPlatform() const noexcept {
   return platform;
 }
 
-std::string Product::getManifestFilename() const {
+std::string Product::getManifestFilename() const noexcept {
   if (platform == "Sentinel-1" || platform == "Sentinel-2") {
     return "manifest.safe";
   } else if (platform == "Sentinel-3") {
@@ -59,7 +58,7 @@ std::string Product::getManifestFilename() const {
   }
 }
 
-std::ostream& operator<<(std::ostream& ostr, const Product& product) {
+std::ostream& operator<<(std::ostream& ostr, const Product& product) noexcept {
   product.toString(ostr);
   return ostr;
 }

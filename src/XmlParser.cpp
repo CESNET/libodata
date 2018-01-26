@@ -15,7 +15,7 @@ public:
   ~XmlDocument() = default;
   std::vector<const tinyxml2::XMLElement*> filter(
       const tinyxml2::XMLElement* root,
-      std::function<bool(const tinyxml2::XMLElement&)> filter) const noexcept;
+      std::function<bool(const tinyxml2::XMLElement&)> filter) const;
   template <typename T>
   std::vector<T> filterMap(
       const std::string& node_name,
@@ -51,7 +51,7 @@ XmlDocument::XmlDocument(const std::string& xml) : doc() {
 
 std::vector<const tinyxml2::XMLElement*> XmlDocument::filter(
     const tinyxml2::XMLElement* root,
-    std::function<bool(const tinyxml2::XMLElement&)> predicate) const noexcept {
+    std::function<bool(const tinyxml2::XMLElement&)> predicate) const {
   XmlFilter filter(predicate);
   root->Accept(&filter);
   return std::move(filter.filtered);
