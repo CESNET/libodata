@@ -46,7 +46,7 @@ std::string Connection::Impl::sendListQuery(
     std::uint32_t offset) {
   std::stringstream query;
   query << "search?q=(platformname:" << platform << ")&start=" << offset
-        << "&rows=2&orderby=beginposition%20asc";
+        << "&rows=100&orderby=ingestiondate%20asc";
   return getQuery(query.str());
 }
 

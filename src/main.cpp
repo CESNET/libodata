@@ -12,7 +12,6 @@ int main(int argc, char** argv) {
   OData::Connection connection("https://dhr1.cesnet.cz/", argv[1], argv[2]);
   auto files = connection.listProducts(argv[3], std::atoi(argv[4]));
   for (auto& file : files) {
-    connection.updateProductDetails(file);
     std::cout << file << std::endl;
   }
   return 0;
