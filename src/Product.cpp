@@ -29,10 +29,8 @@ void Product::setFiles(std::vector<std::string> files) noexcept {
   this->files = std::move(files);
 }
 
-std::string Product::getProductPath() const noexcept {
-  std::stringstream path;
-  path << "Products('" << id << "')/Nodes('" << filename << "')";
-  return path.str();
+ProductPath Product::getProductPath() const noexcept {
+  return ProductPath(id, filename);
 }
 
 void Product::toString(std::ostream& ostr) const noexcept {

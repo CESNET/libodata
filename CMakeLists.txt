@@ -28,6 +28,7 @@ include_directories(${EXTERNAL_PROJECTS_PREFIX}/include)
 add_library(libodata-client
     src/Connection.cpp src/Connection.h
     src/Product.cpp src/Product.h
+    src/ProductPath.cpp src/ProductPath.h
     src/SearchQueryBuilder.cpp src/SearchQueryBuilder.h
     src/XmlParser.cpp src/XmlParser.h
     )
@@ -51,6 +52,7 @@ find_package(GTest REQUIRED)
 enable_testing()
 add_executable(runtest
     test/main.cpp 
+    test/ProductPathTest.cpp
     test/SearchQueryBuilderTest.cpp
     test/XmlParserTest.cpp
     )

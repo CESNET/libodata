@@ -1,6 +1,7 @@
 #ifndef SRC_PRODUCT_H_
 #define SRC_PRODUCT_H_
 
+#include "ProductPath.h"
 #include <cstdlib>
 #include <iosfwd>
 #include <string>
@@ -24,7 +25,7 @@ public:
   bool operator==(const Product& entry) const;
 
   void setFiles(std::vector<std::string> files) noexcept;
-  std::string getProductPath() const noexcept;
+  ProductPath getProductPath() const noexcept;
 
   void toString(std::ostream& ostr) const noexcept;
   const std::string& getPlatform() const noexcept;

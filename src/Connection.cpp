@@ -37,12 +37,8 @@ struct Connection::Impl {
     return getQuery(query.build());
   }
 
-  std::string sendManifestQuery(
-      const std::string& product_path, const std::string& manifest) {
-    std::stringstream query;
-    query << "odata/v1/" << product_path << "/Nodes('" << manifest
-          << "')/$value";
-    return getQuery(query.str());
+  std::string sendManifestQuery(const ProductPath& manifest) {
+    return getQuery("odata/v1/" + manifest.getPath());
   }
 
   RestClient::Connection connection;
@@ -74,9 +70,10 @@ std::vector<Product> Connection::listProducts(
 }
 
 void Connection::updateProductDetails(Product& product) {
-  product.setFiles(
-      pimpl->response_parser.parseManifest(pimpl->sendManifestQuery(
-          product.getProductPath(), product.getManifestFilename())));
+  auto manifest_path = product.getProductPath();
+  manifest_path.appendPath({product.getManifestFilename()});
+  product.setFiles(pimpl->response_parser.parseManifest(
+      pimpl->sendManifestQuery(manifest_path)));
 }
 
 } /* namespace OData */
