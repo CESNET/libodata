@@ -28,6 +28,7 @@ include_directories(${EXTERNAL_PROJECTS_PREFIX}/include)
 add_library(libodata-client
     src/Connection.cpp src/Connection.h
     src/Product.cpp src/Product.h
+    src/SearchQueryBuilder.cpp src/SearchQueryBuilder.h
     src/XmlParser.cpp src/XmlParser.h
     )
 add_executable(${PROJECT_NAME} src/main.cpp)
@@ -50,11 +51,13 @@ find_package(GTest REQUIRED)
 enable_testing()
 add_executable(runtest
     test/main.cpp 
+    test/SearchQueryBuilderTest.cpp
     test/XmlParserTest.cpp
     )
 add_test(tests runtest)
 include_directories(runtest ${GTEST_INCLUDE_DIRS} src)
 target_link_libraries(runtest ${GTEST_LIBRARIES} ${GTEST_MAIN_LIBRARIES} pthread)
+target_link_libraries(runtest ${CURL_LIBRARIES})
 target_link_libraries(runtest tinyxml2)
 target_link_libraries(runtest libodata-client)
 target_link_libraries(runtest restclient-cpp)

@@ -16,7 +16,7 @@ std::string readTestInstance(const std::string& filename) {
     throw std::invalid_argument("Cannot open file" + filename);
   }
 }
-}
+} // namespace
 
 namespace OData {
 namespace Test {

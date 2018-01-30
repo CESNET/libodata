@@ -10,12 +10,13 @@ Product::Product(
     std::string name,
     std::string ingestion_date,
     std::string filename,
-    std::string platform) noexcept : id(std::move(id)),
-                                     name(std::move(name)),
-                                     ingestion_date(std::move(ingestion_date)),
-                                     filename(std::move(filename)),
-                                     platform(std::move(platform)),
-                                     files() {
+    std::string platform) noexcept
+    : id(std::move(id)),
+      name(std::move(name)),
+      ingestion_date(std::move(ingestion_date)),
+      filename(std::move(filename)),
+      platform(std::move(platform)),
+      files() {
 }
 
 bool Product::operator==(const Product& entry) const {
