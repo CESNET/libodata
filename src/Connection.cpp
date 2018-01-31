@@ -37,10 +37,6 @@ struct Connection::Impl {
     return getQuery(query.build());
   }
 
-  std::string sendManifestQuery(const ProductPath& manifest) {
-    return getQuery("odata/v1/" + manifest.getPath());
-  }
-
   RestClient::Connection connection;
   XmlParser response_parser;
 };
@@ -54,9 +50,9 @@ Connection::Connection(
 
 Connection::~Connection() = default;
 
-std::vector<Product> Connection::listProducts(
+std::vector<std::unique_ptr<Product>> Connection::listProducts(
     const std::string& platform, uint32_t size) {
-  std::vector<Product> products;
+  std::vector<std::unique_ptr<Product>> products;
   while (products.size() < size) {
     auto list = pimpl->response_parser.parseList(
         pimpl->sendListQuery(platform, products.size()));
@@ -72,8 +68,13 @@ std::vector<Product> Connection::listProducts(
 void Connection::updateProductDetails(Product& product) {
   auto manifest_path = product.getProductPath();
   manifest_path.appendPath({product.getManifestFilename()});
-  product.setFiles(pimpl->response_parser.parseManifest(
-      pimpl->sendManifestQuery(manifest_path)));
+  product.setArchiveStructure(Directory::create(
+      product.getFilename(),
+      pimpl->response_parser.parseManifest(getFile(manifest_path))));
+}
+
+std::string Connection::getFile(const ProductPath& path) {
+  return pimpl->getQuery("odata/v1/" + path.getPath());
 }
 
 } /* namespace OData */

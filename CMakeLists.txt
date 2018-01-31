@@ -27,6 +27,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include_directories(${EXTERNAL_PROJECTS_PREFIX}/include)
 add_library(libodata-client
     src/Connection.cpp src/Connection.h
+    src/Directory.cpp src/Directory.h
+    src/FileSystemNode.cpp src/FileSystemNode.h
     src/Product.cpp src/Product.h
     src/ProductPath.cpp src/ProductPath.h
     src/SearchQueryBuilder.cpp src/SearchQueryBuilder.h
@@ -51,6 +53,7 @@ add_definitions(-Wall -std=c++14 -pedantic -Wextra)
 find_package(GTest REQUIRED)
 enable_testing()
 add_executable(runtest
+    test/DirectoryTest.cpp
     test/main.cpp 
     test/ProductPathTest.cpp
     test/SearchQueryBuilderTest.cpp

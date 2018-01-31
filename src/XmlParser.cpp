@@ -1,10 +1,9 @@
 #include "XmlParser.h"
 
+#include "Product.h"
 #include <functional>
 #include <stdexcept>
 #include <tinyxml2.h>
-
-#include "Product.h"
 
 namespace OData {
 namespace {
@@ -95,11 +94,12 @@ public:
 
 } /* namespace */
 
-std::vector<Product> XmlParser::parseList(const std::string& xml) const {
+std::vector<std::unique_ptr<Product>> XmlParser::parseList(
+    const std::string& xml) const {
   XmlDocument doc(xml);
-  std::vector<Product> products;
+  std::vector<std::unique_ptr<Product>> products;
   for (const auto& entry_node : doc.getEntries()) {
-    products.push_back(Product(
+    products.push_back(std::make_unique<Product>(
         doc.getPropertyValue(entry_node, "uuid"),
         doc.getPropertyValue(entry_node, "identifier"),
         doc.getPropertyValue(entry_node, "ingestiondate"),
