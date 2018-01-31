@@ -1,6 +1,7 @@
 #ifndef SRC_PRODUCT_H_
 #define SRC_PRODUCT_H_
 
+#include "Directory.h"
 #include "ProductPath.h"
 #include <cstdlib>
 #include <iosfwd>
@@ -17,19 +18,20 @@ public:
       std::string ingestion_date,
       std::string filename,
       std::string platform) noexcept;
-  Product(const Product&) = default;
+  Product(const Product&) = delete;
   Product(Product&&) = default;
   ~Product() = default;
-  Product& operator=(const Product&) = default;
+  Product& operator=(const Product&) = delete;
   Product& operator=(Product&&) = default;
   bool operator==(const Product& entry) const;
 
-  void setFiles(std::vector<std::string> files) noexcept;
+  void setArchiveStructure(Directory directory) noexcept;
   ProductPath getProductPath() const noexcept;
 
   void toString(std::ostream& ostr) const noexcept;
   const std::string& getPlatform() const noexcept;
   std::string getManifestFilename() const noexcept;
+  const std::string& getFilename() const;
 
 private:
   std::string id;
@@ -37,7 +39,7 @@ private:
   std::string ingestion_date;
   std::string filename;
   std::string platform;
-  std::vector<std::string> files;
+  Directory directory;
 };
 
 std::ostream& operator<<(std::ostream& ostr, const Product& product) noexcept;

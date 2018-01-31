@@ -72,8 +72,10 @@ std::vector<Product> Connection::listProducts(
 void Connection::updateProductDetails(Product& product) {
   auto manifest_path = product.getProductPath();
   manifest_path.appendPath({product.getManifestFilename()});
-  product.setFiles(pimpl->response_parser.parseManifest(
-      pimpl->sendManifestQuery(manifest_path)));
+  product.setArchiveStructure(Directory::create(
+      product.getFilename(),
+      pimpl->response_parser.parseManifest(
+          pimpl->sendManifestQuery(manifest_path))));
 }
 
 } /* namespace OData */

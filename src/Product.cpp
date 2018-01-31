@@ -16,17 +16,17 @@ Product::Product(
       ingestion_date(std::move(ingestion_date)),
       filename(std::move(filename)),
       platform(std::move(platform)),
-      files() {
+      directory() {
 }
 
 bool Product::operator==(const Product& entry) const {
   return id == entry.id && name == entry.name
          && ingestion_date == entry.ingestion_date && filename == entry.filename
-         && platform == entry.platform && files == entry.files;
+         && platform == entry.platform && directory == entry.directory;
 }
 
-void Product::setFiles(std::vector<std::string> files) noexcept {
-  this->files = std::move(files);
+void Product::setArchiveStructure(Directory directory) noexcept {
+  this->directory = std::move(directory);
 }
 
 ProductPath Product::getProductPath() const noexcept {
@@ -37,9 +37,7 @@ void Product::toString(std::ostream& ostr) const noexcept {
   ostr << "{\n\tid=" << id << "\n\tname=" << name
        << "\n\tingestion_date=" << ingestion_date << "\n\tfilename=" << filename
        << "\n\tplatform=" << platform << "\n\tfiles {\n";
-  for (const auto& file : files) {
-    ostr << "\t\t" << file << "\n";
-  }
+  directory.toString(ostr, 2);
   ostr << "\t}\n}";
 }
 
@@ -55,6 +53,10 @@ std::string Product::getManifestFilename() const noexcept {
   } else {
     return "";
   }
+}
+
+const std::string& Product::getFilename() const {
+  return filename;
 }
 
 std::ostream& operator<<(std::ostream& ostr, const Product& product) noexcept {
