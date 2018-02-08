@@ -28,6 +28,7 @@ include_directories(${EXTERNAL_PROJECTS_PREFIX}/include)
 add_library(libodata-client
     src/Connection.cpp src/Connection.h
     src/Directory.cpp src/Directory.h
+    src/FileSystemNode.cpp src/FileSystemNode.h
     src/Product.cpp src/Product.h
     src/ProductPath.cpp src/ProductPath.h
     src/SearchQueryBuilder.cpp src/SearchQueryBuilder.h

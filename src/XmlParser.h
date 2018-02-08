@@ -1,6 +1,7 @@
 #ifndef SRC_XMLPARSER_H_
 #define SRC_XMLPARSER_H_
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -14,7 +15,7 @@ public:
   ~XmlParser() = default;
   XmlParser(const XmlParser&) = delete;
   XmlParser& operator=(const XmlParser&) = delete;
-  std::vector<Product> parseList(const std::string& xml) const;
+  std::vector<std::unique_ptr<Product>> parseList(const std::string& xml) const;
   std::vector<std::string> parseManifest(const std::string& manifest) const;
 };
 

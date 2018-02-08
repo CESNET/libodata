@@ -50,9 +50,9 @@ Connection::Connection(
 
 Connection::~Connection() = default;
 
-std::vector<Product> Connection::listProducts(
+std::vector<std::unique_ptr<Product>> Connection::listProducts(
     const std::string& platform, uint32_t size) {
-  std::vector<Product> products;
+  std::vector<std::unique_ptr<Product>> products;
   while (products.size() < size) {
     auto list = pimpl->response_parser.parseList(
         pimpl->sendListQuery(platform, products.size()));
@@ -70,13 +70,11 @@ void Connection::updateProductDetails(Product& product) {
   manifest_path.appendPath({product.getManifestFilename()});
   product.setArchiveStructure(Directory::create(
       product.getFilename(),
-      pimpl->response_parser.parseManifest(
-              getFile(manifest_path))));
+      pimpl->response_parser.parseManifest(getFile(manifest_path))));
 }
 
-std::string Connection::getFile(
-    const ProductPath& path) {
-    return pimpl->getQuery("odata/v1/" + path.getPath());
+std::string Connection::getFile(const ProductPath& path) {
+  return pimpl->getQuery("odata/v1/" + path.getPath());
 }
 
 } /* namespace OData */

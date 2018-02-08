@@ -18,7 +18,8 @@ public:
       const std::string& username,
       const std::string& password);
   ~Connection();
-  std::vector<Product> listProducts(const std::string& platform, uint32_t size);
+  std::vector<std::unique_ptr<Product>> listProducts(
+      const std::string& platform, uint32_t size);
   void updateProductDetails(Product& product);
   std::string getFile(const ProductPath& path);
 
