@@ -9,6 +9,7 @@
 namespace OData {
 
 class Product;
+class ProductPath;
 
 class Connection {
 public:
@@ -19,6 +20,7 @@ public:
   ~Connection();
   std::vector<Product> listProducts(const std::string& platform, uint32_t size);
   void updateProductDetails(Product& product);
+  std::string getFile(const ProductPath& path);
 
 private:
   struct Impl;

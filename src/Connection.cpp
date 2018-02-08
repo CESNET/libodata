@@ -37,10 +37,6 @@ struct Connection::Impl {
     return getQuery(query.build());
   }
 
-  std::string sendManifestQuery(const ProductPath& manifest) {
-    return getQuery("odata/v1/" + manifest.getPath());
-  }
-
   RestClient::Connection connection;
   XmlParser response_parser;
 };
@@ -75,7 +71,12 @@ void Connection::updateProductDetails(Product& product) {
   product.setArchiveStructure(Directory::create(
       product.getFilename(),
       pimpl->response_parser.parseManifest(
-          pimpl->sendManifestQuery(manifest_path))));
+              getFile(manifest_path))));
+}
+
+std::string Connection::getFile(
+    const ProductPath& path) {
+    return pimpl->getQuery("odata/v1/" + path.getPath());
 }
 
 } /* namespace OData */
