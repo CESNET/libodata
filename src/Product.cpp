@@ -71,8 +71,17 @@ bool Product::compare(const FileSystemNode& node) const noexcept {
   }
 }
 
-const std::string& Product::getFilename() const {
+std::string Product::getName() const noexcept {
+  return name;
+}
+
+const std::string& Product::getFilename() const noexcept {
   return filename;
+}
+
+std::string Product::getDate() const noexcept {
+  return std::string(
+      ingestion_date, 0, ingestion_date.length() - ingestion_date.find("T"));
 }
 
 std::ostream& operator<<(std::ostream& ostr, const Product& product) noexcept {

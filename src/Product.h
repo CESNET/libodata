@@ -21,7 +21,7 @@ public:
       std::string filename,
       std::string platform) noexcept;
   Product(const Product&) = delete;
-  ~Product() = default;
+  virtual ~Product() = default;
   Product& operator=(const Product&) = delete;
 
   void setArchiveStructure(std::unique_ptr<Directory> directory) noexcept;
@@ -30,9 +30,11 @@ public:
   void toString(std::ostream& ostr, unsigned indent_level = 0) const
       noexcept override;
   bool compare(const FileSystemNode& node) const noexcept override;
+  std::string getName() const noexcept override;
   const std::string& getPlatform() const noexcept;
   std::string getManifestFilename() const noexcept;
-  const std::string& getFilename() const;
+  const std::string& getFilename() const noexcept;
+  std::string getDate() const noexcept;
 
 private:
   std::string id;

@@ -23,10 +23,13 @@ std::pair<std::string, std::string> splitPath(const std::string& path) {
 }
 } // namespace
 
+Directory::Directory(std::string name) : Directory(std::move(name), {}) {
+}
+
 Directory::Directory(
     std::string name,
     std::vector<std::string> files,
-    std::vector<std::unique_ptr<FileSystemNode>> sub_directories) noexcept
+    Subdirectories sub_directories) noexcept
     : name(std::move(name)),
       files(std::move(files)),
       sub_directories(std::move(sub_directories)) {
@@ -36,7 +39,7 @@ void Directory::toString(std::ostream& ostr, unsigned indent_level) const
     noexcept {
   indent(ostr, indent_level) << name << " {\n";
   for (const auto& sub_dir : sub_directories) {
-    sub_dir->toString(ostr, indent_level + 1);
+    sub_dir.second->toString(ostr, indent_level + 1);
   }
   for (const auto& file : files) {
     indent(ostr, indent_level + 1) << file << "\n";
@@ -50,8 +53,11 @@ bool Directory::compare(const FileSystemNode& node) const noexcept {
     return false;
   }
   if (sub_directories.size() == other->sub_directories.size()) {
-    for (auto i = 0u; i < sub_directories.size(); ++i) {
-      if (*sub_directories[i] != *other->sub_directories[i]) {
+    for (auto pair1 = sub_directories.cbegin(),
+              pair2 = other->sub_directories.cbegin();
+         pair1 != sub_directories.end();
+         ++pair1, ++pair2) {
+      if (*pair1->second != *pair2->second) {
         return false;
       }
     }
@@ -59,6 +65,11 @@ bool Directory::compare(const FileSystemNode& node) const noexcept {
   } else {
     return false;
   }
+}
+
+void Directory::addChild(std::unique_ptr<FileSystemNode> child) noexcept {
+  const auto name = child->getName();
+  sub_directories[name] = std::move(child);
 }
 
 std::unique_ptr<Directory> Directory::create(
@@ -75,12 +86,26 @@ std::unique_ptr<Directory> Directory::create(
       }
     }
   }
-  std::vector<std::unique_ptr<FileSystemNode>> sub_dirs;
+  std::map<std::string, std::unique_ptr<FileSystemNode>> sub_dirs;
   for (const auto& sub_dir : dirs) {
-    sub_dirs.emplace_back(Directory::create(sub_dir.first, sub_dir.second));
+    sub_dirs.insert(
+        {sub_dir.first, Directory::create(sub_dir.first, sub_dir.second)});
   }
   return std::make_unique<Directory>(
       std::move(name), std::move(content), std::move(sub_dirs));
+}
+
+FileSystemNode* Directory::getChild(const std::string& name) noexcept {
+  const auto it = sub_directories.find(name);
+  if (it == sub_directories.end()) {
+    return nullptr;
+  } else {
+    return it->second.get();
+  }
+}
+
+std::string Directory::getName() const noexcept {
+  return name;
 }
 
 std::ostream& operator<<(
