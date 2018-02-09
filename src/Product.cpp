@@ -82,8 +82,7 @@ const std::string& Product::getFilename() const noexcept {
 }
 
 std::string Product::getDate() const noexcept {
-  return std::string(
-      ingestion_date, 0, ingestion_date.length() - ingestion_date.find("T"));
+  return std::string(ingestion_date, 0, ingestion_date.find("T"));
 }
 
 std::ostream& operator<<(std::ostream& ostr, const Product& product) noexcept {

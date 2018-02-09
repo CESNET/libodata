@@ -1,6 +1,7 @@
 #include "Connection.h"
 #include "Directory.h"
 #include "Product.h"
+#include "SearchQuery.h"
 #include <cstdlib>
 #include <iostream>
 #include <memory>
@@ -9,7 +10,8 @@
 namespace {
 std::vector<std::unique_ptr<OData::Product>> getMissionProducts(
     OData::Connection& connection, const std::string& mission, unsigned count) {
-  auto products = connection.listProducts(mission, count);
+  auto products = connection.listProducts(
+      {OData::SearchQuery::Keyword::PLATFORM, mission}, count);
   for (auto& product : products) {
     connection.updateProductDetails(*product);
   }

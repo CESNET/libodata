@@ -10,6 +10,7 @@ namespace OData {
 
 class Product;
 class ProductPath;
+class SearchQuery;
 
 class Connection {
 public:
@@ -19,7 +20,7 @@ public:
       const std::string& password);
   ~Connection();
   std::vector<std::unique_ptr<Product>> listProducts(
-      const std::string& platform, uint32_t size);
+      SearchQuery query, uint32_t size);
   void updateProductDetails(Product& product);
   std::string getFile(const ProductPath& path);
 
