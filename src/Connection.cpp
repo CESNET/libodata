@@ -3,6 +3,7 @@
 #include "Product.h"
 #include "SearchQueryBuilder.h"
 #include "XmlParser.h"
+#include <iostream>
 #include <iterator>
 #include <restclient-cpp/connection.h>
 #include <sstream>
@@ -21,6 +22,7 @@ struct Connection::Impl {
   ~Impl() = default;
 
   std::string getQuery(const std::string& uri) {
+    std::cout << "Sending query: " << uri << std::endl;
     auto response = connection.get(uri);
     if (response.code != 200) {
       throw std::runtime_error(response.body);
@@ -30,10 +32,10 @@ struct Connection::Impl {
 
   std::string sendListQuery(const std::string& platform, std::uint32_t offset) {
     SearchQueryBuilder query;
-    query.addQuery({"platformname", platform});
-    query.addQuery({"start", offset});
-    query.addQuery({"rows", 100});
-    query.addQuery({"orderby", "ingestiondate asc"});
+    query.setQuery({"platformname", platform});
+    query.setStart(offset);
+    query.setRows(100);
+    query.setOrder("ingestiondate", true);
     return getQuery(query.build());
   }
 

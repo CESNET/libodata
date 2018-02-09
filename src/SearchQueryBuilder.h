@@ -2,7 +2,6 @@
 #define SRC_SEARCHQUERYBUILDER_H_
 
 #include <cstdint>
-#include <memory>
 #include <string>
 
 namespace OData {
@@ -32,12 +31,18 @@ public:
   SearchQueryBuilder(const SearchQueryBuilder&) = delete;
   SearchQueryBuilder& operator=(const SearchQueryBuilder&) = delete;
 
-  void addQuery(SearchQuery query) noexcept;
+  void setQuery(SearchQuery query) noexcept;
+  void setStart(unsigned start) noexcept;
+  void setRows(unsigned rows);
+  void setOrder(std::string attribute, bool ascending) noexcept;
   std::string build() const noexcept;
 
 private:
-  struct Impl;
-  std::unique_ptr<Impl> pimpl;
+  SearchQuery query;
+  unsigned start;
+  unsigned rows;
+  std::string order_by;
+  bool ascending;
 };
 
 } /* namespace OData */
