@@ -10,6 +10,8 @@
 
 namespace OData {
 
+class Product;
+
 class Directory : public FileSystemNode {
 public:
   using Subdirectories = std::map<std::string, std::unique_ptr<FileSystemNode>>;
@@ -32,7 +34,12 @@ public:
   static std::unique_ptr<Directory> create(
       std::string name, const std::vector<std::string>& files) noexcept;
 
+  void appendProducts(std::vector<std::unique_ptr<Product>> products);
+
   std::string getName() const noexcept override;
+
+  static std::unique_ptr<Directory> createFilesystem(
+      std::vector<std::unique_ptr<Product>> products) noexcept;
 
 private:
   std::string name;

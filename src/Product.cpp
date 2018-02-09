@@ -37,9 +37,11 @@ void Product::toString(std::ostream& ostr, unsigned indent_level) const
   indent(ostr, indent_level + 1) << "filename=" << filename << "\n";
   indent(ostr, indent_level + 1) << "platform=" << platform << "\n";
   indent(ostr, indent_level + 1) << "files {\n";
-  directory->toString(ostr, indent_level + 2);
+  if (directory != nullptr) {
+    directory->toString(ostr, indent_level + 2);
+  }
   indent(ostr, indent_level + 1) << "}\n";
-  indent(ostr, indent_level) << "}";
+  indent(ostr, indent_level) << "}\n";
 }
 
 const std::string& Product::getPlatform() const noexcept {

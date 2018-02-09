@@ -1,4 +1,4 @@
-#ifndef SRC_FILESYSTEMNODE_H_
+    #ifndef SRC_FILESYSTEMNODE_H_
 #define SRC_FILESYSTEMNODE_H_
 
 #include <iosfwd>
@@ -6,8 +6,6 @@
 #include <vector>
 
 namespace OData {
-
-class Product;
 
 class FileSystemNode {
 public:
@@ -24,8 +22,6 @@ public:
   virtual std::string getName() const noexcept = 0;
 
   static std::ostream& indent(std::ostream& ostr, unsigned level);
-  static std::unique_ptr<FileSystemNode> create(
-      std::vector<std::unique_ptr<Product>> products) noexcept;
 };
 
 } /* namespace OData */

@@ -1,7 +1,9 @@
 #include "Directory.h"
 
+#include "Product.h"
 #include <map>
 #include <ostream>
+#include <string>
 
 namespace OData {
 namespace {
@@ -20,6 +22,30 @@ std::pair<std::string, std::string> splitPath(const std::string& path) {
         path.substr(0, separator_position),
         path.substr(separator_position + 1));
   }
+}
+
+Directory* getOrInsertPlatform(
+    Directory::Subdirectories& platforms, const std::string& platform) {
+  auto platform_tree = platforms.find(platform);
+  if (platform_tree == platforms.end()) {
+    platform_tree =
+        platforms.insert({platform, std::make_unique<Directory>(platform)})
+            .first;
+  }
+  return static_cast<Directory*>(platform_tree->second.get());
+}
+
+Directory* getOrInsertDateSubtree(
+    Directory::Subdirectories& platforms, const Product& product) {
+  Directory* platform = getOrInsertPlatform(platforms, product.getPlatform());
+  const auto date = product.getDate();
+  auto date_tree = dynamic_cast<Directory*>(platform->getChild(date));
+  if (date_tree == nullptr) {
+    auto sub_tree = std::make_unique<Directory>(date);
+    date_tree = sub_tree.get();
+    platform->addChild(std::move(sub_tree));
+  }
+  return date_tree;
 }
 } // namespace
 
@@ -112,6 +138,24 @@ std::ostream& operator<<(
     std::ostream& ostr, const Directory& directory) noexcept {
   directory.toString(ostr);
   return ostr;
+}
+
+void Directory::appendProducts(std::vector<std::unique_ptr<Product>> products) {
+  for (auto& product : products) {
+    auto parent = getOrInsertDateSubtree(sub_directories, *product);
+    parent->addChild(std::move(product));
+  }
+}
+
+std::unique_ptr<Directory> Directory::createFilesystem(
+    std::vector<std::unique_ptr<Product>> products) noexcept {
+  Subdirectories missions;
+  for (auto& product : products) {
+    auto parent = getOrInsertDateSubtree(missions, *product);
+    parent->addChild(std::move(product));
+  }
+  return std::make_unique<Directory>(
+      "root", std::vector<std::string>{}, std::move(missions));
 }
 
 } /* namespace OData */
