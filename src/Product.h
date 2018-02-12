@@ -19,7 +19,8 @@ public:
       std::string name,
       std::string ingestion_date,
       std::string filename,
-      std::string platform) noexcept;
+      std::string platform,
+      std::string type) noexcept;
   Product(const Product&) = delete;
   virtual ~Product() = default;
   Product& operator=(const Product&) = delete;
@@ -42,6 +43,7 @@ private:
   std::string ingestion_date;
   std::string filename;
   std::string platform;
+  std::string type;
   std::unique_ptr<Directory> directory;
 };
 

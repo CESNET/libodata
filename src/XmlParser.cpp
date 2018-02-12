@@ -104,7 +104,8 @@ std::vector<std::unique_ptr<Product>> XmlParser::parseList(
         doc.getPropertyValue(entry_node, "identifier"),
         doc.getPropertyValue(entry_node, "ingestiondate"),
         doc.getPropertyValue(entry_node, "filename"),
-        doc.getPropertyValue(entry_node, "platformname")));
+        doc.getPropertyValue(entry_node, "platformname"),
+        doc.getPropertyValue(entry_node, "producttype")));
   }
   return products;
 }
