@@ -45,7 +45,8 @@ TEST(XmlParserTest, TestListResponseParser) {
           "2018-01-22T23:06:09.235Z",
           "S1B_IW_SLC__1SDV_20180121T165029_20180121T165056_009272_010A05_11E9."
           "SAFE",
-          "Sentinel-1"),
+          "Sentinel-1",
+          "SLC"),
       *entries[0]);
   ASSERT_EQ(
       Product(
@@ -54,7 +55,8 @@ TEST(XmlParserTest, TestListResponseParser) {
           "2018-01-22T23:05:33.262Z",
           "S1B_IW_SLC__1SDV_20180121T165053_20180121T165120_009272_010A05_A393."
           "SAFE",
-          "Sentinel-1"),
+          "Sentinel-1",
+          "SLC"),
       *entries[3]);
 }
 

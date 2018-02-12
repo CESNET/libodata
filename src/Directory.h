@@ -29,6 +29,7 @@ public:
   bool compare(const FileSystemNode& node) const noexcept override;
 
   void addChild(std::unique_ptr<FileSystemNode> child) noexcept;
+  void addFile(std::string file) noexcept;
   FileSystemNode* getChild(const std::string& name) noexcept;
 
   static std::unique_ptr<Directory> create(

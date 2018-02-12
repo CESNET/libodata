@@ -10,12 +10,14 @@ Product::Product(
     std::string name,
     std::string ingestion_date,
     std::string filename,
-    std::string platform) noexcept
+    std::string platform,
+    std::string type) noexcept
     : id(std::move(id)),
       name(std::move(name)),
       ingestion_date(std::move(ingestion_date)),
       filename(std::move(filename)),
       platform(std::move(platform)),
+      type(type),
       directory() {
 }
 
@@ -36,6 +38,7 @@ void Product::toString(std::ostream& ostr, unsigned indent_level) const
   indent(ostr, indent_level + 1) << "ingestion_date=" << ingestion_date << "\n";
   indent(ostr, indent_level + 1) << "filename=" << filename << "\n";
   indent(ostr, indent_level + 1) << "platform=" << platform << "\n";
+  indent(ostr, indent_level + 1) << "type=" << type << "\n";
   indent(ostr, indent_level + 1) << "files {\n";
   if (directory != nullptr) {
     directory->toString(ostr, indent_level + 2);
