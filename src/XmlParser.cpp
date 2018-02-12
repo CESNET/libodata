@@ -1,6 +1,7 @@
 #include "XmlParser.h"
 
 #include "Product.h"
+#include <algorithm>
 #include <functional>
 #include <stdexcept>
 #include <tinyxml2.h>
@@ -60,6 +61,7 @@ public:
          })) {
       result.push_back(map(node));
     }
+    std::sort(result.begin(), result.end());
     return result;
   }
 

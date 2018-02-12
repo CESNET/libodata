@@ -1,6 +1,7 @@
 #include "Directory.h"
 
 #include "Product.h"
+#include <algorithm>
 #include <map>
 #include <ostream>
 #include <string>
@@ -96,6 +97,11 @@ bool Directory::compare(const FileSystemNode& node) const noexcept {
 void Directory::addChild(std::unique_ptr<FileSystemNode> child) noexcept {
   const auto name = child->getName();
   sub_directories[name] = std::move(child);
+}
+
+void Directory::addFile(std::string file) noexcept {
+  files.emplace_back(std::move(file));
+  std::sort(files.begin(), files.end());
 }
 
 std::unique_ptr<Directory> Directory::create(
