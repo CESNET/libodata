@@ -20,7 +20,8 @@ public:
       std::string ingestion_date,
       std::string filename,
       std::string platform,
-      std::string type) noexcept;
+      std::string type,
+      std::vector<std::string> polarisation_modes) noexcept;
   Product(const Product&) = delete;
   virtual ~Product() = default;
   Product& operator=(const Product&) = delete;
@@ -44,6 +45,7 @@ private:
   std::string filename;
   std::string platform;
   std::string type;
+  std::vector<std::string> polarisation_modes;
   std::unique_ptr<Directory> directory;
 };
 

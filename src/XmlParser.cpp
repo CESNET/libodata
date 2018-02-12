@@ -3,6 +3,7 @@
 #include "Product.h"
 #include <algorithm>
 #include <functional>
+#include <sstream>
 #include <stdexcept>
 #include <tinyxml2.h>
 
@@ -91,6 +92,19 @@ public:
     return filterOne(entry_node, predicate)->GetText();
   }
 
+  std::vector<std::string> getPropertyValue(
+      const tinyxml2::XMLElement* entry_node,
+      const std::string& property_name,
+      char separator) const {
+    std::stringstream str(getPropertyValue(entry_node, property_name));
+    std::string token;
+    std::vector<std::string> value;
+    while (getline(str, token, separator)) {
+      value.push_back(token);
+    }
+    return value;
+  }
+
   tinyxml2::XMLDocument doc;
 };
 
@@ -107,7 +121,8 @@ std::vector<std::unique_ptr<Product>> XmlParser::parseList(
         doc.getPropertyValue(entry_node, "ingestiondate"),
         doc.getPropertyValue(entry_node, "filename"),
         doc.getPropertyValue(entry_node, "platformname"),
-        doc.getPropertyValue(entry_node, "producttype")));
+        doc.getPropertyValue(entry_node, "producttype"),
+        doc.getPropertyValue(entry_node, "polarisationmode", ' ')));
   }
   return products;
 }
