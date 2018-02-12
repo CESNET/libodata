@@ -31,6 +31,7 @@ add_library(libodata-client
     src/FileSystemNode.cpp src/FileSystemNode.h
     src/Product.cpp src/Product.h
     src/ProductPath.cpp src/ProductPath.h
+    src/SearchQuery.cpp src/SearchQuery.h
     src/SearchQueryBuilder.cpp src/SearchQueryBuilder.h
     src/XmlParser.cpp src/XmlParser.h
     )
@@ -56,13 +57,13 @@ add_executable(runtest
     test/DirectoryTest.cpp
     test/main.cpp 
     test/ProductPathTest.cpp
+    test/SearchQueryTest.cpp
     test/SearchQueryBuilderTest.cpp
     test/XmlParserTest.cpp
     )
 add_test(tests runtest)
 include_directories(runtest ${GTEST_INCLUDE_DIRS} src)
 target_link_libraries(runtest ${GTEST_LIBRARIES} ${GTEST_MAIN_LIBRARIES} pthread)
-target_link_libraries(runtest ${CURL_LIBRARIES})
 target_link_libraries(runtest tinyxml2)
 target_link_libraries(runtest libodata-client)
 target_link_libraries(runtest restclient-cpp)

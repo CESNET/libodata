@@ -30,13 +30,13 @@ struct Connection::Impl {
     return response.body;
   }
 
-  std::string sendListQuery(const std::string& platform, std::uint32_t offset) {
-    SearchQueryBuilder query;
-    query.setQuery({"platformname", platform});
-    query.setStart(offset);
-    query.setRows(100);
-    query.setOrder("ingestiondate", true);
-    return getQuery(query.build());
+  std::string sendListQuery(SearchQuery query, std::uint32_t offset) {
+    SearchQueryBuilder query_builder;
+    query_builder.setQuery(std::move(query));
+    query_builder.setStart(offset);
+    query_builder.setRows(100);
+    query_builder.setOrder("ingestiondate", true);
+    return getQuery(query_builder.build());
   }
 
   RestClient::Connection connection;
@@ -53,11 +53,11 @@ Connection::Connection(
 Connection::~Connection() = default;
 
 std::vector<std::unique_ptr<Product>> Connection::listProducts(
-    const std::string& platform, uint32_t size) {
+    SearchQuery query, uint32_t size) {
   std::vector<std::unique_ptr<Product>> products;
   while (products.size() < size) {
     auto list = pimpl->response_parser.parseList(
-        pimpl->sendListQuery(platform, products.size()));
+        pimpl->sendListQuery(query, products.size()));
     if (list.empty()) {
       break;
     } else {

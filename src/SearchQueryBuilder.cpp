@@ -1,46 +1,9 @@
 #include "SearchQueryBuilder.h"
 
-#include <cassert>
 #include <sstream>
 #include <stdexcept>
 
 namespace OData {
-namespace {
-constexpr const char* getOperatorString(SearchQuery::Operator op) {
-  switch (op) {
-  case SearchQuery::Operator::AND:
-    return "AND";
-  case SearchQuery::Operator::OR:
-    return "OR";
-  case SearchQuery::Operator::NOT:
-    return "NOT";
-  default:
-    assert(false);
-    return nullptr;
-  }
-}
-} // namespace
-
-SearchQuery::SearchQuery(
-    const std::string& keyword, const std::string& value) noexcept
-    : query(keyword + ":" + value) {
-}
-
-SearchQuery::SearchQuery(
-    const std::string& keyword, std::uint32_t value) noexcept
-    : SearchQuery(keyword, std::to_string(value)) {
-}
-
-SearchQuery::SearchQuery(
-    SearchQuery left, SearchQuery right, Operator op) noexcept
-    : query(
-          "(" + left.query + "%20" + getOperatorString(op) + "%20" + right.query
-          + ")") {
-}
-
-const std::string& SearchQuery::getQuery() const noexcept {
-  return query;
-}
 
 SearchQueryBuilder::SearchQueryBuilder() noexcept
     : query(), start(0), rows(10), order_by("ingestiondate"), ascending(false) {
