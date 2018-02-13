@@ -3,31 +3,62 @@
 #include "Product.h"
 #include "SearchQueryBuilder.h"
 #include "XmlParser.h"
+#include <curl/curl.h>
+#include <functional>
 #include <iostream>
 #include <iterator>
-#include <restclient-cpp/connection.h>
 #include <sstream>
 #include <stdexcept>
 
 namespace OData {
+struct ScopeGuard {
+  ScopeGuard(std::function<void()> cleanup) : cleanup(std::move(cleanup)) {
+  }
+  ~ScopeGuard() {
+    cleanup();
+  }
+  std::function<void()> cleanup;
+};
+
 struct Connection::Impl {
   Impl(
-      const std::string& url,
-      const std::string& username,
-      const std::string& password)
-      : connection(url) {
-    connection.SetBasicAuth(username, password);
+      std::string url, const std::string& username, const std::string& password)
+      : curl_handle(curl_easy_init(), curl_easy_cleanup),
+        url(std::move(url)),
+        auth_token(username + ":" + password),
+        body(),
+        response_parser() {
   }
 
   ~Impl() = default;
 
   std::string getQuery(const std::string& uri) {
     std::cout << "Sending query: " << uri << std::endl;
-    auto response = connection.get(uri);
-    if (response.code != 200) {
-      throw std::runtime_error(response.body);
+    ScopeGuard guard([&]() {
+      curl_easy_reset(curl_handle.get());
+      body.clear();
+    });
+
+    const auto url = this->url + uri;
+    curl_easy_setopt(curl_handle.get(), CURLOPT_URL, url.c_str());
+    curl_easy_setopt(
+        curl_handle.get(), CURLOPT_WRITEFUNCTION, Impl::dataCallback);
+    curl_easy_setopt(curl_handle.get(), CURLOPT_WRITEDATA, this);
+    curl_easy_setopt(curl_handle.get(), CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+    curl_easy_setopt(curl_handle.get(), CURLOPT_USERPWD, auth_token.c_str());
+    curl_easy_setopt(curl_handle.get(), CURLOPT_FOLLOWLOCATION, 1L);
+    const auto ret = curl_easy_perform(curl_handle.get());
+    if (ret == CURLE_OK) {
+      int64_t http_code = 0;
+      curl_easy_getinfo(curl_handle.get(), CURLINFO_RESPONSE_CODE, &http_code);
+      if (http_code == 200) {
+        return std::move(body);
+      } else {
+        throw std::runtime_error(std::move(body));
+      }
+    } else {
+      throw std::runtime_error(curl_easy_strerror(ret));
     }
-    return response.body;
   }
 
   std::string sendListQuery(SearchQuery query, std::uint32_t offset) {
@@ -39,15 +70,24 @@ struct Connection::Impl {
     return getQuery(query_builder.build());
   }
 
-  RestClient::Connection connection;
+  static size_t dataCallback(
+      void* data, size_t size, size_t nmemb, void* user_data) {
+    auto self = reinterpret_cast<Connection::Impl*>(user_data);
+    const auto data_length = size * nmemb;
+    self->body.append(reinterpret_cast<char*>(data), data_length);
+    return data_length;
+  }
+
+  std::unique_ptr<CURL, std::function<void(CURL*)>> curl_handle;
+  std::string url;
+  std::string auth_token;
+  std::string body;
   XmlParser response_parser;
 };
 
 Connection::Connection(
-    const std::string& url,
-    const std::string& username,
-    const std::string& password)
-    : pimpl(std::make_unique<Impl>(url, username, password)) {
+    std::string url, const std::string& username, const std::string& password)
+    : pimpl(std::make_unique<Impl>(std::move(url), username, password)) {
 }
 
 Connection::~Connection() = default;

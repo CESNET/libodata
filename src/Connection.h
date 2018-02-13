@@ -15,7 +15,7 @@ class SearchQuery;
 class Connection {
 public:
   explicit Connection(
-      const std::string& url,
+      std::string url,
       const std::string& username,
       const std::string& password);
   ~Connection();
