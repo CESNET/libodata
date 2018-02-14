@@ -22,7 +22,7 @@ public:
   std::vector<std::unique_ptr<Product>> listProducts(
       SearchQuery query, uint32_t size);
   void updateProductDetails(Product& product);
-  std::string getFile(const ProductPath& path);
+  std::vector<char> getFile(const ProductPath& path);
 
 private:
   struct Impl;

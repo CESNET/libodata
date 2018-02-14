@@ -35,8 +35,8 @@ public:
 
 class XmlDocument {
 public:
-  XmlDocument(const std::string& xml) : doc() {
-    if (tinyxml2::XML_SUCCESS != doc.Parse(xml.c_str())) {
+  explicit XmlDocument(const std::vector<char>& xml) : doc() {
+    if (tinyxml2::XML_SUCCESS != doc.Parse(xml.data(), xml.size())) {
       throw std::invalid_argument("Invalid xml");
     }
   }
@@ -96,7 +96,7 @@ public:
 } /* namespace */
 
 std::vector<std::unique_ptr<Product>> XmlParser::parseList(
-    const std::string& xml) const {
+    const std::vector<char>& xml) const {
   XmlDocument doc(xml);
   std::vector<std::unique_ptr<Product>> products;
   for (const auto& entry_node : doc.getEntries()) {
@@ -112,7 +112,7 @@ std::vector<std::unique_ptr<Product>> XmlParser::parseList(
 }
 
 std::vector<std::string> XmlParser::parseManifest(
-    const std::string& manifest) const {
+    const std::vector<char>& manifest) const {
   XmlDocument doc(manifest);
   std::function<std::string(const tinyxml2::XMLElement*)> map = [](auto node) {
     return node->Attribute("href");

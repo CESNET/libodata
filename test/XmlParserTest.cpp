@@ -6,12 +6,13 @@
 #include <stdexcept>
 
 namespace {
-std::string readTestInstance(const std::string& filename) {
+std::vector<char> readTestInstance(const std::string& filename) {
   std::fstream file("examples/" + filename, std::fstream::in);
   if (file.is_open()) {
     std::stringstream buffer;
     buffer << file.rdbuf();
-    return buffer.str();
+    const auto data = buffer.str();
+    return std::vector<char>(data.begin(), data.end());
   } else {
     throw std::invalid_argument("Cannot open file" + filename);
   }

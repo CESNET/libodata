@@ -32,7 +32,7 @@ struct Connection::Impl {
 
   ~Impl() = default;
 
-  std::string getQuery(const std::string& uri) {
+  std::vector<char> getQuery(const std::string& uri) {
     std::cout << "Sending query: " << uri << std::endl;
     ScopeGuard guard([&]() {
       curl_easy_reset(curl_handle.get());
@@ -54,14 +54,15 @@ struct Connection::Impl {
       if (http_code == 200) {
         return std::move(body);
       } else {
-        throw std::runtime_error(std::move(body));
+        body.push_back('\0');
+        throw std::runtime_error(std::string(body.data()));
       }
     } else {
       throw std::runtime_error(curl_easy_strerror(ret));
     }
   }
 
-  std::string sendListQuery(SearchQuery query, std::uint32_t offset) {
+  std::vector<char> sendListQuery(SearchQuery query, std::uint32_t offset) {
     SearchQueryBuilder query_builder;
     query_builder.setQuery(std::move(query));
     query_builder.setStart(offset);
@@ -74,14 +75,16 @@ struct Connection::Impl {
       void* data, size_t size, size_t nmemb, void* user_data) {
     auto self = reinterpret_cast<Connection::Impl*>(user_data);
     const auto data_length = size * nmemb;
-    self->body.append(reinterpret_cast<char*>(data), data_length);
+    self->body.reserve(self->body.size() + data_length);
+    const char* ch_data = reinterpret_cast<char*>(data);
+    std::copy(ch_data, ch_data + data_length, std::back_inserter(self->body));
     return data_length;
   }
 
   std::unique_ptr<CURL, std::function<void(CURL*)>> curl_handle;
   std::string url;
   std::string auth_token;
-  std::string body;
+  std::vector<char> body;
   XmlParser response_parser;
 };
 
@@ -110,12 +113,12 @@ std::vector<std::unique_ptr<Product>> Connection::listProducts(
 void Connection::updateProductDetails(Product& product) {
   auto manifest_path = product.getProductPath();
   manifest_path.appendPath({product.getManifestFilename()});
+  auto response = getFile(manifest_path);
   product.setArchiveStructure(Directory::create(
-      product.getFilename(),
-      pimpl->response_parser.parseManifest(getFile(manifest_path))));
+      product.getFilename(), pimpl->response_parser.parseManifest(response)));
 }
 
-std::string Connection::getFile(const ProductPath& path) {
+std::vector<char> Connection::getFile(const ProductPath& path) {
   return pimpl->getQuery("odata/v1/" + path.getPath());
 }
 
