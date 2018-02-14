@@ -6,6 +6,8 @@
 #include <stdexcept>
 #include <tinyxml2.h>
 
+// TODO better exceptions
+
 namespace OData {
 namespace {
 

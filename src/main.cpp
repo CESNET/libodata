@@ -13,7 +13,7 @@ std::vector<std::unique_ptr<OData::Product>> getMissionProducts(
   auto products = connection.listProducts(
       {OData::SearchQuery::Keyword::PLATFORM, mission}, count);
   for (auto& product : products) {
-    connection.updateProductDetails(*product);
+    connection.updateProductFileStructure(*product);
   }
   return products;
 }

@@ -5,9 +5,20 @@
 
 namespace OData {
 
+/**
+ * Sorl protocol search query.
+ */
 class SearchQuery {
 public:
+  /**
+   * Relational operators supported by Copernicus Open Access Hub.
+   * NOT might be used as unary operator and also binary with meaning:
+   * X NOT Y == X AND NOT Y
+   */
   enum class Operator { AND, OR, NOT };
+  /**
+   * Keywords supported by Copernicus Open Access Hub
+   */
   enum class Keyword {
     PLATFORM,
     BEGIN_POSITION,

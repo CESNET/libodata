@@ -12,6 +12,9 @@
 
 namespace OData {
 
+/**
+ * Product stored in Copernicus Open Access Hub
+ */
 class Product : public FileSystemNode {
 public:
   Product(

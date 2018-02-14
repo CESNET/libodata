@@ -10,6 +10,8 @@
 #include <sstream>
 #include <stdexcept>
 
+// TODO better exceptions
+
 namespace OData {
 struct ScopeGuard {
   ScopeGuard(std::function<void()> cleanup) : cleanup(std::move(cleanup)) {
@@ -96,9 +98,9 @@ Connection::Connection(
 Connection::~Connection() = default;
 
 std::vector<std::unique_ptr<Product>> Connection::listProducts(
-    SearchQuery query, uint32_t size) {
+    SearchQuery query, uint32_t count) {
   std::vector<std::unique_ptr<Product>> products;
-  while (products.size() < size) {
+  while (products.size() < count) {
     auto list = pimpl->response_parser.parseList(
         pimpl->sendListQuery(query, products.size()));
     if (list.empty()) {
@@ -110,7 +112,7 @@ std::vector<std::unique_ptr<Product>> Connection::listProducts(
   return products;
 }
 
-void Connection::updateProductDetails(Product& product) {
+void Connection::updateProductFileStructure(Product& product) {
   auto manifest_path = product.getProductPath();
   manifest_path.appendPath({product.getManifestFilename()});
   auto response = getFile(manifest_path);
