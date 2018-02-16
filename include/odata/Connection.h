@@ -1,5 +1,5 @@
-#ifndef SRC_CONNECTION_H_
-#define SRC_CONNECTION_H_
+#ifndef ODATA_CONNECTION_H_
+#define ODATA_CONNECTION_H_
 
 #include <cstdint>
 #include <memory>
@@ -57,4 +57,4 @@ private:
 
 } /* namespace OData */
 
-#endif /* SRC_CONNECTION_H_ */
+#endif /* ODATA_CONNECTION_H_ */
