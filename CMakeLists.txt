@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 3.0)
 project (odata VERSION 0.0.1)
 
 #project definition
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-add_definitions(-Wall -std=c++14 -pedantic -Wextra)
+add_definitions(-Wall -std=c++11 -pedantic -Wextra)
 
 # check dependencies
 find_package(CURL REQUIRED)

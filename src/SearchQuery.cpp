@@ -1,10 +1,11 @@
 #include "SearchQuery.h"
 
-#include <cassert>
+#include <assert.h>
 
 namespace OData {
 namespace {
-constexpr const char* getOperatorString(SearchQuery::Operator op) {
+// TODO constexpr in C++14
+const char* getOperatorString(SearchQuery::Operator op) {
   switch (op) {
   case SearchQuery::Operator::AND:
     return "AND";
@@ -13,12 +14,14 @@ constexpr const char* getOperatorString(SearchQuery::Operator op) {
   case SearchQuery::Operator::NOT:
     return "NOT";
   default:
-    assert(false);
+    // assert that all enum values are implemented
+    assert("Unknown enum value!");
     return nullptr;
   }
 }
 
-constexpr const char* getKeywordString(SearchQuery::Keyword word) {
+// TODO constexpr in C++14
+const char* getKeywordString(SearchQuery::Keyword word) {
   switch (word) {
   case SearchQuery::Keyword::PLATFORM:
     return "platformname";
@@ -55,7 +58,8 @@ constexpr const char* getKeywordString(SearchQuery::Keyword word) {
   case SearchQuery::Keyword::CLOUD_COVERAGE:
     return "cloudcoverpercentage";
   default:
-    assert(false);
+    // assert that all enum values are implemented
+    assert("Unknown enum value!");
     return nullptr;
   }
 }

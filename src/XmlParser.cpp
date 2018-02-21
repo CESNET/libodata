@@ -58,7 +58,8 @@ public:
       const std::string& node_name,
       std::function<T(const tinyxml2::XMLElement*)> map) const {
     std::vector<T> result;
-    for (const auto& node : filter(doc.RootElement(), [&](const auto& element) {
+    for (const auto& node :
+         filter(doc.RootElement(), [&](const tinyxml2::XMLElement& element) {
            return element.Name() == node_name;
          })) {
       result.push_back(map(node));
@@ -78,7 +79,7 @@ public:
   }
 
   std::vector<const tinyxml2::XMLElement*> getEntries() const {
-    return filter(doc.RootElement(), [](const auto& element) {
+    return filter(doc.RootElement(), [](const tinyxml2::XMLElement& element) {
       return 0 == std::strcmp(element.Name(), "entry");
     });
   }
@@ -102,13 +103,13 @@ std::vector<std::unique_ptr<Product>> XmlParser::parseList(
   XmlDocument doc(xml);
   std::vector<std::unique_ptr<Product>> products;
   for (const auto& entry_node : doc.getEntries()) {
-    products.push_back(std::make_unique<Product>(
+    products.push_back(std::unique_ptr<Product>(new Product(
         doc.getPropertyValue(entry_node, "uuid"),
         doc.getPropertyValue(entry_node, "identifier"),
         doc.getPropertyValue(entry_node, "ingestiondate"),
         doc.getPropertyValue(entry_node, "filename"),
         doc.getPropertyValue(entry_node, "platformname"),
-        doc.getPropertyValue(entry_node, "producttype")));
+        doc.getPropertyValue(entry_node, "producttype"))));
   }
   return products;
 }
@@ -116,9 +117,8 @@ std::vector<std::unique_ptr<Product>> XmlParser::parseList(
 std::vector<std::string> XmlParser::parseManifest(
     const std::vector<char>& manifest) const {
   XmlDocument doc(manifest);
-  std::function<std::string(const tinyxml2::XMLElement*)> map = [](auto node) {
-    return node->Attribute("href");
-  };
+  std::function<std::string(const tinyxml2::XMLElement*)> map =
+      [](const tinyxml2::XMLElement* node) { return node->Attribute("href"); };
   return doc.filterMap("fileLocation", map);
 }
 

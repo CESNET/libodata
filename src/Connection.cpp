@@ -92,7 +92,7 @@ struct Connection::Impl {
 
 Connection::Connection(
     std::string url, const std::string& username, const std::string& password)
-    : pimpl(std::make_unique<Impl>(std::move(url), username, password)) {
+    : pimpl(new Impl(std::move(url), username, password)) {
 }
 
 Connection::~Connection() = default;

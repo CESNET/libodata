@@ -29,9 +29,8 @@ Directory* getOrInsertPlatform(
     Directory::Subdirectories& platforms, const std::string& platform) {
   auto platform_tree = platforms.find(platform);
   if (platform_tree == platforms.end()) {
-    platform_tree =
-        platforms.insert({platform, std::make_unique<Directory>(platform)})
-            .first;
+    platforms[platform] = std::unique_ptr<Directory>(new Directory(platform));
+    platform_tree = platforms.find(platform);
   }
   return static_cast<Directory*>(platform_tree->second.get());
 }
@@ -42,7 +41,7 @@ Directory* getOrInsertDateSubtree(
   const auto date = product.getDate();
   auto date_tree = dynamic_cast<Directory*>(platform->getChild(date));
   if (date_tree == nullptr) {
-    auto sub_tree = std::make_unique<Directory>(date);
+    auto sub_tree = std::unique_ptr<Directory>(new Directory(date));
     date_tree = sub_tree.get();
     platform->addChild(std::move(sub_tree));
   }
@@ -121,11 +120,10 @@ std::unique_ptr<Directory> Directory::create(
   }
   std::map<std::string, std::unique_ptr<FileSystemNode>> sub_dirs;
   for (const auto& sub_dir : dirs) {
-    sub_dirs.insert(
-        {sub_dir.first, Directory::create(sub_dir.first, sub_dir.second)});
+    sub_dirs[sub_dir.first] = Directory::create(sub_dir.first, sub_dir.second);
   }
-  return std::make_unique<Directory>(
-      std::move(name), std::move(content), std::move(sub_dirs));
+  return std::unique_ptr<Directory>(
+      new Directory(std::move(name), std::move(content), std::move(sub_dirs)));
 }
 
 FileSystemNode* Directory::getChild(const std::string& name) noexcept {
@@ -161,8 +159,8 @@ std::unique_ptr<Directory> Directory::createFilesystem(
     auto parent = getOrInsertDateSubtree(missions, *product);
     parent->addChild(std::move(product));
   }
-  return std::make_unique<Directory>(
-      "root", std::vector<std::string>{}, std::move(missions));
+  return std::unique_ptr<Directory>(
+      new Directory("root", std::vector<std::string>{}, std::move(missions)));
 }
 
 } /* namespace OData */
