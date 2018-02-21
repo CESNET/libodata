@@ -65,19 +65,23 @@ set(TEST_CLIENT odata-client)
 add_executable(${TEST_CLIENT} src/main.cpp)
 target_link_libraries(${TEST_CLIENT} ${LIB_NAME})
 
-#test
-find_package(GTest REQUIRED)
-enable_testing()
-set(TEST_BINARY runtest)
-add_executable(${TEST_BINARY}
-    test/DirectoryTest.cpp
-    test/main.cpp 
-    test/ProductPathTest.cpp
-    test/SearchQueryTest.cpp
-    test/SearchQueryBuilderTest.cpp
-    test/XmlParserTest.cpp
-    )
-add_test(tests ${TEST_BINARY})
-target_include_directories(${TEST_BINARY} PRIVATE ${GTEST_INCLUDE_DIRS} src)
-target_link_libraries(${TEST_BINARY} ${GTEST_LIBRARIES} ${GTEST_MAIN_LIBRARIES} pthread)
-target_link_libraries(${TEST_BINARY} ${LIB_NAME})
+#test - enable only if gtest library is found
+find_package(GTest)
+if(GTEST_FOUND)
+    enable_testing()
+    set(TEST_BINARY runtest)
+    add_executable(${TEST_BINARY}
+        test/DirectoryTest.cpp
+        test/main.cpp
+        test/ProductPathTest.cpp
+        test/SearchQueryTest.cpp
+        test/SearchQueryBuilderTest.cpp
+        test/XmlParserTest.cpp
+        )
+    add_test(tests ${TEST_BINARY})
+    target_include_directories(${TEST_BINARY} PRIVATE ${GTEST_INCLUDE_DIRS} src)
+    target_link_libraries(${TEST_BINARY} ${GTEST_LIBRARIES} ${GTEST_MAIN_LIBRARIES} pthread)
+    target_link_libraries(${TEST_BINARY} ${LIB_NAME})
+else(GTEST_FOUND)
+    message(STATUS "GTEST package not found, tests are disabled")
+endif(GTEST_FOUND)
