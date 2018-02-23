@@ -19,4 +19,10 @@ std::ostream& FileSystemNode::indent(std::ostream& ostr, unsigned level) {
   return ostr;
 }
 
+std::ostream& operator<<(
+    std::ostream& ostr, const FileSystemNode& node) noexcept {
+  node.toString(ostr);
+  return ostr;
+}
+
 } /* namespace OData */

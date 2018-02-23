@@ -68,7 +68,7 @@ struct Connection::Impl {
     SearchQueryBuilder query_builder;
     query_builder.setQuery(std::move(query));
     query_builder.setStart(offset);
-    query_builder.setRows(100);
+    query_builder.setRows(5);
     query_builder.setOrder("ingestiondate", true);
     return getQuery(query_builder.build());
   }

@@ -23,6 +23,8 @@ public:
       const std::string& username,
       const std::string& password);
   ~Connection();
+  Connection(const Connection&) = delete;
+  Connection& operator=(const Connection&) = delete;
 
   /**
    * List products specified by query. Sorl protocol is used.

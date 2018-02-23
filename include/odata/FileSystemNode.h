@@ -1,5 +1,5 @@
-    #ifndef SRC_FILESYSTEMNODE_H_
-#define SRC_FILESYSTEMNODE_H_
+#ifndef ODATA_FILESYSTEMNODE_H_
+#define ODATA_FILESYSTEMNODE_H_
 
 #include <iosfwd>
 #include <memory>
@@ -24,6 +24,9 @@ public:
   static std::ostream& indent(std::ostream& ostr, unsigned level);
 };
 
+std::ostream& operator<<(
+    std::ostream& ostr, const FileSystemNode& node) noexcept;
+
 } /* namespace OData */
 
-#endif /* SRC_FILESYSTEMNODE_H_ */
+#endif /* ODATA_FILESYSTEMNODE_H_ */
