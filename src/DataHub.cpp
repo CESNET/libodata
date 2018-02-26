@@ -28,7 +28,7 @@ struct DataHub::Impl {
   std::unique_ptr<FileSystemNode> getData() {
     std::unique_ptr<Directory> data(new Directory("root"));
     for (const auto& mission : missions) {
-      data->appendProducts(getMissionProducts(mission, 10));
+      data->appendProducts(getMissionProducts(mission, 100));
     }
     return data;
   }

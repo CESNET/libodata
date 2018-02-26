@@ -18,6 +18,7 @@ set(LIB_NAME odata)
 add_library(${LIB_NAME} SHARED
     src/Connection.cpp include/odata/Connection.h
     src/DataHub.cpp include/odata/DataHub.h
+    src/DataHubException.cpp include/odata/DataHubException.h
     src/Directory.cpp src/Directory.h
     src/FileSystemNode.cpp include/odata/FileSystemNode.h
     src/Product.cpp src/Product.h

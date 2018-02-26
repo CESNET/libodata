@@ -1,5 +1,6 @@
 #include "Connection.h"
 
+#include "DataHubException.h"
 #include "Product.h"
 #include "SearchQueryBuilder.h"
 #include "XmlParser.h"
@@ -8,9 +9,6 @@
 #include <iostream>
 #include <iterator>
 #include <sstream>
-#include <stdexcept>
-
-// TODO better exceptions
 
 namespace OData {
 struct ScopeGuard {
@@ -49,6 +47,9 @@ struct Connection::Impl {
     curl_easy_setopt(curl_handle.get(), CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
     curl_easy_setopt(curl_handle.get(), CURLOPT_USERPWD, auth_token.c_str());
     curl_easy_setopt(curl_handle.get(), CURLOPT_FOLLOWLOCATION, 1L);
+    // TODO remove workaround for testing environment, add configuration option
+    // for loading certificates from custom location
+    curl_easy_setopt(curl_handle.get(), CURLOPT_SSL_VERIFYPEER, 0L);
     const auto ret = curl_easy_perform(curl_handle.get());
     if (ret == CURLE_OK) {
       int64_t http_code = 0;
@@ -57,10 +58,10 @@ struct Connection::Impl {
         return std::move(body);
       } else {
         body.push_back('\0');
-        throw std::runtime_error(std::string(body.data()));
+        throw DataHubException("Get request " + uri, std::string(body.data()));
       }
     } else {
-      throw std::runtime_error(curl_easy_strerror(ret));
+      throw DataHubException("Get request " + uri, curl_easy_strerror(ret));
     }
   }
 
@@ -68,7 +69,7 @@ struct Connection::Impl {
     SearchQueryBuilder query_builder;
     query_builder.setQuery(std::move(query));
     query_builder.setStart(offset);
-    query_builder.setRows(5);
+    query_builder.setRows(100);
     query_builder.setOrder("ingestiondate", true);
     return getQuery(query_builder.build());
   }
@@ -109,6 +110,7 @@ std::vector<std::unique_ptr<Product>> Connection::listProducts(
       std::move(list.begin(), list.end(), std::back_inserter(products));
     }
   }
+  std::cout << products.size() << " product downloaded" << std::endl;
   return products;
 }
 

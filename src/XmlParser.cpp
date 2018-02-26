@@ -1,12 +1,10 @@
 #include "XmlParser.h"
 
+#include "DataHubException.h"
 #include "Product.h"
 #include <algorithm>
 #include <functional>
-#include <stdexcept>
 #include <tinyxml2.h>
-
-// TODO better exceptions
 
 namespace OData {
 namespace {
@@ -38,8 +36,10 @@ public:
 class XmlDocument {
 public:
   explicit XmlDocument(const std::vector<char>& xml) : doc() {
-    if (tinyxml2::XML_SUCCESS != doc.Parse(xml.data(), xml.size())) {
-      throw std::invalid_argument("Invalid xml");
+    tinyxml2::XMLError xml_status = doc.Parse(xml.data(), xml.size());
+    if (tinyxml2::XML_SUCCESS != xml_status) {
+      throw DataHubException(
+          "XML parsing error", doc.ErrorIDToName(xml_status));
     }
   }
 
@@ -67,17 +67,6 @@ public:
     return result;
   }
 
-  const tinyxml2::XMLElement* filterOne(
-      const tinyxml2::XMLElement* root,
-      std::function<bool(const tinyxml2::XMLElement&)> predicate) const {
-    const auto nodes = filter(root, predicate);
-    if (nodes.size() == 1) {
-      return nodes[0];
-    } else {
-      throw std::invalid_argument("Invalid xml");
-    }
-  }
-
   std::vector<const tinyxml2::XMLElement*> getEntries() const {
     return filter(doc.RootElement(), [](const tinyxml2::XMLElement& element) {
       return 0 == std::strcmp(element.Name(), "entry");
@@ -90,7 +79,14 @@ public:
     auto predicate = [&](const tinyxml2::XMLElement& element) {
       return element.Attribute("name", property_name.c_str());
     };
-    return filterOne(entry_node, predicate)->GetText();
+    const auto nodes = filter(entry_node, predicate);
+    if (nodes.size() == 1) {
+      return nodes[0]->GetText();
+    } else if (nodes.empty()) {
+      throw DataHubException(property_name, "XML element not found");
+    } else {
+      throw DataHubException(property_name, "Only one XML element expected");
+    }
   }
 
   tinyxml2::XMLDocument doc;
