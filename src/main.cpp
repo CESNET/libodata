@@ -20,12 +20,11 @@ std::vector<std::unique_ptr<OData::Product>> getMissionProducts(
 } // namespace
 
 int main(int argc, char** argv) {
-  if (argc < 5) {
-    std::cout << "try odata-client username password mission product_count"
-              << std::endl;
+  if (argc < 4) {
+    std::cout << "try odata-client url username password" << std::endl;
     return 1;
   }
-  OData::Connection connection("https://dhr1.cesnet.cz/", argv[1], argv[2]);
+  OData::Connection connection(argv[1], argv[2], argv[3]);
   auto filesystem = OData::Directory::createFilesystem(
       getMissionProducts(connection, "Sentinel-1", std::atoi(argv[4])));
   filesystem->appendProducts(
