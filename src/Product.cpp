@@ -80,6 +80,16 @@ std::string Product::getName() const noexcept {
   return name;
 }
 
+FileSystemNode* Product::getFile(std::list<std::string> path) const noexcept {
+  const auto filename = path.front();
+  path.pop_front();
+  if (filename == directory->getName()) {
+    return directory->getFile(std::move(path));
+  } else {
+    return nullptr;
+  }
+}
+
 const std::string& Product::getFilename() const noexcept {
   return filename;
 }

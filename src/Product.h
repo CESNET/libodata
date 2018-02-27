@@ -35,6 +35,7 @@ public:
       noexcept override;
   bool compare(const FileSystemNode& node) const noexcept override;
   std::string getName() const noexcept override;
+  FileSystemNode* getFile(std::list<std::string> path) const noexcept override;
   const std::string& getPlatform() const noexcept;
   std::string getManifestFilename() const noexcept;
   const std::string& getFilename() const noexcept;

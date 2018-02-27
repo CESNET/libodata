@@ -2,8 +2,8 @@
 #define ODATA_FILESYSTEMNODE_H_
 
 #include <iosfwd>
+#include <list>
 #include <memory>
-#include <vector>
 
 namespace OData {
 
@@ -20,7 +20,10 @@ public:
       noexcept = 0;
   virtual bool compare(const FileSystemNode& node) const noexcept = 0;
   virtual std::string getName() const noexcept = 0;
+  virtual FileSystemNode* getFile(std::list<std::string> path) const
+      noexcept = 0;
 
+  FileSystemNode* getFile(const std::string& file) const noexcept;
   static std::ostream& indent(std::ostream& ostr, unsigned level);
 };
 

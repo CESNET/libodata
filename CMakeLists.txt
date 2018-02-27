@@ -20,6 +20,7 @@ add_library(${LIB_NAME} SHARED
     src/DataHub.cpp include/odata/DataHub.h
     src/DataHubException.cpp include/odata/DataHubException.h
     src/Directory.cpp src/Directory.h
+    src/File.cpp src/File.h
     src/FileSystemNode.cpp include/odata/FileSystemNode.h
     src/Product.cpp src/Product.h
     src/ProductPath.cpp src/ProductPath.h
@@ -74,6 +75,7 @@ if(GTEST_FOUND)
     set(TEST_BINARY runtest)
     add_executable(${TEST_BINARY}
         test/DirectoryTest.cpp
+        test/FileSystemNodeTest.cpp
         test/main.cpp
         test/ProductPathTest.cpp
         test/SearchQueryTest.cpp
