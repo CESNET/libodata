@@ -3,6 +3,7 @@
 #include "Directory.h"
 #include "File.h"
 #include "Product.h"
+#include <boost/filesystem/path.hpp>
 #include <gtest/gtest.h>
 #include <memory>
 #include <string>
@@ -27,7 +28,7 @@ TEST(FileSystemNodeTest, FileTreeTraverseTest) {
   products.emplace_back(createTestProduct("platform2"));
   const std::unique_ptr<FileSystemNode> test_tree =
       Directory::createFilesystem(std::move(products));
-  ASSERT_EQ(nullptr, test_tree->getFile(std::string("/abc/def")));
+  ASSERT_EQ(nullptr, test_tree->getFile("/abc/def"));
   ASSERT_EQ(
       File("manifest.xml"),
       *test_tree->getFile("/platform1/date/name/extracted/manifest.xml"));

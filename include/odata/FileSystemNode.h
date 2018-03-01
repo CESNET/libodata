@@ -1,8 +1,8 @@
 #ifndef ODATA_FILESYSTEMNODE_H_
 #define ODATA_FILESYSTEMNODE_H_
 
+#include <boost/filesystem/path.hpp>
 #include <iosfwd>
-#include <list>
 #include <memory>
 #include <string>
 #include <vector>
@@ -22,11 +22,13 @@ public:
       noexcept = 0;
   virtual bool compare(const FileSystemNode& node) const noexcept = 0;
   virtual std::string getName() const noexcept = 0;
-  virtual FileSystemNode* getFile(std::list<std::string> path) const
-      noexcept = 0;
+  virtual const FileSystemNode* getFile(
+      boost::filesystem::path::const_iterator begin,
+      boost::filesystem::path::const_iterator end) const noexcept = 0;
   virtual std::vector<std::string> readDir() const noexcept = 0;
 
-  FileSystemNode* getFile(const std::string& file) const noexcept;
+  const FileSystemNode* getFile(const boost::filesystem::path& path) const
+      noexcept;
   static std::ostream& indent(std::ostream& ostr, unsigned level);
 };
 

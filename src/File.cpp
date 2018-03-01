@@ -20,8 +20,14 @@ std::string File::getName() const noexcept {
   return name;
 }
 
-FileSystemNode* File::getFile(std::list<std::string>) const noexcept {
-  return nullptr;
+const FileSystemNode* File::getFile(
+    boost::filesystem::path::const_iterator begin,
+    boost::filesystem::path::const_iterator end) const noexcept {
+  if (begin != end && begin->string() == name && ++begin == end) {
+    return this;
+  } else {
+    return nullptr;
+  }
 }
 
 std::vector<std::string> File::readDir() const noexcept {

@@ -12,6 +12,7 @@ find_library(TINYXML2_LIBRARIES NAMES tinyxml2)
 if(NOT TINYXML2_LIBRARIES)
     message(SEND_ERROR "tinyxml2 library not found")
 endif (NOT TINYXML2_LIBRARIES)
+find_package(Boost REQUIRED COMPONENTS filesystem)
 
 # library project
 set(LIB_NAME odata)
@@ -31,8 +32,10 @@ add_library(${LIB_NAME} SHARED
 target_include_directories(${LIB_NAME} PUBLIC 
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/odata>
     $<INSTALL_INTERFACE:include/odata>)
+target_include_directories(${LIB_NAME} PUBLIC ${Boost_INCLUDE_DIRS})
 target_link_libraries(${LIB_NAME} PUBLIC ${CURL_LIBRARIES})
 target_link_libraries(${LIB_NAME} PUBLIC ${TINYXML2_LIBRARIES})
+target_link_libraries(${LIB_NAME} PUBLIC ${Boost_LIBRARIES})
 
 #install
 include(CMakePackageConfigHelpers)
@@ -75,6 +78,7 @@ if(GTEST_FOUND)
     set(TEST_BINARY runtest)
     add_executable(${TEST_BINARY}
         test/DirectoryTest.cpp
+        test/FileTest.cpp
         test/FileSystemNodeTest.cpp
         test/main.cpp
         test/ProductPathTest.cpp

@@ -14,18 +14,13 @@ bool FileSystemNode::operator!=(const FileSystemNode& node) const {
   return !compare(node);
 }
 
-FileSystemNode* OData::FileSystemNode::getFile(const std::string& file) const
-    noexcept {
-  std::stringstream str(file);
-  std::string dir;
-  std::list<std::string> path;
-  if (!file.empty() && file.front() == '/') {
-    str.get();
+const FileSystemNode* FileSystemNode::getFile(
+    const boost::filesystem::path& path) const noexcept {
+  if (path.empty()) {
+    return nullptr;
+  } else {
+    return getFile(path.begin(), path.end());
   }
-  while (std::getline(str, dir, '/')) {
-    path.emplace_back(dir);
-  }
-  return getFile(std::move(path));
 }
 
 std::ostream& FileSystemNode::indent(std::ostream& ostr, unsigned level) {

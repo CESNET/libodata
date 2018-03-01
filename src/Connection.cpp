@@ -116,7 +116,7 @@ std::vector<std::unique_ptr<Product>> Connection::listProducts(
 
 void Connection::updateProductFileStructure(Product& product) {
   auto manifest_path = product.getProductPath();
-  manifest_path.appendPath({product.getManifestFilename()});
+  manifest_path.append({product.getManifestFilename()});
   auto response = getFile(manifest_path);
   product.setArchiveStructure(Directory::create(
       product.getFilename(), pimpl->response_parser.parseManifest(response)));

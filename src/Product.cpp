@@ -80,13 +80,17 @@ std::string Product::getName() const noexcept {
   return name;
 }
 
-FileSystemNode* Product::getFile(std::list<std::string> path) const noexcept {
-  const auto filename = path.front();
-  path.pop_front();
-  if (filename == directory->getName()) {
-    return directory->getFile(std::move(path));
-  } else {
+const FileSystemNode* Product::getFile(
+    boost::filesystem::path::const_iterator begin,
+    boost::filesystem::path::const_iterator end) const noexcept {
+  if (begin == end || begin->string() != name) {
     return nullptr;
+  }
+  const auto next = ++begin;
+  if (next == end) {
+    return this;
+  } else {
+    return directory->getFile(next, end);
   }
 }
 

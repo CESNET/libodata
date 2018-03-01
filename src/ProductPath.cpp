@@ -1,6 +1,5 @@
 #include "ProductPath.h"
 
-#include <iterator>
 #include <sstream>
 #include <utility>
 
@@ -12,21 +11,23 @@ ProductPath::ProductPath(std::string uuid, std::string filename) noexcept
 ProductPath::ProductPath(
     std::string uuid,
     std::string filename,
-    std::initializer_list<std::string> path) noexcept
+    boost::filesystem::path path) noexcept
     : uuid(std::move(uuid)),
       filename(std::move(filename)),
       path(std::move(path)) {
 }
 
-void ProductPath::appendPath(std::initializer_list<std::string> path) noexcept {
-  std::move(path.begin(), path.end(), std::back_inserter(this->path));
+void ProductPath::append(std::initializer_list<std::string> path) noexcept {
+  for (const auto& dir : path) {
+    this->path /= dir;
+  }
 }
 
 std::string ProductPath::getPath() const noexcept {
   std::stringstream uri;
   uri << "Products('" << uuid << "')/Nodes('" << filename << "')";
   for (const auto& item : path) {
-    uri << "/Nodes('" << item << "')";
+    uri << "/Nodes('" << item.string() << "')";
   }
   uri << "/$value";
   return uri.str();

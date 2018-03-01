@@ -110,11 +110,13 @@ std::vector<std::unique_ptr<Product>> XmlParser::parseList(
   return products;
 }
 
-std::vector<std::string> XmlParser::parseManifest(
+std::vector<boost::filesystem::path> XmlParser::parseManifest(
     const std::vector<char>& manifest) const {
   XmlDocument doc(manifest);
-  std::function<std::string(const tinyxml2::XMLElement*)> map =
-      [](const tinyxml2::XMLElement* node) { return node->Attribute("href"); };
+  std::function<boost::filesystem::path(const tinyxml2::XMLElement*)> map =
+      [](const tinyxml2::XMLElement* node) {
+        return node->Attribute("href") + 2;
+      };
   return doc.filterMap("fileLocation", map);
 }
 

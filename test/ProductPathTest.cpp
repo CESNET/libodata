@@ -9,13 +9,13 @@ TEST(ProductPathTest, BuildPathTest) {
   ASSERT_EQ(
       "Products('uuid')/Nodes('file')/$value", complete_product.getPath());
 
-  ProductPath manifest("uuid", "file", {"manifest.xml"});
+  ProductPath manifest("uuid", "file", "manifest.xml");
   ASSERT_EQ(
       "Products('uuid')/Nodes('file')/Nodes('manifest.xml')/$value",
       manifest.getPath());
 
   ProductPath appended("uuid", "file");
-  appended.appendPath({"x", "y"});
+  appended.append({"x", "y"});
   ASSERT_EQ(
       "Products('uuid')/Nodes('file')/Nodes('x')/Nodes('y')/$value",
       appended.getPath());

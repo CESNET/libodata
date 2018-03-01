@@ -1,8 +1,8 @@
 #ifndef SRC_XMLPARSER_H_
 #define SRC_XMLPARSER_H_
 
+#include <boost/filesystem/path.hpp>
 #include <memory>
-#include <string>
 #include <vector>
 
 namespace OData {
@@ -17,7 +17,7 @@ public:
   XmlParser& operator=(const XmlParser&) = delete;
   std::vector<std::unique_ptr<Product>> parseList(
       const std::vector<char>& xml) const;
-  std::vector<std::string> parseManifest(
+  std::vector<boost::filesystem::path> parseManifest(
       const std::vector<char>& manifest) const;
 };
 

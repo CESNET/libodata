@@ -3,29 +3,13 @@
 #include "File.h"
 #include "Product.h"
 #include <algorithm>
+#include <boost/filesystem/operations.hpp>
 #include <map>
 #include <ostream>
 #include <string>
 
 namespace OData {
 namespace {
-std::pair<std::string, std::string> splitPath(const std::string& path) {
-  if (path.length() >= 2 && path[0] == '.' && path[1] == '/') {
-    // archive root
-    return splitPath(path.substr(2));
-  }
-  const auto separator_position = path.find('/');
-  if (separator_position == std::string::npos) {
-    // file
-    return std::make_pair(std::string(), path);
-  } else {
-    // sub directory
-    return std::make_pair(
-        path.substr(0, separator_position),
-        path.substr(separator_position + 1));
-  }
-}
-
 Directory* getOrInsertPlatform(
     Directory::Content& platforms, const std::string& platform) {
   auto platform_tree = platforms.find(platform);
@@ -86,17 +70,20 @@ std::string Directory::getName() const noexcept {
   return name;
 }
 
-FileSystemNode* Directory::getFile(std::list<std::string> path) const noexcept {
-  const auto filename = path.front();
-  path.pop_front();
-  auto sub_dir_iter = content.find(filename);
+const FileSystemNode* Directory::getFile(
+    boost::filesystem::path::const_iterator begin,
+    boost::filesystem::path::const_iterator end) const noexcept {
+  if (begin == end || begin->string() != name) {
+    return nullptr;
+  }
+  const auto next = ++begin;
+  if (next == end) {
+    return this;
+  }
+  auto sub_dir_iter = content.find(next->string());
   auto subdir =
       sub_dir_iter == content.end() ? nullptr : sub_dir_iter->second.get();
-  if (path.empty()) {
-    return subdir;
-  } else {
-    return subdir == nullptr ? nullptr : subdir->getFile(std::move(path));
-  }
+  return subdir == nullptr ? nullptr : subdir->getFile(next, end);
 }
 
 std::vector<std::string> OData::Directory::readDir() const noexcept {
@@ -117,17 +104,20 @@ void Directory::addFile(std::string file) noexcept {
 }
 
 std::unique_ptr<Directory> Directory::create(
-    std::string name, const std::vector<std::string>& files) noexcept {
+    std::string name,
+    const std::vector<boost::filesystem::path>& files) noexcept {
   std::map<std::string, std::unique_ptr<FileSystemNode>> dir_content;
-  std::map<std::string, std::vector<std::string>> sub_dirs;
+  std::map<std::string, std::vector<boost::filesystem::path>> sub_dirs;
   for (const auto& file : files) {
     if (!file.empty()) {
-      const auto splitted = splitPath(file);
-      if (splitted.first.empty()) {
-        dir_content[splitted.second] =
-            std::unique_ptr<File>(new File(splitted.second));
+      auto filename = file.begin()->string();
+      if (++file.begin() == file.end()) {
+        dir_content[filename] = std::unique_ptr<File>(new File(filename));
       } else {
-        sub_dirs[splitted.first].push_back(splitted.second);
+        const auto position = file.string().find(filename);
+        boost::filesystem::path child_path(
+            file.string().c_str() + position + filename.size() + 1);
+        sub_dirs[std::move(filename)].emplace_back(std::move(child_path));
       }
     }
   }
@@ -168,7 +158,7 @@ std::unique_ptr<Directory> Directory::createFilesystem(
     auto parent = getOrInsertDateSubtree(missions, *product);
     parent->addChild(std::move(product));
   }
-  return std::unique_ptr<Directory>(new Directory("root", std::move(missions)));
+  return std::unique_ptr<Directory>(new Directory("/", std::move(missions)));
 }
 
 } /* namespace OData */

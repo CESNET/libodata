@@ -2,6 +2,7 @@
 #define SRC_DIRECTORY_H_
 
 #include "FileSystemNode.h"
+#include <boost/filesystem/path.hpp>
 #include <iosfwd>
 #include <map>
 #include <memory>
@@ -24,7 +25,9 @@ public:
       noexcept override;
   bool compare(const FileSystemNode& node) const noexcept override;
   std::string getName() const noexcept override;
-  FileSystemNode* getFile(std::list<std::string> path) const noexcept override;
+  const FileSystemNode* getFile(
+      boost::filesystem::path::const_iterator begin,
+      boost::filesystem::path::const_iterator end) const noexcept override;
   std::vector<std::string> readDir() const noexcept override;
 
   void addChild(std::unique_ptr<FileSystemNode> child) noexcept;
@@ -32,7 +35,8 @@ public:
   FileSystemNode* getChild(const std::string& name) noexcept;
 
   static std::unique_ptr<Directory> create(
-      std::string name, const std::vector<std::string>& files) noexcept;
+      std::string name,
+      const std::vector<boost::filesystem::path>& files) noexcept;
 
   void appendProducts(std::vector<std::unique_ptr<Product>> products);
 
