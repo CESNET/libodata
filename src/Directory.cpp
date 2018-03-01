@@ -99,6 +99,14 @@ FileSystemNode* Directory::getFile(std::list<std::string> path) const noexcept {
   }
 }
 
+std::vector<std::string> OData::Directory::readDir() const noexcept {
+  std::vector<std::string> children;
+  for (const auto& pair : content) {
+    children.push_back(pair.first);
+  }
+  return children;
+}
+
 void Directory::addChild(std::unique_ptr<FileSystemNode> child) noexcept {
   const auto name = child->getName();
   content[name] = std::move(child);

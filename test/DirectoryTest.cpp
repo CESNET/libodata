@@ -8,6 +8,12 @@
 
 namespace OData {
 namespace Test {
+namespace {
+std::unique_ptr<Directory> createTestTree() {
+  return Directory::create(
+      "test_tree", {"./sub_dir1/.manifest.xml", "./sub_dir1/sub_dir2/xyz"});
+}
+} // namespace
 
 TEST(DirectoryTest, CreateDirectoryTest) {
   {
@@ -47,8 +53,7 @@ TEST(DirectoryTest, TraverseTest) {
   }
 
   {
-    const auto test_tree = Directory::create(
-        "test_tree", {"./sub_dir1/.manifest.xml", "./sub_dir1/sub_dir2/xyz"});
+    const auto test_tree = createTestTree();
     ASSERT_EQ(nullptr, test_tree->getFile({"x", "y", "z"}));
     ASSERT_EQ(
         File(".manifest.xml"),
@@ -56,6 +61,19 @@ TEST(DirectoryTest, TraverseTest) {
     ASSERT_EQ(
         *Directory::create("sub_dir2", {"xyz"}),
         *test_tree->getFile({"sub_dir1", "sub_dir2"}));
+  }
+}
+
+TEST(DirectoryTest, ReaddirTest) {
+  {
+    const auto empty = Directory::create("empty", {});
+    ASSERT_EQ(std::vector<std::string>{}, empty->readDir());
+  }
+  {
+    const auto test_tree = createTestTree();
+    ASSERT_EQ(std::vector<std::string>{"sub_dir1"}, test_tree->readDir());
+    std::vector<std::string> sub_dir1_expected{".manifest.xml", "sub_dir2"};
+    ASSERT_EQ(sub_dir1_expected, test_tree->getChild("sub_dir1")->readDir());
   }
 }
 

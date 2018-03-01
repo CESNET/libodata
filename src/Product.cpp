@@ -90,6 +90,10 @@ FileSystemNode* Product::getFile(std::list<std::string> path) const noexcept {
   }
 }
 
+std::vector<std::string> Product::readDir() const noexcept {
+  return {directory->getName()};
+}
+
 const std::string& Product::getFilename() const noexcept {
   return filename;
 }

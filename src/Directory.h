@@ -25,6 +25,7 @@ public:
   bool compare(const FileSystemNode& node) const noexcept override;
   std::string getName() const noexcept override;
   FileSystemNode* getFile(std::list<std::string> path) const noexcept override;
+  std::vector<std::string> readDir() const noexcept override;
 
   void addChild(std::unique_ptr<FileSystemNode> child) noexcept;
   void addFile(std::string file) noexcept;

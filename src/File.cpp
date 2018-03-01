@@ -24,4 +24,8 @@ FileSystemNode* File::getFile(std::list<std::string>) const noexcept {
   return nullptr;
 }
 
+std::vector<std::string> File::readDir() const noexcept {
+  return {};
+}
+
 } /* namespace OData */
