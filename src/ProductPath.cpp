@@ -17,6 +17,12 @@ ProductPath::ProductPath(
       path(std::move(path)) {
 }
 
+ProductPath::ProductPath(
+    const ProductPath& path, std::string appended_path) noexcept
+    : ProductPath(path) {
+  append({appended_path});
+}
+
 void ProductPath::append(std::initializer_list<std::string> path) noexcept {
   for (const auto& dir : path) {
     this->path /= dir;
@@ -31,6 +37,10 @@ std::string ProductPath::getPath() const noexcept {
   }
   uri << "/$value";
   return uri.str();
+}
+
+bool ProductPath::operator==(const ProductPath& other) const noexcept {
+  return uuid == other.uuid && filename == other.filename && path == other.path;
 }
 
 } /* namespace OData */

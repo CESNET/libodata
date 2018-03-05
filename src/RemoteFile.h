@@ -1,18 +1,18 @@
-#ifndef SRC_FILE_H_
-#define SRC_FILE_H_
+#ifndef SRC_REMOTEFILE_H_
+#define SRC_REMOTEFILE_H_
 
 #include "FileSystemNode.h"
+#include "ProductPath.h"
 #include <string>
-#include <vector>
 
 namespace OData {
 
-class File : public FileSystemNode {
+class RemoteFile : public FileSystemNode {
 public:
-  File(std::string name, std::vector<char> data) noexcept;
-  ~File() = default;
-  File(const File&) = delete;
-  File& operator=(const File&) = delete;
+  RemoteFile(std::string name, ProductPath path) noexcept;
+  virtual ~RemoteFile() = default;
+  RemoteFile(const RemoteFile&) = delete;
+  RemoteFile& operator=(const RemoteFile&) = delete;
 
   void toString(std::ostream& ostr, unsigned indent_level = 0) const
       noexcept override;
@@ -23,13 +23,11 @@ public:
       boost::filesystem::path::const_iterator end) const noexcept override;
   std::vector<std::string> readDir() const noexcept override;
 
-  const std::vector<char>& getData() const noexcept;
-
 private:
   std::string name;
-  std::vector<char> data;
+  ProductPath path;
 };
 
 } /* namespace OData */
 
-#endif /* SRC_FILE_H_ */
+#endif /* SRC_REMOTEFILE_H_ */

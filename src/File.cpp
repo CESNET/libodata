@@ -4,7 +4,8 @@
 
 namespace OData {
 
-File::File(std::string name) noexcept : name(std::move(name)) {
+File::File(std::string name, std::vector<char> data) noexcept
+    : name(std::move(name)), data(std::move(data)) {
 }
 
 void File::toString(std::ostream& ostr, unsigned indent_level) const noexcept {
@@ -13,7 +14,7 @@ void File::toString(std::ostream& ostr, unsigned indent_level) const noexcept {
 
 bool File::compare(const FileSystemNode& node) const noexcept {
   const auto* other = dynamic_cast<const File*>(&node);
-  return other != nullptr && name == other->name;
+  return other != nullptr && name == other->name && data == other->data;
 }
 
 std::string File::getName() const noexcept {
@@ -32,6 +33,10 @@ const FileSystemNode* File::getFile(
 
 std::vector<std::string> File::readDir() const noexcept {
   return {};
+}
+
+const std::vector<char>& File::getData() const noexcept {
+  return data;
 }
 
 } /* namespace OData */

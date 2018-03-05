@@ -118,8 +118,10 @@ void Connection::updateProductFileStructure(Product& product) {
   auto manifest_path = product.getProductPath();
   manifest_path.append({product.getManifestFilename()});
   auto response = getFile(manifest_path);
-  product.setArchiveStructure(Directory::create(
-      product.getFilename(), pimpl->response_parser.parseManifest(response)));
+  product.setArchiveStructure(Directory::createRemoteStructure(
+      product.getProductPath(),
+      product.getFilename(),
+      pimpl->response_parser.parseManifest(response)));
 }
 
 std::vector<char> Connection::getFile(const ProductPath& path) {

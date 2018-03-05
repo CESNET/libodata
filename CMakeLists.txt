@@ -25,6 +25,7 @@ add_library(${LIB_NAME} SHARED
     src/FileSystemNode.cpp include/odata/FileSystemNode.h
     src/Product.cpp src/Product.h
     src/ProductPath.cpp src/ProductPath.h
+    src/RemoteFile.cpp src/RemoteFile.h
     src/SearchQuery.cpp src/SearchQuery.h
     src/SearchQueryBuilder.cpp src/SearchQueryBuilder.h
     src/XmlParser.cpp src/XmlParser.h

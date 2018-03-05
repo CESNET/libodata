@@ -13,6 +13,7 @@ public:
       std::string uuid,
       std::string filename,
       boost::filesystem::path path) noexcept;
+  ProductPath(const ProductPath& path, std::string appended_path) noexcept;
   ~ProductPath() = default;
   ProductPath(const ProductPath&) = default;
   ProductPath(ProductPath&&) = default;
@@ -21,6 +22,7 @@ public:
 
   void append(std::initializer_list<std::string> path) noexcept;
   std::string getPath() const noexcept;
+  bool operator==(const ProductPath& other) const noexcept;
 
 private:
   std::string uuid;

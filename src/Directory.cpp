@@ -2,6 +2,8 @@
 
 #include "File.h"
 #include "Product.h"
+#include "ProductPath.h"
+#include "RemoteFile.h"
 #include <algorithm>
 #include <boost/filesystem/operations.hpp>
 #include <map>
@@ -99,11 +101,8 @@ void Directory::addChild(std::unique_ptr<FileSystemNode> child) noexcept {
   content[name] = std::move(child);
 }
 
-void Directory::addFile(std::string file) noexcept {
-  content[file] = std::unique_ptr<File>(new File(file));
-}
-
-std::unique_ptr<Directory> Directory::create(
+std::unique_ptr<Directory> Directory::createRemoteStructure(
+    const ProductPath& product_path,
     std::string name,
     const std::vector<boost::filesystem::path>& files) noexcept {
   std::map<std::string, std::unique_ptr<FileSystemNode>> dir_content;
@@ -112,7 +111,8 @@ std::unique_ptr<Directory> Directory::create(
     if (!file.empty()) {
       auto filename = file.begin()->string();
       if (++file.begin() == file.end()) {
-        dir_content[filename] = std::unique_ptr<File>(new File(filename));
+        dir_content[filename] =
+            std::unique_ptr<RemoteFile>(new RemoteFile(filename, product_path));
       } else {
         const auto position = file.string().find(filename);
         boost::filesystem::path child_path(
@@ -122,8 +122,10 @@ std::unique_ptr<Directory> Directory::create(
     }
   }
   for (const auto& sub_dir : sub_dirs) {
-    dir_content[sub_dir.first] =
-        Directory::create(sub_dir.first, sub_dir.second);
+    dir_content[sub_dir.first] = Directory::createRemoteStructure(
+        ProductPath(product_path, sub_dir.first),
+        sub_dir.first,
+        sub_dir.second);
   }
   return std::unique_ptr<Directory>(
       new Directory(std::move(name), std::move(dir_content)));

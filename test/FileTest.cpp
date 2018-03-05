@@ -7,7 +7,7 @@ namespace OData {
 namespace Test {
 
 TEST(FileTest, GetFileTest) {
-  File file("test_file");
+  File file("test_file", {1, 2, 3, 4});
 
   const boost::filesystem::path empty;
   ASSERT_EQ(nullptr, file.getFile(empty.begin(), empty.end()));
