@@ -94,18 +94,18 @@ public:
 
 } /* namespace */
 
-std::vector<std::unique_ptr<Product>> XmlParser::parseList(
+std::vector<std::shared_ptr<Product>> XmlParser::parseList(
     const std::vector<char>& xml) const {
   XmlDocument doc(xml);
-  std::vector<std::unique_ptr<Product>> products;
+  std::vector<std::shared_ptr<Product>> products;
   for (const auto& entry_node : doc.getEntries()) {
-    products.push_back(std::unique_ptr<Product>(new Product(
+    products.push_back(std::make_shared<Product>(
         doc.getPropertyValue(entry_node, "uuid"),
         doc.getPropertyValue(entry_node, "identifier"),
         doc.getPropertyValue(entry_node, "ingestiondate"),
         doc.getPropertyValue(entry_node, "filename"),
         doc.getPropertyValue(entry_node, "platformname"),
-        doc.getPropertyValue(entry_node, "producttype"))));
+        doc.getPropertyValue(entry_node, "producttype")));
   }
   return products;
 }

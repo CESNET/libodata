@@ -34,4 +34,12 @@ std::vector<std::string> RemoteFile::readDir() const noexcept {
   return {};
 }
 
+bool RemoteFile::isDirectory() const noexcept {
+  return false;
+}
+
+ProductPath RemoteFile::getProductPath() const noexcept {
+  return ProductPath(path, name);
+}
+
 } /* namespace OData */

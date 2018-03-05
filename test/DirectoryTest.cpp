@@ -40,14 +40,13 @@ TEST(DirectoryTest, CreateDirectoryTest) {
   {
     const auto directories = Directory::createRemoteStructure(
         test_path, "directories", {"sub_dir1/.manifest.xml", "empty_sub_dir/"});
-    std::map<std::string, std::unique_ptr<FileSystemNode>> sub_dirs;
-    sub_dirs["empty_sub_dir"] =
-        std::unique_ptr<Directory>(new Directory("empty_sub_dir"));
+    std::map<std::string, std::shared_ptr<FileSystemNode>> sub_dirs;
+    sub_dirs["empty_sub_dir"] = std::make_shared<Directory>("empty_sub_dir");
     Directory::Content test_content;
-    test_content[".manifest.xml"] = std::unique_ptr<RemoteFile>(
-        new RemoteFile(".manifest.xml", ProductPath(test_path, "sub_dir1")));
-    sub_dirs["sub_dir1"] = std::unique_ptr<Directory>(
-        new Directory("sub_dir1", std::move(test_content)));
+    test_content[".manifest.xml"] = std::make_shared<RemoteFile>(
+        ".manifest.xml", ProductPath(test_path, "sub_dir1"));
+    sub_dirs["sub_dir1"] =
+        std::make_shared<Directory>("sub_dir1", std::move(test_content));
     ASSERT_EQ(Directory("directories", std::move(sub_dirs)), *directories);
   }
 }
@@ -74,9 +73,9 @@ TEST(DirectoryTest, TraverseTest) {
         RemoteFile(".manifest.xml", ProductPath(test_path, "sub_dir1")),
         *test_tree->getFile(manifest.begin(), manifest.end()));
     const boost::filesystem::path subdir2("test_tree/sub_dir1/sub_dir2");
-    std::map<std::string, std::unique_ptr<FileSystemNode>> sub_dirs;
-    sub_dirs["xyz"] = std::unique_ptr<FileSystemNode>(new RemoteFile(
-        "xyz", ProductPath("uuid", "filename", "sub_dir1/sub_dir2")));
+    std::map<std::string, std::shared_ptr<FileSystemNode>> sub_dirs;
+    sub_dirs["xyz"] = std::make_shared<RemoteFile>(
+        "xyz", ProductPath("uuid", "filename", "sub_dir1/sub_dir2"));
     ASSERT_EQ(
         Directory("sub_dir2", std::move(sub_dirs)),
         *test_tree->getFile(subdir2.begin(), subdir2.end()));

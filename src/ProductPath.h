@@ -20,7 +20,7 @@ public:
   ProductPath& operator=(const ProductPath&) = default;
   ProductPath& operator=(ProductPath&&) = default;
 
-  void append(std::initializer_list<std::string> path) noexcept;
+  void append(std::string path) noexcept;
   std::string getPath() const noexcept;
   bool operator==(const ProductPath& other) const noexcept;
 

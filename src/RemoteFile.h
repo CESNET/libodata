@@ -22,6 +22,9 @@ public:
       boost::filesystem::path::const_iterator begin,
       boost::filesystem::path::const_iterator end) const noexcept override;
   std::vector<std::string> readDir() const noexcept override;
+  bool isDirectory() const noexcept override;
+
+  ProductPath getProductPath() const noexcept;
 
 private:
   std::string name;

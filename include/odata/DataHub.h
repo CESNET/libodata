@@ -1,7 +1,9 @@
 #ifndef ODATA_DATAHUB_H_
 #define ODATA_DATAHUB_H_
 
+#include <boost/filesystem/path.hpp>
 #include <memory>
+#include <vector>
 
 namespace OData {
 
@@ -12,7 +14,8 @@ class DataHub {
 public:
   explicit DataHub(Connection& connection);
   ~DataHub();
-  std::unique_ptr<FileSystemNode> getData();
+  std::shared_ptr<FileSystemNode> getData();
+  std::vector<char> getFile(const boost::filesystem::path& file_path);
 
 private:
   struct Impl;

@@ -15,7 +15,7 @@ public:
   ~XmlParser() = default;
   XmlParser(const XmlParser&) = delete;
   XmlParser& operator=(const XmlParser&) = delete;
-  std::vector<std::unique_ptr<Product>> parseList(
+  std::vector<std::shared_ptr<Product>> parseList(
       const std::vector<char>& xml) const;
   std::vector<boost::filesystem::path> parseManifest(
       const std::vector<char>& manifest) const;

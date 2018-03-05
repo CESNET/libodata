@@ -20,13 +20,11 @@ ProductPath::ProductPath(
 ProductPath::ProductPath(
     const ProductPath& path, std::string appended_path) noexcept
     : ProductPath(path) {
-  append({appended_path});
+  append(appended_path);
 }
 
-void ProductPath::append(std::initializer_list<std::string> path) noexcept {
-  for (const auto& dir : path) {
-    this->path /= dir;
-  }
+void ProductPath::append(std::string path) noexcept {
+  this->path /= path;
 }
 
 std::string ProductPath::getPath() const noexcept {

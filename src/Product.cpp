@@ -1,5 +1,6 @@
 #include "Product.h"
 
+#include "File.h"
 #include <ostream>
 #include <sstream>
 
@@ -22,8 +23,10 @@ Product::Product(
 }
 
 void Product::setArchiveStructure(
-    std::unique_ptr<Directory> directory) noexcept {
+    std::shared_ptr<Directory> directory,
+    std::shared_ptr<File> manifest) noexcept {
   this->directory = std::move(directory);
+  this->manifest = std::move(manifest);
 }
 
 ProductPath Product::getProductPath() const noexcept {
@@ -42,6 +45,9 @@ void Product::toString(std::ostream& ostr, unsigned indent_level) const
   indent(ostr, indent_level + 1) << "files {\n";
   if (directory != nullptr) {
     directory->toString(ostr, indent_level + 2);
+  }
+  if (manifest != nullptr) {
+    manifest->toString(ostr, indent_level + 2);
   }
   indent(ostr, indent_level + 1) << "}\n";
   indent(ostr, indent_level) << "}\n";
@@ -68,11 +74,18 @@ bool Product::compare(const FileSystemNode& node) const noexcept {
       || platform != entry->platform) {
     return false;
   } else {
+    bool ret = false;
     if (directory != nullptr && entry->directory != nullptr) {
-      return *directory == *entry->directory;
+      ret = *directory == *entry->directory;
     } else {
-      return entry->directory == directory;
+      ret = entry->directory == directory;
     }
+    if (manifest != nullptr && entry->manifest != nullptr) {
+      ret &= *manifest == *entry->manifest;
+    } else {
+      ret &= manifest == entry->manifest;
+    }
+    return ret;
   }
 }
 
@@ -89,13 +102,16 @@ const FileSystemNode* Product::getFile(
   const auto next = ++begin;
   if (next == end) {
     return this;
-  } else {
-    return directory->getFile(next, end);
   }
+  return directory->getFile(next, end);
 }
 
 std::vector<std::string> Product::readDir() const noexcept {
-  return {directory->getName()};
+  return {directory->getName(), manifest->getName()};
+}
+
+bool Product::isDirectory() const noexcept {
+  return true;
 }
 
 const std::string& Product::getFilename() const noexcept {

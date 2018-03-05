@@ -35,6 +35,10 @@ std::vector<std::string> File::readDir() const noexcept {
   return {};
 }
 
+bool File::isDirectory() const noexcept {
+  return false;
+}
+
 const std::vector<char>& File::getData() const noexcept {
   return data;
 }

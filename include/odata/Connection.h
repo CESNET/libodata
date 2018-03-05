@@ -34,15 +34,8 @@ public:
    * @return list of discovered products
    * @exception if service is not available or response is invalid
    */
-  std::vector<std::unique_ptr<Product>> listProducts(
+  std::vector<std::shared_ptr<Product>> listProducts(
       SearchQuery query, uint32_t count);
-
-  /**
-   * Update product file structure. File structure is stored in manifest file.
-   * @param[in, out] product product to update
-   * @exception if service is not available or response is invalid
-   */
-  void updateProductFileStructure(Product& product);
 
   /**
    * Download file using OData protocol

@@ -16,7 +16,7 @@ class ProductPath;
 
 class Directory : public FileSystemNode {
 public:
-  using Content = std::map<std::string, std::unique_ptr<FileSystemNode>>;
+  using Content = std::map<std::string, std::shared_ptr<FileSystemNode>>;
 
   Directory(std::string name, Content content = {}) noexcept;
   virtual ~Directory() = default;
@@ -30,8 +30,9 @@ public:
       boost::filesystem::path::const_iterator begin,
       boost::filesystem::path::const_iterator end) const noexcept override;
   std::vector<std::string> readDir() const noexcept override;
+  bool isDirectory() const noexcept override;
 
-  void addChild(std::unique_ptr<FileSystemNode> child) noexcept;
+  void addChild(std::shared_ptr<FileSystemNode> child) noexcept;
   FileSystemNode* getChild(const std::string& name) noexcept;
 
   static std::unique_ptr<Directory> createRemoteStructure(
@@ -39,10 +40,10 @@ public:
       std::string name,
       const std::vector<boost::filesystem::path>& files) noexcept;
 
-  void appendProducts(std::vector<std::unique_ptr<Product>> products);
+  void appendProducts(std::vector<std::shared_ptr<Product>> products);
 
   static std::unique_ptr<Directory> createFilesystem(
-      std::vector<std::unique_ptr<Product>> products) noexcept;
+      std::vector<std::shared_ptr<Product>> products) noexcept;
 
 private:
   std::string name;

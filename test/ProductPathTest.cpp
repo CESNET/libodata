@@ -15,7 +15,8 @@ TEST(ProductPathTest, BuildPathTest) {
       manifest.getPath());
 
   ProductPath appended("uuid", "file");
-  appended.append({"x", "y"});
+  appended.append("x");
+  appended.append("y");
   ASSERT_EQ(
       "Products('uuid')/Nodes('file')/Nodes('x')/Nodes('y')/$value",
       appended.getPath());

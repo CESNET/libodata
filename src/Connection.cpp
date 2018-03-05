@@ -98,9 +98,9 @@ Connection::Connection(
 
 Connection::~Connection() = default;
 
-std::vector<std::unique_ptr<Product>> Connection::listProducts(
+std::vector<std::shared_ptr<Product>> Connection::listProducts(
     SearchQuery query, uint32_t count) {
-  std::vector<std::unique_ptr<Product>> products;
+  std::vector<std::shared_ptr<Product>> products;
   while (products.size() < count) {
     auto list = pimpl->response_parser.parseList(
         pimpl->sendListQuery(query, products.size()));
@@ -112,16 +112,6 @@ std::vector<std::unique_ptr<Product>> Connection::listProducts(
   }
   std::cout << products.size() << " product downloaded" << std::endl;
   return products;
-}
-
-void Connection::updateProductFileStructure(Product& product) {
-  auto manifest_path = product.getProductPath();
-  manifest_path.append({product.getManifestFilename()});
-  auto response = getFile(manifest_path);
-  product.setArchiveStructure(Directory::createRemoteStructure(
-      product.getProductPath(),
-      product.getFilename(),
-      pimpl->response_parser.parseManifest(response)));
 }
 
 std::vector<char> Connection::getFile(const ProductPath& path) {

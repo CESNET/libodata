@@ -17,16 +17,18 @@ namespace {
 std::unique_ptr<Product> createTestProduct(std::string platform) {
   std::unique_ptr<Product> product(new Product(
       "id", "name", "date", "filename", std::move(platform), "type"));
-  product->setArchiveStructure(Directory::createRemoteStructure(
-      ProductPath("uuid", "filename"),
-      "extracted",
-      {"manifest.xml", "subdir/xxx", "subdir2/yyy"}));
+  product->setArchiveStructure(
+      Directory::createRemoteStructure(
+          ProductPath("uuid", "filename"),
+          "extracted",
+          {"manifest.xml", "subdir/xxx", "subdir2/yyy"}),
+      std::make_shared<File>(std::string("manifest.xml"), std::vector<char>{}));
   return product;
 }
 } // namespace
 
 TEST(FileSystemNodeTest, FileTreeTraverseTest) {
-  std::vector<std::unique_ptr<Product>> products;
+  std::vector<std::shared_ptr<Product>> products;
   products.emplace_back(createTestProduct("platform1"));
   products.emplace_back(createTestProduct("platform2"));
   const std::unique_ptr<FileSystemNode> test_tree =

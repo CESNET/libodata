@@ -12,6 +12,8 @@
 
 namespace OData {
 
+class File;
+
 /**
  * Product stored in Copernicus Open Access Hub
  */
@@ -28,7 +30,9 @@ public:
   virtual ~Product() = default;
   Product& operator=(const Product&) = delete;
 
-  void setArchiveStructure(std::unique_ptr<Directory> directory) noexcept;
+  void setArchiveStructure(
+      std::shared_ptr<Directory> directory,
+      std::shared_ptr<File> manifest) noexcept;
   ProductPath getProductPath() const noexcept;
 
   void toString(std::ostream& ostr, unsigned indent_level = 0) const
@@ -39,6 +43,7 @@ public:
       boost::filesystem::path::const_iterator begin,
       boost::filesystem::path::const_iterator end) const noexcept override;
   std::vector<std::string> readDir() const noexcept override;
+  bool isDirectory() const noexcept override;
   const std::string& getPlatform() const noexcept;
   std::string getManifestFilename() const noexcept;
   const std::string& getFilename() const noexcept;
@@ -51,7 +56,8 @@ private:
   std::string filename;
   std::string platform;
   std::string type;
-  std::unique_ptr<Directory> directory;
+  std::shared_ptr<Directory> directory;
+  std::shared_ptr<File> manifest;
 };
 
 std::ostream& operator<<(std::ostream& ostr, const Product& product) noexcept;

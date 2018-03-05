@@ -16,7 +16,7 @@ Directory* getOrInsertPlatform(
     Directory::Content& platforms, const std::string& platform) {
   auto platform_tree = platforms.find(platform);
   if (platform_tree == platforms.end()) {
-    platforms[platform] = std::unique_ptr<Directory>(new Directory(platform));
+    platforms[platform] = std::make_shared<Directory>(platform);
     platform_tree = platforms.find(platform);
   }
   return static_cast<Directory*>(platform_tree->second.get());
@@ -28,9 +28,9 @@ Directory* getOrInsertDateSubtree(
   const auto date = product.getDate();
   auto date_tree = dynamic_cast<Directory*>(platform->getChild(date));
   if (date_tree == nullptr) {
-    auto sub_tree = std::unique_ptr<Directory>(new Directory(date));
+    auto sub_tree = std::make_shared<Directory>(date);
     date_tree = sub_tree.get();
-    platform->addChild(std::move(sub_tree));
+    platform->addChild(sub_tree);
   }
   return date_tree;
 }
@@ -96,7 +96,11 @@ std::vector<std::string> OData::Directory::readDir() const noexcept {
   return children;
 }
 
-void Directory::addChild(std::unique_ptr<FileSystemNode> child) noexcept {
+bool Directory::isDirectory() const noexcept {
+  return true;
+}
+
+void Directory::addChild(std::shared_ptr<FileSystemNode> child) noexcept {
   const auto name = child->getName();
   content[name] = std::move(child);
 }
@@ -105,14 +109,14 @@ std::unique_ptr<Directory> Directory::createRemoteStructure(
     const ProductPath& product_path,
     std::string name,
     const std::vector<boost::filesystem::path>& files) noexcept {
-  std::map<std::string, std::unique_ptr<FileSystemNode>> dir_content;
+  std::map<std::string, std::shared_ptr<FileSystemNode>> dir_content;
   std::map<std::string, std::vector<boost::filesystem::path>> sub_dirs;
   for (const auto& file : files) {
     if (!file.empty()) {
       auto filename = file.begin()->string();
       if (++file.begin() == file.end()) {
         dir_content[filename] =
-            std::unique_ptr<RemoteFile>(new RemoteFile(filename, product_path));
+            std::make_shared<RemoteFile>(filename, product_path);
       } else {
         const auto position = file.string().find(filename);
         boost::filesystem::path child_path(
@@ -146,7 +150,7 @@ std::ostream& operator<<(
   return ostr;
 }
 
-void Directory::appendProducts(std::vector<std::unique_ptr<Product>> products) {
+void Directory::appendProducts(std::vector<std::shared_ptr<Product>> products) {
   for (auto& product : products) {
     auto parent = getOrInsertDateSubtree(content, *product);
     parent->addChild(std::move(product));
@@ -154,7 +158,7 @@ void Directory::appendProducts(std::vector<std::unique_ptr<Product>> products) {
 }
 
 std::unique_ptr<Directory> Directory::createFilesystem(
-    std::vector<std::unique_ptr<Product>> products) noexcept {
+    std::vector<std::shared_ptr<Product>> products) noexcept {
   Content missions;
   for (auto& product : products) {
     auto parent = getOrInsertDateSubtree(missions, *product);
