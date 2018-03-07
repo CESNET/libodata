@@ -1,23 +1,8 @@
 #include "XmlParser.h"
-#include "Product.h"
-#include <fstream>
-#include <gtest/gtest.h>
-#include <sstream>
-#include <stdexcept>
 
-namespace {
-std::vector<char> readTestInstance(const std::string& filename) {
-  std::fstream file("examples/" + filename, std::fstream::in);
-  if (file.is_open()) {
-    std::stringstream buffer;
-    buffer << file.rdbuf();
-    const auto data = buffer.str();
-    return std::vector<char>(data.begin(), data.end());
-  } else {
-    throw std::invalid_argument("Cannot open file" + filename);
-  }
-}
-} // namespace
+#include "Product.h"
+#include "Utils.h"
+#include <gtest/gtest.h>
 
 namespace OData {
 namespace Test {

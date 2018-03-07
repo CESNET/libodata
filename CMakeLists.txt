@@ -18,6 +18,7 @@ find_package(Boost REQUIRED COMPONENTS filesystem)
 set(LIB_NAME odata)
 add_library(${LIB_NAME} SHARED
     src/Connection.cpp include/odata/Connection.h
+    src/DataHubConnection.cpp include/odata/DataHubConnection.h
     src/DataHub.cpp include/odata/DataHub.h
     src/DataHubException.cpp include/odata/DataHubException.h
     src/Directory.cpp src/Directory.h
@@ -78,13 +79,16 @@ if(GTEST_FOUND)
     enable_testing()
     set(TEST_BINARY runtest)
     add_executable(${TEST_BINARY}
+        test/DataHubTest.cpp
         test/DirectoryTest.cpp
         test/FileTest.cpp
         test/FileSystemNodeTest.cpp
         test/main.cpp
+        test/MockConnection.cpp test/MockConnection.h
         test/ProductPathTest.cpp
         test/SearchQueryTest.cpp
         test/SearchQueryBuilderTest.cpp
+        test/Utils.cpp test/Utils.h
         test/XmlParserTest.cpp
         )
     add_test(tests ${TEST_BINARY})

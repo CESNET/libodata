@@ -1,5 +1,5 @@
-#include "Connection.h"
 #include "DataHub.h"
+#include "DataHubConnection.h"
 #include "FileSystemNode.h"
 #include <cstdlib>
 #include <iostream>
@@ -10,8 +10,8 @@ int main(int argc, char** argv) {
     std::cout << "try odata-client url username password" << std::endl;
     return 1;
   }
-  OData::Connection connection(argv[1], argv[2], argv[3]);
-  OData::DataHub hub(connection);
+  OData::DataHubConnection connection(argv[1], argv[2], argv[3]);
+  OData::DataHub hub(connection, {"Sentinel-1", "Sentinel-2", "Sentinel-3"});
   const auto filesystem = hub.getData();
   std::cout << *filesystem << std::endl;
   return 0;

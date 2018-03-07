@@ -15,9 +15,8 @@
 
 namespace OData {
 struct DataHub::Impl {
-  Impl(Connection& connection)
-      : connection(connection),
-        missions{"Sentinel-1", "Sentinel-2", "Sentinel-3"} {
+  Impl(Connection& connection, std::vector<std::string> missions)
+      : connection(connection), missions(std::move(missions)) {
   }
 
   std::vector<std::shared_ptr<OData::Product>> getMissionProducts(
@@ -56,7 +55,8 @@ struct DataHub::Impl {
   XmlParser response_parser;
 };
 
-DataHub::DataHub(Connection& connection) : pimpl(new Impl(connection)) {
+DataHub::DataHub(Connection& connection, std::vector<std::string> missions)
+    : pimpl(new Impl(connection, std::move(missions))) {
 }
 
 std::vector<char> DataHub::getFile(const boost::filesystem::path& path) {
