@@ -4,6 +4,7 @@
 #include "Product.h"
 #include "SearchQueryBuilder.h"
 #include "XmlParser.h"
+#include <algorithm>
 #include <curl/curl.h>
 #include <functional>
 #include <iostream>
@@ -21,11 +22,10 @@ struct ScopeGuard {
 };
 
 struct DataHubConnection::Impl {
-  Impl(
-      std::string url, const std::string& username, const std::string& password)
+  Impl(std::string url, std::string auth_token)
       : curl_handle(curl_easy_init(), curl_easy_cleanup),
         url(std::move(url)),
-        auth_token(username + ":" + password),
+        auth_token(std::move(auth_token)),
         body(),
         response_parser() {
   }
@@ -93,17 +93,21 @@ struct DataHubConnection::Impl {
 
 DataHubConnection::DataHubConnection(
     std::string url, const std::string& username, const std::string& password)
-    : pimpl(new Impl(std::move(url), username, password)) {
+    : pimpl(new Impl(std::move(url), username + ":" + password)) {
+}
+
+DataHubConnection::DataHubConnection(std::string url, std::string auth_token)
+    : pimpl(new Impl(std::move(url), std::move(auth_token))) {
 }
 
 DataHubConnection::~DataHubConnection() = default;
 
 std::vector<std::shared_ptr<Product>> DataHubConnection::listProducts(
-    SearchQuery query, std::uint32_t count) {
+    SearchQuery query, std::uint32_t offset, std::uint32_t count) {
   std::vector<std::shared_ptr<Product>> products;
   while (products.size() < count) {
     auto list = pimpl->response_parser.parseList(
-        pimpl->sendListQuery(query, products.size()));
+        pimpl->sendListQuery(query, offset + products.size()));
     if (list.empty()) {
       break;
     } else {
@@ -116,6 +120,11 @@ std::vector<std::shared_ptr<Product>> DataHubConnection::listProducts(
 
 std::vector<char> DataHubConnection::getFile(const ProductPath& path) {
   return pimpl->getQuery("odata/v1/" + path.getPath());
+}
+
+std::unique_ptr<Connection> DataHubConnection::clone() const noexcept {
+  return std::unique_ptr<Connection>(
+      new DataHubConnection(pimpl->url, pimpl->auth_token));
 }
 
 } /* namespace OData */

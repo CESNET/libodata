@@ -3,6 +3,7 @@
 
 #include "FileSystemNode.h"
 #include <boost/filesystem/path.hpp>
+#include <boost/thread/shared_mutex.hpp>
 #include <iosfwd>
 #include <map>
 #include <memory>
@@ -48,6 +49,7 @@ public:
 private:
   std::string name;
   Content content;
+  mutable boost::shared_mutex content_mutex;
 };
 
 std::ostream& operator<<(

@@ -12,12 +12,12 @@ find_library(TINYXML2_LIBRARIES NAMES tinyxml2)
 if(NOT TINYXML2_LIBRARIES)
     message(SEND_ERROR "tinyxml2 library not found")
 endif (NOT TINYXML2_LIBRARIES)
-find_package(Boost REQUIRED COMPONENTS filesystem)
+find_package(Boost REQUIRED COMPONENTS filesystem thread)
 
 # library project
 set(LIB_NAME odata)
 add_library(${LIB_NAME} SHARED
-    src/Connection.cpp include/odata/Connection.h
+    include/odata/Connection.h
     src/DataHubConnection.cpp include/odata/DataHubConnection.h
     src/DataHub.cpp include/odata/DataHub.h
     src/DataHubException.cpp include/odata/DataHubException.h

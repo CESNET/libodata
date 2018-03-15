@@ -37,11 +37,12 @@ Directory* getOrInsertDateSubtree(
 } // namespace
 
 Directory::Directory(std::string name, Content content) noexcept
-    : name(std::move(name)), content(std::move(content)) {
+    : name(std::move(name)), content(std::move(content)), content_mutex() {
 }
 
 void Directory::toString(std::ostream& ostr, unsigned indent_level) const
     noexcept {
+  boost::shared_lock<boost::shared_mutex> lock(content_mutex);
   indent(ostr, indent_level) << name << " {\n";
   for (const auto& sub_dir : content) {
     sub_dir.second->toString(ostr, indent_level + 1);
@@ -50,6 +51,7 @@ void Directory::toString(std::ostream& ostr, unsigned indent_level) const
 }
 
 bool Directory::compare(const FileSystemNode& node) const noexcept {
+  boost::shared_lock<boost::shared_mutex> lock(content_mutex);
   const auto* other = dynamic_cast<const Directory*>(&node);
   if (other == nullptr || name != other->name) {
     return false;
@@ -75,6 +77,7 @@ std::string Directory::getName() const noexcept {
 const FileSystemNode* Directory::getFile(
     boost::filesystem::path::const_iterator begin,
     boost::filesystem::path::const_iterator end) const noexcept {
+  boost::shared_lock<boost::shared_mutex> lock(content_mutex);
   if (begin == end || begin->string() != name) {
     return nullptr;
   }
@@ -89,6 +92,7 @@ const FileSystemNode* Directory::getFile(
 }
 
 std::vector<std::string> OData::Directory::readDir() const noexcept {
+  boost::shared_lock<boost::shared_mutex> lock(content_mutex);
   std::vector<std::string> children;
   for (const auto& pair : content) {
     children.push_back(pair.first);
@@ -101,6 +105,7 @@ bool Directory::isDirectory() const noexcept {
 }
 
 void Directory::addChild(std::shared_ptr<FileSystemNode> child) noexcept {
+  boost::unique_lock<boost::shared_mutex> lock(content_mutex);
   const auto name = child->getName();
   content[name] = std::move(child);
 }
@@ -136,6 +141,7 @@ std::unique_ptr<Directory> Directory::createRemoteStructure(
 }
 
 FileSystemNode* Directory::getChild(const std::string& name) noexcept {
+  boost::shared_lock<boost::shared_mutex> lock(content_mutex);
   const auto it = content.find(name);
   if (it == content.end()) {
     return nullptr;
@@ -151,6 +157,7 @@ std::ostream& operator<<(
 }
 
 void Directory::appendProducts(std::vector<std::shared_ptr<Product>> products) {
+  boost::unique_lock<boost::shared_mutex> lock(content_mutex);
   for (auto& product : products) {
     auto parent = getOrInsertDateSubtree(content, *product);
     parent->addChild(std::move(product));

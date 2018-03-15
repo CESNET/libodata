@@ -19,17 +19,25 @@ Product::Product(
       filename(std::move(filename)),
       platform(std::move(platform)),
       type(type),
-      directory() {
+      archive_initialized(false),
+      directory(),
+      manifest() {
 }
 
 void Product::setArchiveStructure(
     std::shared_ptr<Directory> directory,
     std::shared_ptr<File> manifest) noexcept {
+  assert(directory != nullptr && manifest != nullptr);
   this->directory = std::move(directory);
   this->manifest = std::move(manifest);
+  archive_initialized = true;
 }
 
 ProductPath Product::getProductPath() const noexcept {
+  return ProductPath(id);
+}
+
+ProductPath Product::getArchivePath() const noexcept {
   return ProductPath(id, filename);
 }
 
@@ -71,21 +79,13 @@ bool Product::compare(const FileSystemNode& node) const noexcept {
   const auto* entry = dynamic_cast<const Product*>(&node);
   if (entry == nullptr || id != entry->id || name != entry->name
       || ingestion_date != entry->ingestion_date || filename != entry->filename
-      || platform != entry->platform) {
+      || platform != entry->platform
+      || archive_initialized != entry->archive_initialized) {
     return false;
+  } else if (archive_initialized) {
+    return *directory == *entry->directory && *manifest == *entry->manifest;
   } else {
-    bool ret = false;
-    if (directory != nullptr && entry->directory != nullptr) {
-      ret = *directory == *entry->directory;
-    } else {
-      ret = entry->directory == directory;
-    }
-    if (manifest != nullptr && entry->manifest != nullptr) {
-      ret &= *manifest == *entry->manifest;
-    } else {
-      ret &= manifest == entry->manifest;
-    }
-    return ret;
+    return true;
   }
 }
 
@@ -103,11 +103,22 @@ const FileSystemNode* Product::getFile(
   if (next == end) {
     return this;
   }
-  return directory->getFile(next, end);
+  if (archive_initialized) {
+    if (next->string() == directory->getName()) {
+      return directory->getFile(next, end);
+    } else if (next->string() == manifest->getName()) {
+      return manifest->getFile(next, end);
+    }
+  }
+  return nullptr;
 }
 
 std::vector<std::string> Product::readDir() const noexcept {
-  return {directory->getName(), manifest->getName()};
+  if (archive_initialized) {
+    return {directory->getName(), manifest->getName()};
+  } else {
+    return {};
+  }
 }
 
 bool Product::isDirectory() const noexcept {

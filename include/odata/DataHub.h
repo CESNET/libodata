@@ -12,7 +12,8 @@ class FileSystemNode;
 
 class DataHub {
 public:
-  explicit DataHub(Connection& connection, std::vector<std::string> missions);
+  explicit DataHub(
+      Connection& connection, const std::vector<std::string>& missions);
   ~DataHub();
   std::shared_ptr<FileSystemNode> getData();
   std::vector<char> getFile(const boost::filesystem::path& file_path);

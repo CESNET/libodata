@@ -4,6 +4,7 @@
 #include "Directory.h"
 #include "FileSystemNode.h"
 #include "ProductPath.h"
+#include <atomic>
 #include <cstdlib>
 #include <iosfwd>
 #include <memory>
@@ -34,6 +35,7 @@ public:
       std::shared_ptr<Directory> directory,
       std::shared_ptr<File> manifest) noexcept;
   ProductPath getProductPath() const noexcept;
+  ProductPath getArchivePath() const noexcept;
 
   void toString(std::ostream& ostr, unsigned indent_level = 0) const
       noexcept override;
@@ -56,6 +58,7 @@ private:
   std::string filename;
   std::string platform;
   std::string type;
+  std::atomic<bool> archive_initialized;
   std::shared_ptr<Directory> directory;
   std::shared_ptr<File> manifest;
 };

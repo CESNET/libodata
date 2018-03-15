@@ -14,8 +14,9 @@ public:
   MockConnection& operator=(const MockConnection&) = delete;
 
   std::vector<std::shared_ptr<Product>> listProducts(
-      SearchQuery query, std::uint32_t count) override;
+      SearchQuery query, std::uint32_t offset, std::uint32_t count) override;
   virtual std::vector<char> getFile(const ProductPath& path) override;
+  std::unique_ptr<Connection> clone() const noexcept override;
 
 private:
   std::uint32_t product_count;

@@ -26,10 +26,13 @@ public:
   DataHubConnection& operator=(const DataHubConnection&) = delete;
 
   std::vector<std::shared_ptr<Product>> listProducts(
-      SearchQuery query, std::uint32_t count) override;
+      SearchQuery query, std::uint32_t offset, std::uint32_t count) override;
   std::vector<char> getFile(const ProductPath& path) override;
+  std::unique_ptr<Connection> clone() const noexcept override;
 
 private:
+  DataHubConnection(std::string url, std::string auth_token);
+
   struct Impl;
   std::unique_ptr<Impl> pimpl;
 };

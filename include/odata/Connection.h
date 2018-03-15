@@ -22,12 +22,13 @@ public:
    * List products specified by query.
    * Archive structure is not initialized.
    * @param query specification of products to list
+   * @param offset index of first product to be fetched
    * @param count how many product should be listed
    * @return list of discovered products
    * @exception if service is not available or response is invalid
    */
   virtual std::vector<std::shared_ptr<Product>> listProducts(
-      SearchQuery query, std::uint32_t count) = 0;
+      SearchQuery query, std::uint32_t offset, std::uint32_t count) = 0;
 
   /**
    * Download file using
@@ -36,6 +37,12 @@ public:
    * @exception if service is not available or response is invalid
    */
   virtual std::vector<char> getFile(const ProductPath& path) = 0;
+
+  /**
+   * Clone connection object
+   * @return new connection object
+   */
+  virtual std::unique_ptr<Connection> clone() const noexcept = 0;
 };
 
 } /* namespace OData */

@@ -4,6 +4,10 @@
 #include <utility>
 
 namespace OData {
+ProductPath::ProductPath(std::string uuid) noexcept
+    : ProductPath(std::move(uuid), std::string(), {}) {
+}
+
 ProductPath::ProductPath(std::string uuid, std::string filename) noexcept
     : ProductPath(std::move(uuid), std::move(filename), {}) {
 }
@@ -29,7 +33,10 @@ void ProductPath::append(std::string path) noexcept {
 
 std::string ProductPath::getPath() const noexcept {
   std::stringstream uri;
-  uri << "Products('" << uuid << "')/Nodes('" << filename << "')";
+  uri << "Products('" << uuid << "')";
+  if (!filename.empty()) {
+    uri << "/Nodes('" << filename << "')";
+  }
   for (const auto& item : path) {
     uri << "/Nodes('" << item.string() << "')";
   }

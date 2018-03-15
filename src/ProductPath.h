@@ -8,6 +8,7 @@ namespace OData {
 
 class ProductPath {
 public:
+  ProductPath(std::string uuid) noexcept;
   ProductPath(std::string uuid, std::string filename) noexcept;
   ProductPath(
       std::string uuid,

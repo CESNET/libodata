@@ -32,9 +32,9 @@ MockConnection::MockConnection(std::uint32_t product_count)
 }
 
 std::vector<std::shared_ptr<Product>> MockConnection::listProducts(
-    SearchQuery, std::uint32_t count) {
+    SearchQuery, std::uint32_t offset, std::uint32_t count) {
   std::vector<std::shared_ptr<Product>> products;
-  for (auto i = 0u; i < count && product_count != 0; ++i, --product_count) {
+  for (auto i = offset; i < count && product_count != 0; ++i, --product_count) {
     products.push_back(std::make_shared<Product>(
         generateString("TEST_UUID", i),
         generateString("TEST_NAME", i),
@@ -48,6 +48,10 @@ std::vector<std::shared_ptr<Product>> MockConnection::listProducts(
 
 std::vector<char> MockConnection::getFile(const ProductPath&) {
   return readTestInstance("manifest.xml");
+}
+
+std::unique_ptr<Connection> MockConnection::clone() const noexcept {
+  return std::unique_ptr<Connection>(new MockConnection(product_count));
 }
 
 } /* namespace Test */
