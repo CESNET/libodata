@@ -12,6 +12,7 @@
 #include "XmlParser.h"
 #include <boost/asio/deadline_timer.hpp>
 #include <boost/asio/io_service.hpp>
+#include <glog/logging.h>
 #include <mutex>
 #include <string>
 #include <thread>
@@ -66,16 +67,22 @@ struct DataHub::Impl {
   }
 
   void loadData() {
-    bool continue_synchronously;
-    do {
-      continue_synchronously = false;
-      for (auto& mission : missions) {
-        auto products = getMissionProducts(mission.first, mission.second, 100);
-        continue_synchronously = !products.empty();
-        mission.second += products.size();
-        data->appendProducts(std::move(products));
-      }
-    } while (continue_synchronously);
+    LOG(INFO) << "Load data timer expired";
+    try {
+      bool continue_synchronously;
+      do {
+        continue_synchronously = false;
+        for (auto& mission : missions) {
+          auto products =
+              getMissionProducts(mission.first, mission.second, 100);
+          continue_synchronously = !products.empty();
+          mission.second += products.size();
+          data->appendProducts(std::move(products));
+        }
+      } while (continue_synchronously);
+    } catch (DataHubException& ex) {
+      LOG(ERROR) << "Error occured during product discovery: " << ex.what();
+    }
     this->timer.expires_from_now(boost::posix_time::seconds(60));
     this->timer.async_wait(
         [&](const boost::system::error_code&) { this->loadData(); });

@@ -8,6 +8,10 @@ add_definitions(-Wall -std=c++11 -pedantic -Wextra -Werror)
 
 # check dependencies
 find_package(CURL REQUIRED)
+find_library(GLOG_LIBRARIES NAMES glog)
+if(NOT GLOG_LIBRARIES)
+    message(SEND_ERROR "glog library not found")
+endif (NOT GLOG_LIBRARIES)
 find_library(TINYXML2_LIBRARIES NAMES tinyxml2)
 if(NOT TINYXML2_LIBRARIES)
     message(SEND_ERROR "tinyxml2 library not found")
@@ -36,6 +40,7 @@ target_include_directories(${LIB_NAME} PUBLIC
     $<INSTALL_INTERFACE:include/odata>)
 target_include_directories(${LIB_NAME} PUBLIC ${Boost_INCLUDE_DIRS})
 target_link_libraries(${LIB_NAME} PUBLIC ${CURL_LIBRARIES})
+target_link_libraries(${LIB_NAME} PUBLIC ${GLOG_LIBRARIES})
 target_link_libraries(${LIB_NAME} PUBLIC ${TINYXML2_LIBRARIES})
 target_link_libraries(${LIB_NAME} PUBLIC ${Boost_LIBRARIES})
 

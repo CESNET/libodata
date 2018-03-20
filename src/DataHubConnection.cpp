@@ -7,7 +7,7 @@
 #include <algorithm>
 #include <curl/curl.h>
 #include <functional>
-#include <iostream>
+#include <glog/logging.h>
 #include <iterator>
 #include <sstream>
 
@@ -33,7 +33,7 @@ struct DataHubConnection::Impl {
   ~Impl() = default;
 
   std::vector<char> getQuery(const std::string& uri) {
-    std::cout << "Sending query: " << uri << std::endl;
+    LOG(INFO) << "Sending query: " << uri;
     ScopeGuard guard([&]() {
       curl_easy_reset(curl_handle.get());
       body.clear();
@@ -114,7 +114,7 @@ std::vector<std::shared_ptr<Product>> DataHubConnection::listProducts(
       std::move(list.begin(), list.end(), std::back_inserter(products));
     }
   }
-  std::cout << products.size() << " product downloaded" << std::endl;
+  LOG(INFO) << products.size() << " product downloaded";
   return products;
 }
 
