@@ -28,7 +28,7 @@ struct DataHub::Impl {
         data(std::make_shared<Directory>("root")),
         response_parser(),
         io_service(),
-        timer(io_service, boost::posix_time::seconds(60)),
+        timer(io_service, boost::posix_time::seconds(5)),
         timer_thread([&]() {
           this->timer.async_wait(
               [&](const boost::system::error_code&) { this->loadData(); });

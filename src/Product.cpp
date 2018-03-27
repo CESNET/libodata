@@ -133,6 +133,10 @@ std::string Product::getDate() const noexcept {
   return std::string(ingestion_date, 0, ingestion_date.find("T"));
 }
 
+const std::string& Product::getId() const {
+  return id;
+}
+
 std::ostream& operator<<(std::ostream& ostr, const Product& product) noexcept {
   product.toString(ostr);
   return ostr;

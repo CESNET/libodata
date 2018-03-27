@@ -50,6 +50,7 @@ public:
   std::string getManifestFilename() const noexcept;
   const std::string& getFilename() const noexcept;
   std::string getDate() const noexcept;
+  const std::string& getId() const;
 
 private:
   std::string id;

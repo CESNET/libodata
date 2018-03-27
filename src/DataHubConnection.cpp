@@ -28,6 +28,9 @@ struct DataHubConnection::Impl {
         auth_token(std::move(auth_token)),
         body(),
         response_parser() {
+    if (this->url.back() != '/') {
+      this->url.push_back('/');
+    }
   }
 
   ~Impl() = default;
