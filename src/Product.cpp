@@ -4,6 +4,8 @@
 #include <ostream>
 #include <sstream>
 
+BOOST_CLASS_EXPORT_IMPLEMENT(OData::Product)
+
 namespace OData {
 
 Product::Product(
@@ -19,7 +21,6 @@ Product::Product(
       filename(std::move(filename)),
       platform(std::move(platform)),
       type(type),
-      archive_initialized(false),
       directory(),
       manifest() {
 }
@@ -30,7 +31,6 @@ void Product::setArchiveStructure(
   assert(directory != nullptr && manifest != nullptr);
   this->directory = std::move(directory);
   this->manifest = std::move(manifest);
-  archive_initialized = true;
 }
 
 ProductPath Product::getProductPath() const noexcept {
@@ -79,13 +79,14 @@ bool Product::compare(const FileSystemNode& node) const noexcept {
   const auto* entry = dynamic_cast<const Product*>(&node);
   if (entry == nullptr || id != entry->id || name != entry->name
       || ingestion_date != entry->ingestion_date || filename != entry->filename
-      || platform != entry->platform
-      || archive_initialized != entry->archive_initialized) {
+      || platform != entry->platform) {
     return false;
-  } else if (archive_initialized) {
-    return *directory == *entry->directory && *manifest == *entry->manifest;
+  } else if (isArchiveSet() == entry->isArchiveSet()) {
+    return !isArchiveSet()
+           || ((*directory == *entry->directory)
+               && (*manifest == *entry->manifest));
   } else {
-    return true;
+    return false;
   }
 }
 
@@ -103,7 +104,7 @@ const FileSystemNode* Product::getFile(
   if (next == end) {
     return this;
   }
-  if (archive_initialized) {
+  if (isArchiveSet()) {
     if (next->string() == directory->getName()) {
       return directory->getFile(next, end);
     } else if (next->string() == manifest->getName()) {
@@ -114,7 +115,7 @@ const FileSystemNode* Product::getFile(
 }
 
 std::vector<std::string> Product::readDir() const noexcept {
-  if (archive_initialized) {
+  if (isArchiveSet()) {
     return {directory->getName(), manifest->getName()};
   } else {
     return {};
@@ -140,6 +141,10 @@ const std::string& Product::getId() const {
 std::ostream& operator<<(std::ostream& ostr, const Product& product) noexcept {
   product.toString(ostr);
   return ostr;
+}
+
+bool Product::isArchiveSet() const {
+  return manifest != nullptr && directory != nullptr;
 }
 
 } /* namespace OData */

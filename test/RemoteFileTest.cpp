@@ -1,4 +1,4 @@
-#include "File.h"
+#include "RemoteFile.h"
 
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
@@ -9,29 +9,16 @@
 namespace OData {
 namespace Test {
 
-TEST(FileTest, GetFileTest) {
-  File file("test_file", {1, 2, 3, 4});
-
-  const boost::filesystem::path empty;
-  ASSERT_EQ(nullptr, file.getFile(empty.begin(), empty.end()));
-
-  const boost::filesystem::path long_path("test_file/too/long");
-  ASSERT_EQ(nullptr, file.getFile(long_path.begin(), long_path.end()));
-
-  const boost::filesystem::path path("test_file");
-  ASSERT_EQ(&file, file.getFile(path.begin(), path.end()));
-}
-
-TEST(FileTest, SerializeTest) {
+TEST(RemoteFileTest, SerializeTest) {
   std::stringstream sstream(
       std::ios_base::in | std::ios_base::out | std::ios_base::binary);
-  File expected("test_file", {1, 2, 3, 4});
+  RemoteFile expected("test_file", {"uuid", "filename", "x/y/z"});
   {
     boost::archive::binary_oarchive out(sstream);
     out& expected;
   }
 
-  File deserialized;
+  RemoteFile deserialized;
   {
     boost::archive::binary_iarchive in(sstream);
     in& deserialized;

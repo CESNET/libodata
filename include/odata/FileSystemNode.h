@@ -7,6 +7,12 @@
 #include <string>
 #include <vector>
 
+namespace boost {
+namespace serialization {
+class access;
+} // namespace serialization
+} // namespace boost
+
 namespace OData {
 
 class FileSystemNode {
@@ -31,6 +37,11 @@ public:
   const FileSystemNode* getFile(const boost::filesystem::path& path) const
       noexcept;
   static std::ostream& indent(std::ostream& ostr, unsigned level);
+
+private:
+  friend class boost::serialization::access;
+  template <typename Archive> void serialize(Archive&, const unsigned int) {
+  }
 };
 
 std::ostream& operator<<(

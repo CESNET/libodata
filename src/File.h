@@ -2,6 +2,9 @@
 #define SRC_FILE_H_
 
 #include "FileSystemNode.h"
+#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/export.hpp>
+#include <boost/serialization/vector.hpp>
 #include <string>
 #include <vector>
 
@@ -9,6 +12,7 @@ namespace OData {
 
 class File : public FileSystemNode {
 public:
+  File() = default;
   File(std::string name, std::vector<char> data) noexcept;
   ~File() = default;
   File(const File&) = delete;
@@ -27,10 +31,19 @@ public:
   const std::vector<char>& getData() const noexcept;
 
 private:
+  friend class boost::serialization::access;
+  template <typename Archive> void serialize(Archive& ar, const unsigned int) {
+    ar& boost::serialization::base_object<FileSystemNode>(*this);
+    ar& name;
+    ar& data;
+  }
+
   std::string name;
   std::vector<char> data;
 };
 
 } /* namespace OData */
+
+BOOST_CLASS_EXPORT_KEY(OData::File)
 
 #endif /* SRC_FILE_H_ */

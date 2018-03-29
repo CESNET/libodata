@@ -10,6 +10,8 @@
 #include <ostream>
 #include <string>
 
+BOOST_CLASS_EXPORT_IMPLEMENT(OData::Directory)
+
 namespace OData {
 namespace {
 Directory* getOrInsertPlatform(

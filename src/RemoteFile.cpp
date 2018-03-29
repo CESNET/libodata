@@ -1,5 +1,7 @@
 #include "RemoteFile.h"
 
+BOOST_CLASS_EXPORT_IMPLEMENT(OData::RemoteFile)
+
 namespace OData {
 
 RemoteFile::RemoteFile(std::string name, ProductPath path) noexcept

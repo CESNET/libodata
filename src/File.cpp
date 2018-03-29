@@ -2,6 +2,8 @@
 
 #include <ostream>
 
+BOOST_CLASS_EXPORT_IMPLEMENT(OData::File)
+
 namespace OData {
 
 File::File(std::string name, std::vector<char> data) noexcept

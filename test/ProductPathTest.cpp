@@ -1,5 +1,8 @@
 #include "ProductPath.h"
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
 #include <gtest/gtest.h>
+#include <sstream>
 
 namespace OData {
 namespace Test {
@@ -20,6 +23,25 @@ TEST(ProductPathTest, BuildPathTest) {
   ASSERT_EQ(
       "Products('uuid')/Nodes('file')/Nodes('x')/Nodes('y')/$value",
       appended.getPath());
+}
+
+TEST(ProductPathTest, SerializeTest) {
+  std::stringstream sstream(
+      std::ios_base::in | std::ios_base::out | std::ios_base::binary);
+  ProductPath expected("uuid", "file", "x/y");
+  {
+    boost::archive::binary_oarchive out(sstream);
+    ProductPath path(expected);
+    out& path;
+  }
+
+  ProductPath deserialized;
+  {
+    boost::archive::binary_iarchive in(sstream);
+    in& deserialized;
+  }
+
+  ASSERT_EQ(expected, deserialized);
 }
 
 } // namespace Test

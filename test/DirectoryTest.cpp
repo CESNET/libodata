@@ -1,12 +1,16 @@
 #include "Directory.h"
 
+#include "File.h"
 #include "ProductPath.h"
 #include "RemoteFile.h"
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
 #include <boost/filesystem/path.hpp>
 #include <gtest/gtest.h>
 #include <list>
 #include <map>
 #include <memory>
+#include <sstream>
 
 namespace OData {
 namespace Test {
@@ -93,6 +97,30 @@ TEST(DirectoryTest, ReaddirTest) {
     std::vector<std::string> sub_dir1_expected{".manifest.xml", "sub_dir2"};
     ASSERT_EQ(sub_dir1_expected, test_tree->getChild("sub_dir1")->readDir());
   }
+}
+
+TEST(DirectoryTest, SerializeTest) {
+  std::stringstream sstream(
+      std::ios_base::in | std::ios_base::out | std::ios_base::binary);
+  auto expected = createTestTree();
+  {
+    boost::archive::binary_oarchive out(sstream);
+    out.register_type<Directory>();
+    out.register_type<RemoteFile>();
+    out.register_type<File>();
+    out&(*expected);
+  }
+
+  Directory deserialized;
+  {
+    boost::archive::binary_iarchive in(sstream);
+    in.register_type<Directory>();
+    in.register_type<RemoteFile>();
+    in.register_type<File>();
+    in& deserialized;
+  }
+
+  ASSERT_EQ(*expected, deserialized);
 }
 
 } // namespace Test

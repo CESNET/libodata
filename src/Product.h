@@ -5,6 +5,9 @@
 #include "FileSystemNode.h"
 #include "ProductPath.h"
 #include <atomic>
+#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/export.hpp>
+#include <boost/serialization/shared_ptr.hpp>
 #include <cstdlib>
 #include <iosfwd>
 #include <memory>
@@ -20,6 +23,7 @@ class File;
  */
 class Product : public FileSystemNode {
 public:
+  Product() = default;
   Product(
       std::string id,
       std::string name,
@@ -53,13 +57,27 @@ public:
   const std::string& getId() const;
 
 private:
+  bool isArchiveSet() const;
+
+  friend class boost::serialization::access;
+  template <typename Archive> void serialize(Archive& ar, const unsigned int) {
+    ar& boost::serialization::base_object<FileSystemNode>(*this);
+    ar& id;
+    ar& name;
+    ar& ingestion_date;
+    ar& filename;
+    ar& platform;
+    ar& type;
+    ar& directory;
+    ar& manifest;
+  }
+
   std::string id;
   std::string name;
   std::string ingestion_date;
   std::string filename;
   std::string platform;
   std::string type;
-  std::atomic<bool> archive_initialized;
   std::shared_ptr<Directory> directory;
   std::shared_ptr<File> manifest;
 };
@@ -67,5 +85,7 @@ private:
 std::ostream& operator<<(std::ostream& ostr, const Product& product) noexcept;
 
 } /* namespace OData */
+
+BOOST_CLASS_EXPORT_KEY(OData::Product)
 
 #endif /* SRC_PRODUCT_H_ */

@@ -3,12 +3,15 @@
 
 #include "FileSystemNode.h"
 #include "ProductPath.h"
+#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/export.hpp>
 #include <string>
 
 namespace OData {
 
 class RemoteFile : public FileSystemNode {
 public:
+  RemoteFile() = default;
   RemoteFile(std::string name, ProductPath path) noexcept;
   virtual ~RemoteFile() = default;
   RemoteFile(const RemoteFile&) = delete;
@@ -27,10 +30,19 @@ public:
   ProductPath getProductPath() const noexcept;
 
 private:
+  friend class boost::serialization::access;
+  template <typename Archive> void serialize(Archive& ar, const unsigned int) {
+    ar& boost::serialization::base_object<FileSystemNode>(*this);
+    ar& name;
+    ar& path;
+  }
+
   std::string name;
   ProductPath path;
 };
 
 } /* namespace OData */
+
+BOOST_CLASS_EXPORT_KEY(OData::RemoteFile)
 
 #endif /* SRC_REMOTEFILE_H_ */

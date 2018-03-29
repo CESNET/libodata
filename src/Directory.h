@@ -3,6 +3,10 @@
 
 #include "FileSystemNode.h"
 #include <boost/filesystem/path.hpp>
+#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/export.hpp>
+#include <boost/serialization/map.hpp>
+#include <boost/serialization/shared_ptr.hpp>
 #include <boost/thread/shared_mutex.hpp>
 #include <iosfwd>
 #include <map>
@@ -19,6 +23,7 @@ class Directory : public FileSystemNode {
 public:
   using Content = std::map<std::string, std::shared_ptr<FileSystemNode>>;
 
+  Directory() = default;
   Directory(std::string name, Content content = {}) noexcept;
   virtual ~Directory() = default;
   Directory(const Directory&) = delete;
@@ -47,6 +52,13 @@ public:
       std::vector<std::shared_ptr<Product>> products) noexcept;
 
 private:
+  friend class boost::serialization::access;
+  template <typename Archive> void serialize(Archive& ar, const unsigned int) {
+    ar& boost::serialization::base_object<FileSystemNode>(*this);
+    ar& name;
+    ar& content;
+  }
+
   std::string name;
   Content content;
   mutable boost::shared_mutex content_mutex;
@@ -56,5 +68,7 @@ std::ostream& operator<<(
     std::ostream& ostr, const Directory& directory) noexcept;
 
 } /* namespace OData */
+
+BOOST_CLASS_EXPORT_KEY(OData::Directory)
 
 #endif /* SRC_DIRECTORY_H_ */

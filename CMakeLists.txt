@@ -16,7 +16,8 @@ find_library(TINYXML2_LIBRARIES NAMES tinyxml2)
 if(NOT TINYXML2_LIBRARIES)
     message(SEND_ERROR "tinyxml2 library not found")
 endif (NOT TINYXML2_LIBRARIES)
-find_package(Boost REQUIRED COMPONENTS filesystem thread)
+find_package(Boost REQUIRED COMPONENTS filesystem thread serialization)
+
 
 # library project
 set(LIB_NAME odata)
@@ -91,6 +92,8 @@ if(GTEST_FOUND)
         test/main.cpp
         test/MockConnection.cpp test/MockConnection.h
         test/ProductPathTest.cpp
+        test/ProductTest.cpp
+        test/RemoteFileTest.cpp
         test/SearchQueryTest.cpp
         test/SearchQueryBuilderTest.cpp
         test/Utils.cpp test/Utils.h

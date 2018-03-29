@@ -4,10 +4,27 @@
 #include <boost/filesystem/path.hpp>
 #include <string>
 
+namespace boost {
+namespace filesystem {
+// TODO workaround, put somewhere else
+template <class Archive>
+void serialize(Archive& ar, boost::filesystem::path& path, const unsigned int) {
+  std::string raw = path.string();
+  ar& raw;
+  path = boost::filesystem::path(raw);
+}
+} // namespace filesystem
+
+namespace serialization {
+class access;
+} // namespace serialization
+} // namespace boost
+
 namespace OData {
 
 class ProductPath {
 public:
+  ProductPath() = default;
   ProductPath(std::string uuid) noexcept;
   ProductPath(std::string uuid, std::string filename) noexcept;
   ProductPath(
@@ -26,6 +43,13 @@ public:
   bool operator==(const ProductPath& other) const noexcept;
 
 private:
+  friend class boost::serialization::access;
+  template <typename Archive> void serialize(Archive& ar, const unsigned int) {
+    ar& uuid;
+    ar& filename;
+    ar& path;
+  }
+
   std::string uuid;
   std::string filename;
   boost::filesystem::path path;

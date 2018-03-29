@@ -1,7 +1,10 @@
 #include "ProductPath.h"
 
+#include <boost/serialization/export.hpp>
 #include <sstream>
 #include <utility>
+
+BOOST_CLASS_EXPORT(OData::ProductPath)
 
 namespace OData {
 ProductPath::ProductPath(std::string uuid) noexcept
