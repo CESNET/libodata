@@ -25,6 +25,14 @@ std::unique_ptr<Product> createTestProduct(std::string platform) {
       std::make_shared<File>(std::string("manifest.xml"), std::vector<char>{}));
   return product;
 }
+
+std::unique_ptr<Directory> createFilesystem(
+    std::vector<std::shared_ptr<Product>> products) noexcept {
+  std::unique_ptr<Directory> filesystem(new Directory("/"));
+  filesystem->appendProducts(products);
+  return filesystem;
+}
+
 } // namespace
 
 TEST(FileSystemNodeTest, FileTreeTraverseTest) {
@@ -32,7 +40,7 @@ TEST(FileSystemNodeTest, FileTreeTraverseTest) {
   products.emplace_back(createTestProduct("platform1"));
   products.emplace_back(createTestProduct("platform2"));
   const std::unique_ptr<FileSystemNode> test_tree =
-      Directory::createFilesystem(std::move(products));
+      createFilesystem(std::move(products));
   ASSERT_EQ(nullptr, test_tree->getFile("/abc/def"));
   ASSERT_EQ(
       RemoteFile("manifest.xml", ProductPath("uuid", "filename")),

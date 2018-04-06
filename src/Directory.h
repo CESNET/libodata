@@ -48,9 +48,6 @@ public:
 
   void appendProducts(std::vector<std::shared_ptr<Product>> products);
 
-  static std::unique_ptr<Directory> createFilesystem(
-      std::vector<std::shared_ptr<Product>> products) noexcept;
-
 private:
   friend class boost::serialization::access;
   template <typename Archive> void serialize(Archive& ar, const unsigned int) {

@@ -165,15 +165,4 @@ void Directory::appendProducts(std::vector<std::shared_ptr<Product>> products) {
     parent->addChild(std::move(product));
   }
 }
-
-std::unique_ptr<Directory> Directory::createFilesystem(
-    std::vector<std::shared_ptr<Product>> products) noexcept {
-  Content missions;
-  for (auto& product : products) {
-    auto parent = getOrInsertDateSubtree(missions, *product);
-    parent->addChild(std::move(product));
-  }
-  return std::unique_ptr<Directory>(new Directory("/", std::move(missions)));
-}
-
 } /* namespace OData */

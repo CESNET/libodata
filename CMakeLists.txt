@@ -24,6 +24,7 @@ find_package(BerkeleyDB REQUIRED)
 set(LIB_NAME odata)
 add_library(${LIB_NAME} SHARED
     src/BerkeleyDBStorage.cpp src/BerkeleyDBStorage.h
+    src/CachedStorage.cpp src/CachedStorage.h
     include/odata/Connection.h
     src/DataHubConnection.cpp include/odata/DataHubConnection.h
     src/DataHub.cpp include/odata/DataHub.h
@@ -31,8 +32,10 @@ add_library(${LIB_NAME} SHARED
     src/Directory.cpp src/Directory.h
     src/File.cpp src/File.h
     src/FileSystemNode.cpp include/odata/FileSystemNode.h
+    src/LRUCache.h
     src/Product.cpp src/Product.h
     src/ProductPath.cpp src/ProductPath.h
+    src/ProductPlaceHolder.cpp src/ProductPlaceHolder.h
     src/ProductStorage.cpp src/ProductStorage.h
     src/RemoteFile.cpp src/RemoteFile.h
     src/ScopeGuard.h
@@ -95,6 +98,7 @@ if(GTEST_FOUND)
         test/DirectoryTest.cpp
         test/FileTest.cpp
         test/FileSystemNodeTest.cpp
+        test/LRUCacheTest.cpp
         test/main.cpp
         test/MockConnection.cpp test/MockConnection.h
         test/MockStorage.h test/MockStorage.cpp
