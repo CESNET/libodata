@@ -2,25 +2,16 @@
 
 #include "DataHubException.h"
 #include "Product.h"
+#include "ScopeGuard.h"
 #include "SearchQueryBuilder.h"
 #include "XmlParser.h"
 #include <algorithm>
 #include <curl/curl.h>
-#include <functional>
 #include <glog/logging.h>
 #include <iterator>
 #include <sstream>
 
 namespace OData {
-struct ScopeGuard {
-  ScopeGuard(std::function<void()> cleanup) : cleanup(std::move(cleanup)) {
-  }
-  ~ScopeGuard() {
-    cleanup();
-  }
-  std::function<void()> cleanup;
-};
-
 struct DataHubConnection::Impl {
   Impl(std::string url, std::string auth_token)
       : curl_handle(curl_easy_init(), curl_easy_cleanup),

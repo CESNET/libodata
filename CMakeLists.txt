@@ -16,12 +16,14 @@ find_library(TINYXML2_LIBRARIES NAMES tinyxml2)
 if(NOT TINYXML2_LIBRARIES)
     message(SEND_ERROR "tinyxml2 library not found")
 endif (NOT TINYXML2_LIBRARIES)
-find_package(Boost REQUIRED COMPONENTS filesystem thread serialization)
+find_package(Boost REQUIRED COMPONENTS filesystem thread serialization iostreams)
+find_package(BerkeleyDB REQUIRED)
 
 
 # library project
 set(LIB_NAME odata)
 add_library(${LIB_NAME} SHARED
+    src/BerkeleyDBStorage.cpp src/BerkeleyDBStorage.h
     include/odata/Connection.h
     src/DataHubConnection.cpp include/odata/DataHubConnection.h
     src/DataHub.cpp include/odata/DataHub.h
@@ -31,7 +33,9 @@ add_library(${LIB_NAME} SHARED
     src/FileSystemNode.cpp include/odata/FileSystemNode.h
     src/Product.cpp src/Product.h
     src/ProductPath.cpp src/ProductPath.h
+    src/ProductStorage.cpp src/ProductStorage.h
     src/RemoteFile.cpp src/RemoteFile.h
+    src/ScopeGuard.h
     src/SearchQuery.cpp src/SearchQuery.h
     src/SearchQueryBuilder.cpp src/SearchQueryBuilder.h
     src/XmlParser.cpp src/XmlParser.h
@@ -39,11 +43,12 @@ add_library(${LIB_NAME} SHARED
 target_include_directories(${LIB_NAME} PUBLIC 
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/odata>
     $<INSTALL_INTERFACE:include/odata>)
-target_include_directories(${LIB_NAME} PUBLIC ${Boost_INCLUDE_DIRS})
+target_include_directories(${LIB_NAME} PUBLIC ${CURL_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${BERKELEY_INCLUDE_DIRS})
 target_link_libraries(${LIB_NAME} PUBLIC ${CURL_LIBRARIES})
 target_link_libraries(${LIB_NAME} PUBLIC ${GLOG_LIBRARIES})
 target_link_libraries(${LIB_NAME} PUBLIC ${TINYXML2_LIBRARIES})
 target_link_libraries(${LIB_NAME} PUBLIC ${Boost_LIBRARIES})
+target_link_libraries(${LIB_NAME} PUBLIC ${BERKELEY_DB_LIBRARIES})
 
 #install
 include(CMakePackageConfigHelpers)
@@ -85,12 +90,14 @@ if(GTEST_FOUND)
     enable_testing()
     set(TEST_BINARY runtest)
     add_executable(${TEST_BINARY}
+        test/BerkeleyDBStorageTest.cpp
         test/DataHubTest.cpp
         test/DirectoryTest.cpp
         test/FileTest.cpp
         test/FileSystemNodeTest.cpp
         test/main.cpp
         test/MockConnection.cpp test/MockConnection.h
+        test/MockStorage.h test/MockStorage.cpp
         test/ProductPathTest.cpp
         test/ProductTest.cpp
         test/RemoteFileTest.cpp
