@@ -46,7 +46,11 @@ public:
       std::string name,
       const std::vector<boost::filesystem::path>& files) noexcept;
 
-  void appendProducts(std::vector<std::shared_ptr<Product>> products);
+  void appendProducts(std::vector<std::shared_ptr<Product>> products) noexcept;
+  void appendProduct(
+      std::shared_ptr<FileSystemNode> product,
+      const std::string& platform,
+      const std::string& date) noexcept;
 
 private:
   friend class boost::serialization::access;

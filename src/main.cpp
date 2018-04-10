@@ -1,3 +1,5 @@
+#include "BerkeleyDBStorage.h"
+#include "CachedStorage.h"
 #include "DataHub.h"
 #include "DataHubConnection.h"
 #include "DataHubException.h"
@@ -7,7 +9,6 @@
 #include <cstdlib>
 #include <fstream>
 #include <glog/logging.h>
-#include <fstream>
 #include <iostream>
 #include <memory>
 #include <string>
@@ -20,7 +21,12 @@ int main(int argc, char** argv) {
   google::InitGoogleLogging(argv[0]);
   LOG(INFO) << "Application started";
   OData::DataHubConnection connection(argv[1], argv[2], argv[3]);
-  OData::DataHub hub(connection, {"Sentinel-1", "Sentinel-2", "Sentinel-3"});
+  OData::DataHub hub(
+      connection,
+      {"Sentinel-1", "Sentinel-2", "Sentinel-3"},
+      std::make_shared<OData::CachedStorage>(
+          std::unique_ptr<OData::ProductStorage>(new OData::BerkeleyDBStorage(
+              boost::filesystem::path(std::getenv("HOME")) / ".db"))));
   while (true) {
     std::cout << "> ";
     std::string line;

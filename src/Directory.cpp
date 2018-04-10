@@ -25,12 +25,13 @@ Directory* getOrInsertPlatform(
 }
 
 Directory* getOrInsertDateSubtree(
-    Directory::Content& platforms, const Product& product) {
-  Directory* platform = getOrInsertPlatform(platforms, product.getPlatform());
-  const auto date = product.getDate();
-  auto date_tree = dynamic_cast<Directory*>(platform->getChild(date));
+    Directory::Content& platforms,
+    const std::string& product_platform,
+    const std::string& product_date) {
+  Directory* platform = getOrInsertPlatform(platforms, product_platform);
+  auto date_tree = dynamic_cast<Directory*>(platform->getChild(product_date));
   if (date_tree == nullptr) {
-    auto sub_tree = std::make_shared<Directory>(date);
+    auto sub_tree = std::make_shared<Directory>(product_date);
     date_tree = sub_tree.get();
     platform->addChild(sub_tree);
   }
@@ -158,11 +159,20 @@ std::ostream& operator<<(
   return ostr;
 }
 
-void Directory::appendProducts(std::vector<std::shared_ptr<Product>> products) {
-  boost::unique_lock<boost::shared_mutex> lock(content_mutex);
-  for (auto& product : products) {
-    auto parent = getOrInsertDateSubtree(content, *product);
-    parent->addChild(std::move(product));
+void Directory::appendProducts(
+    std::vector<std::shared_ptr<Product>> products) noexcept {
+  for (auto product : products) {
+    appendProduct(product, product->getPlatform(), product->getDate());
   }
 }
+
+void Directory::appendProduct(
+    std::shared_ptr<FileSystemNode> product,
+    const std::string& platform,
+    const std::string& date) noexcept {
+  boost::unique_lock<boost::shared_mutex> lock(content_mutex);
+  auto parent = getOrInsertDateSubtree(content, platform, date);
+  parent->addChild(std::move(product));
+}
+
 } /* namespace OData */

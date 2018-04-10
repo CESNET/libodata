@@ -2,6 +2,7 @@
 #define SRC_BERKELEYDBSTORAGE_H_
 
 #include "ProductStorage.h"
+#include <boost/filesystem/path.hpp>
 #include <db_cxx.h>
 #include <mutex>
 
@@ -9,7 +10,7 @@ namespace OData {
 
 class BerkeleyDBStorage : public ProductStorage {
 public:
-  BerkeleyDBStorage();
+  BerkeleyDBStorage(boost::filesystem::path db_path);
   virtual ~BerkeleyDBStorage();
   BerkeleyDBStorage(const BerkeleyDBStorage&) = delete;
   BerkeleyDBStorage& operator=(const BerkeleyDBStorage&) = delete;

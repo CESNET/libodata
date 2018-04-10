@@ -47,8 +47,15 @@ std::shared_ptr<Product> decodeProductRecord(const Dbt& record) {
 }
 } // namespace
 
-BerkeleyDBStorage::BerkeleyDBStorage() : database(nullptr, 0) {
-  database.open(nullptr, "products.db", nullptr, DB_HASH, DB_CREATE, 0);
+BerkeleyDBStorage::BerkeleyDBStorage(boost::filesystem::path db_path)
+    : database(nullptr, 0) {
+  database.open(
+      nullptr,
+      (db_path / "products.db").c_str(),
+      nullptr,
+      DB_HASH,
+      DB_CREATE,
+      0);
 }
 
 BerkeleyDBStorage::~BerkeleyDBStorage() {

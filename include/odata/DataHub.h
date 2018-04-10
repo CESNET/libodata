@@ -9,11 +9,14 @@ namespace OData {
 
 class Connection;
 class FileSystemNode;
+class ProductStorage;
 
 class DataHub {
 public:
   explicit DataHub(
-      Connection& connection, const std::vector<std::string>& missions);
+      Connection& connection,
+      const std::vector<std::string>& missions,
+      std::shared_ptr<ProductStorage> product_storage);
   ~DataHub();
   std::shared_ptr<FileSystemNode> getData();
   std::vector<char> getFile(const boost::filesystem::path& file_path);

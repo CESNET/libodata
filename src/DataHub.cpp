@@ -7,6 +7,8 @@
 #include "FileSystemNode.h"
 #include "Product.h"
 #include "ProductPath.h"
+#include "ProductPlaceHolder.h"
+#include "ProductStorage.h"
 #include "RemoteFile.h"
 #include "SearchQuery.h"
 #include "XmlParser.h"
@@ -20,8 +22,12 @@
 
 namespace OData {
 struct DataHub::Impl {
-  Impl(Connection& connection, const std::vector<std::string>& missions)
+  Impl(
+      Connection& connection,
+      const std::vector<std::string>& missions,
+      std::shared_ptr<ProductStorage> product_storage)
       : service_connection(connection),
+        product_storage(std::move(product_storage)),
         filesytem_connection(service_connection.clone()),
         get_file_mutex(),
         missions(),
@@ -49,19 +55,27 @@ struct DataHub::Impl {
     auto products = service_connection.listProducts(
         {OData::SearchQuery::Keyword::PLATFORM, mission}, offset, count);
     for (auto& product : products) {
-      auto manifest_path = product->getArchivePath();
-      const auto manifest_filename = product->getManifestFilename();
-      manifest_path.append(manifest_filename);
-      auto manifest = service_connection.getFile(manifest_path);
-      auto content =
-          std::shared_ptr<Directory>(Directory::createRemoteStructure(
-              product->getArchivePath(),
-              product->getFilename(),
-              response_parser.parseManifest(manifest)));
-      product->setArchiveStructure(
-          std::move(content),
-          std::make_shared<File>(
-              std::move(manifest_filename), std::move(manifest)));
+      if (product_storage->productExists(product->getId())) {
+        LOG(INFO) << "Product '" << product->getId()
+                  << "' fetched from local database";
+        product = product_storage->getProduct(product->getId());
+      } else {
+        LOG(INFO) << "New product '" << product->getId() << "' found";
+        auto manifest_path = product->getArchivePath();
+        const auto manifest_filename = product->getManifestFilename();
+        manifest_path.append(manifest_filename);
+        auto manifest = service_connection.getFile(manifest_path);
+        auto content =
+            std::shared_ptr<Directory>(Directory::createRemoteStructure(
+                product->getArchivePath(),
+                product->getFilename(),
+                response_parser.parseManifest(manifest)));
+        product->setArchiveStructure(
+            std::move(content),
+            std::make_shared<File>(
+                std::move(manifest_filename), std::move(manifest)));
+        product_storage->storeProduct(product);
+      }
     }
     return products;
   }
@@ -77,7 +91,13 @@ struct DataHub::Impl {
               getMissionProducts(mission.first, mission.second, 100);
           continue_synchronously = !products.empty();
           mission.second += products.size();
-          data->appendProducts(std::move(products));
+          for (const auto& product : products) {
+            data->appendProduct(
+                std::make_shared<ProductPlaceHolder>(
+                    product->getId(), product->getName(), product_storage),
+                product->getPlatform(),
+                product->getDate());
+          }
         }
       } while (continue_synchronously);
     } catch (DataHubException& ex) {
@@ -89,6 +109,7 @@ struct DataHub::Impl {
   }
 
   Connection& service_connection;
+  std::shared_ptr<ProductStorage> product_storage;
   std::unique_ptr<Connection> filesytem_connection;
   std::mutex get_file_mutex;
   std::map<std::string, std::uint32_t> missions;
@@ -100,8 +121,10 @@ struct DataHub::Impl {
 };
 
 DataHub::DataHub(
-    Connection& connection, const std::vector<std::string>& missions)
-    : pimpl(new Impl(connection, missions)) {
+    Connection& connection,
+    const std::vector<std::string>& missions,
+    std::shared_ptr<ProductStorage> product_storage)
+    : pimpl(new Impl(connection, missions, std::move(product_storage))) {
 }
 
 std::vector<char> DataHub::getFile(const boost::filesystem::path& path) {
