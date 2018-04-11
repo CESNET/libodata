@@ -1,5 +1,7 @@
 #include "DataHub.h"
 
+#include "BerkeleyDBStorage.h"
+#include "CachedStorage.h"
 #include "Connection.h"
 #include "DataHubException.h"
 #include "Directory.h"
@@ -119,6 +121,17 @@ struct DataHub::Impl {
   boost::asio::deadline_timer timer;
   std::thread timer_thread;
 };
+
+DataHub::DataHub(
+    Connection& connection,
+    const std::vector<std::string>& missions,
+    boost::filesystem::path db_path)
+    : DataHub(
+          connection,
+          missions,
+          std::make_shared<CachedStorage>(std::unique_ptr<ProductStorage>(
+              new BerkeleyDBStorage(std::move(db_path))))) {
+}
 
 DataHub::DataHub(
     Connection& connection,

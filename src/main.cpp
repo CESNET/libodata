@@ -24,9 +24,7 @@ int main(int argc, char** argv) {
   OData::DataHub hub(
       connection,
       {"Sentinel-1", "Sentinel-2", "Sentinel-3"},
-      std::make_shared<OData::CachedStorage>(
-          std::unique_ptr<OData::ProductStorage>(new OData::BerkeleyDBStorage(
-              boost::filesystem::path(std::getenv("HOME")) / ".db"))));
+      boost::filesystem::path(std::getenv("HOME")) / ".db");
   while (true) {
     std::cout << "> ";
     std::string line;

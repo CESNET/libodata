@@ -13,6 +13,11 @@ class ProductStorage;
 
 class DataHub {
 public:
+  DataHub(
+      Connection& connection,
+      const std::vector<std::string>& missions,
+      boost::filesystem::path db_path);
+
   explicit DataHub(
       Connection& connection,
       const std::vector<std::string>& missions,
