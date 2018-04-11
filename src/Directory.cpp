@@ -77,21 +77,23 @@ std::string Directory::getName() const noexcept {
   return name;
 }
 
-const FileSystemNode* Directory::getFile(
+std::shared_ptr<FileSystemNode> Directory::getFile(
     boost::filesystem::path::const_iterator begin,
     boost::filesystem::path::const_iterator end) const noexcept {
   boost::shared_lock<boost::shared_mutex> lock(content_mutex);
-  if (begin == end || begin->string() != name) {
+  if (begin == end) {
     return nullptr;
+  }
+  auto sub_dir_iter = content.find(begin->string());
+  if (sub_dir_iter == content.end()) {
+    return {};
   }
   const auto next = ++begin;
   if (next == end) {
-    return this;
+    return sub_dir_iter->second;
+  } else {
+    return sub_dir_iter->second->getFile(next, end);
   }
-  auto sub_dir_iter = content.find(next->string());
-  auto subdir =
-      sub_dir_iter == content.end() ? nullptr : sub_dir_iter->second.get();
-  return subdir == nullptr ? nullptr : subdir->getFile(next, end);
 }
 
 std::vector<std::string> OData::Directory::readDir() const noexcept {

@@ -94,24 +94,22 @@ std::string Product::getName() const noexcept {
   return name;
 }
 
-const FileSystemNode* Product::getFile(
+std::shared_ptr<FileSystemNode> Product::getFile(
     boost::filesystem::path::const_iterator begin,
     boost::filesystem::path::const_iterator end) const noexcept {
-  if (begin == end || begin->string() != name) {
+  if (begin == end || !isArchiveSet()) {
     return nullptr;
   }
+  const auto name = begin->string();
   const auto next = ++begin;
-  if (next == end) {
-    return this;
+  const bool is_last = next == end;
+  if (name == directory->getName()) {
+    return is_last ? directory : directory->getFile(next, end);
+  } else if (name == manifest->getName()) {
+    return is_last ? manifest : manifest->getFile(next, end);
+  } else {
+    return {};
   }
-  if (isArchiveSet()) {
-    if (next->string() == directory->getName()) {
-      return directory->getFile(next, end);
-    } else if (next->string() == manifest->getName()) {
-      return manifest->getFile(next, end);
-    }
-  }
-  return nullptr;
 }
 
 std::vector<std::string> Product::readDir() const noexcept {

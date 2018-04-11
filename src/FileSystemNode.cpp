@@ -14,10 +14,10 @@ bool FileSystemNode::operator!=(const FileSystemNode& node) const {
   return !compare(node);
 }
 
-const FileSystemNode* FileSystemNode::getFile(
+std::shared_ptr<FileSystemNode> FileSystemNode::getFile(
     const boost::filesystem::path& path) const noexcept {
   if (path.empty()) {
-    return nullptr;
+    return {};
   } else {
     return getFile(path.begin(), path.end());
   }

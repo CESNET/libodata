@@ -22,14 +22,10 @@ std::string RemoteFile::getName() const noexcept {
   return name;
 }
 
-const FileSystemNode* RemoteFile::getFile(
-    boost::filesystem::path::const_iterator begin,
-    boost::filesystem::path::const_iterator end) const noexcept {
-  if (begin != end && begin->string() == name && ++begin == end) {
-    return this;
-  } else {
-    return nullptr;
-  }
+std::shared_ptr<FileSystemNode> RemoteFile::getFile(
+    boost::filesystem::path::const_iterator,
+    boost::filesystem::path::const_iterator) const noexcept {
+  return nullptr;
 }
 
 std::vector<std::string> RemoteFile::readDir() const noexcept {

@@ -28,15 +28,14 @@ public:
       noexcept = 0;
   virtual bool compare(const FileSystemNode& node) const noexcept = 0;
   virtual std::string getName() const noexcept = 0;
-  // TODO not save with caching in place
-  virtual const FileSystemNode* getFile(
+  virtual std::shared_ptr<FileSystemNode> getFile(
       boost::filesystem::path::const_iterator begin,
       boost::filesystem::path::const_iterator end) const noexcept = 0;
   virtual std::vector<std::string> readDir() const noexcept = 0;
   virtual bool isDirectory() const noexcept = 0;
 
-  const FileSystemNode* getFile(const boost::filesystem::path& path) const
-      noexcept;
+  std::shared_ptr<FileSystemNode> getFile(
+      const boost::filesystem::path& path) const noexcept;
   static std::ostream& indent(std::ostream& ostr, unsigned level);
 
 private:

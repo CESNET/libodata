@@ -72,11 +72,11 @@ TEST(DirectoryTest, TraverseTest) {
     const auto test_tree = createTestTree();
     const boost::filesystem::path invalid("test_tree/x/y/z");
     ASSERT_EQ(nullptr, test_tree->getFile(invalid.begin(), invalid.end()));
-    const boost::filesystem::path manifest("test_tree/sub_dir1/.manifest.xml");
+    const boost::filesystem::path manifest("sub_dir1/.manifest.xml");
     ASSERT_EQ(
         RemoteFile(".manifest.xml", ProductPath(test_path, "sub_dir1")),
         *test_tree->getFile(manifest.begin(), manifest.end()));
-    const boost::filesystem::path subdir2("test_tree/sub_dir1/sub_dir2");
+    const boost::filesystem::path subdir2("sub_dir1/sub_dir2");
     std::map<std::string, std::shared_ptr<FileSystemNode>> sub_dirs;
     sub_dirs["xyz"] = std::make_shared<RemoteFile>(
         "xyz", ProductPath("uuid", "filename", "sub_dir1/sub_dir2"));

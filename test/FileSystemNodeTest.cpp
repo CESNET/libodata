@@ -28,7 +28,7 @@ std::unique_ptr<Product> createTestProduct(std::string platform) {
 
 std::unique_ptr<Directory> createFilesystem(
     std::vector<std::shared_ptr<Product>> products) noexcept {
-  std::unique_ptr<Directory> filesystem(new Directory("/"));
+  std::unique_ptr<Directory> filesystem(new Directory("root"));
   filesystem->appendProducts(products);
   return filesystem;
 }
@@ -41,17 +41,17 @@ TEST(FileSystemNodeTest, FileTreeTraverseTest) {
   products.emplace_back(createTestProduct("platform2"));
   const std::unique_ptr<FileSystemNode> test_tree =
       createFilesystem(std::move(products));
-  ASSERT_EQ(nullptr, test_tree->getFile("/abc/def"));
+  ASSERT_EQ(nullptr, test_tree->getFile("abc/def"));
   ASSERT_EQ(
       RemoteFile("manifest.xml", ProductPath("uuid", "filename")),
-      *test_tree->getFile("/platform1/date/name/extracted/manifest.xml"));
+      *test_tree->getFile("platform1/date/name/extracted/manifest.xml"));
   ASSERT_EQ(
       *Directory::createRemoteStructure(
           ProductPath("uuid", "filename", "subdir"), "subdir", {"xxx"}),
-      *test_tree->getFile("/platform1/date/name/extracted/subdir"));
+      *test_tree->getFile("platform1/date/name/extracted/subdir"));
   ASSERT_EQ(
       *createTestProduct("platform1"),
-      *test_tree->getFile("/platform1/date/name"));
+      *test_tree->getFile("platform1/date/name"));
 }
 
 } // namespace Test

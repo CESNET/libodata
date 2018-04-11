@@ -144,9 +144,9 @@ std::vector<char> DataHub::getFile(const boost::filesystem::path& path) {
   std::unique_lock<std::mutex> lock(pimpl->get_file_mutex);
   const auto file =
       static_cast<FileSystemNode*>(pimpl->data.get())->getFile(path);
-  const auto local_file = dynamic_cast<const File*>(file);
-  const auto remote_file = dynamic_cast<const RemoteFile*>(file);
-  const auto product_file = dynamic_cast<const Product*>(file);
+  const auto local_file = std::dynamic_pointer_cast<const File>(file);
+  const auto remote_file = std::dynamic_pointer_cast<const RemoteFile>(file);
+  const auto product_file = std::dynamic_pointer_cast<const Product>(file);
   if (local_file != nullptr) {
     return local_file->getData();
   } else if (remote_file) {

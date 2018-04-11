@@ -45,7 +45,7 @@ public:
       noexcept override;
   bool compare(const FileSystemNode& node) const noexcept override;
   std::string getName() const noexcept override;
-  const FileSystemNode* getFile(
+  std::shared_ptr<FileSystemNode> getFile(
       boost::filesystem::path::const_iterator begin,
       boost::filesystem::path::const_iterator end) const noexcept override;
   std::vector<std::string> readDir() const noexcept override;

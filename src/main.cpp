@@ -37,12 +37,12 @@ int main(int argc, char** argv) {
       command = line;
     } else {
       command = line.substr(0, separator);
-      argument = "root/" + line.substr(separator + 1);
+      argument = line.substr(separator + 1);
     }
     if (command == "ls") {
-      const OData::FileSystemNode* filesystem;
+      std::shared_ptr<OData::FileSystemNode> filesystem;
       if (argument.empty()) {
-        filesystem = hub.getData().get();
+        filesystem = hub.getData();
       } else {
         filesystem = hub.getData()->getFile(boost::filesystem::path(argument));
       }
