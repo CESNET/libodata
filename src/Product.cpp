@@ -14,7 +14,8 @@ Product::Product(
     std::string ingestion_date,
     std::string filename,
     std::string platform,
-    std::string type) noexcept
+    std::string type,
+    std::size_t size) noexcept
     : id(std::move(id)),
       name(std::move(name)),
       ingestion_date(std::move(ingestion_date)),
@@ -22,7 +23,8 @@ Product::Product(
       platform(std::move(platform)),
       type(type),
       directory(),
-      manifest() {
+      manifest(),
+      size(size) {
 }
 
 void Product::setArchiveStructure(
@@ -50,6 +52,7 @@ void Product::toString(std::ostream& ostr, unsigned indent_level) const
   indent(ostr, indent_level + 1) << "filename=" << filename << "\n";
   indent(ostr, indent_level + 1) << "platform=" << platform << "\n";
   indent(ostr, indent_level + 1) << "type=" << type << "\n";
+  indent(ostr, indent_level + 1) << "size=" << size << "\n";
   indent(ostr, indent_level + 1) << "files {\n";
   if (directory != nullptr) {
     directory->toString(ostr, indent_level + 2);
@@ -79,7 +82,7 @@ bool Product::compare(const FileSystemNode& node) const noexcept {
   const auto* entry = dynamic_cast<const Product*>(&node);
   if (entry == nullptr || id != entry->id || name != entry->name
       || ingestion_date != entry->ingestion_date || filename != entry->filename
-      || platform != entry->platform) {
+      || platform != entry->platform || size != entry->size) {
     return false;
   } else if (isArchiveSet() == entry->isArchiveSet()) {
     return !isArchiveSet()
@@ -122,6 +125,10 @@ std::vector<std::string> Product::readDir() const noexcept {
 
 bool Product::isDirectory() const noexcept {
   return true;
+}
+
+std::size_t Product::getSize() const noexcept {
+  return size;
 }
 
 const std::string& Product::getFilename() const noexcept {

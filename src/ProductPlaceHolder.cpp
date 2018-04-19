@@ -51,4 +51,9 @@ bool ProductPlaceHolder::isDirectory() const noexcept {
   return true;
 }
 
+std::size_t ProductPlaceHolder::getSize() const noexcept {
+  auto instance = product_storage->getProduct(id);
+  return instance->getSize();
+}
+
 } /* namespace OData */

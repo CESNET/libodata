@@ -33,6 +33,7 @@ public:
       boost::filesystem::path::const_iterator end) const noexcept = 0;
   virtual std::vector<std::string> readDir() const noexcept = 0;
   virtual bool isDirectory() const noexcept = 0;
+  virtual std::size_t getSize() const noexcept = 0;
 
   std::shared_ptr<FileSystemNode> getFile(
       const boost::filesystem::path& path) const noexcept;

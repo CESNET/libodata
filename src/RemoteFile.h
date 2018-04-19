@@ -12,7 +12,7 @@ namespace OData {
 class RemoteFile : public FileSystemNode {
 public:
   RemoteFile() = default;
-  RemoteFile(std::string name, ProductPath path) noexcept;
+  RemoteFile(std::string name, ProductPath path, std::size_t size) noexcept;
   virtual ~RemoteFile() = default;
   RemoteFile(const RemoteFile&) = delete;
   RemoteFile& operator=(const RemoteFile&) = delete;
@@ -26,6 +26,7 @@ public:
       boost::filesystem::path::const_iterator end) const noexcept override;
   std::vector<std::string> readDir() const noexcept override;
   bool isDirectory() const noexcept override;
+  std::size_t getSize() const noexcept override;
 
   ProductPath getProductPath() const noexcept;
 
@@ -35,10 +36,12 @@ private:
     ar& boost::serialization::base_object<FileSystemNode>(*this);
     ar& name;
     ar& path;
+    ar& size;
   }
 
   std::string name;
   ProductPath path;
+  std::size_t size;
 };
 
 } /* namespace OData */

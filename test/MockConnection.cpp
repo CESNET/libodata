@@ -41,7 +41,8 @@ std::vector<std::shared_ptr<Product>> MockConnection::listProducts(
         generateTimestamp(i),
         generateString("TEST_FILE", i),
         "TEST_PLATFORM",
-        "TEST_PRODUCT_TYPE"));
+        "TEST_PRODUCT_TYPE",
+        1000000000UL));
   }
   return products;
 }

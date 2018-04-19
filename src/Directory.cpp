@@ -109,6 +109,10 @@ bool Directory::isDirectory() const noexcept {
   return true;
 }
 
+std::size_t Directory::getSize() const noexcept {
+  return 0;
+}
+
 void Directory::addChild(std::shared_ptr<FileSystemNode> child) noexcept {
   boost::unique_lock<boost::shared_mutex> lock(content_mutex);
   const auto name = child->getName();
@@ -118,20 +122,25 @@ void Directory::addChild(std::shared_ptr<FileSystemNode> child) noexcept {
 std::unique_ptr<Directory> Directory::createRemoteStructure(
     const ProductPath& product_path,
     std::string name,
-    const std::vector<boost::filesystem::path>& files) noexcept {
+    const std::vector<std::pair<boost::filesystem::path, std::size_t>>&
+        files) noexcept {
   std::map<std::string, std::shared_ptr<FileSystemNode>> dir_content;
-  std::map<std::string, std::vector<boost::filesystem::path>> sub_dirs;
+  std::map<
+      std::string,
+      std::vector<std::pair<boost::filesystem::path, std::size_t>>>
+      sub_dirs;
   for (const auto& file : files) {
-    if (!file.empty()) {
-      auto filename = file.begin()->string();
-      if (++file.begin() == file.end()) {
+    if (!file.first.empty()) {
+      auto filename = file.first.begin()->string();
+      if (++file.first.begin() == file.first.end()) {
         dir_content[filename] =
-            std::make_shared<RemoteFile>(filename, product_path);
+            std::make_shared<RemoteFile>(filename, product_path, file.second);
       } else {
-        const auto position = file.string().find(filename);
+        const auto position = file.first.string().find(filename);
         boost::filesystem::path child_path(
-            file.string().c_str() + position + filename.size() + 1);
-        sub_dirs[std::move(filename)].emplace_back(std::move(child_path));
+            file.first.string().c_str() + position + filename.size() + 1);
+        sub_dirs[std::move(filename)].emplace_back(
+            std::make_pair(std::move(child_path), file.second));
       }
     }
   }

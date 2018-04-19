@@ -30,7 +30,8 @@ public:
       std::string ingestion_date,
       std::string filename,
       std::string platform,
-      std::string type) noexcept;
+      std::string type,
+      std::size_t size) noexcept;
   Product(const Product&) = delete;
   virtual ~Product() = default;
   Product& operator=(const Product&) = delete;
@@ -50,6 +51,7 @@ public:
       boost::filesystem::path::const_iterator end) const noexcept override;
   std::vector<std::string> readDir() const noexcept override;
   bool isDirectory() const noexcept override;
+  std::size_t getSize() const noexcept override;
   const std::string& getPlatform() const noexcept;
   std::string getManifestFilename() const noexcept;
   const std::string& getFilename() const noexcept;
@@ -70,6 +72,7 @@ private:
     ar& type;
     ar& directory;
     ar& manifest;
+    ar& size;
   }
 
   std::string id;
@@ -80,6 +83,7 @@ private:
   std::string type;
   std::shared_ptr<Directory> directory;
   std::shared_ptr<File> manifest;
+  std::size_t size;
 };
 
 std::ostream& operator<<(std::ostream& ostr, const Product& product) noexcept;

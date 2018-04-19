@@ -12,7 +12,7 @@ namespace Test {
 TEST(RemoteFileTest, SerializeTest) {
   std::stringstream sstream(
       std::ios_base::in | std::ios_base::out | std::ios_base::binary);
-  RemoteFile expected("test_file", {"uuid", "filename", "x/y/z"});
+  RemoteFile expected("test_file", {"uuid", "filename", "x/y/z"}, 100000);
   {
     boost::archive::binary_oarchive out(sstream);
     out& expected;

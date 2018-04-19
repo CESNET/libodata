@@ -37,6 +37,10 @@ bool File::isDirectory() const noexcept {
   return false;
 }
 
+std::size_t File::getSize() const noexcept {
+  return data.size();
+}
+
 const std::vector<char>& File::getData() const noexcept {
   return data;
 }

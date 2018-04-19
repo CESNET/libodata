@@ -148,7 +148,7 @@
     <link rel="alternative" href="https://dhr1.cesnet.cz/odata/v1/Products('725adbf7-dd68-49c2-b466-061fa5b07861')/"/>
     <link rel="icon" href="https://dhr1.cesnet.cz/odata/v1/Products('725adbf7-dd68-49c2-b466-061fa5b07861')/Products('Quicklook')/$value"/>
     <id>725adbf7-dd68-49c2-b466-061fa5b07861</id>
-    <summary>Date: 2018-01-21T16:50:53.913Z, Instrument: SAR-C SAR, Mode: VV VH, Satellite: Sentinel-1, Size: 7.7 GB</summary>
+    <summary>Date: 2018-01-21T16:50:53.913Z, Instrument: SAR-C SAR, Mode: VV VH, Satellite: Sentinel-1, Size: 7.7 MB</summary>
     <date name="ingestiondate">2018-01-22T23:05:33.262Z</date>
     <date name="beginposition">2018-01-21T16:50:53.913Z</date>
     <date name="endposition">2018-01-21T16:51:20.874Z</date>
@@ -180,7 +180,7 @@
     <str name="productclass">S</str>
     <str name="producttype">SLC</str>
     <str name="platformname">Sentinel-1</str>
-    <str name="size">7.7 GB</str>
+    <str name="size">7.7 MB</str>
     <str name="status">ARCHIVED</str>
     <str name="uuid">725adbf7-dd68-49c2-b466-061fa5b07861</str>
   </entry>

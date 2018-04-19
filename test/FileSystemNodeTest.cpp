@@ -16,12 +16,12 @@ namespace Test {
 namespace {
 std::unique_ptr<Product> createTestProduct(std::string platform) {
   std::unique_ptr<Product> product(new Product(
-      "id", "name", "date", "filename", std::move(platform), "type"));
+      "id", "name", "date", "filename", std::move(platform), "type", 100));
   product->setArchiveStructure(
       Directory::createRemoteStructure(
           ProductPath("uuid", "filename"),
           "extracted",
-          {"manifest.xml", "subdir/xxx", "subdir2/yyy"}),
+          {{"manifest.xml", 10}, {"subdir/xxx", 20}, {"subdir2/yyy", 30}}),
       std::make_shared<File>(std::string("manifest.xml"), std::vector<char>{}));
   return product;
 }
@@ -43,11 +43,11 @@ TEST(FileSystemNodeTest, FileTreeTraverseTest) {
       createFilesystem(std::move(products));
   ASSERT_EQ(nullptr, test_tree->getFile("abc/def"));
   ASSERT_EQ(
-      RemoteFile("manifest.xml", ProductPath("uuid", "filename")),
+      RemoteFile("manifest.xml", ProductPath("uuid", "filename"), 10),
       *test_tree->getFile("platform1/date/name/extracted/manifest.xml"));
   ASSERT_EQ(
       *Directory::createRemoteStructure(
-          ProductPath("uuid", "filename", "subdir"), "subdir", {"xxx"}),
+          ProductPath("uuid", "filename", "subdir"), "subdir", {{"xxx", 20}}),
       *test_tree->getFile("platform1/date/name/extracted/subdir"));
   ASSERT_EQ(
       *createTestProduct("platform1"),

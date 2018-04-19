@@ -14,7 +14,7 @@ namespace Test {
 namespace {
 std::shared_ptr<Product> createProduct() {
   auto product(std::make_shared<Product>(
-      "id", "name", "date", "filename", "platform", "type"));
+      "id", "name", "date", "filename", "platform", "type", 1000UL));
 
   product->setArchiveStructure(
       std::make_shared<Directory>(),

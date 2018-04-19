@@ -15,7 +15,7 @@ namespace Test {
 TEST(ProductTest, SerializeTest) {
   std::stringstream sstream(
       std::ios_base::in | std::ios_base::out | std::ios_base::binary);
-  Product expected("id", "name", "date", "file", "platform", "type");
+  Product expected("id", "name", "date", "file", "platform", "type", 10);
   expected.setArchiveStructure(
       std::make_shared<Directory>(),
       std::make_shared<File>(

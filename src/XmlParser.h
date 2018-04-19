@@ -17,7 +17,7 @@ public:
   XmlParser& operator=(const XmlParser&) = delete;
   std::vector<std::shared_ptr<Product>> parseList(
       const std::vector<char>& xml) const;
-  std::vector<boost::filesystem::path> parseManifest(
+  std::vector<std::pair<boost::filesystem::path, std::size_t>> parseManifest(
       const std::vector<char>& manifest) const;
 };
 

@@ -37,6 +37,7 @@ public:
       boost::filesystem::path::const_iterator end) const noexcept override;
   std::vector<std::string> readDir() const noexcept override;
   bool isDirectory() const noexcept override;
+  std::size_t getSize() const noexcept override;
 
   void addChild(std::shared_ptr<FileSystemNode> child) noexcept;
   FileSystemNode* getChild(const std::string& name) noexcept;
@@ -44,7 +45,8 @@ public:
   static std::unique_ptr<Directory> createRemoteStructure(
       const ProductPath& product_path,
       std::string name,
-      const std::vector<boost::filesystem::path>& files) noexcept;
+      const std::vector<std::pair<boost::filesystem::path, std::size_t>>&
+          files) noexcept;
 
   void appendProducts(std::vector<std::shared_ptr<Product>> products) noexcept;
   void appendProduct(

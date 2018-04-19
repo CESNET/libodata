@@ -27,6 +27,7 @@ public:
       boost::filesystem::path::const_iterator end) const noexcept override;
   std::vector<std::string> readDir() const noexcept override;
   bool isDirectory() const noexcept override;
+  std::size_t getSize() const noexcept override;
 
 private:
   std::string id;
