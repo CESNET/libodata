@@ -140,21 +140,32 @@ DataHub::DataHub(
     : pimpl(new Impl(connection, missions, std::move(product_storage))) {
 }
 
-std::vector<char> DataHub::getFile(const boost::filesystem::path& path) {
+std::vector<char> DataHub::getFile(
+    const boost::filesystem::path& path,
+    std::size_t offset,
+    std::size_t length) {
   std::unique_lock<std::mutex> lock(pimpl->get_file_mutex);
   const auto file =
       static_cast<FileSystemNode*>(pimpl->data.get())->getFile(path);
   const auto local_file = std::dynamic_pointer_cast<const File>(file);
   const auto remote_file = std::dynamic_pointer_cast<const RemoteFile>(file);
   const auto product_file = std::dynamic_pointer_cast<const Product>(file);
+  std::vector<char> data;
   if (local_file != nullptr) {
-    return local_file->getData();
+    data = local_file->getData();
   } else if (remote_file) {
-    return pimpl->filesytem_connection->getFile(remote_file->getProductPath());
+    data = pimpl->filesytem_connection->getFile(remote_file->getProductPath());
   } else if (product_file) {
-    return pimpl->filesytem_connection->getFile(product_file->getProductPath());
+    data = pimpl->filesytem_connection->getFile(product_file->getProductPath());
+  } else {
+    throw DataHubException(path.string(), "File read failed.");
   }
-  throw DataHubException(path.string(), "File read failed.");
+  if (offset >= data.size()) {
+    throw DataHubException(path.string(), "File offset out of range.");
+  }
+  const auto begin = data.begin() + offset;
+  const auto end = offset + length < data.size() ? begin + length : data.end();
+  return std::vector<char>(begin, end);
 }
 
 DataHub::~DataHub() = default;

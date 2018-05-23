@@ -51,6 +51,11 @@ std::vector<char> MockConnection::getFile(const ProductPath&) {
   return readTestInstance("manifest.xml");
 }
 
+std::shared_ptr<TemporaryFile> MockConnection::getTemporaryFile(
+    const ProductPath&) {
+  return std::shared_ptr<TemporaryFile>();
+}
+
 std::unique_ptr<Connection> MockConnection::clone() const noexcept {
   return std::unique_ptr<Connection>(new MockConnection(product_count));
 }

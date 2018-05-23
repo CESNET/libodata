@@ -41,6 +41,7 @@ add_library(${LIB_NAME} SHARED
     src/ScopeGuard.h
     src/SearchQuery.cpp src/SearchQuery.h
     src/SearchQueryBuilder.cpp src/SearchQueryBuilder.h
+    src/TemporaryFile.cpp src/TemporaryFile.h
     src/XmlParser.cpp src/XmlParser.h
     )
 target_include_directories(${LIB_NAME} PUBLIC 

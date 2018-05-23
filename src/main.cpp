@@ -10,6 +10,7 @@
 #include <fstream>
 #include <glog/logging.h>
 #include <iostream>
+#include <limits>
 #include <memory>
 #include <string>
 
@@ -62,7 +63,8 @@ int main(int argc, char** argv) {
         std::cout << "Invalid path" << std::endl;
       } else {
         try {
-          const auto data = hub.getFile(argument);
+          const auto data =
+              hub.getFile(argument, 0, std::numeric_limits<std::size_t>::max());
           std::fstream file("out.file", std::fstream::out);
           file.write(data.data(), data.size());
           file.flush();

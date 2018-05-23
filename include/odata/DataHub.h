@@ -2,6 +2,7 @@
 #define ODATA_DATAHUB_H_
 
 #include <boost/filesystem/path.hpp>
+#include <cstdint>
 #include <memory>
 #include <vector>
 
@@ -24,7 +25,10 @@ public:
       std::shared_ptr<ProductStorage> product_storage);
   ~DataHub();
   std::shared_ptr<FileSystemNode> getData();
-  std::vector<char> getFile(const boost::filesystem::path& file_path);
+  std::vector<char> getFile(
+      const boost::filesystem::path& file_path,
+      std::size_t offset,
+      std::size_t length);
 
 private:
   struct Impl;

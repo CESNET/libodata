@@ -10,6 +10,7 @@ namespace OData {
 class Product;
 class ProductPath;
 class SearchQuery;
+class TemporaryFile;
 
 class Connection {
 public:
@@ -31,12 +32,21 @@ public:
       SearchQuery query, std::uint32_t offset, std::uint32_t count) = 0;
 
   /**
-   * Download file using
+   * Download file into memory
    * @param path path to requested file
    * @return file content
    * @exception if service is not available or response is invalid
    */
   virtual std::vector<char> getFile(const ProductPath& path) = 0;
+
+  /**
+   * Download file into temporary file
+   * @param path path to requested file
+   * @return temporary file
+   * @exception if service is not available or response is invalid
+   */
+  virtual std::shared_ptr<TemporaryFile> getTemporaryFile(
+      const ProductPath& path) = 0;
 
   /**
    * Clone connection object
