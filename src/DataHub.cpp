@@ -7,12 +7,14 @@
 #include "Directory.h"
 #include "File.h"
 #include "FileSystemNode.h"
+#include "LRUCache.h"
 #include "Product.h"
 #include "ProductPath.h"
 #include "ProductPlaceHolder.h"
 #include "ProductStorage.h"
 #include "RemoteFile.h"
 #include "SearchQuery.h"
+#include "TemporaryFile.h"
 #include "XmlParser.h"
 #include <boost/asio/deadline_timer.hpp>
 #include <boost/asio/io_service.hpp>
@@ -27,7 +29,8 @@ struct DataHub::Impl {
   Impl(
       Connection& connection,
       const std::vector<std::string>& missions,
-      std::shared_ptr<ProductStorage> product_storage)
+      std::shared_ptr<ProductStorage> product_storage,
+      boost::filesystem::path tmp_path)
       : service_connection(connection),
         product_storage(std::move(product_storage)),
         filesytem_connection(service_connection.clone()),
@@ -41,7 +44,10 @@ struct DataHub::Impl {
           this->timer.async_wait(
               [&](const boost::system::error_code&) { this->loadData(); });
           this->io_service.run();
-        }) {
+        }),
+        tmp_path(std::move(tmp_path)),
+        tmp_file_name(0),
+        file_cache(10) {
     for (auto& mission : missions) {
       this->missions[mission] = 0u;
     }
@@ -110,6 +116,10 @@ struct DataHub::Impl {
         [&](const boost::system::error_code&) { this->loadData(); });
   }
 
+  boost::filesystem::path getNextTmpFile() {
+    return tmp_path / ("odata" + std::to_string(tmp_file_name++) + ".tmp");
+  }
+
   Connection& service_connection;
   std::shared_ptr<ProductStorage> product_storage;
   std::unique_ptr<Connection> filesytem_connection;
@@ -120,24 +130,34 @@ struct DataHub::Impl {
   boost::asio::io_service io_service;
   boost::asio::deadline_timer timer;
   std::thread timer_thread;
+  boost::filesystem::path tmp_path;
+  std::uint8_t tmp_file_name;
+  LRUCache<ProductPath, std::shared_ptr<TemporaryFile>> file_cache;
 };
 
 DataHub::DataHub(
     Connection& connection,
     const std::vector<std::string>& missions,
-    boost::filesystem::path db_path)
+    boost::filesystem::path db_path,
+    boost::filesystem::path tmp_path)
     : DataHub(
           connection,
           missions,
           std::make_shared<CachedStorage>(std::unique_ptr<ProductStorage>(
-              new BerkeleyDBStorage(std::move(db_path))))) {
+              new BerkeleyDBStorage(std::move(db_path)))),
+          std::move(tmp_path)) {
 }
 
 DataHub::DataHub(
     Connection& connection,
     const std::vector<std::string>& missions,
-    std::shared_ptr<ProductStorage> product_storage)
-    : pimpl(new Impl(connection, missions, std::move(product_storage))) {
+    std::shared_ptr<ProductStorage> product_storage,
+    boost::filesystem::path tmp_path)
+    : pimpl(new Impl(
+          connection,
+          missions,
+          std::move(product_storage),
+          std::move(tmp_path))) {
 }
 
 std::vector<char> DataHub::getFile(
@@ -150,22 +170,36 @@ std::vector<char> DataHub::getFile(
   const auto local_file = std::dynamic_pointer_cast<const File>(file);
   const auto remote_file = std::dynamic_pointer_cast<const RemoteFile>(file);
   const auto product_file = std::dynamic_pointer_cast<const Product>(file);
-  std::vector<char> data;
   if (local_file != nullptr) {
-    data = local_file->getData();
-  } else if (remote_file) {
-    data = pimpl->filesytem_connection->getFile(remote_file->getProductPath());
+    auto data = local_file->getData();
+    if (offset >= data.size()) {
+      throw DataHubException(path.string(), "File offset out of range.");
+    }
+    const auto begin = data.begin() + offset;
+    const auto end =
+        offset + length < data.size() ? begin + length : data.end();
+    return std::vector<char>(begin, end);
+  }
+
+  ProductPath product_path;
+  if (remote_file) {
+    product_path = remote_file->getProductPath();
   } else if (product_file) {
-    data = pimpl->filesytem_connection->getFile(product_file->getProductPath());
+    product_path = product_file->getProductPath();
   } else {
     throw DataHubException(path.string(), "File read failed.");
   }
-  if (offset >= data.size()) {
-    throw DataHubException(path.string(), "File offset out of range.");
+
+  std::shared_ptr<TemporaryFile> tmp_file;
+  auto cached = pimpl->file_cache.get(product_path);
+  if (cached.is_initialized()) {
+    tmp_file = cached.get();
+  } else {
+    tmp_file = pimpl->filesytem_connection->getTemporaryFile(
+        product_path, pimpl->getNextTmpFile());
+    pimpl->file_cache.put(product_path, tmp_file);
   }
-  const auto begin = data.begin() + offset;
-  const auto end = offset + length < data.size() ? begin + length : data.end();
-  return std::vector<char>(begin, end);
+  return tmp_file->read(offset, length);
 }
 
 DataHub::~DataHub() = default;

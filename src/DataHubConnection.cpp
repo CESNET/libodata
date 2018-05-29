@@ -16,8 +16,12 @@
 namespace OData {
 struct FileDataCallback {
 
-  FileDataCallback(std::string path)
-      : file(path, std::ios_base::in | std::ios_base::out) {
+  FileDataCallback(const boost::filesystem::path& path)
+      : file(path.c_str(), std::fstream::out | std::fstream::binary) {
+  }
+
+  ~FileDataCallback() {
+    file.flush();
   }
 
   static size_t dataCallback(
@@ -108,10 +112,6 @@ struct DataHubConnection::Impl {
     return std::move(callback.body);
   }
 
-  std::string getTmpFileName() {
-    return "/tmp/libodata.tmp";
-  }
-
   std::unique_ptr<CURL, std::function<void(CURL*)>> curl_handle;
   std::string url;
   std::string auth_token;
@@ -152,11 +152,10 @@ std::vector<char> DataHubConnection::getFile(const ProductPath& path) {
 }
 
 std::shared_ptr<TemporaryFile> DataHubConnection::getTemporaryFile(
-    const ProductPath& path) {
-  const auto tmp_file_name = pimpl->getTmpFileName();
-  FileDataCallback callback(tmp_file_name);
+    const ProductPath& path, boost::filesystem::path tmp_file) {
+  FileDataCallback callback(tmp_file);
   pimpl->getQuery("odata/v1/" + path.getPath(), &callback);
-  return std::make_shared<TemporaryFile>(path, tmp_file_name);
+  return std::make_shared<TemporaryFile>(path, std::move(tmp_file));
 }
 
 std::unique_ptr<Connection> DataHubConnection::clone() const noexcept {

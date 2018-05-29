@@ -51,4 +51,8 @@ bool ProductPath::operator==(const ProductPath& other) const noexcept {
   return uuid == other.uuid && filename == other.filename && path == other.path;
 }
 
+bool OData::ProductPath::operator<(const ProductPath& other) const noexcept {
+  return getPath() < other.getPath();
+}
+
 } /* namespace OData */

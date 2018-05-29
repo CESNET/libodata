@@ -17,12 +17,14 @@ public:
   DataHub(
       Connection& connection,
       const std::vector<std::string>& missions,
-      boost::filesystem::path db_path);
+      boost::filesystem::path db_path,
+      boost::filesystem::path tmp_path);
 
   explicit DataHub(
       Connection& connection,
       const std::vector<std::string>& missions,
-      std::shared_ptr<ProductStorage> product_storage);
+      std::shared_ptr<ProductStorage> product_storage,
+      boost::filesystem::path tmp_path);
   ~DataHub();
   std::shared_ptr<FileSystemNode> getData();
   std::vector<char> getFile(

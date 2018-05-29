@@ -29,7 +29,7 @@ public:
       SearchQuery query, std::uint32_t offset, std::uint32_t count) override;
   std::vector<char> getFile(const ProductPath& path) override;
   std::shared_ptr<TemporaryFile> getTemporaryFile(
-      const ProductPath& path) override;
+      const ProductPath& path, boost::filesystem::path tmp_file) override;
   std::unique_ptr<Connection> clone() const noexcept override;
 
 private:

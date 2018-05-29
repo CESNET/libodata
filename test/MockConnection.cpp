@@ -52,7 +52,7 @@ std::vector<char> MockConnection::getFile(const ProductPath&) {
 }
 
 std::shared_ptr<TemporaryFile> MockConnection::getTemporaryFile(
-    const ProductPath&) {
+    const ProductPath&, boost::filesystem::path) {
   return std::shared_ptr<TemporaryFile>();
 }
 

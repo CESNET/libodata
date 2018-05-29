@@ -1,7 +1,10 @@
 #include "TemporaryFile.h"
 
+#include <algorithm>
 #include <cstdio>
 #include <fstream>
+
+#include <iostream>
 
 namespace OData {
 
@@ -15,11 +18,17 @@ TemporaryFile::~TemporaryFile() {
 }
 
 std::vector<char> TemporaryFile::read(off64_t offset, std::size_t length) {
-  std::fstream file(path.c_str(), std::ios_base::in);
+  std::ifstream file(path.c_str(), std::ifstream::binary | std::ifstream::ate);
+  file.seekg(0, file.end);
+  const auto file_size = static_cast<off64_t>(file.tellg());
+  if (file_size <= offset || length == 0) {
+    return {};
+  }
+  const auto read_size =
+      std::min(static_cast<std::size_t>(file_size - offset), length);
   file.seekg(offset);
-  std::vector<char> buffer(length);
-  file.read(buffer.data(), length);
-  buffer.resize(file.gcount());
+  std::vector<char> buffer(read_size, 0);
+  file.read(buffer.data(), read_size);
   return buffer;
 }
 

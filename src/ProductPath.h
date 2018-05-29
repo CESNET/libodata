@@ -41,6 +41,7 @@ public:
   void append(std::string path) noexcept;
   std::string getPath() const noexcept;
   bool operator==(const ProductPath& other) const noexcept;
+  bool operator<(const ProductPath& other) const noexcept;
 
 private:
   friend class boost::serialization::access;

@@ -1,6 +1,7 @@
 #ifndef ODATA_CONNECTION_H_
 #define ODATA_CONNECTION_H_
 
+#include <boost/filesystem/path.hpp>
 #include <cstdint>
 #include <memory>
 #include <vector>
@@ -42,11 +43,12 @@ public:
   /**
    * Download file into temporary file
    * @param path path to requested file
+   * @param tmp_file temporary file location
    * @return temporary file
    * @exception if service is not available or response is invalid
    */
   virtual std::shared_ptr<TemporaryFile> getTemporaryFile(
-      const ProductPath& path) = 0;
+      const ProductPath& path, boost::filesystem::path tmp_file) = 0;
 
   /**
    * Clone connection object
