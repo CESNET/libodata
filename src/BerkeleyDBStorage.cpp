@@ -1,5 +1,6 @@
 #include "BerkeleyDBStorage.h"
 
+#include "Archive.h"
 #include "Directory.h"
 #include "File.h"
 #include "Product.h"
@@ -24,6 +25,7 @@ std::vector<char> createProductRecord(const Product& product) {
       boost::iostreams::back_insert_device<std::vector<char>>>
       os(v);
   boost::archive::binary_oarchive out(os);
+  out.register_type<Archive>();
   out.register_type<Directory>();
   out.register_type<RemoteFile>();
   out.register_type<File>();
@@ -38,6 +40,7 @@ std::shared_ptr<Product> decodeProductRecord(const Dbt& record) {
   boost::iostreams::stream<boost::iostreams::array_source> sstream(
       reinterpret_cast<char*>(record.get_data()), record.get_size());
   boost::archive::binary_iarchive in(sstream);
+  in.register_type<Archive>();
   in.register_type<Directory>();
   in.register_type<RemoteFile>();
   in.register_type<File>();

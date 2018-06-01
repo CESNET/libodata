@@ -1,5 +1,6 @@
 #include "Product.h"
 
+#include "Archive.h"
 #include "File.h"
 #include <ostream>
 #include <sstream>
@@ -31,7 +32,8 @@ void Product::setArchiveStructure(
     std::shared_ptr<Directory> directory,
     std::shared_ptr<File> manifest) noexcept {
   assert(directory != nullptr && manifest != nullptr);
-  this->directory = std::move(directory);
+  this->directory =
+      std::make_shared<Archive>(std::move(directory), getProductPath(), size);
   this->manifest = std::move(manifest);
 }
 

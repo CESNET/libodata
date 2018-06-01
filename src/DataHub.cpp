@@ -168,8 +168,6 @@ std::vector<char> DataHub::getFile(
   const auto file =
       static_cast<FileSystemNode*>(pimpl->data.get())->getFile(path);
   const auto local_file = std::dynamic_pointer_cast<const File>(file);
-  const auto remote_file = std::dynamic_pointer_cast<const RemoteFile>(file);
-  const auto product_file = std::dynamic_pointer_cast<const Product>(file);
   if (local_file != nullptr) {
     auto data = local_file->getData();
     if (offset >= data.size()) {
@@ -181,25 +179,22 @@ std::vector<char> DataHub::getFile(
     return std::vector<char>(begin, end);
   }
 
-  ProductPath product_path;
-  if (remote_file) {
-    product_path = remote_file->getProductPath();
-  } else if (product_file) {
-    product_path = product_file->getProductPath();
-  } else {
-    throw DataHubException(path.string(), "File read failed.");
+  const auto remote_file = std::dynamic_pointer_cast<const ProductFile>(file);
+  if (remote_file != nullptr) {
+    ProductPath product_path = remote_file->getProductPath();
+    std::shared_ptr<TemporaryFile> tmp_file;
+    auto cached = pimpl->file_cache.get(product_path);
+    if (cached.is_initialized()) {
+      tmp_file = cached.get();
+    } else {
+      tmp_file = pimpl->filesytem_connection->getTemporaryFile(
+          product_path, pimpl->getNextTmpFile());
+      pimpl->file_cache.put(product_path, tmp_file);
+    }
+    return tmp_file->read(offset, length);
   }
 
-  std::shared_ptr<TemporaryFile> tmp_file;
-  auto cached = pimpl->file_cache.get(product_path);
-  if (cached.is_initialized()) {
-    tmp_file = cached.get();
-  } else {
-    tmp_file = pimpl->filesytem_connection->getTemporaryFile(
-        product_path, pimpl->getNextTmpFile());
-    pimpl->file_cache.put(product_path, tmp_file);
-  }
-  return tmp_file->read(offset, length);
+  throw DataHubException(path.string(), "File read failed.");
 }
 
 DataHub::~DataHub() = default;

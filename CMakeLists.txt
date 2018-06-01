@@ -23,6 +23,7 @@ find_package(BerkeleyDB REQUIRED)
 # library project
 set(LIB_NAME odata)
 add_library(${LIB_NAME} SHARED
+    src/Archive.cpp src/Archive.h
     src/BerkeleyDBStorage.cpp src/BerkeleyDBStorage.h
     src/CachedStorage.cpp src/CachedStorage.h
     include/odata/Connection.h
@@ -34,6 +35,7 @@ add_library(${LIB_NAME} SHARED
     src/FileSystemNode.cpp include/odata/FileSystemNode.h
     src/LRUCache.h
     src/Product.cpp src/Product.h
+    src/ProductFile.h
     src/ProductPath.cpp src/ProductPath.h
     src/ProductPlaceHolder.cpp src/ProductPlaceHolder.h
     src/ProductStorage.cpp src/ProductStorage.h

@@ -81,7 +81,7 @@ private:
   std::string filename;
   std::string platform;
   std::string type;
-  std::shared_ptr<Directory> directory;
+  std::shared_ptr<FileSystemNode> directory;
   std::shared_ptr<File> manifest;
   std::size_t size;
 };

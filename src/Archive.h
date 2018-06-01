@@ -1,27 +1,30 @@
-#ifndef SRC_REMOTEFILE_H_
-#define SRC_REMOTEFILE_H_
+#ifndef SRC_ARCHIVE_H_
+#define SRC_ARCHIVE_H_
 
+#include "Directory.h"
 #include "FileSystemNode.h"
 #include "ProductFile.h"
 #include "ProductPath.h"
 #include <boost/serialization/base_object.hpp>
 #include <boost/serialization/export.hpp>
-#include <string>
+#include <boost/serialization/shared_ptr.hpp>
+#include <memory>
 
 namespace OData {
 
-class RemoteFile : public FileSystemNode, public ProductFile {
+class Archive : public FileSystemNode, public ProductFile {
 public:
-  RemoteFile() = default;
-  RemoteFile(std::string name, ProductPath path, std::size_t size) noexcept;
-  virtual ~RemoteFile() = default;
-  RemoteFile(const RemoteFile&) = delete;
-  RemoteFile& operator=(const RemoteFile&) = delete;
+  Archive() = default;
+  Archive(
+      std::shared_ptr<Directory> content,
+      ProductPath path,
+      std::size_t size) noexcept;
+  virtual ~Archive() = default;
 
   void toString(std::ostream& ostr, unsigned indent_level = 0) const
       noexcept override;
   bool compare(const FileSystemNode& node) const noexcept override;
-  std::string getName() const noexcept;
+  std::string getName() const noexcept override;
   std::shared_ptr<FileSystemNode> getFile(
       boost::filesystem::path::const_iterator begin,
       boost::filesystem::path::const_iterator end) const noexcept override;
@@ -34,18 +37,18 @@ private:
   friend class boost::serialization::access;
   template <typename Archive> void serialize(Archive& ar, const unsigned int) {
     ar& boost::serialization::base_object<FileSystemNode>(*this);
-    ar& name;
+    ar& content;
     ar& path;
     ar& size;
   }
 
-  std::string name;
+  std::shared_ptr<Directory> content;
   ProductPath path;
   std::size_t size;
 };
 
 } /* namespace OData */
 
-BOOST_CLASS_EXPORT_KEY(OData::RemoteFile)
+BOOST_CLASS_EXPORT_KEY(OData::Archive)
 
-#endif /* SRC_REMOTEFILE_H_ */
+#endif /* SRC_ARCHIVE_H_ */
