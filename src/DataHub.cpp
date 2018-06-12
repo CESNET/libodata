@@ -72,16 +72,20 @@ struct DataHub::Impl {
         auto manifest_path = product->getArchivePath();
         const auto manifest_filename = product->getManifestFilename();
         manifest_path.append(manifest_filename);
-        auto manifest = service_connection.getFile(manifest_path);
-        auto content =
-            std::shared_ptr<Directory>(Directory::createRemoteStructure(
-                product->getArchivePath(),
-                product->getFilename(),
-                response_parser.parseManifest(manifest)));
-        product->setArchiveStructure(
-            std::move(content),
-            std::make_shared<File>(
-                std::move(manifest_filename), std::move(manifest)));
+        try {
+          auto manifest = service_connection.getFile(manifest_path);
+          auto content =
+              std::shared_ptr<Directory>(Directory::createRemoteStructure(
+                  product->getArchivePath(),
+                  product->getFilename(),
+                  response_parser.parseManifest(manifest)));
+          product->setArchiveStructure(
+              std::move(content),
+              std::make_shared<File>(
+                  std::move(manifest_filename), std::move(manifest)));
+        } catch (DataHubException& ex) {
+          LOG(ERROR) << "Product details unavailable: " << ex.what();
+        }
         product_storage->storeProduct(product);
       }
     }
