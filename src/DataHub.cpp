@@ -18,6 +18,7 @@
 #include "XmlParser.h"
 #include <boost/asio/deadline_timer.hpp>
 #include <boost/asio/io_service.hpp>
+#include <boost/thread.hpp>
 #include <glog/logging.h>
 #include <mutex>
 #include <string>
@@ -47,15 +48,17 @@ struct DataHub::Impl {
         }),
         tmp_path(std::move(tmp_path)),
         tmp_file_name(0),
-        file_cache(10) {
+        file_cache(10),
+        stop(false) {
     for (auto& mission : missions) {
       this->missions[mission] = 0u;
     }
-    timer_thread.detach();
   }
 
   ~Impl() {
+    stop = true;
     io_service.stop();
+    timer_thread.join();
   }
 
   std::vector<std::shared_ptr<OData::Product>> getMissionProducts(
@@ -87,6 +90,9 @@ struct DataHub::Impl {
           LOG(ERROR) << "Product details unavailable: " << ex.what();
         }
         product_storage->storeProduct(product);
+        if (stop) {
+          break;
+        }
       }
     }
     return products;
@@ -111,7 +117,7 @@ struct DataHub::Impl {
                 product->getDate());
           }
         }
-      } while (continue_synchronously);
+      } while (continue_synchronously && !stop);
     } catch (DataHubException& ex) {
       LOG(ERROR) << "Error occured during product discovery: " << ex.what();
     }
@@ -133,10 +139,11 @@ struct DataHub::Impl {
   XmlParser response_parser;
   boost::asio::io_service io_service;
   boost::asio::deadline_timer timer;
-  std::thread timer_thread;
+  boost::thread timer_thread;
   boost::filesystem::path tmp_path;
   std::uint8_t tmp_file_name;
   LRUCache<ProductPath, std::shared_ptr<TemporaryFile>> file_cache;
+  std::atomic<bool> stop;
 };
 
 DataHub::DataHub(
