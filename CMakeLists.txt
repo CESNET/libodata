@@ -5,6 +5,7 @@ project (odata VERSION 0.0.1)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_definitions(-Wall -std=c++11 -pedantic -Wextra -Werror)
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/modules" ${CMAKE_MODULE_PATH})
 
 # check dependencies
 find_package(CURL REQUIRED)

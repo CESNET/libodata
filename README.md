@@ -15,4 +15,4 @@ i.e. on debian buster just run:
 
     # apt-get install libcurl4-openssl-dev libtinyxml2-dev libdb++-dev libgoogle-glog-dev libboost-all-dev    
     $ cd libodata
-    $ cmake -DCMAKE_MODULE_PATH='./modules' && make
+    $ cmake . && make
