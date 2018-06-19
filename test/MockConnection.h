@@ -2,6 +2,7 @@
 #define TEST_MOCKCONNECTION_H_
 
 #include "Connection.h"
+#include <atomic>
 
 namespace OData {
 namespace Test {
@@ -20,8 +21,11 @@ public:
       const ProductPath& path, boost::filesystem::path tmp_file) override;
   std::unique_ptr<Connection> clone() const noexcept override;
 
+  std::uint32_t getProductsListed() const noexcept;
+
 private:
   std::uint32_t product_count;
+  std::atomic<std::uint32_t> products_listed;
 };
 
 } /* namespace Test */

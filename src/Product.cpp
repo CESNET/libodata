@@ -1,7 +1,7 @@
 #include "Product.h"
 
-#include "Archive.h"
 #include "File.h"
+#include "RemoteFile.h"
 #include <ostream>
 #include <sstream>
 
@@ -20,29 +20,28 @@ Product::Product(
     : id(std::move(id)),
       name(std::move(name)),
       ingestion_date(std::move(ingestion_date)),
-      filename(std::move(filename)),
       platform(std::move(platform)),
       type(type),
       directory(),
       manifest(),
-      size(size) {
+      archive(std::make_shared<RemoteFile>(
+          std::move(filename), ProductPath(this->id), size)) {
 }
 
 void Product::setArchiveStructure(
     std::shared_ptr<Directory> directory,
     std::shared_ptr<File> manifest) noexcept {
   assert(directory != nullptr && manifest != nullptr);
-  this->directory =
-      std::make_shared<Archive>(std::move(directory), getProductPath(), size);
+  this->directory = std::move(directory);
   this->manifest = std::move(manifest);
 }
 
 ProductPath Product::getProductPath() const noexcept {
-  return ProductPath(id);
+  return archive->getProductPath();
 }
 
 ProductPath Product::getArchivePath() const noexcept {
-  return ProductPath(id, filename);
+  return ProductPath(id, archive->getName());
 }
 
 void Product::toString(std::ostream& ostr, unsigned indent_level) const
@@ -51,11 +50,10 @@ void Product::toString(std::ostream& ostr, unsigned indent_level) const
   indent(ostr, indent_level + 1) << "id=" << id << "\n";
   indent(ostr, indent_level + 1) << "name=" << name << "\n";
   indent(ostr, indent_level + 1) << "ingestion_date=" << ingestion_date << "\n";
-  indent(ostr, indent_level + 1) << "filename=" << filename << "\n";
   indent(ostr, indent_level + 1) << "platform=" << platform << "\n";
   indent(ostr, indent_level + 1) << "type=" << type << "\n";
-  indent(ostr, indent_level + 1) << "size=" << size << "\n";
   indent(ostr, indent_level + 1) << "files {\n";
+  archive->toString(ostr, indent_level + 2);
   if (directory != nullptr) {
     directory->toString(ostr, indent_level + 2);
   }
@@ -83,8 +81,8 @@ std::string Product::getManifestFilename() const noexcept {
 bool Product::compare(const FileSystemNode& node) const noexcept {
   const auto* entry = dynamic_cast<const Product*>(&node);
   if (entry == nullptr || id != entry->id || name != entry->name
-      || ingestion_date != entry->ingestion_date || filename != entry->filename
-      || platform != entry->platform || size != entry->size) {
+      || ingestion_date != entry->ingestion_date || platform != entry->platform
+      || *archive != *entry->archive) {
     return false;
   } else if (isArchiveSet() == entry->isArchiveSet()) {
     return !isArchiveSet()
@@ -103,12 +101,14 @@ std::shared_ptr<FileSystemNode> Product::getFile(
     boost::filesystem::path::const_iterator begin,
     boost::filesystem::path::const_iterator end) const noexcept {
   if (begin == end || !isArchiveSet()) {
-    return nullptr;
+    return {};
   }
   const auto name = begin->string();
   const auto next = ++begin;
   const bool is_last = next == end;
-  if (name == directory->getName()) {
+  if (name == archive->getName()) {
+    return is_last ? archive : archive->getFile(next, end);
+  } else if (name == directory->getName()) {
     return is_last ? directory : directory->getFile(next, end);
   } else if (name == manifest->getName()) {
     return is_last ? manifest : manifest->getFile(next, end);
@@ -119,9 +119,9 @@ std::shared_ptr<FileSystemNode> Product::getFile(
 
 std::vector<std::string> Product::readDir() const noexcept {
   if (isArchiveSet()) {
-    return {directory->getName(), manifest->getName()};
+    return {archive->getName(), directory->getName(), manifest->getName()};
   } else {
-    return {};
+    return {archive->getName()};
   }
 }
 
@@ -130,11 +130,11 @@ bool Product::isDirectory() const noexcept {
 }
 
 std::size_t Product::getSize() const noexcept {
-  return size;
+  return archive->getSize();
 }
 
-const std::string& Product::getFilename() const noexcept {
-  return filename;
+std::string Product::getFilename() const noexcept {
+  return archive->getName();
 }
 
 std::string Product::getDate() const noexcept {

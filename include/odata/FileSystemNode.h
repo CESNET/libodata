@@ -35,8 +35,6 @@ public:
   virtual bool isDirectory() const noexcept = 0;
   virtual std::size_t getSize() const noexcept = 0;
 
-  std::shared_ptr<FileSystemNode> getFile(
-      const boost::filesystem::path& path) const noexcept;
   static std::ostream& indent(std::ostream& ostr, unsigned level);
 
 private:

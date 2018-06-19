@@ -33,6 +33,11 @@ std::unique_ptr<Directory> createFilesystem(
   return filesystem;
 }
 
+std::shared_ptr<FileSystemNode> testGetFile(
+    const FileSystemNode& instance, const boost::filesystem::path& path) {
+  return instance.getFile(path.begin(), path.end());
+}
+
 } // namespace
 
 TEST(FileSystemNodeTest, FileTreeTraverseTest) {
@@ -41,17 +46,18 @@ TEST(FileSystemNodeTest, FileTreeTraverseTest) {
   products.emplace_back(createTestProduct("platform2"));
   const std::unique_ptr<FileSystemNode> test_tree =
       createFilesystem(std::move(products));
-  ASSERT_EQ(nullptr, test_tree->getFile("abc/def"));
+  ASSERT_EQ(nullptr, testGetFile(*test_tree, "abc/def").get());
   ASSERT_EQ(
-      RemoteFile("manifest.xml", ProductPath("uuid", "filename"), 10),
-      *test_tree->getFile("platform1/date/name/extracted/manifest.xml"));
+      RemoteFile(
+          "manifest.xml", ProductPath("uuid", "filename", "manifest.xml"), 10),
+      *testGetFile(*test_tree, "platform1/date/name/extracted/manifest.xml"));
   ASSERT_EQ(
       *Directory::createRemoteStructure(
           ProductPath("uuid", "filename", "subdir"), "subdir", {{"xxx", 20}}),
-      *test_tree->getFile("platform1/date/name/extracted/subdir"));
+      *testGetFile(*test_tree, "platform1/date/name/extracted/subdir"));
   ASSERT_EQ(
       *createTestProduct("platform1"),
-      *test_tree->getFile("platform1/date/name"));
+      *testGetFile(*test_tree, "platform1/date/name"));
 }
 
 } // namespace Test

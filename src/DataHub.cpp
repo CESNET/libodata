@@ -80,7 +80,7 @@ struct DataHub::Impl {
           auto content =
               std::shared_ptr<Directory>(Directory::createRemoteStructure(
                   product->getArchivePath(),
-                  product->getFilename(),
+                  "extracted",
                   response_parser.parseManifest(manifest)));
           product->setArchiveStructure(
               std::move(content),
@@ -176,8 +176,7 @@ std::vector<char> DataHub::getFile(
     std::size_t offset,
     std::size_t length) {
   std::unique_lock<std::mutex> lock(pimpl->get_file_mutex);
-  const auto file =
-      static_cast<FileSystemNode*>(pimpl->data.get())->getFile(path);
+  const auto file = getFile(path);
   const auto local_file = std::dynamic_pointer_cast<const File>(file);
   if (local_file != nullptr) {
     auto data = local_file->getData();
@@ -212,6 +211,27 @@ DataHub::~DataHub() = default;
 
 std::shared_ptr<FileSystemNode> DataHub::getData() {
   return pimpl->data;
+}
+
+std::shared_ptr<FileSystemNode> DataHub::getFile(
+    const boost::filesystem::path& file_path) {
+  if (file_path.empty()) {
+    LOG(WARNING) << "Empty path requested";
+    return nullptr;
+  }
+  auto begin = file_path.begin();
+  const auto end = file_path.end();
+  if (begin->has_root_directory()) {
+    ++begin;
+  }
+  if (begin == end) {
+    return pimpl->data;
+  }
+  const auto file = pimpl->data->getFile(begin, end);
+  if (file == nullptr) {
+    LOG(INFO) << "Invalid file '" << file_path << "' requested";
+  }
+  return file;
 }
 
 } /* namespace OData */

@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
       if (argument.empty()) {
         filesystem = hub.getData();
       } else {
-        filesystem = hub.getData()->getFile(boost::filesystem::path(argument));
+        filesystem = hub.getFile(boost::filesystem::path(argument));
       }
       if (filesystem == nullptr) {
         std::cout << "Invalid path '" << argument << "'" << std::endl;

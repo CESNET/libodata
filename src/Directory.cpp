@@ -133,8 +133,8 @@ std::unique_ptr<Directory> Directory::createRemoteStructure(
     if (!file.first.empty()) {
       auto filename = file.first.begin()->string();
       if (++file.first.begin() == file.first.end()) {
-        dir_content[filename] =
-            std::make_shared<RemoteFile>(filename, product_path, file.second);
+        dir_content[filename] = std::make_shared<RemoteFile>(
+            filename, ProductPath(product_path, filename), file.second);
       } else {
         const auto position = file.first.string().find(filename);
         boost::filesystem::path child_path(

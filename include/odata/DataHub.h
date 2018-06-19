@@ -27,6 +27,8 @@ public:
       boost::filesystem::path tmp_path);
   ~DataHub();
   std::shared_ptr<FileSystemNode> getData();
+  std::shared_ptr<FileSystemNode> getFile(
+      const boost::filesystem::path& file_path);
   std::vector<char> getFile(
       const boost::filesystem::path& file_path,
       std::size_t offset,

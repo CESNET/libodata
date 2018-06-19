@@ -44,7 +44,7 @@ std::size_t RemoteFile::getSize() const noexcept {
 }
 
 ProductPath RemoteFile::getProductPath() const noexcept {
-  return ProductPath(path, name);
+  return path;
 }
 
 } /* namespace OData */

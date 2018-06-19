@@ -17,6 +17,7 @@
 namespace OData {
 
 class File;
+class RemoteFile;
 
 /**
  * Product stored in Copernicus Open Access Hub
@@ -54,7 +55,7 @@ public:
   std::size_t getSize() const noexcept override;
   const std::string& getPlatform() const noexcept;
   std::string getManifestFilename() const noexcept;
-  const std::string& getFilename() const noexcept;
+  std::string getFilename() const noexcept;
   std::string getDate() const noexcept;
   const std::string& getId() const;
 
@@ -67,23 +68,21 @@ private:
     ar& id;
     ar& name;
     ar& ingestion_date;
-    ar& filename;
     ar& platform;
     ar& type;
     ar& directory;
     ar& manifest;
-    ar& size;
+    ar& archive;
   }
 
   std::string id;
   std::string name;
   std::string ingestion_date;
-  std::string filename;
   std::string platform;
   std::string type;
   std::shared_ptr<FileSystemNode> directory;
   std::shared_ptr<File> manifest;
-  std::size_t size;
+  std::shared_ptr<RemoteFile> archive;
 };
 
 std::ostream& operator<<(std::ostream& ostr, const Product& product) noexcept;

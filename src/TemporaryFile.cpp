@@ -8,16 +8,17 @@
 
 namespace OData {
 
-OData::TemporaryFile::TemporaryFile(
+TemporaryFileImpl::TemporaryFileImpl(
     ProductPath file_name, boost::filesystem::path path) noexcept
     : file_name(std::move(file_name)), path(std::move(path)) {
 }
 
-TemporaryFile::~TemporaryFile() {
+TemporaryFileImpl::~TemporaryFileImpl() {
   std::remove(path.c_str());
 }
 
-std::vector<char> TemporaryFile::read(off64_t offset, std::size_t length) {
+std::vector<char> TemporaryFileImpl::read(
+    off64_t offset, std::size_t length) noexcept {
   std::ifstream file(path.c_str(), std::ifstream::binary | std::ifstream::ate);
   file.seekg(0, file.end);
   const auto file_size = static_cast<off64_t>(file.tellg());
@@ -30,10 +31,6 @@ std::vector<char> TemporaryFile::read(off64_t offset, std::size_t length) {
   std::vector<char> buffer(read_size, 0);
   file.read(buffer.data(), read_size);
   return buffer;
-}
-
-const ProductPath& TemporaryFile::getFileName() const noexcept {
-  return file_name;
 }
 
 } /* namespace OData */

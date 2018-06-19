@@ -24,7 +24,6 @@ find_package(BerkeleyDB REQUIRED)
 # library project
 set(LIB_NAME odata)
 add_library(${LIB_NAME} SHARED
-    src/Archive.cpp src/Archive.h
     src/BerkeleyDBStorage.cpp src/BerkeleyDBStorage.h
     src/CachedStorage.cpp src/CachedStorage.h
     src/Config.cpp src/Config.h
@@ -91,6 +90,18 @@ install(
 set(TEST_CLIENT odata-client)
 add_executable(${TEST_CLIENT} src/main.cpp)
 target_link_libraries(${TEST_CLIENT} ${LIB_NAME})
+
+# fuse binary
+find_package(FUSE)
+if(FUSE_FOUND)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FILE_OFFSET_BITS=64 -DFUSE_USE_VERSION=26")
+  set(FUSE_BINARY odatafs)
+  add_executable(${FUSE_BINARY} src/fuse.cpp src/FuseAdapter.cpp src/FuseAdapter.h)
+  target_link_libraries(${FUSE_BINARY} ${LIB_NAME})
+  target_link_libraries(${FUSE_BINARY} ${FUSE_LIBRARIES})
+else(FUSE_FOUND)
+  message(STATUS "FUSE package not found, skipping odatafs")
+endif(FUSE_FOUND)
 
 #test - enable only if gtest library is found
 find_package(GTest)

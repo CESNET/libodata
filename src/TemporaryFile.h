@@ -12,12 +12,22 @@ namespace OData {
 
 class TemporaryFile {
 public:
-  TemporaryFile(ProductPath file_name, boost::filesystem::path path) noexcept;
+  TemporaryFile() = default;
   TemporaryFile(const TemporaryFile&) = delete;
-  ~TemporaryFile();
+  virtual ~TemporaryFile() = default;
   TemporaryFile& operator=(const TemporaryFile&) = delete;
-  std::vector<char> read(off64_t offset, std::size_t length);
-  const ProductPath& getFileName() const noexcept;
+  virtual std::vector<char> read(
+      off64_t offset, std::size_t length) noexcept = 0;
+};
+
+class TemporaryFileImpl : public TemporaryFile {
+public:
+  TemporaryFileImpl(
+      ProductPath file_name, boost::filesystem::path path) noexcept;
+  TemporaryFileImpl(const TemporaryFileImpl&) = delete;
+  ~TemporaryFileImpl();
+  TemporaryFileImpl& operator=(const TemporaryFile&) = delete;
+  std::vector<char> read(off64_t offset, std::size_t length) noexcept override;
 
 private:
   ProductPath file_name;

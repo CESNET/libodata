@@ -2,6 +2,7 @@
 
 #include "Product.h"
 #include "SearchQuery.h"
+#include "TemporaryFile.h"
 #include "Utils.h"
 #include <ctime>
 #include <sstream>
@@ -25,10 +26,29 @@ std::string generateTimestamp(std::uint32_t id) {
       timestamp, sizeof(timestamp), "%FT%T", std::gmtime(&since_epoch));
   return timestamp;
 }
+
+class MockFile : public TemporaryFile {
+public:
+  MockFile(std::string data) : data(std::move(data)) {
+  }
+  virtual ~MockFile() = default;
+
+  std::vector<char> read(off64_t offset, std::size_t length) noexcept override {
+    try {
+      const auto chunk = data.substr(offset, length);
+      return std::vector<char>(chunk.begin(), chunk.end());
+    } catch (...) {
+      return {};
+    }
+  }
+
+private:
+  const std::string data;
+};
 } // namespace
 
 MockConnection::MockConnection(std::uint32_t product_count)
-    : product_count(product_count) {
+    : product_count(product_count), products_listed(0) {
 }
 
 std::vector<std::shared_ptr<Product>> MockConnection::listProducts(
@@ -43,21 +63,26 @@ std::vector<std::shared_ptr<Product>> MockConnection::listProducts(
         "TEST_PLATFORM",
         "TEST_PRODUCT_TYPE",
         1000000000UL));
+    ++products_listed;
   }
   return products;
 }
 
 std::vector<char> MockConnection::getFile(const ProductPath&) {
-  return readTestInstance("manifest.xml");
+  return readTestInstance("testmanifest.xml");
 }
 
 std::shared_ptr<TemporaryFile> MockConnection::getTemporaryFile(
-    const ProductPath&, boost::filesystem::path) {
-  return std::shared_ptr<TemporaryFile>();
+    const ProductPath& path, boost::filesystem::path) {
+  return std::make_shared<MockFile>(path.getPath());
 }
 
 std::unique_ptr<Connection> MockConnection::clone() const noexcept {
   return std::unique_ptr<Connection>(new MockConnection(product_count));
+}
+
+std::uint32_t OData::Test::MockConnection::getProductsListed() const noexcept {
+  return products_listed;
 }
 
 } /* namespace Test */
