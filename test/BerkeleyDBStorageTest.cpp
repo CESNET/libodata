@@ -26,7 +26,7 @@ std::shared_ptr<Product> createProduct() {
 TEST(BerkeleyDBStorageTest, CRUDTest) {
   ScopeGuard guard([]() { std::remove("products.db"); });
   const auto test_product = createProduct();
-  BerkeleyDBStorage instance(".");
+  BerkeleyDBStorage instance("products.db");
   ASSERT_EQ(false, instance.productExists(test_product->getId()));
   instance.storeProduct(test_product);
   ASSERT_EQ(true, instance.productExists(test_product->getId()));

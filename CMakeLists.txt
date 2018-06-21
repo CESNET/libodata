@@ -17,7 +17,7 @@ find_library(TINYXML2_LIBRARIES NAMES tinyxml2)
 if(NOT TINYXML2_LIBRARIES)
     message(SEND_ERROR "tinyxml2 library not found")
 endif (NOT TINYXML2_LIBRARIES)
-find_package(Boost REQUIRED COMPONENTS filesystem thread serialization iostreams)
+find_package(Boost REQUIRED COMPONENTS filesystem thread serialization iostreams program_options)
 find_package(BerkeleyDB REQUIRED)
 
 
@@ -27,6 +27,7 @@ add_library(${LIB_NAME} SHARED
     src/Archive.cpp src/Archive.h
     src/BerkeleyDBStorage.cpp src/BerkeleyDBStorage.h
     src/CachedStorage.cpp src/CachedStorage.h
+    src/Config.cpp src/Config.h
     include/odata/Connection.h
     src/DataHubConnection.cpp include/odata/DataHubConnection.h
     src/DataHub.cpp include/odata/DataHub.h
@@ -98,6 +99,7 @@ if(GTEST_FOUND)
     set(TEST_BINARY runtest)
     add_executable(${TEST_BINARY}
         test/BerkeleyDBStorageTest.cpp
+        test/ConfigTest.cpp
         test/DataHubTest.cpp
         test/DirectoryTest.cpp
         test/FileTest.cpp

@@ -1,5 +1,6 @@
 #include "BerkeleyDBStorage.h"
 #include "CachedStorage.h"
+#include "Config.h"
 #include "DataHub.h"
 #include "DataHubConnection.h"
 #include "DataHubException.h"
@@ -15,19 +16,30 @@
 #include <string>
 
 int main(int argc, char** argv) {
-  if (argc < 4) {
-    std::cerr << "try odata-client url username password" << std::endl;
+  OData::Config config(argc, argv);
+  if (config.printHelp()) {
+    std::cout << config.getHelp() << std::endl;
+    return 0;
+  }
+  if (config.printVersion()) {
+    std::cout << config.getVersion() << std::endl;
+    return 0;
+  }
+  if (!config.isValid()) {
+    std::cerr << config.getErrorMessage() << std::endl;
+    std::cout << config.getHelp() << std::endl;
     return 1;
   }
   google::InitGoogleLogging(argv[0]);
   LOG(INFO) << "Application started";
-  OData::DataHubConnection connection(argv[1], argv[2], argv[3]);
+  OData::DataHubConnection connection(
+      config.getUrl(), config.getUsername(), config.getPassword());
   boost::filesystem::path home(std::getenv("HOME"));
   OData::DataHub hub(
       connection,
-      {"Sentinel-1", "Sentinel-2", "Sentinel-3"},
-      home / ".db",
-      home / ".tmp" / "odata");
+      config.getMissions(),
+      config.getDbPath(),
+      config.getTmpPath());
   while (true) {
     std::cout << "> ";
     std::string line;

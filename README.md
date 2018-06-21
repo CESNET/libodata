@@ -8,7 +8,7 @@ Following libraries are needed:
   * [glog](https://github.com/google/glog)
   * [tinyxml2](https://github.com/leethomason/tinyxml2)
   * [libdb++](https://github.com/berkeleydb/libdb)
-  * boost (filesystem, thread, serialization, iostreams)
+  * boost (filesystem, thread, serialization, iostreams program_options)
   * optionally google test (needed only for unit tests)
 
 i.e. on debian buster just run:
