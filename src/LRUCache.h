@@ -5,18 +5,20 @@
 #include <cstdint>
 #include <list>
 #include <map>
+#include <mutex>
 
 namespace OData {
 
 template <typename Key, typename Value> class LRUCache {
 public:
-  LRUCache(std::uint32_t size) : size(size) {
+  LRUCache(std::uint32_t size) : size(size), cache(), object_list(), mutex() {
   }
   ~LRUCache() = default;
   LRUCache(const LRUCache&) = delete;
   LRUCache& operator=(const LRUCache&) = delete;
 
   void put(const Key& key, Value value) {
+    std::lock_guard<std::mutex> guard(mutex);
     auto it = cache.find(key);
     if (it == cache.end()) {
       if (cache.size() == size) {
@@ -25,13 +27,14 @@ public:
       }
       object_list.push_back(key);
       cache[key] = value;
-      updateLastAccessed(key);
     } else {
       it->second = value;
+      updateLastAccessed(key);
     }
   }
 
   boost::optional<Value> get(const Key& key) const {
+    std::lock_guard<std::mutex> guard(mutex);
     auto it = cache.find(key);
     if (it == cache.end()) {
       return boost::optional<Value>();
@@ -51,6 +54,7 @@ private:
   const std::uint32_t size;
   std::map<Key, Value> cache;
   mutable std::list<Key> object_list;
+  mutable std::mutex mutex;
 };
 
 } /* namespace OData */
