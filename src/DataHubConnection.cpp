@@ -154,8 +154,10 @@ std::vector<char> DataHubConnection::getFile(const ProductPath& path) {
 std::shared_ptr<TemporaryFile> DataHubConnection::getTemporaryFile(
     const ProductPath& path, boost::filesystem::path tmp_file) {
   FileDataCallback callback(tmp_file);
+  const auto temporary_file =
+      std::make_shared<TemporaryFile>(path, std::move(tmp_file));
   pimpl->getQuery("odata/v1/" + path.getPath(), &callback);
-  return std::make_shared<TemporaryFile>(path, std::move(tmp_file));
+  return temporary_file;
 }
 
 std::unique_ptr<Connection> DataHubConnection::clone() const noexcept {
