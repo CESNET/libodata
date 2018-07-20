@@ -124,6 +124,7 @@ if(GTEST_FOUND)
         test/RemoteFileTest.cpp
         test/SearchQueryTest.cpp
         test/SearchQueryBuilderTest.cpp
+        test/TemporaryFileTest.cpp
         test/Utils.cpp test/Utils.h
         test/XmlParserTest.cpp
         )

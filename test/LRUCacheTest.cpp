@@ -27,6 +27,16 @@ TEST(LRUCacheTest, PutGetTest) {
   instance.put("w", 5);
   ASSERT_EQ(false, instance.get("y").is_initialized());
   ASSERT_EQ(true, instance.get("x").is_initialized());
+
+  // make the same for put
+  ASSERT_EQ(true, instance.get("x").is_initialized());
+  ASSERT_EQ(true, instance.get("z").is_initialized());
+  ASSERT_EQ(true, instance.get("w").is_initialized());
+  instance.put("x", 5);
+
+  instance.put("v", 5);
+  ASSERT_EQ(false, instance.get("z").is_initialized());
+  ASSERT_EQ(true, instance.get("x").is_initialized());
 }
 
 } // namespace Test

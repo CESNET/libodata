@@ -14,7 +14,7 @@ std::vector<char> readTestInstance(const std::string& filename) {
     const auto data = buffer.str();
     return std::vector<char>(data.begin(), data.end());
   } else {
-    throw std::invalid_argument("Cannot open file" + filename);
+    throw std::invalid_argument("Cannot open file " + filename);
   }
 }
 } /* namespace Test */
