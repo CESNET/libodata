@@ -19,7 +19,8 @@ struct DataHubTest : public ::testing::Test {
             connection,
             {"TEST_PLATFORM"},
             std::make_shared<MockStorage>(),
-            "/tmp/odata") {
+            "/tmp/odata",
+            10) {
     while (connection.getProductsListed() < product_count) {
       std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }

@@ -43,6 +43,7 @@ struct Config::Impl {
   std::string error;
   bool print_version;
   bool print_help;
+  std::uint32_t cache_size;
   boost::program_options::options_description options;
 
   Impl(boost::program_options::options_description options)
@@ -55,6 +56,7 @@ struct Config::Impl {
         error(),
         print_version(false),
         print_help(false),
+        cache_size(0),
         options(std::move(options)) {
   }
 
@@ -112,7 +114,10 @@ struct Config::Impl {
         "tmp_path",
         boost::program_options::value(&tmp_path)->default_value(
             (home / ".cache" / "odata").string()),
-        "temporary files path on local filesystem");
+        "temporary files path on local filesystem")(
+        "tmp_size",
+        boost::program_options::value(&cache_size)->default_value(10),
+        "how many temporary files will be used");
     return options;
   }
 
@@ -232,6 +237,10 @@ std::string Config::getErrorMessage() const noexcept {
     }
     return stream.str();
   }
+}
+
+std::uint32_t Config::getCacheSize() const noexcept {
+  return pimpl->cache_size;
 }
 
 } /* namespace OData */

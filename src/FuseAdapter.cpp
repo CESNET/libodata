@@ -160,7 +160,8 @@ FuseAdapter::FuseAdapter(const Config& config)
           connection,
           config.getMissions(),
           config.getDbPath(),
-          config.getTmpPath()),
+          config.getTmpPath(),
+          config.getCacheSize()),
       operations(getOdataOperations()) {
 }
 

@@ -31,7 +31,8 @@ struct DataHub::Impl {
       Connection& connection,
       const std::vector<std::string>& missions,
       std::shared_ptr<ProductStorage> product_storage,
-      boost::filesystem::path tmp_path)
+      boost::filesystem::path tmp_path,
+      std::uint32_t cache_size)
       : service_connection(connection),
         product_storage(std::move(product_storage)),
         filesytem_connection(service_connection.clone()),
@@ -48,7 +49,7 @@ struct DataHub::Impl {
         }),
         tmp_path(std::move(tmp_path)),
         tmp_file_name(0),
-        file_cache(10),
+        file_cache(cache_size),
         stop(false) {
     for (auto& mission : missions) {
       this->missions[mission] = 0u;
@@ -141,7 +142,7 @@ struct DataHub::Impl {
   boost::asio::deadline_timer timer;
   boost::thread timer_thread;
   boost::filesystem::path tmp_path;
-  std::uint8_t tmp_file_name;
+  std::uint32_t tmp_file_name;
   LRUCache<ProductPath, std::shared_ptr<TemporaryFile>> file_cache;
   std::atomic<bool> stop;
 };
@@ -150,25 +151,29 @@ DataHub::DataHub(
     Connection& connection,
     const std::vector<std::string>& missions,
     boost::filesystem::path db_path,
-    boost::filesystem::path tmp_path)
+    boost::filesystem::path tmp_path,
+    std::uint32_t cache_size)
     : DataHub(
           connection,
           missions,
           std::make_shared<CachedStorage>(std::unique_ptr<ProductStorage>(
               new BerkeleyDBStorage(std::move(db_path)))),
-          std::move(tmp_path)) {
+          std::move(tmp_path),
+          cache_size) {
 }
 
 DataHub::DataHub(
     Connection& connection,
     const std::vector<std::string>& missions,
     std::shared_ptr<ProductStorage> product_storage,
-    boost::filesystem::path tmp_path)
+    boost::filesystem::path tmp_path,
+    std::uint32_t cache_size)
     : pimpl(new Impl(
           connection,
           missions,
           std::move(product_storage),
-          std::move(tmp_path))) {
+          std::move(tmp_path),
+          cache_size)) {
 }
 
 std::vector<char> DataHub::getFile(

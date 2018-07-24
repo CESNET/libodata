@@ -28,6 +28,7 @@ TEST_F(ConfigTest, FileConfigTest) {
   ASSERT_EQ(test_missions, instance.getMissions());
   ASSERT_EQ("path/to/db/directory/file.db", instance.getDbPath());
   ASSERT_EQ("path/to/tmp/directory", instance.getTmpPath());
+  ASSERT_EQ(20, instance.getCacheSize());
   ASSERT_TRUE(boost::filesystem::exists("path/to/db/directory"));
   ASSERT_TRUE(boost::filesystem::exists("path/to/tmp/directory"));
 }
@@ -46,7 +47,9 @@ TEST_F(ConfigTest, CommandLineArgumentsTest) {
                                "--tmp_path",
                                "path/to/tmp/directory",
                                "--missions",
-                               "mission1,mission2,mission3"};
+                               "mission1,mission2,mission3",
+                               "--tmp_size",
+                               "30"};
     Config instance(
         "test_home",
         sizeof(arguments) / sizeof(*arguments),
@@ -59,6 +62,7 @@ TEST_F(ConfigTest, CommandLineArgumentsTest) {
     ASSERT_EQ(test_missions, instance.getMissions());
     ASSERT_EQ("path/to/db/directory/file.db", instance.getDbPath());
     ASSERT_EQ("path/to/tmp/directory", instance.getTmpPath());
+    ASSERT_EQ(30, instance.getCacheSize());
     ASSERT_TRUE(!instance.printHelp());
     ASSERT_TRUE(!instance.printVersion());
     ASSERT_TRUE(boost::filesystem::exists("path/to/db/directory"));
@@ -81,6 +85,9 @@ TEST_F(ConfigTest, CommandLineArgumentsTest) {
     ASSERT_TRUE(instance.isValid());
     ASSERT_TRUE(!instance.printHelp());
     ASSERT_TRUE(!instance.printVersion());
+    ASSERT_EQ("test_home/.db/products.db", instance.getDbPath());
+    ASSERT_EQ("test_home/.cache/odata", instance.getTmpPath());
+    ASSERT_EQ(10, instance.getCacheSize());
     ASSERT_TRUE(boost::filesystem::exists("test_home/.db"));
     ASSERT_TRUE(boost::filesystem::exists("test_home/.cache/odata"));
   }

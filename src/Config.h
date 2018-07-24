@@ -30,6 +30,7 @@ public:
   std::string getHelp() const noexcept;
   std::string getVersion() const noexcept;
   std::string getErrorMessage() const noexcept;
+  std::uint32_t getCacheSize() const noexcept;
 
 private:
   struct Impl;

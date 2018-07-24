@@ -39,7 +39,8 @@ int main(int argc, char** argv) {
       connection,
       config.getMissions(),
       config.getDbPath(),
-      config.getTmpPath());
+      config.getTmpPath(),
+      config.getCacheSize());
   while (true) {
     std::cout << "> ";
     std::string line;
