@@ -1,22 +1,38 @@
 #include "Config.h"
+
+#include <boost/filesystem.hpp>
 #include <gtest/gtest.h>
 
 namespace OData {
 namespace Test {
 
-TEST(ConfigTest, FileConfigTest) {
-  Config instance("examples/test.cfg");
+namespace {
+struct ConfigTest : public ::testing::Test {
+  void SetUp() override {
+  }
+
+  void TearDown() override {
+    boost::filesystem::remove_all("path");
+    boost::filesystem::remove_all("test_home");
+  }
+};
+} // namespace
+
+TEST_F(ConfigTest, FileConfigTest) {
+  Config instance("test_home", "examples/test.cfg");
   ASSERT_TRUE(instance.isValid());
   ASSERT_EQ("http://test.url:8089", instance.getUrl());
   ASSERT_EQ("testname", instance.getUsername());
   ASSERT_EQ("testpassword", instance.getPassword());
   std::vector<std::string> test_missions{"mission1", "mission2", "mission3"};
   ASSERT_EQ(test_missions, instance.getMissions());
-  ASSERT_EQ("/path/to/db/directory", instance.getDbPath());
-  ASSERT_EQ("/path/to/tmp/directory", instance.getTmpPath());
+  ASSERT_EQ("path/to/db/directory/file.db", instance.getDbPath());
+  ASSERT_EQ("path/to/tmp/directory", instance.getTmpPath());
+  ASSERT_TRUE(boost::filesystem::exists("path/to/db/directory"));
+  ASSERT_TRUE(boost::filesystem::exists("path/to/tmp/directory"));
 }
 
-TEST(ConfigTest, CommandLineArgumentsTest) {
+TEST_F(ConfigTest, CommandLineArgumentsTest) {
   {
     const char* arguments[] = {"test-program-name",
                                "--url",
@@ -26,28 +42,54 @@ TEST(ConfigTest, CommandLineArgumentsTest) {
                                "--password",
                                "testpassword",
                                "--db_path",
-                               "/path/to/db/directory",
+                               "path/to/db/directory/file.db",
                                "--tmp_path",
-                               "/path/to/tmp/directory",
+                               "path/to/tmp/directory",
                                "--missions",
                                "mission1,mission2,mission3"};
     Config instance(
-        sizeof(arguments) / sizeof(*arguments), const_cast<char**>(arguments));
+        "test_home",
+        sizeof(arguments) / sizeof(*arguments),
+        const_cast<char**>(arguments));
     ASSERT_TRUE(instance.isValid());
     ASSERT_EQ("http://test.url:8089", instance.getUrl());
     ASSERT_EQ("testname", instance.getUsername());
     ASSERT_EQ("testpassword", instance.getPassword());
     std::vector<std::string> test_missions{"mission1", "mission2", "mission3"};
     ASSERT_EQ(test_missions, instance.getMissions());
-    ASSERT_EQ("/path/to/db/directory", instance.getDbPath());
-    ASSERT_EQ("/path/to/tmp/directory", instance.getTmpPath());
+    ASSERT_EQ("path/to/db/directory/file.db", instance.getDbPath());
+    ASSERT_EQ("path/to/tmp/directory", instance.getTmpPath());
     ASSERT_TRUE(!instance.printHelp());
     ASSERT_TRUE(!instance.printVersion());
+    ASSERT_TRUE(boost::filesystem::exists("path/to/db/directory"));
+    ASSERT_TRUE(boost::filesystem::exists("path/to/tmp/directory"));
+  }
+  {
+    const char* arguments[] = {"test-program-name",
+                               "--url",
+                               "http://test.url:8089",
+                               "--username",
+                               "testname",
+                               "--password",
+                               "testpassword",
+                               "--missions",
+                               "mission1"};
+    Config instance(
+        "test_home",
+        sizeof(arguments) / sizeof(*arguments),
+        const_cast<char**>(arguments));
+    ASSERT_TRUE(instance.isValid());
+    ASSERT_TRUE(!instance.printHelp());
+    ASSERT_TRUE(!instance.printVersion());
+    ASSERT_TRUE(boost::filesystem::exists("test_home/.db"));
+    ASSERT_TRUE(boost::filesystem::exists("test_home/.cache/odata"));
   }
   {
     const char* arguments[] = {"test-program-name", "--help"};
     Config instance(
-        sizeof(arguments) / sizeof(*arguments), const_cast<char**>(arguments));
+        "test_home",
+        sizeof(arguments) / sizeof(*arguments),
+        const_cast<char**>(arguments));
     ASSERT_TRUE(instance.isValid());
     ASSERT_TRUE(instance.printHelp());
     ASSERT_TRUE(!instance.printVersion());
@@ -55,18 +97,22 @@ TEST(ConfigTest, CommandLineArgumentsTest) {
   {
     const char* arguments[] = {"test-program-name", "--version"};
     Config instance(
-        sizeof(arguments) / sizeof(*arguments), const_cast<char**>(arguments));
+        "test_home",
+        sizeof(arguments) / sizeof(*arguments),
+        const_cast<char**>(arguments));
     ASSERT_TRUE(instance.isValid());
     ASSERT_TRUE(!instance.printHelp());
     ASSERT_TRUE(instance.printVersion());
   }
 }
 
-TEST(ConfigTest, InvalidArgumentsTest) {
+TEST_F(ConfigTest, InvalidArgumentsTest) {
   {
     const char* unknown[] = {"test-program-name", "--c", "invalid"};
     Config instance(
-        sizeof(unknown) / sizeof(*unknown), const_cast<char**>(unknown));
+        "test_home",
+        sizeof(unknown) / sizeof(*unknown),
+        const_cast<char**>(unknown));
     ASSERT_TRUE(!instance.isValid());
     ASSERT_TRUE(!instance.printHelp());
     ASSERT_TRUE(!instance.printVersion());
@@ -80,7 +126,27 @@ TEST(ConfigTest, InvalidArgumentsTest) {
                              "--password",
                              "testpassword"};
     Config instance(
-        sizeof(missing) / sizeof(*missing), const_cast<char**>(missing));
+        "test_home",
+        sizeof(missing) / sizeof(*missing),
+        const_cast<char**>(missing));
+    ASSERT_TRUE(!instance.isValid());
+    ASSERT_TRUE(!instance.printHelp());
+    ASSERT_TRUE(!instance.printVersion());
+  }
+
+  {
+    // db path must be file
+    const char* missing[] = {"test-program-name",
+                             "--url",
+                             "http://test.url:8089",
+                             "--username",
+                             "testname",
+                             "--db_path",
+                             "/directory/only/"};
+    Config instance(
+        "test_home",
+        sizeof(missing) / sizeof(*missing),
+        const_cast<char**>(missing));
     ASSERT_TRUE(!instance.isValid());
     ASSERT_TRUE(!instance.printHelp());
     ASSERT_TRUE(!instance.printVersion());

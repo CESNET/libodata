@@ -79,7 +79,7 @@ int main(int argc, char* argv[]) {
     OData::printHelp();
     return 1;
   }
-  OData::Config config(arguments.config_file);
+  OData::Config config(std::getenv("HOME"), arguments.config_file);
   if (!config.isValid()) {
     std::cerr << "Invalid configuration file '" << arguments.config_file
               << "': " << config.getErrorMessage() << std::endl;

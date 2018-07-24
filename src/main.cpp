@@ -16,7 +16,7 @@
 #include <string>
 
 int main(int argc, char** argv) {
-  OData::Config config(argc, argv);
+  OData::Config config(std::getenv("HOME"), argc, argv);
   if (config.printHelp()) {
     std::cout << config.getHelp() << std::endl;
     return 0;

@@ -2,6 +2,7 @@
 
 #include <boost/algorithm/string.hpp>
 #include <boost/any.hpp>
+#include <boost/filesystem.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/parsers.hpp>
@@ -57,9 +58,13 @@ struct Config::Impl {
         options(std::move(options)) {
   }
 
-  Impl(int argc, char** argv, bool allow_unknown_arguments)
+  Impl(
+      const std::string& user_home,
+      int argc,
+      char** argv,
+      bool allow_unknown_arguments)
       : Impl(createCommandLineOptions(
-            std::string("Usage: ") + argv[0] + " [options]")) {
+            user_home, std::string("Usage: ") + argv[0] + " [options]")) {
     try {
       if (allow_unknown_arguments) {
         initialize(boost::program_options::command_line_parser(argc, argv)
@@ -75,7 +80,8 @@ struct Config::Impl {
     }
   }
 
-  Impl(const std::string& config_file) : Impl(createOptions("")) {
+  Impl(const std::string& user_home, const std::string& config_file)
+      : Impl(createOptions(user_home, "")) {
     try {
       initialize(boost::program_options::parse_config_file<char>(
           config_file.c_str(), options, false));
@@ -85,8 +91,8 @@ struct Config::Impl {
   }
 
   boost::program_options::options_description createOptions(
-      const std::string& caption) {
-    const boost::filesystem::path home = std::getenv("HOME");
+      const std::string& user_home, const std::string& caption) {
+    const boost::filesystem::path home(user_home);
     boost::program_options::options_description options(caption);
     options.add_options()(
         "url", boost::program_options::value(&url), "data hub url")(
@@ -111,8 +117,8 @@ struct Config::Impl {
   }
 
   boost::program_options::options_description createCommandLineOptions(
-      const std::string& caption) {
-    auto options = createOptions(caption);
+      const std::string& user_home, const std::string& caption) {
+    auto options = createOptions(user_home, caption);
     options.add_options()("help,h", "print help")(
         "version,v", "print program version");
     return options;
@@ -128,14 +134,34 @@ struct Config::Impl {
     }
     print_help = values.count("help");
     print_version = values.count("version");
+    if (!print_help && !print_version && isValid()) {
+      const boost::filesystem::path db_path_check(db_path);
+      if (!db_path_check.has_filename() || db_path_check.filename() == ".") {
+        error =
+            "Invalid database filename '" + db_path + "', it is a directory";
+      }
+      boost::filesystem::create_directories(tmp_path);
+      boost::filesystem::create_directories(db_path_check.parent_path());
+    }
+  }
+
+  bool isValid() const {
+    return print_help || print_version
+           || (error.empty() && !url.empty() && !username.empty()
+               && !password.empty() && !missions.empty());
   }
 };
-Config::Config(int argc, char** argv, bool allow_unknown_arguments) noexcept
-    : pimpl(new Impl(argc, argv, allow_unknown_arguments)) {
+Config::Config(
+    const std::string& user_home,
+    int argc,
+    char** argv,
+    bool allow_unknown_arguments) noexcept
+    : pimpl(new Impl(user_home, argc, argv, allow_unknown_arguments)) {
 }
 
-Config::Config(const std::string& config_file) noexcept
-    : pimpl(new Impl(config_file)) {
+Config::Config(
+    const std::string& user_home, const std::string& config_file) noexcept
+    : pimpl(new Impl(user_home, config_file)) {
 }
 
 Config::~Config() = default;
@@ -165,10 +191,7 @@ const std::string& Config::getUsername() const noexcept {
 }
 
 bool Config::isValid() const noexcept {
-  return pimpl->print_help || pimpl->print_version
-         || (pimpl->error.empty() && !pimpl->url.empty()
-             && !pimpl->username.empty() && !pimpl->password.empty()
-             && !pimpl->missions.empty());
+  return pimpl->isValid();
 }
 
 bool Config::printVersion() const noexcept {

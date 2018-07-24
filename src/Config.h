@@ -9,8 +9,13 @@ namespace OData {
 
 class Config {
 public:
-  Config(int argc, char** argv, bool allow_unknown_arguments = false) noexcept;
-  explicit Config(const std::string& config_file) noexcept;
+  Config(
+      const std::string& user_home,
+      int argc,
+      char** argv,
+      bool allow_unknown_arguments = false) noexcept;
+  explicit Config(
+      const std::string& user_home, const std::string& config_file) noexcept;
   ~Config();
 
   const std::string& getDbPath() const noexcept;
