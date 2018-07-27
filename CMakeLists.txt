@@ -39,7 +39,7 @@ add_library(${LIB_NAME} SHARED
     src/ProductFile.h
     src/ProductPath.cpp src/ProductPath.h
     src/ProductPlaceHolder.cpp src/ProductPlaceHolder.h
-    src/ProductStorage.cpp src/ProductStorage.h
+    src/ProductStorage.h
     src/RemoteFile.cpp src/RemoteFile.h
     src/ScopeGuard.h
     src/SearchQuery.cpp src/SearchQuery.h
@@ -110,6 +110,7 @@ if(GTEST_FOUND)
     set(TEST_BINARY runtest)
     add_executable(${TEST_BINARY}
         test/BerkeleyDBStorageTest.cpp
+        test/CachedStorageTest.cpp
         test/ConfigTest.cpp
         test/DataHubTest.cpp
         test/DirectoryTest.cpp

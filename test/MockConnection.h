@@ -3,6 +3,7 @@
 
 #include "Connection.h"
 #include <atomic>
+#include <vector>
 
 namespace OData {
 namespace Test {
@@ -19,13 +20,16 @@ public:
   virtual std::vector<char> getFile(const ProductPath& path) override;
   std::shared_ptr<TemporaryFile> getTemporaryFile(
       const ProductPath& path, boost::filesystem::path tmp_file) override;
+  std::vector<std::string> getDeletedProducts(std::uint32_t offset) override;
   std::unique_ptr<Connection> clone() const noexcept override;
 
   std::uint32_t getProductsListed() const noexcept;
+  void addDeletedProduct(std::uint32_t id) noexcept;
 
 private:
   std::uint32_t product_count;
   std::atomic<std::uint32_t> products_listed;
+  std::vector<std::uint32_t> deleted_products;
 };
 
 } /* namespace Test */

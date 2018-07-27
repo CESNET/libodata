@@ -51,6 +51,14 @@ public:
       const ProductPath& path, boost::filesystem::path tmp_file) = 0;
 
   /**
+   * Download part of deleted products list starting at offset.
+   * List size depends on server and it is not configurable.
+   * @param offset offset of first element from server deleted list
+   * @return deleted products or empty list if end of server list was reached
+   */
+  virtual std::vector<std::string> getDeletedProducts(std::uint32_t offset) = 0;
+
+  /**
    * Clone connection object
    * @return new connection object
    */

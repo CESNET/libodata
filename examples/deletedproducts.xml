@@ -1,0 +1,1710 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xml:base="https://dhr1.cesnet.cz/odata/v1/">
+  <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts</id>
+  <title type="text">DeletedProducts</title>
+  <updated>2018-07-27T07:18:21.735Z</updated>
+  <author>
+    <name/>
+  </author>
+  <link href="DeletedProducts" rel="self" title="DeletedProducts"/>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('2a7e89c0-67c9-482b-9d59-ecdec4f43ea7')</id>
+    <title type="text">S2A_MSIL1C_20170312T100021_N0204_R122_T33UWS_20170312T100405</title>
+    <updated>2017-11-02T21:09:19.538Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('2a7e89c0-67c9-482b-9d59-ecdec4f43ea7')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('2a7e89c0-67c9-482b-9d59-ecdec4f43ea7')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>2a7e89c0-67c9-482b-9d59-ecdec4f43ea7</d:Id>
+        <d:Name>S2A_MSIL1C_20170312T100021_N0204_R122_T33UWS_20170312T100405</d:Name>
+        <d:CreationDate>2017-03-15T08:22:39.468</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;51.45118220579359,14.999712175851299 51.44054116582309,16.57954402146963 50.453523278919015,16.54643644146265 50.46379840175528,14.999718211669174 51.45118220579359,14.999712175851299 51.45118220579359,14.999712175851299&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>686120148</d:Size>
+        <d:IngestionDate>2017-03-15T08:22:53.714</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-12T10:00:21.026</d:Start>
+          <d:End>2017-03-12T10:00:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:09:19.538</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>525CED6B53A1389E7CCAA896A9DAF7D6</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('c35d73e5-d138-43b5-9512-b2fb5b890be6')</id>
+    <title type="text">S2A_MSIL1C_20170308T102021_N0204_R065_T32UPA_20170308T102514</title>
+    <updated>2017-11-02T21:11:26.084Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('c35d73e5-d138-43b5-9512-b2fb5b890be6')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('c35d73e5-d138-43b5-9512-b2fb5b890be6')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>c35d73e5-d138-43b5-9512-b2fb5b890be6</d:Id>
+        <d:Name>S2A_MSIL1C_20170308T102021_N0204_R065_T32UPA_20170308T102514</d:Name>
+        <d:CreationDate>2017-03-15T08:22:39.521</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;50.543739174288454,10.411349506049252 50.5146700159563,11.959386076289569 49.52841829443089,11.899359688454206 49.55649445196309,10.382684363173013 50.543739174288454,10.411349506049252 50.543739174288454,10.411349506049252&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>598664376</d:Size>
+        <d:IngestionDate>2017-03-15T08:22:53.840</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-08T10:20:21.026</d:Start>
+          <d:End>2017-03-08T10:20:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:11:26.084</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>66EE8A3A12E27839B4298835280A2357</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('b9405e0d-6e8e-43a1-b0f6-afde457b8941')</id>
+    <title type="text">S2A_MSIL1C_20170309T095021_N0204_R079_T33UXT_20170309T095021</title>
+    <updated>2017-11-02T21:09:36.613Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('b9405e0d-6e8e-43a1-b0f6-afde457b8941')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('b9405e0d-6e8e-43a1-b0f6-afde457b8941')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>b9405e0d-6e8e-43a1-b0f6-afde457b8941</d:Id>
+        <d:Name>S2A_MSIL1C_20170309T095021_N0204_R079_T33UXT_20170309T095021</d:Name>
+        <d:CreationDate>2017-03-15T08:22:39.556</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;51.34319784951113,17.028008123683776 51.477098238491216,17.083134047797696 51.62292658845514,17.14373995012639 51.76870942677003,17.204535463146286 51.91445295431421,17.265657708627916 52.060168877317054,17.326952382888873 52.20585263140208,17.38853196029386 52.32267688594366,17.438239957011103 52.31036691499413,18.07775792530945 51.32452335478603,18.011254122594853 51.34319784951113,17.028008123683776 51.34319784951113,17.028008123683776&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>348450079</d:Size>
+        <d:IngestionDate>2017-03-15T08:22:53.714</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-09T09:50:21.026</d:Start>
+          <d:End>2017-03-09T09:50:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:09:36.613</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>BF6646B5B01C44B6BE8D5148A6AE3913</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('701c95bf-b765-4a79-8576-7f0b44517645')</id>
+    <title type="text">S2A_MSIL1C_20170125T094251_N0204_R036_T34UFB_20170125T094251</title>
+    <updated>2017-11-02T21:09:09.782Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('701c95bf-b765-4a79-8576-7f0b44517645')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('701c95bf-b765-4a79-8576-7f0b44517645')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>701c95bf-b765-4a79-8576-7f0b44517645</d:Id>
+        <d:Name>S2A_MSIL1C_20170125T094251_N0204_R036_T34UFB_20170125T094251</d:Name>
+        <d:CreationDate>2017-03-15T08:22:39.580</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;51.41248970587014,24.009291900297026 51.27175820358876,23.936570050824425 51.12772504029575,23.862734395453224 50.983651694756354,23.789350955765464 50.8395339712564,23.71633966983713 50.69541762408958,23.643766153437404 50.5513128712518,23.571538346408587 50.43454969091383,23.51365220025506 50.45527216066188,22.408715109637644 51.44235231685392,22.438876794404745 51.41248970587014,24.009291900297026 51.41248970587014,24.009291900297026&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>597063181</d:Size>
+        <d:IngestionDate>2017-03-15T08:22:53.714</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-01-25T09:42:51.026</d:Start>
+          <d:End>2017-01-25T09:42:51.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:09:09.782</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>F7E7653A110F44B56E6A1E9CE20884DD</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('797e110c-5420-4a83-b3f9-8943ebef7d54')</id>
+    <title type="text">S2A_MSIL1C_20170312T100021_N0204_R122_T33UVQ_20170312T100405</title>
+    <updated>2017-11-02T21:07:18.995Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('797e110c-5420-4a83-b3f9-8943ebef7d54')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('797e110c-5420-4a83-b3f9-8943ebef7d54')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>797e110c-5420-4a83-b3f9-8943ebef7d54</d:Id>
+        <d:Name>S2A_MSIL1C_20170312T100021_N0204_R122_T33UVQ_20170312T100405</d:Name>
+        <d:CreationDate>2017-03-15T08:22:39.603</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;49.11475185975062,13.628902945216161 49.13380124817488,13.636065215287012 49.28023892841545,13.691017316990193 49.42639986764172,13.74703954743872 49.572364137978816,13.803946398150666 49.645609010540255,13.832575107068342 49.652643868751746,15.13521359578094 48.66495515183609,15.13255132712365 48.6570207750582,13.641546225080209 49.11475185975062,13.628902945216161 49.11475185975062,13.628902945216161&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>800380423</d:Size>
+        <d:IngestionDate>2017-03-15T08:23:24.941</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-12T10:00:21.026</d:Start>
+          <d:End>2017-03-12T10:00:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:07:18.995</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>9B16EDA452DF83203862869AD960D0C7</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('7c2827b0-6712-4853-88be-b009f3f058db')</id>
+    <title type="text">S2A_MSIL1C_20170308T102021_N0204_R065_T32UQB_20170308T102514</title>
+    <updated>2017-11-02T21:12:06.888Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('7c2827b0-6712-4853-88be-b009f3f058db')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('7c2827b0-6712-4853-88be-b009f3f058db')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>7c2827b0-6712-4853-88be-b009f3f058db</d:Id>
+        <d:Name>S2A_MSIL1C_20170308T102021_N0204_R065_T32UQB_20170308T102514</d:Name>
+        <d:CreationDate>2017-03-15T08:22:39.626</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;51.41589769639834,11.875717288603331 51.366602012514676,13.45058969901368 50.38212225093181,13.357621898236907 50.429726614086306,11.815510113566978 51.41589769639834,11.875717288603331 51.41589769639834,11.875717288603331&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>748271317</d:Size>
+        <d:IngestionDate>2017-03-15T08:23:25.953</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-08T10:20:21.026</d:Start>
+          <d:End>2017-03-08T10:20:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:12:06.888</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>AA5D8FD592DFD31E5EF98E4E951815E4</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('8263b784-e4dc-4d7f-80d6-ad2aae99c8e0')</id>
+    <title type="text">S2A_MSIL1C_20170312T100021_N0204_R122_T33UWP_20170312T100405</title>
+    <updated>2017-11-02T21:02:36.491Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('8263b784-e4dc-4d7f-80d6-ad2aae99c8e0')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('8263b784-e4dc-4d7f-80d6-ad2aae99c8e0')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>8263b784-e4dc-4d7f-80d6-ad2aae99c8e0</d:Id>
+        <d:Name>S2A_MSIL1C_20170312T100021_N0204_R122_T33UWP_20170312T100405</d:Name>
+        <d:CreationDate>2017-03-15T08:22:39.650</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;47.99475306564106,16.471678358113714 48.03764316499878,16.277081867036628 48.03763324421992,16.277077612468176 48.03763425569345,16.277073030367085 48.03690449312919,16.276762683908874 48.03966164434988,16.263311110583352 48.03976649610389,16.263355684381622 48.1036700918956,15.953438961377543 48.104183019010506,15.950860435226703 48.10428129799583,15.950902133561785 48.104290300334846,15.95085694089928 48.10460580545004,15.950990568927129 48.10516960023168,15.948162850635342 48.10552266679829,15.94831257455872 48.16343840494082,15.658008179424195 48.16331259381081,15.657955381806095 48.163317195352256,15.657932306924788 48.162881486005006,15.657748025838604 48.16563549893494,15.643180007601938 48.16602224778442,15.643342527152178 48.221153827544576,15.351793448340562 48.22075215817159,15.351627092880426 48.22424157279076,15.333168989341845 48.224332835871714,15.333206722317632 48.22489007571095,15.330108168445678 48.22539635031424,15.330316965008905 48.27791426443747,15.038247249028 48.27786205829226,15.038226162016947 48.277870496989166,15.038179236065549 48.277352400119256,15.0379681664376 48.283967495381205,14.999730369465354 48.7530130044756,14.999727904106205 48.7433372246506,16.4932694755772 47.99475306564106,16.471678358113714 47.99475306564106,16.471678358113714&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>501438019</d:Size>
+        <d:IngestionDate>2017-03-15T08:23:22.636</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-12T10:00:21.026</d:Start>
+          <d:End>2017-03-12T10:00:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:02:36.491</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>CF63CA759B0FADF6A72015B292C0B237</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('3a77aa48-a9d8-484f-ad20-04d55de45154')</id>
+    <title type="text">S2A_MSIL1C_20170309T095021_N0204_R079_T34UDV_20170309T095021</title>
+    <updated>2017-11-02T21:11:06.301Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('3a77aa48-a9d8-484f-ad20-04d55de45154')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('3a77aa48-a9d8-484f-ad20-04d55de45154')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>3a77aa48-a9d8-484f-ad20-04d55de45154</d:Id>
+        <d:Name>S2A_MSIL1C_20170309T095021_N0204_R079_T34UDV_20170309T095021</d:Name>
+        <d:CreationDate>2017-03-15T08:22:39.671</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;49.649743427017114,20.598141358613304 49.58515881956493,20.5669955319537 49.44086571843291,20.496870722580525 49.29640317323262,20.42770030352405 49.151708010390834,20.359722200160142 49.00712705367804,20.29157861900828 48.862600483089125,20.22319901700435 48.71771246890508,20.15614684035188 48.65961820528911,20.129647790571457 48.6570207750582,19.641546225080212 49.64443007346099,19.614272368185706 49.649743427017114,20.598141358613304 49.649743427017114,20.598141358613304&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>318729877</d:Size>
+        <d:IngestionDate>2017-03-15T08:23:13.575</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-09T09:50:21.026</d:Start>
+          <d:End>2017-03-09T09:50:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:11:06.301</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>75A03C710F234D1A6B172256BA5A6184</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('d460edd0-4511-4285-88f4-f29518f7a17e')</id>
+    <title type="text">S2A_MSIL1C_20170309T095021_N0204_R079_T33UXR_20170309T095021</title>
+    <updated>2017-11-02T21:02:35.254Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('d460edd0-4511-4285-88f4-f29518f7a17e')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('d460edd0-4511-4285-88f4-f29518f7a17e')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>d460edd0-4511-4285-88f4-f29518f7a17e</d:Id>
+        <d:Name>S2A_MSIL1C_20170309T095021_N0204_R079_T33UXR_20170309T095021</d:Name>
+        <d:CreationDate>2017-03-15T08:22:39.693</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;49.74199731516848,16.388070531321077 49.87140833173398,16.438373324110778 50.01753246570762,16.49540798095537 50.16343643498914,16.553262535896803 50.30955938838167,16.610553852340498 50.45560469552152,16.66835350889308 50.538292390369094,16.701410215789224 50.5146700159563,17.95938607628957 49.52841829443089,17.899359688454204 49.55649445196309,16.382684363173013 49.74199731516848,16.388070531321077 49.74199731516848,16.388070531321077&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>658135431</d:Size>
+        <d:IngestionDate>2017-03-15T08:23:53.341</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-09T09:50:21.026</d:Start>
+          <d:End>2017-03-09T09:50:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:02:35.254</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>93F9510A59E0F0B000C9524B96156151</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('898d86fe-c447-474a-8c28-26398abae9a3')</id>
+    <title type="text">S2A_MSIL1C_20170308T102021_N0204_R065_T32UQU_20170308T102514</title>
+    <updated>2017-11-02T21:10:21.152Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('898d86fe-c447-474a-8c28-26398abae9a3')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('898d86fe-c447-474a-8c28-26398abae9a3')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>898d86fe-c447-474a-8c28-26398abae9a3</d:Id>
+        <d:Name>S2A_MSIL1C_20170308T102021_N0204_R065_T32UQU_20170308T102514</d:Name>
+        <d:CreationDate>2017-03-15T08:22:39.718</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;48.694588212465895,12.593876786224863 48.56853319621776,12.535302080765828 48.42380816749178,12.468422847212237 48.278935528481405,12.40193425483897 48.13409336025527,12.335704464512208 47.9892447732925,12.269791557895283 47.844296485969885,12.20425743931947 47.719930161716306,12.147307851402132 47.73416799677996,11.667009418148025 48.720927698149374,11.718815262801492 48.694588212465895,12.593876786224863 48.694588212465895,12.593876786224863&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>337682592</d:Size>
+        <d:IngestionDate>2017-03-15T08:23:52.117</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-08T10:20:21.026</d:Start>
+          <d:End>2017-03-08T10:20:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:10:21.152</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>323A242EE754FB9E3714D3E931F193F3</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('b2a8710a-ce4a-4503-9504-30bd15371907')</id>
+    <title type="text">S2A_MSIL1C_20170309T095021_N0204_R079_T33TYN_20170309T095021</title>
+    <updated>2017-11-02T21:04:03.800Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('b2a8710a-ce4a-4503-9504-30bd15371907')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('b2a8710a-ce4a-4503-9504-30bd15371907')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>b2a8710a-ce4a-4503-9504-30bd15371907</d:Id>
+        <d:Name>S2A_MSIL1C_20170309T095021_N0204_R079_T33TYN_20170309T095021</d:Name>
+        <d:CreationDate>2017-03-15T08:22:39.740</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;47.82260755999096,17.67153942639965 47.779157072334634,19.13525847527747 46.79367068819608,19.05902986504502 46.835655727197015,17.62219565551236 47.82260755999096,17.67153942639965 47.82260755999096,17.67153942639965&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>690328221</d:Size>
+        <d:IngestionDate>2017-03-15T08:24:12.230</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-09T09:50:21.026</d:Start>
+          <d:End>2017-03-09T09:50:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:04:03.800</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>0DDE6C82E48B0401464D4B0218932DBF</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('3938119f-d578-49e5-aa85-8035afa5b71e')</id>
+    <title type="text">S2A_MSIL1C_20170125T094251_N0204_R036_T34UEB_20170125T094251</title>
+    <updated>2017-11-02T21:09:37.418Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('3938119f-d578-49e5-aa85-8035afa5b71e')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('3938119f-d578-49e5-aa85-8035afa5b71e')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>3938119f-d578-49e5-aa85-8035afa5b71e</d:Id>
+        <d:Name>S2A_MSIL1C_20170125T094251_N0204_R036_T34UEB_20170125T094251</d:Name>
+        <d:CreationDate>2017-03-15T08:22:39.762</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;51.45118220579359,20.9997121758513 51.44054116582309,22.579544021469633 50.453523278919015,22.54643644146265 50.46379840175528,20.999718211669176 51.45118220579359,20.9997121758513 51.45118220579359,20.9997121758513&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>715057216</d:Size>
+        <d:IngestionDate>2017-03-15T08:24:14.068</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-01-25T09:42:51.026</d:Start>
+          <d:End>2017-01-25T09:42:51.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:09:37.418</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>DB2FAEEE8B0BA57FE84ADF290AED7045</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('b7ec8835-f026-4069-bf0e-0e7db0d5e90b')</id>
+    <title type="text">S2A_MSIL1C_20170309T095021_N0204_R079_T34UCV_20170309T095021</title>
+    <updated>2017-11-02T21:03:24.242Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('b7ec8835-f026-4069-bf0e-0e7db0d5e90b')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('b7ec8835-f026-4069-bf0e-0e7db0d5e90b')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>b7ec8835-f026-4069-bf0e-0e7db0d5e90b</d:Id>
+        <d:Name>S2A_MSIL1C_20170309T095021_N0204_R079_T34UCV_20170309T095021</d:Name>
+        <d:CreationDate>2017-03-15T08:22:39.784</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;49.619596875011254,18.230932062986902 49.64598096654525,19.750537404965346 48.6585189163826,19.77513103779051 48.63303181535822,18.285371051797206 49.619596875011254,18.230932062986902 49.619596875011254,18.230932062986902&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>641004984</d:Size>
+        <d:IngestionDate>2017-03-15T08:24:26.499</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-09T09:50:21.026</d:Start>
+          <d:End>2017-03-09T09:50:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:03:24.242</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>ABAF631C7CE09BAF56E41116FDFB2F91</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('5d56fdb9-1025-4b61-905f-5af6322ca8a7')</id>
+    <title type="text">S2A_MSIL1C_20170308T102021_N0204_R065_T32UQC_20170308T102514</title>
+    <updated>2017-11-02T21:09:19.446Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('5d56fdb9-1025-4b61-905f-5af6322ca8a7')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('5d56fdb9-1025-4b61-905f-5af6322ca8a7')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>5d56fdb9-1025-4b61-905f-5af6322ca8a7</d:Id>
+        <d:Name>S2A_MSIL1C_20170308T102021_N0204_R065_T32UQC_20170308T102514</d:Name>
+        <d:CreationDate>2017-03-15T08:22:39.808</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;52.31403780479302,11.933615765809156 52.26313739791785,13.539979680877822 51.27892518278613,13.442095184333063 51.32806731121396,11.870215764132041 52.31403780479302,11.933615765809156 52.31403780479302,11.933615765809156&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>733108651</d:Size>
+        <d:IngestionDate>2017-03-15T08:24:30.677</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-08T10:20:21.026</d:Start>
+          <d:End>2017-03-08T10:20:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:09:19.446</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>61BFE3379E7020F4605203D755B991C6</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('53da211b-3468-4082-9eaf-aa3dd60d27a5')</id>
+    <title type="text">S2A_MSIL1C_20170309T095021_N0204_R079_T33UYT_20170309T095021</title>
+    <updated>2017-11-02T21:11:52.000Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('53da211b-3468-4082-9eaf-aa3dd60d27a5')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('53da211b-3468-4082-9eaf-aa3dd60d27a5')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>53da211b-3468-4082-9eaf-aa3dd60d27a5</d:Id>
+        <d:Name>S2A_MSIL1C_20170309T095021_N0204_R079_T33UYT_20170309T095021</d:Name>
+        <d:CreationDate>2017-03-15T08:22:39.830</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;52.31403780479302,17.933615765809154 52.26313739791785,19.53997968087782 51.27892518278613,19.442095184333063 51.32806731121396,17.87021576413204 52.31403780479302,17.933615765809154 52.31403780479302,17.933615765809154&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>618012294</d:Size>
+        <d:IngestionDate>2017-03-15T08:24:41.779</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-09T09:50:21.026</d:Start>
+          <d:End>2017-03-09T09:50:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:11:52.000</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>7B96BFD2854B64EB0CE3AF87901140CA</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('64953b98-ae66-47e9-9ed5-bb89ebd12700')</id>
+    <title type="text">S2A_MSIL1C_20170125T094251_N0204_R036_T33TYN_20170125T094251</title>
+    <updated>2017-11-02T21:08:09.719Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('64953b98-ae66-47e9-9ed5-bb89ebd12700')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('64953b98-ae66-47e9-9ed5-bb89ebd12700')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>64953b98-ae66-47e9-9ed5-bb89ebd12700</d:Id>
+        <d:Name>S2A_MSIL1C_20170125T094251_N0204_R036_T33TYN_20170125T094251</d:Name>
+        <d:CreationDate>2017-03-15T08:22:39.857</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;46.82955562040255,17.830956736427108 46.90162986650254,17.85647112670851 47.04795332113071,17.909538788117068 47.19439758485181,17.96240009694267 47.34088405015076,18.01521232532155 47.487322568395335,18.0680782622059 47.633733932996975,18.12125743718677 47.78011178236619,18.17473893429938 47.80737251105193,18.18476338648559 47.779157072334634,19.13525847527747 46.79367068819608,19.05902986504502 46.82955562040255,17.830956736427108 46.82955562040255,17.830956736427108&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>576534113</d:Size>
+        <d:IngestionDate>2017-03-15T08:24:42.399</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-01-25T09:42:51.026</d:Start>
+          <d:End>2017-01-25T09:42:51.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:08:09.719</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>96ED1432F168C7EF0FE6A264F44B7B97</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('c8c60db2-3fe0-4d15-a025-22b85619e961')</id>
+    <title type="text">S2A_MSIL1C_20170125T094251_N0204_R036_T34UCA_20170125T094251</title>
+    <updated>2017-11-02T21:08:24.006Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('c8c60db2-3fe0-4d15-a025-22b85619e961')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('c8c60db2-3fe0-4d15-a025-22b85619e961')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>c8c60db2-3fe0-4d15-a025-22b85619e961</d:Id>
+        <d:Name>S2A_MSIL1C_20170125T094251_N0204_R036_T34UCA_20170125T094251</d:Name>
+        <d:CreationDate>2017-03-15T08:22:39.901</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;49.54221839433491,18.84069917621241 49.680772711695205,18.89416861169986 49.826988060254976,18.950382532969964 49.97309731941454,19.007213739354047 50.11913922042377,19.064829952971813 50.26513778976639,19.12272819199947 50.41111882082246,19.180982483301527 50.53661214329047,19.231117394156186 50.545333158635955,19.726924416029938 49.558033952412664,19.752783043838747 49.54221839433491,18.84069917621241 49.54221839433491,18.84069917621241&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>342443762</d:Size>
+        <d:IngestionDate>2017-03-15T08:24:44.187</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-01-25T09:42:51.026</d:Start>
+          <d:End>2017-01-25T09:42:51.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:08:24.006</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>D2F4BA2A0595268C19E4388BE5A09447</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('0c98790f-a7e9-4851-8d30-e782ec0c10af')</id>
+    <title type="text">S2A_MSIL1C_20170308T102021_N0204_R065_T33UUP_20170308T102514</title>
+    <updated>2017-11-02T21:13:42.081Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('0c98790f-a7e9-4851-8d30-e782ec0c10af')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('0c98790f-a7e9-4851-8d30-e782ec0c10af')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>0c98790f-a7e9-4851-8d30-e782ec0c10af</d:Id>
+        <d:Name>S2A_MSIL1C_20170308T102021_N0204_R065_T33UUP_20170308T102514</d:Name>
+        <d:CreationDate>2017-03-15T08:22:39.934</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;48.72653599618316,12.608766532420427 48.71319746949036,12.602524056134964 48.56853319621776,12.535302080765828 48.42380816749178,12.468422847212237 48.278935528481405,12.40193425483897 48.13409336025527,12.335704464512208 48.086319334296284,12.313965040070613 48.7209148694678,12.280641504771697 48.72653599618316,12.608766532420427 48.72653599618316,12.608766532420427&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>79624220</d:Size>
+        <d:IngestionDate>2017-03-15T08:24:42.273</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-08T10:20:21.026</d:Start>
+          <d:End>2017-03-08T10:20:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:13:42.081</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>69E7B675546B76705EB2246003A7D185</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('155b2107-fa89-4dce-b7ed-73eacc6c5e86')</id>
+    <title type="text">S2A_MSIL1C_20170309T095021_N0204_R079_T34UDC_20170309T095021</title>
+    <updated>2017-11-02T21:01:21.281Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('155b2107-fa89-4dce-b7ed-73eacc6c5e86')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('155b2107-fa89-4dce-b7ed-73eacc6c5e86')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>155b2107-fa89-4dce-b7ed-73eacc6c5e86</d:Id>
+        <d:Name>S2A_MSIL1C_20170309T095021_N0204_R079_T34UDC_20170309T095021</d:Name>
+        <d:CreationDate>2017-03-15T08:22:39.958</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;52.34134780285317,19.531528902588295 52.350386283733314,21.143290766756213 51.36315784303349,21.140188798644377 51.354432348394134,19.563305120541532 52.34134780285317,19.531528902588295 52.34134780285317,19.531528902588295&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>604884728</d:Size>
+        <d:IngestionDate>2017-03-15T08:25:14.958</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-09T09:50:21.026</d:Start>
+          <d:End>2017-03-09T09:50:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:01:21.281</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>DB4F2C9C2819F59B2BAAA324F819F965</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('241dea47-37ee-4dc2-9959-7af3dfd66a80')</id>
+    <title type="text">S2A_MSIL1C_20170308T102021_N0204_R065_T33UUQ_20170308T102514</title>
+    <updated>2017-11-02T21:10:30.239Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('241dea47-37ee-4dc2-9959-7af3dfd66a80')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('241dea47-37ee-4dc2-9959-7af3dfd66a80')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>241dea47-37ee-4dc2-9959-7af3dfd66a80</d:Id>
+        <d:Name>S2A_MSIL1C_20170308T102021_N0204_R065_T33UUQ_20170308T102514</d:Name>
+        <d:CreationDate>2017-03-15T08:22:40.018</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;49.63361243203489,13.038165288981233 49.58088657387388,13.012757449120931 49.43632683430072,12.943452807394335 49.29173350134796,12.874601837530236 49.14718543767725,12.805714813800549 49.002636878521336,12.737249009732777 48.85780768365392,12.670202132832827 48.71319746949036,12.602524056134964 48.63785880566308,12.567516008262647 48.63303181535822,12.285371051797204 49.619596875011254,12.230932062986899 49.63361243203489,13.038165288981233 49.63361243203489,13.038165288981233&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>301732773</d:Size>
+        <d:IngestionDate>2017-03-15T08:24:59.512</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-08T10:20:21.026</d:Start>
+          <d:End>2017-03-08T10:20:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:10:30.239</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>D11600C5A75D51436DEAB3EB6B1D4BD4</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('1df3ae13-0727-4ce0-82c7-da7ad9ebab12')</id>
+    <title type="text">S2A_MSIL1C_20170312T100021_N0204_R122_T34UCA_20170312T100405</title>
+    <updated>2017-11-02T21:00:05.031Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('1df3ae13-0727-4ce0-82c7-da7ad9ebab12')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('1df3ae13-0727-4ce0-82c7-da7ad9ebab12')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>1df3ae13-0727-4ce0-82c7-da7ad9ebab12</d:Id>
+        <d:Name>S2A_MSIL1C_20170312T100021_N0204_R122_T34UCA_20170312T100405</d:Name>
+        <d:CreationDate>2017-03-15T08:22:40.065</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;50.52391205242786,18.509092036022036 50.444986016837525,18.46977813773087 50.30066874878321,18.398515805920592 50.156341188320376,18.32752317599027 50.01190926396679,18.25680698959578 49.92259316252083,18.213222492623192 50.51810003852152,18.178667516417683 50.52391205242786,18.509092036022036 50.52391205242786,18.509092036022036&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>62129238</d:Size>
+        <d:IngestionDate>2017-03-15T08:24:54.180</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-12T10:00:21.026</d:Start>
+          <d:End>2017-03-12T10:00:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:00:05.031</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>791A10C9B4A5BF2E1BF32C1486CB20B0</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('740da692-9861-4fa3-bc5f-4c602e77506d')</id>
+    <title type="text">S2A_MSIL1C_20170309T095021_N0204_R079_T33TXN_20170309T095021</title>
+    <updated>2017-11-02T21:02:35.086Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('740da692-9861-4fa3-bc5f-4c602e77506d')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('740da692-9861-4fa3-bc5f-4c602e77506d')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>740da692-9861-4fa3-bc5f-4c602e77506d</d:Id>
+        <d:Name>S2A_MSIL1C_20170309T095021_N0204_R079_T33TXN_20170309T095021</d:Name>
+        <d:CreationDate>2017-03-15T08:22:40.118</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;47.84592105208886,16.33660021997006 47.81947440295927,17.80284668292451 46.83262831925138,17.751084998620154 46.85818197246455,16.31188688551243 47.84592105208886,16.33660021997006 47.84592105208886,16.33660021997006&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>807539550</d:Size>
+        <d:IngestionDate>2017-03-15T08:25:29.500</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-09T09:50:21.026</d:Start>
+          <d:End>2017-03-09T09:50:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:02:35.086</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>48BD2778C6F9D80C51FFE9553EBCECAA</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('94e6afda-7742-4e90-b99c-5df2d8cf2e8e')</id>
+    <title type="text">S2A_MSIL1C_20170312T100021_N0204_R122_T33TWN_20170312T100706</title>
+    <updated>2017-11-02T21:09:27.066Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('94e6afda-7742-4e90-b99c-5df2d8cf2e8e')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('94e6afda-7742-4e90-b99c-5df2d8cf2e8e')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>94e6afda-7742-4e90-b99c-5df2d8cf2e8e</d:Id>
+        <d:Name>S2A_MSIL1C_20170312T100021_N0204_R122_T33TWN_20170312T100706</d:Name>
+        <d:CreationDate>2017-03-15T08:22:40.140</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;47.85370184248753,14.999732642342599 47.844325046514086,16.467277376768234 46.85663988190739,16.440149824410025 46.86569987335423,14.999737587449387 47.85370184248753,14.999732642342599 47.85370184248753,14.999732642342599&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>843728592</d:Size>
+        <d:IngestionDate>2017-03-15T08:25:32.918</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-12T10:00:21.026</d:Start>
+          <d:End>2017-03-12T10:00:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:09:27.066</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>04EAE1576150CC247BEED36DAD4EC130</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('e53de767-d529-4e1d-b73c-94410ec64617')</id>
+    <title type="text">S2A_MSIL1C_20170308T102021_N0204_R065_T33UVT_20170308T102514</title>
+    <updated>2017-11-02T21:01:38.994Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('e53de767-d529-4e1d-b73c-94410ec64617')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('e53de767-d529-4e1d-b73c-94410ec64617')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>e53de767-d529-4e1d-b73c-94410ec64617</d:Id>
+        <d:Name>S2A_MSIL1C_20170308T102021_N0204_R065_T33UVT_20170308T102514</d:Name>
+        <d:CreationDate>2017-03-15T08:22:40.183</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;52.34631517144481,14.417321035960976 52.31946990761342,14.402882700612375 52.1756384862754,14.326171902573556 52.03180011581661,14.24952993114306 51.88792498714367,14.173427928623648 51.744011518339086,14.097947636067058 51.60011607200055,14.022605042437164 51.45609455376168,13.948240723347656 51.35627667989494,13.896615306477994 51.354432348394134,13.56330512054153 52.34134780285317,13.531528902588294 52.34631517144481,14.417321035960976 52.34631517144481,14.417321035960976&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>339002622</d:Size>
+        <d:IngestionDate>2017-03-15T08:25:27.745</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-08T10:20:21.026</d:Start>
+          <d:End>2017-03-08T10:20:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:01:38.994</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>75AE2D297105EB44C754FA619EB85B66</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('fb25767d-57e3-4148-9400-933c87a8968e')</id>
+    <title type="text">S2A_MSIL1C_20170312T100021_N0204_R122_T33UXS_20170312T100405</title>
+    <updated>2017-11-02T21:00:22.931Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('fb25767d-57e3-4148-9400-933c87a8968e')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('fb25767d-57e3-4148-9400-933c87a8968e')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>fb25767d-57e3-4148-9400-933c87a8968e</d:Id>
+        <d:Name>S2A_MSIL1C_20170312T100021_N0204_R122_T33UXS_20170312T100405</d:Name>
+        <d:CreationDate>2017-03-15T08:22:40.259</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;51.44235231685392,16.43887679440474 51.41234265506691,18.017025008525813 50.42629366061962,17.953869713140705 50.45527216066188,16.408715109637644 51.44235231685392,16.43887679440474 51.44235231685392,16.43887679440474&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>721548106</d:Size>
+        <d:IngestionDate>2017-03-15T08:25:32.417</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-12T10:00:21.026</d:Start>
+          <d:End>2017-03-12T10:00:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:00:22.931</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>380462C1E749FE756650AC060B485A94</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('e004d3bd-c83d-4118-a673-239bbd7edfce')</id>
+    <title type="text">S2A_MSIL1C_20170309T095021_N0204_R079_T34UEB_20170309T095021</title>
+    <updated>2017-11-02T21:13:41.561Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('e004d3bd-c83d-4118-a673-239bbd7edfce')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('e004d3bd-c83d-4118-a673-239bbd7edfce')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>e004d3bd-c83d-4118-a673-239bbd7edfce</d:Id>
+        <d:Name>S2A_MSIL1C_20170309T095021_N0204_R079_T34UEB_20170309T095021</d:Name>
+        <d:CreationDate>2017-03-15T08:22:40.327</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;51.44784013454451,21.495895876341272 51.31642589814052,21.428218104973297 51.17242722302412,21.354205993529504 51.02841838405424,21.280814495951745 50.88429971116072,21.20773911357584 50.74009286556786,21.135147616117123 50.59586215395058,21.062719070730804 50.469195087275615,20.99971817867956 51.45118220579359,20.9997121758513 51.44784013454451,21.495895876341272 51.44784013454451,21.495895876341272&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>115157210</d:Size>
+        <d:IngestionDate>2017-03-15T08:25:32.641</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-09T09:50:21.026</d:Start>
+          <d:End>2017-03-09T09:50:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:13:41.561</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>592558A0C9BC031F87F9681395E2A4EA</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('8d2f3de4-a660-4fef-a36e-2264cedeb756')</id>
+    <title type="text">S2A_MSIL1C_20170309T095021_N0204_R079_T33UWR_20170309T095021</title>
+    <updated>2017-11-02T21:03:31.937Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('8d2f3de4-a660-4fef-a36e-2264cedeb756')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('8d2f3de4-a660-4fef-a36e-2264cedeb756')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>8d2f3de4-a660-4fef-a36e-2264cedeb756</d:Id>
+        <d:Name>S2A_MSIL1C_20170309T095021_N0204_R079_T33UWR_20170309T095021</d:Name>
+        <d:CreationDate>2017-03-15T08:22:40.374</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;49.55612547146119,16.315736008430036 49.57916266830386,16.32468520412595 49.72526235632492,16.381565558333513 49.87140833173398,16.438373324110778 50.01753246570762,16.49540798095537 50.11955878772013,16.535863956768857 49.55480005728169,16.517863127544892 49.55612547146119,16.315736008430036 49.55612547146119,16.315736008430036&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>50694228</d:Size>
+        <d:IngestionDate>2017-03-15T08:25:33.260</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-09T09:50:21.026</d:Start>
+          <d:End>2017-03-09T09:50:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:03:31.937</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>7376E3D3ADC6DFD181962F867C4101B2</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('4566b7bd-5690-4c86-9d27-4b9f8bd10195')</id>
+    <title type="text">S2A_MSIL1C_20170309T095021_N0204_R079_T33UYQ_20170309T095021</title>
+    <updated>2017-11-02T21:12:47.191Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('4566b7bd-5690-4c86-9d27-4b9f8bd10195')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('4566b7bd-5690-4c86-9d27-4b9f8bd10195')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>4566b7bd-5690-4c86-9d27-4b9f8bd10195</d:Id>
+        <d:Name>S2A_MSIL1C_20170309T095021_N0204_R079_T33UYQ_20170309T095021</d:Name>
+        <d:CreationDate>2017-03-15T08:22:40.444</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;49.61961011420237,17.768514805040418 49.57334356268714,19.285045642978584 48.5883487810417,19.20098061857843 48.63304460468163,17.714086657742417 49.61961011420237,17.768514805040418 49.61961011420237,17.768514805040418&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>672699127</d:Size>
+        <d:IngestionDate>2017-03-15T08:25:53.980</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-09T09:50:21.026</d:Start>
+          <d:End>2017-03-09T09:50:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:12:47.191</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>00748BB0824CE86FE919985225D47367</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('76ee9a9a-54a8-417e-a3c3-e49a42d6ff2e')</id>
+    <title type="text">S2A_MSIL1C_20170309T095021_N0204_R079_T34UCB_20170309T095021</title>
+    <updated>2017-11-02T21:05:01.464Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('76ee9a9a-54a8-417e-a3c3-e49a42d6ff2e')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('76ee9a9a-54a8-417e-a3c3-e49a42d6ff2e')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>76ee9a9a-54a8-417e-a3c3-e49a42d6ff2e</d:Id>
+        <d:Name>S2A_MSIL1C_20170309T095021_N0204_R079_T34UCB_20170309T095021</d:Name>
+        <d:CreationDate>2017-03-15T08:22:40.498</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;51.415883589517534,18.123708231698878 51.44399790803582,19.702092127176297 50.45686117062749,19.729300891794367 50.42971299170202,18.183927395096322 51.415883589517534,18.123708231698878 51.415883589517534,18.123708231698878&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>621500200</d:Size>
+        <d:IngestionDate>2017-03-15T08:25:53.927</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-09T09:50:21.026</d:Start>
+          <d:End>2017-03-09T09:50:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:05:01.464</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>F8C7F52EE046907296AF588973A32D91</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('7ebbe089-19ae-496e-9666-6f6646a419b6')</id>
+    <title type="text">S2A_MSIL1C_20170313T093031_N0204_R136_T34UFC_20170313T093510</title>
+    <updated>2017-11-02T21:08:42.849Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('7ebbe089-19ae-496e-9666-6f6646a419b6')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('7ebbe089-19ae-496e-9666-6f6646a419b6')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>7ebbe089-19ae-496e-9666-6f6646a419b6</d:Id>
+        <d:Name>S2A_MSIL1C_20170313T093031_N0204_R136_T34UFC_20170313T093510</d:Name>
+        <d:CreationDate>2017-03-15T08:22:40.547</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;52.31033653468685,22.4668858316534 52.34112210504767,22.479988382366294 52.31036691499413,24.07775792530945 51.32452335478603,24.011254122594853 51.354439390266904,22.43612062512346 52.31033653468685,22.4668858316534 52.31033653468685,22.4668858316534&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>686281262</d:Size>
+        <d:IngestionDate>2017-03-15T08:25:54.190</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-13T09:30:31.026</d:Start>
+          <d:End>2017-03-13T09:30:31.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:08:42.849</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>5EB1C12437667447EBBC39C9AC789E19</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('d629ad74-fa78-4d76-80e9-ffdf9b98b6de')</id>
+    <title type="text">S2A_MSIL1C_20170125T094251_N0204_R036_T34UCB_20170125T094251</title>
+    <updated>2017-11-02T21:00:11.325Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('d629ad74-fa78-4d76-80e9-ffdf9b98b6de')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('d629ad74-fa78-4d76-80e9-ffdf9b98b6de')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>d629ad74-fa78-4d76-80e9-ffdf9b98b6de</d:Id>
+        <d:Name>S2A_MSIL1C_20170125T094251_N0204_R036_T34UCB_20170125T094251</d:Name>
+        <d:CreationDate>2017-03-15T08:22:40.596</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;50.44748386511586,19.19551041369671 50.557118735939554,19.239309831603656 50.70304483792079,19.29825945614211 50.84906878565825,19.357044609594706 50.99502582895002,19.41631799824517 51.14092703390183,19.47589974589076 51.286729271885854,19.536096799560312 51.432491648598734,19.596344666391328 51.442185477447836,19.600339305037675 51.44399790803582,19.702092127176297 50.45686117062749,19.729300891794367 50.44748386511586,19.19551041369671 50.44748386511586,19.19551041369671&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>162797602</d:Size>
+        <d:IngestionDate>2017-03-15T08:25:44.932</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-01-25T09:42:51.026</d:Start>
+          <d:End>2017-01-25T09:42:51.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:00:11.325</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>272000C59C4F0EFE53D33D234060EDBD</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('462f5732-200c-421e-9cfd-0ac1be0e8f60')</id>
+    <title type="text">S2A_MSIL1C_20170313T093031_N0204_R136_T34UDU_20170313T093510</title>
+    <updated>2017-11-02T21:09:08.605Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('462f5732-200c-421e-9cfd-0ac1be0e8f60')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('462f5732-200c-421e-9cfd-0ac1be0e8f60')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>462f5732-200c-421e-9cfd-0ac1be0e8f60</d:Id>
+        <d:Name>S2A_MSIL1C_20170313T093031_N0204_R136_T34UDU_20170313T093510</d:Name>
+        <d:CreationDate>2017-03-15T08:22:40.649</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;47.76268944971417,20.672332022773393 47.82869245407581,20.696554881947545 47.97495900016422,20.75054416614012 48.12131992026534,20.80449645428079 48.267597906797526,20.858926300382056 48.41381611759676,20.913837272535407 48.56018736749928,20.96828118280311 48.706278088632,21.02401967151788 48.75244968085209,21.041421029567704 48.75293650976542,21.132782609970736 47.765092664464426,21.130248809843977 47.76268944971417,20.672332022773393 47.76268944971417,20.672332022773393&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>160404487</d:Size>
+        <d:IngestionDate>2017-03-15T08:25:54.106</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-13T09:30:31.026</d:Start>
+          <d:End>2017-03-13T09:30:31.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:09:08.605</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>1566D1AB2C26954E8325C692E598CD37</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('ab394d1e-0971-4882-9168-8cfe16b19846')</id>
+    <title type="text">S2A_MSIL1C_20170309T095021_N0204_R079_T34TCT_20170309T095021</title>
+    <updated>2017-11-02T21:10:02.833Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('ab394d1e-0971-4882-9168-8cfe16b19846')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('ab394d1e-0971-4882-9168-8cfe16b19846')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>ab394d1e-0971-4882-9168-8cfe16b19846</d:Id>
+        <d:Name>S2A_MSIL1C_20170309T095021_N0204_R079_T34TCT_20170309T095021</d:Name>
+        <d:CreationDate>2017-03-15T08:22:40.695</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;47.84676218803355,19.758311981135094 47.70338496466449,19.69423618504792 47.558410449728406,19.62927823040624 47.41343571304496,19.564729541223123 47.268419578356486,19.5006393089632 47.12335802336912,19.436802691242608 46.97826523441001,19.373204608197323 46.8512852556497,19.31773686627674 46.835643714163524,18.377280362167834 47.82259512731069,18.32792675946482 47.84676218803355,19.758311981135094 47.84676218803355,19.758311981135094&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>517383240</d:Size>
+        <d:IngestionDate>2017-03-15T08:26:19.882</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-09T09:50:21.026</d:Start>
+          <d:End>2017-03-09T09:50:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:10:02.833</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>6DB1BB73BEA1B5B840617D6608C53E12</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('958b25d2-62f8-4fa0-ac5b-8ba9e4a13eb5')</id>
+    <title type="text">S2A_MSIL1C_20170309T095021_N0204_R079_T34UCA_20170309T095021</title>
+    <updated>2017-11-02T21:08:09.428Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('958b25d2-62f8-4fa0-ac5b-8ba9e4a13eb5')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('958b25d2-62f8-4fa0-ac5b-8ba9e4a13eb5')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>958b25d2-62f8-4fa0-ac5b-8ba9e4a13eb5</d:Id>
+        <d:Name>S2A_MSIL1C_20170309T095021_N0204_R079_T34UCA_20170309T095021</d:Name>
+        <d:CreationDate>2017-03-15T08:22:40.749</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;50.51810003852152,18.178667516417683 50.545333158635955,19.726924416029938 49.558033952412664,19.752783043838747 49.53173120782476,18.235902710246986 50.51810003852152,18.178667516417683 50.51810003852152,18.178667516417683&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>636896424</d:Size>
+        <d:IngestionDate>2017-03-15T08:26:21.020</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-09T09:50:21.026</d:Start>
+          <d:End>2017-03-09T09:50:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:08:09.428</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>B6E53D22456B7B8D25F06C6B61315236</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('d6c824e9-ec50-4e68-bc30-09aad4346d57')</id>
+    <title type="text">S2A_MSIL1C_20170312T100021_N0204_R122_T33UXR_20170312T100405</title>
+    <updated>2017-11-02T21:09:37.690Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('d6c824e9-ec50-4e68-bc30-09aad4346d57')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('d6c824e9-ec50-4e68-bc30-09aad4346d57')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>d6c824e9-ec50-4e68-bc30-09aad4346d57</d:Id>
+        <d:Name>S2A_MSIL1C_20170312T100021_N0204_R122_T33UXR_20170312T100405</d:Name>
+        <d:CreationDate>2017-03-15T08:22:40.809</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;50.543739174288454,16.411349506049252 50.5146700159563,17.95938607628957 49.52841829443089,17.899359688454204 49.55649445196309,16.382684363173013 50.543739174288454,16.411349506049252 50.543739174288454,16.411349506049252&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>789129407</d:Size>
+        <d:IngestionDate>2017-03-15T08:26:21.506</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-12T10:00:21.026</d:Start>
+          <d:End>2017-03-12T10:00:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:09:37.690</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>1D89AB21F8EA3285A4F6939F77D7C6E4</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('f26c6538-b74e-4c4b-bf71-96e290449f52')</id>
+    <title type="text">S2A_MSIL1C_20170312T100021_N0204_R122_T33TVN_20170312T100706</title>
+    <updated>2017-11-02T21:04:22.634Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('f26c6538-b74e-4c4b-bf71-96e290449f52')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('f26c6538-b74e-4c4b-bf71-96e290449f52')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>f26c6538-b74e-4c4b-bf71-96e290449f52</d:Id>
+        <d:Name>S2A_MSIL1C_20170312T100021_N0204_R122_T33TVN_20170312T100706</d:Name>
+        <d:CreationDate>2017-03-15T08:22:40.849</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;47.84591482730969,13.662865290445673 47.85362771191058,15.130470361916801 46.86562824777826,15.12805716115114 46.858175957972115,13.68758850047601 47.84591482730969,13.662865290445673 47.84591482730969,13.662865290445673&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>914095979</d:Size>
+        <d:IngestionDate>2017-03-15T08:26:22.509</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-12T10:00:21.026</d:Start>
+          <d:End>2017-03-12T10:00:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:04:22.634</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>21B0610CC0551D970BA331E9C6B8DEEC</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('29ddf633-126d-4f6a-a4eb-68dcc7006d4a')</id>
+    <title type="text">S2A_MSIL1C_20170308T102021_N0204_R065_T33UUT_20170308T102514</title>
+    <updated>2017-11-02T21:08:54.614Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('29ddf633-126d-4f6a-a4eb-68dcc7006d4a')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('29ddf633-126d-4f6a-a4eb-68dcc7006d4a')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>29ddf633-126d-4f6a-a4eb-68dcc7006d4a</d:Id>
+        <d:Name>S2A_MSIL1C_20170308T102021_N0204_R065_T33UUT_20170308T102514</d:Name>
+        <d:CreationDate>2017-03-15T08:22:40.895</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;52.31402323817268,12.065798228229744 52.34305438492137,13.675924550313963 51.35607984388353,13.704578464673325 51.3280532483229,12.12921085152078 52.31402323817268,12.065798228229744 52.31402323817268,12.065798228229744&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>753948547</d:Size>
+        <d:IngestionDate>2017-03-15T08:26:46.831</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-08T10:20:21.026</d:Start>
+          <d:End>2017-03-08T10:20:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:08:54.614</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>BFDC3FFCE4EA10FF2716EF6B007C8127</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('d9b714bf-daba-47d8-a5f9-b9d803467f5f')</id>
+    <title type="text">S2A_MSIL1C_20170312T100021_N0204_R122_T33TXN_20170312T100405</title>
+    <updated>2017-11-02T21:03:46.384Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('d9b714bf-daba-47d8-a5f9-b9d803467f5f')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('d9b714bf-daba-47d8-a5f9-b9d803467f5f')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>d9b714bf-daba-47d8-a5f9-b9d803467f5f</d:Id>
+        <d:Name>S2A_MSIL1C_20170312T100021_N0204_R122_T33TXN_20170312T100405</d:Name>
+        <d:CreationDate>2017-03-15T08:22:40.943</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;47.819773317963,17.228871413369166 47.830637167565506,17.183964342084924 47.829746297235296,17.23335568327995 47.819773317963,17.228871413369166 47.819773317963,17.228871413369166&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>9781135</d:Size>
+        <d:IngestionDate>2017-03-15T08:26:25.681</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-12T10:00:21.026</d:Start>
+          <d:End>2017-03-12T10:00:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:03:46.384</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>F1A6347BEE4B02BD1B2250F33B1E324E</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('1b33e403-bc11-46d0-8e3d-b1a7eb404f03')</id>
+    <title type="text">S2A_MSIL1C_20170312T100021_N0204_R122_T33UUP_20170312T100405</title>
+    <updated>2017-11-02T21:07:19.262Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('1b33e403-bc11-46d0-8e3d-b1a7eb404f03')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('1b33e403-bc11-46d0-8e3d-b1a7eb404f03')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>1b33e403-bc11-46d0-8e3d-b1a7eb404f03</d:Id>
+        <d:Name>S2A_MSIL1C_20170312T100021_N0204_R122_T33UUP_20170312T100405</d:Name>
+        <d:CreationDate>2017-03-15T08:22:40.988</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;48.47666858233069,13.779389148452227 48.479680937740646,13.757754541125957 48.47936106753604,13.757628929440529 48.47937647105949,13.75751861506296 48.478982766296376,13.757362263429473 48.481735156019454,13.737919687702066 48.48229109848938,13.738131052999794 48.528176686478645,13.4052913323413 48.54929210488843,13.413047657723409 48.69557508740167,13.467985929543463 48.74155783080468,13.485644096317095 48.74648044472784,13.77299446421159 48.47666858233069,13.779389148452227 48.47666858233069,13.779389148452227&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>58769310</d:Size>
+        <d:IngestionDate>2017-03-15T08:26:27.903</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-12T10:00:21.026</d:Start>
+          <d:End>2017-03-12T10:00:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:07:19.262</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>B680C8F2A5D34C1BA3323D284FE7CD9E</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('ae3da69e-36ec-4d94-8a21-fb702fe0e57b')</id>
+    <title type="text">S2A_MSIL1C_20170312T100021_N0204_R122_T33UYQ_20170312T100405</title>
+    <updated>2017-11-02T21:01:11.262Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('ae3da69e-36ec-4d94-8a21-fb702fe0e57b')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('ae3da69e-36ec-4d94-8a21-fb702fe0e57b')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>ae3da69e-36ec-4d94-8a21-fb702fe0e57b</d:Id>
+        <d:Name>S2A_MSIL1C_20170312T100021_N0204_R122_T33UYQ_20170312T100405</d:Name>
+        <d:CreationDate>2017-03-15T08:22:41.033</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;49.610665884730764,18.061689882305927 49.57866446434148,18.04614689351032 49.434139957829125,17.97668585824291 49.28956034418309,17.9075737012129 49.14486367944533,17.839278268833677 49.000219496912855,17.77095398102349 48.9133462423191,17.729550708202293 49.61961011420237,17.768514805040418 49.610665884730764,18.061689882305927 49.610665884730764,18.061689882305927&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>67148156</d:Size>
+        <d:IngestionDate>2017-03-15T08:26:29.864</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-12T10:00:21.026</d:Start>
+          <d:End>2017-03-12T10:00:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:01:11.262</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>B5738E485B9CFDBB9657E1F90C7AFC6A</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('e3f7cfc2-ee08-401d-aa4b-911f21867c6b')</id>
+    <title type="text">S2A_MSIL1C_20170308T102021_N0204_R065_T33UUR_20170308T102514</title>
+    <updated>2017-11-02T21:09:08.870Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('e3f7cfc2-ee08-401d-aa4b-911f21867c6b')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('e3f7cfc2-ee08-401d-aa4b-911f21867c6b')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>e3f7cfc2-ee08-401d-aa4b-911f21867c6b</d:Id>
+        <d:Name>S2A_MSIL1C_20170308T102021_N0204_R065_T33UUR_20170308T102514</d:Name>
+        <d:CreationDate>2017-03-15T08:22:41.077</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;50.54103243242065,13.482419599533978 50.447229468026016,13.436451187563362 50.302897869321,13.365165860528847 50.15866552331071,13.293491375009246 50.01432611096972,13.222494610015062 49.869957456544526,13.152061623232964 49.72540956274238,13.082401018431645 49.58088657387388,13.012757449120931 49.54490275098489,12.995506131702687 49.53173120782476,12.235902710246984 50.51810003852152,12.178667516417683 50.54103243242065,13.482419599533978 50.54103243242065,13.482419599533978&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>533561579</d:Size>
+        <d:IngestionDate>2017-03-15T08:26:46.936</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-08T10:20:21.026</d:Start>
+          <d:End>2017-03-08T10:20:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:09:08.870</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>CF31548F1C0865483D117C378D3C29AE</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('75666f72-5273-4ddd-a99e-073e0ee5e4be')</id>
+    <title type="text">S2A_MSIL1C_20170308T102021_N0204_R065_T32UPB_20170308T102514</title>
+    <updated>2017-11-02T21:09:09.080Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('75666f72-5273-4ddd-a99e-073e0ee5e4be')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('75666f72-5273-4ddd-a99e-073e0ee5e4be')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>75666f72-5273-4ddd-a99e-073e0ee5e4be</d:Id>
+        <d:Name>S2A_MSIL1C_20170308T102021_N0204_R065_T32UPB_20170308T102514</d:Name>
+        <d:CreationDate>2017-03-15T08:22:41.121</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;51.44235231685392,10.438876794404743 51.41234265506691,12.017025008525813 50.42629366061962,11.953869713140705 50.45527216066188,10.408715109637644 51.44235231685392,10.438876794404743 51.44235231685392,10.438876794404743&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>599508569</d:Size>
+        <d:IngestionDate>2017-03-15T08:26:48.222</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-08T10:20:21.026</d:Start>
+          <d:End>2017-03-08T10:20:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:09:09.080</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>ADEC8655670F005F398C665F89DAC62D</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('f00705e1-c502-440a-9c8b-2d835d773d1d')</id>
+    <title type="text">S2A_MSIL1C_20170312T100021_N0204_R122_T33UWQ_20170312T100405</title>
+    <updated>2017-11-02T21:08:24.478Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('f00705e1-c502-440a-9c8b-2d835d773d1d')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('f00705e1-c502-440a-9c8b-2d835d773d1d')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>f00705e1-c502-440a-9c8b-2d835d773d1d</d:Id>
+        <d:Name>S2A_MSIL1C_20170312T100021_N0204_R122_T33UWQ_20170312T100405</d:Name>
+        <d:CreationDate>2017-03-15T08:22:41.165</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;49.652722814505665,14.999722922552591 49.64273706516441,16.520595653725128 48.65538534877128,16.49066964052278 48.66503141156509,14.999728378048822 49.652722814505665,14.999722922552591 49.652722814505665,14.999722922552591&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>794190055</d:Size>
+        <d:IngestionDate>2017-03-15T08:26:49.873</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-12T10:00:21.026</d:Start>
+          <d:End>2017-03-12T10:00:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:08:24.478</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>FB7443FB1B00830BBF15581AFD0ABD89</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('fa2b8d1d-0240-410c-90ce-c31b0b57ecff')</id>
+    <title type="text">S2A_MSIL1C_20170312T100021_N0204_R122_T33UVP_20170312T100405</title>
+    <updated>2017-11-02T21:10:02.544Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('fa2b8d1d-0240-410c-90ce-c31b0b57ecff')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('fa2b8d1d-0240-410c-90ce-c31b0b57ecff')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>fa2b8d1d-0240-410c-90ce-c31b0b57ecff</d:Id>
+        <d:Name>S2A_MSIL1C_20170312T100021_N0204_R122_T33UVP_20170312T100405</d:Name>
+        <d:CreationDate>2017-03-15T08:22:41.220</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;48.26114240695289,15.131521167723587 48.27791426443747,15.038247249028 48.27786205829226,15.038226162016947 48.277870496989166,15.038179236065549 48.277352400119256,15.0379681664376 48.33414428599151,14.709689205113364 48.33448980135648,14.709827726577563 48.335033416917305,14.706420656509716 48.33535569411051,14.706550539684605 48.37400628249774,14.463452919682055 48.38283031979882,14.408027840705868 48.38240851051695,14.407858376056604 48.38522230746006,14.390341721655476 48.38534203695164,14.390388680109409 48.41674886108623,14.187973970455126 48.43512897136034,14.070732040255733 48.43556393714963,14.070902651914192 48.43605803985409,14.067369054137185 48.43654446803156,14.067558816051042 48.479680937740646,13.757754541125957 48.47936106753604,13.757628929440529 48.47937647105949,13.75751861506296 48.478982766296376,13.757362263429473 48.481735156019454,13.737919687702066 48.48229109848938,13.738131052999794 48.4950272873265,13.645746717949034 48.74497768846318,13.63917680224736 48.75293650976542,15.132782609970732 48.26114240695289,15.131521167723587 48.26114240695289,15.131521167723587&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>326182543</d:Size>
+        <d:IngestionDate>2017-03-15T08:27:04.336</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-12T10:00:21.026</d:Start>
+          <d:End>2017-03-12T10:00:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:10:02.544</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>661DA6C521D53387EB88A4DE6EC87C89</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('ffbb8b1f-f8ca-4fb9-8242-746143266145')</id>
+    <title type="text">S2A_MSIL1C_20170309T095021_N0204_R079_T34TDT_20170309T095021</title>
+    <updated>2017-11-02T21:05:00.440Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('ffbb8b1f-f8ca-4fb9-8242-746143266145')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('ffbb8b1f-f8ca-4fb9-8242-746143266145')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>ffbb8b1f-f8ca-4fb9-8242-746143266145</d:Id>
+        <d:Name>S2A_MSIL1C_20170309T095021_N0204_R079_T34TDT_20170309T095021</d:Name>
+        <d:CreationDate>2017-03-15T08:22:41.291</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;47.846415626029355,19.75815710133068 47.70338496466449,19.69423618504792 47.644615856251725,19.66790382532048 47.84591482730969,19.662865290445676 47.846415626029355,19.75815710133068 47.846415626029355,19.75815710133068&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>24907140</d:Size>
+        <d:IngestionDate>2017-03-15T08:26:54.832</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-09T09:50:21.026</d:Start>
+          <d:End>2017-03-09T09:50:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:05:00.440</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>7905E9C60032914E640B810C647E9CC2</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('a09f8b3f-dc40-4e2a-9606-460bfae96f91')</id>
+    <title type="text">S2A_MSIL1C_20170309T095021_N0204_R079_T33UWQ_20170309T095021</title>
+    <updated>2017-11-02T21:02:15.528Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('a09f8b3f-dc40-4e2a-9606-460bfae96f91')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('a09f8b3f-dc40-4e2a-9606-460bfae96f91')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>a09f8b3f-dc40-4e2a-9606-460bfae96f91</d:Id>
+        <d:Name>S2A_MSIL1C_20170309T095021_N0204_R079_T33UWQ_20170309T095021</d:Name>
+        <d:CreationDate>2017-03-15T08:22:41.348</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;48.65874505407207,15.971377638203258 48.70235969118199,15.987789911285567 48.848549313237285,16.04326936911849 48.994704024994576,16.09904368716617 49.140831450279855,16.15522577650405 49.28697000277463,16.21153763080274 49.433018807462,16.26791310553417 49.57916266830386,16.32468520412595 49.6438579979306,16.349872754589533 49.64273706516441,16.520595653725128 48.65538534877128,16.49066964052278 48.65874505407207,15.971377638203258 48.65874505407207,15.971377638203258&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>195642306</d:Size>
+        <d:IngestionDate>2017-03-15T08:27:05.345</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-09T09:50:21.026</d:Start>
+          <d:End>2017-03-09T09:50:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:02:15.528</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>22A1418E6AFCD5EE333A4E1691433533</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('0ade4d56-2f9d-4d6d-b90d-854367bccf36')</id>
+    <title type="text">S2A_MSIL1C_20170308T102021_N0204_R065_T32UPC_20170308T102514</title>
+    <updated>2017-11-02T21:11:07.022Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('0ade4d56-2f9d-4d6d-b90d-854367bccf36')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('0ade4d56-2f9d-4d6d-b90d-854367bccf36')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>0ade4d56-2f9d-4d6d-b90d-854367bccf36</d:Id>
+        <d:Name>S2A_MSIL1C_20170308T102021_N0204_R065_T32UPC_20170308T102514</d:Name>
+        <d:CreationDate>2017-03-15T08:22:41.412</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;52.34135509726958,10.467884152957831 52.31036691499413,12.077757925309447 51.32452335478603,12.011254122594853 51.354439390266904,10.43612062512346 52.34135509726958,10.467884152957831 52.34135509726958,10.467884152957831&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>600781906</d:Size>
+        <d:IngestionDate>2017-03-15T08:27:24.978</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-08T10:20:21.026</d:Start>
+          <d:End>2017-03-08T10:20:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:11:07.022</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>AD45A991E9C6ED15E4251F9BC2BF04BD</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('77e75f22-6737-4143-9be3-c6a3a92edc36')</id>
+    <title type="text">S2A_MSIL1C_20170308T102021_N0204_R065_T32UQV_20170308T102514</title>
+    <updated>2017-11-02T21:12:26.467Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('77e75f22-6737-4143-9be3-c6a3a92edc36')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('77e75f22-6737-4143-9be3-c6a3a92edc36')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>77e75f22-6737-4143-9be3-c6a3a92edc36</d:Id>
+        <d:Name>S2A_MSIL1C_20170308T102021_N0204_R065_T32UQV_20170308T102514</d:Name>
+        <d:CreationDate>2017-03-15T08:22:41.469</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;49.58163950282748,13.013120274856659 49.58088657387388,13.012757449120931 49.43632683430072,12.943452807394335 49.29173350134796,12.874601837530236 49.14718543767725,12.805714813800549 49.002636878521336,12.737249009732777 48.85780768365392,12.670202132832827 48.71319746949036,12.602524056134964 48.607810357596044,12.553553224016419 48.63304460468163,11.714086657742419 49.61961011420237,11.76851480504042 49.58163950282748,13.013120274856659 49.58163950282748,13.013120274856659&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>530466730</d:Size>
+        <d:IngestionDate>2017-03-15T08:27:26.269</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-08T10:20:21.026</d:Start>
+          <d:End>2017-03-08T10:20:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:12:26.467</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>180BCB8874571B9F50C3637C8A7B8FA7</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('f27c368e-16ad-48a8-b15d-f9c54efb9f79')</id>
+    <title type="text">S2A_MSIL1C_20170308T102021_N0204_R065_T32TQT_20170308T102514</title>
+    <updated>2017-11-02T21:06:33.675Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('f27c368e-16ad-48a8-b15d-f9c54efb9f79')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('f27c368e-16ad-48a8-b15d-f9c54efb9f79')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>f27c368e-16ad-48a8-b15d-f9c54efb9f79</d:Id>
+        <d:Name>S2A_MSIL1C_20170308T102021_N0204_R065_T32TQT_20170308T102514</d:Name>
+        <d:CreationDate>2017-03-15T08:22:41.527</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;47.807296778172166,12.187314604313384 47.69954182753406,12.13797166464122 47.554857646497446,12.07193227173908 47.409755137492894,12.007651736660138 47.26504078773818,11.94212139931992 47.11984215476375,11.878694590768337 46.97565927795269,11.811565398465865 46.83182554351268,11.753274227246509 46.835655727197015,11.62219565551236 47.82260755999096,11.671539426399653 47.807296778172166,12.187314604313384 47.807296778172166,12.187314604313384&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>198483075</d:Size>
+        <d:IngestionDate>2017-03-15T08:27:25.340</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-08T10:20:21.026</d:Start>
+          <d:End>2017-03-08T10:20:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:06:33.675</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>4220DAEA5DE49E9E8CD7AB2008ED6C9F</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+  <entry>
+    <id>https://dhr1.cesnet.cz/odata/v1/DeletedProducts('692faef4-bf64-4c66-aaaf-09e02cb2ee82')</id>
+    <title type="text">S2A_MSIL1C_20170309T095021_N0204_R079_T34UDA_20170309T095021</title>
+    <updated>2017-11-02T21:07:52.670Z</updated>
+    <category term="DHuS.DeletedProduct" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="DeletedProducts('692faef4-bf64-4c66-aaaf-09e02cb2ee82')" rel="edit" title="DeletedProduct"/>
+    <link href="DeletedProducts('692faef4-bf64-4c66-aaaf-09e02cb2ee82')/Class" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Class" title="Class" type="application/atom+xml;type=entry"/>
+    <content type="application/xml">
+      <m:properties>
+        <d:Id>692faef4-bf64-4c66-aaaf-09e02cb2ee82</d:Id>
+        <d:Name>S2A_MSIL1C_20170309T095021_N0204_R079_T34UDA_20170309T095021</d:Name>
+        <d:CreationDate>2017-03-15T08:22:41.591</d:CreationDate>
+        <d:FootPrint>&lt;gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml"&gt;
+   &lt;gml:outerBoundaryIs&gt;
+      &lt;gml:LinearRing&gt;
+         &lt;gml:coordinates&gt;50.55167979570666,21.040743919214606 50.451536331932544,20.990935174791243 50.307196467721496,20.91967336808616 50.16286157975472,20.848550860694665 50.01849329365718,20.77752037596877 49.87407338034291,20.706949442936427 49.72966784716706,20.6366847861274 49.58515881956493,20.5669955319537 49.56155104431498,20.555522421138704 49.55648784343155,19.616762732856103 50.54373233188457,19.588086136628576 50.55167979570666,21.040743919214606 50.55167979570666,21.040743919214606&lt;/gml:coordinates&gt;
+      &lt;/gml:LinearRing&gt;
+   &lt;/gml:outerBoundaryIs&gt;
+&lt;/gml:Polygon&gt;</d:FootPrint>
+        <d:Size>470800021</d:Size>
+        <d:IngestionDate>2017-03-15T08:27:38.189</d:IngestionDate>
+        <d:ContentDate m:type="DHuS.TimeRange">
+          <d:Start>2017-03-09T09:50:21.026</d:Start>
+          <d:End>2017-03-09T09:50:21.026</d:End>
+        </d:ContentDate>
+        <d:DeletionDate>2017-11-02T21:07:52.670</d:DeletionDate>
+        <d:DeletionCause>Automatic Eviction</d:DeletionCause>
+        <d:Checksum m:type="DHuS.Checksum">
+          <d:Algorithm>MD5</d:Algorithm>
+          <d:Value>2C426AA95DB895C6183B54F5E008C4F2</d:Value>
+        </d:Checksum>
+      </m:properties>
+    </content>
+  </entry>
+</feed>

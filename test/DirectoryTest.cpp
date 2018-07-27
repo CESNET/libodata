@@ -1,8 +1,10 @@
 #include "Directory.h"
 
 #include "File.h"
+#include "Product.h"
 #include "ProductPath.h"
 #include "RemoteFile.h"
+#include "Utils.h"
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/filesystem/path.hpp>
@@ -106,6 +108,19 @@ TEST(DirectoryTest, ReaddirTest) {
     std::vector<std::string> sub_dir1_expected{".manifest.xml", "sub_dir2"};
     ASSERT_EQ(sub_dir1_expected, test_tree->getChild("sub_dir1")->readDir());
   }
+}
+
+TEST(DirectoryTest, RemoveProductTest) {
+  auto instance = createFilesystem(
+      {createProduct("id1", "platform1"), createProduct("id2", "platform2")});
+
+  ASSERT_EQ(
+      *createProduct("id1", "platform1"),
+      *testGetFile(*instance, "platform1/date/name"));
+
+  instance->removeProduct("name", "platform1", "date");
+
+  ASSERT_EQ(nullptr, testGetFile(*instance, "platform1/date/name"));
 }
 
 TEST(DirectoryTest, SerializeTest) {

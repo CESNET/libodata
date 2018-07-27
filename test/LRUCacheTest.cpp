@@ -39,5 +39,21 @@ TEST(LRUCacheTest, PutGetTest) {
   ASSERT_EQ(true, instance.get("x").is_initialized());
 }
 
+TEST(LRUCacheTest, RemoveTest) {
+  LRUCache<std::string, int> instance(3);
+  instance.put("x", 1);
+  instance.put("y", 2);
+  instance.put("z", 3);
+
+  ASSERT_EQ(true, instance.get("x").is_initialized());
+  instance.remove("x");
+  ASSERT_EQ(false, instance.get("x").is_initialized());
+
+  instance.put("w", 4);
+  ASSERT_EQ(true, instance.get("y").is_initialized());
+  ASSERT_EQ(true, instance.get("z").is_initialized());
+  ASSERT_EQ(true, instance.get("w").is_initialized());
+}
+
 } // namespace Test
 } // namespace OData

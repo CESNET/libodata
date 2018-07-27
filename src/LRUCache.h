@@ -44,6 +44,16 @@ public:
     }
   }
 
+  void remove(const Key& key) {
+    std::lock_guard<std::mutex> guard(mutex);
+    auto it = cache.find(key);
+    if (it != cache.end()) {
+      auto key_index = std::find(object_list.begin(), object_list.end(), key);
+      object_list.erase(key_index);
+      cache.erase(it);
+    }
+  }
+
 private:
   void updateLastAccessed(const Key& key) const {
     auto key_index = std::find(object_list.begin(), object_list.end(), key);

@@ -3,6 +3,7 @@
 #include "DataHubException.h"
 #include "Product.h"
 #include <algorithm>
+#include <boost/algorithm/string.hpp>
 #include <functional>
 #include <tinyxml2.h>
 
@@ -117,7 +118,18 @@ public:
   const tinyxml2::XMLElement* getChild(
       const tinyxml2::XMLElement* node, const std::string& name) const {
     return filterOne(node, [&](const tinyxml2::XMLElement& element) {
-      return element.Name() == name;
+      // remove namespace
+      const auto name_with_namespace = element.Name();
+      std::vector<std::string> splited;
+      boost::split(
+          splited, name_with_namespace, [](char c) { return c == ':'; });
+      std::string name_without_namespace;
+      if (splited.size() == 2) {
+        name_without_namespace = splited[1];
+      } else {
+        name_without_namespace = splited[0];
+      }
+      return name_without_namespace == name;
     });
   }
 
@@ -156,6 +168,16 @@ std::vector<std::pair<boost::filesystem::path, std::size_t>> XmlParser::
             static_cast<std::size_t>(stream->Int64Attribute("size")));
       };
   return doc.filterMap("dataObject", map);
+}
+
+std::vector<std::string> OData::XmlParser::parseDeletedList(
+    const std::vector<char>& xml) const {
+  XmlDocument doc(xml);
+  std::function<std::string(const tinyxml2::XMLElement*)> map =
+      [&](const tinyxml2::XMLElement* node) {
+        return doc.getChild(node, "Id")->GetText();
+      };
+  return doc.filterMap("entry", map);
 }
 
 } /* namespace OData */

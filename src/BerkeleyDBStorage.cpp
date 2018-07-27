@@ -45,6 +45,32 @@ std::shared_ptr<Product> decodeProductRecord(const Dbt& record) {
   in&(*product);
   return product;
 }
+
+class Cursor : public ProductIterator {
+public:
+  explicit Cursor(Dbc* cursor, std::mutex& db_access_mutex)
+      : cursor(cursor), db_access_mutex(db_access_mutex) {
+  }
+  virtual ~Cursor() {
+    cursor->close();
+  }
+
+  std::shared_ptr<Product> next() override {
+    std::unique_lock<std::mutex> lock(db_access_mutex);
+    Dbt key;
+    Dbt data;
+    if (cursor->get(&key, &data, DB_NEXT) == 0) {
+      return decodeProductRecord(data);
+    } else {
+      // TODO handle error
+      return nullptr;
+    }
+  }
+
+private:
+  Dbc* cursor;
+  std::mutex& db_access_mutex;
+};
 } // namespace
 
 BerkeleyDBStorage::BerkeleyDBStorage(boost::filesystem::path db_path)
@@ -79,6 +105,26 @@ std::shared_ptr<Product> BerkeleyDBStorage::getProduct(
   // TODO error handling
   database.get(nullptr, &key, &data, 0);
   return decodeProductRecord(data);
+}
+
+void BerkeleyDBStorage::deleteProduct(const std::string& product_id) {
+  std::unique_lock<std::mutex> lock(db_access_mutex);
+  auto key = createProductKey(product_id);
+  /*int ret =*/database.del(nullptr, &key, 0);
+  // TODO handle error
+}
+
+std::unique_ptr<ProductIterator> BerkeleyDBStorage::iterator() {
+  std::unique_lock<std::mutex> lock(db_access_mutex);
+  Dbc* cursor = nullptr;
+  database.cursor(nullptr, &cursor, 0);
+  // TODO handle error
+  if (cursor == nullptr) {
+    return nullptr;
+  } else {
+    return std::unique_ptr<ProductIterator>(
+        new Cursor(cursor, db_access_mutex));
+  }
 }
 
 } /* namespace OData */

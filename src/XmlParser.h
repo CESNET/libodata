@@ -19,6 +19,7 @@ public:
       const std::vector<char>& xml) const;
   std::vector<std::pair<boost::filesystem::path, std::size_t>> parseManifest(
       const std::vector<char>& manifest) const;
+  std::vector<std::string> parseDeletedList(const std::vector<char>& xml) const;
 };
 
 } /* namespace OData */

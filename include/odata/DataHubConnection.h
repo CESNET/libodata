@@ -30,6 +30,7 @@ public:
   std::vector<char> getFile(const ProductPath& path) override;
   std::shared_ptr<TemporaryFile> getTemporaryFile(
       const ProductPath& path, boost::filesystem::path tmp_file) override;
+  std::vector<std::string> getDeletedProducts(std::uint32_t offset) override;
   std::unique_ptr<Connection> clone() const noexcept override;
 
 private:

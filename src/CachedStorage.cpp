@@ -32,4 +32,14 @@ std::shared_ptr<Product> CachedStorage::getProduct(
     return product;
   }
 }
+
+void CachedStorage::deleteProduct(const std::string& product_id) {
+  cache.remove(product_id);
+  storage->deleteProduct(product_id);
+}
+
+std::unique_ptr<ProductIterator> CachedStorage::iterator() {
+  return storage->iterator();
+}
+
 } /* namespace OData */

@@ -24,6 +24,16 @@ Directory* getOrInsertPlatform(
   return static_cast<Directory*>(platform_tree->second.get());
 }
 
+Directory* getPlatform(
+    Directory::Content& platforms, const std::string& platform) {
+  auto platform_tree = platforms.find(platform);
+  if (platform_tree == platforms.end()) {
+    return nullptr;
+  } else {
+    return static_cast<Directory*>(platform_tree->second.get());
+  }
+}
+
 Directory* getOrInsertDateSubtree(
     Directory::Content& platforms,
     const std::string& product_platform,
@@ -36,6 +46,18 @@ Directory* getOrInsertDateSubtree(
     platform->addChild(sub_tree);
   }
   return date_tree;
+}
+
+Directory* getDateSubtree(
+    Directory::Content& platforms,
+    const std::string& product_platform,
+    const std::string& product_date) {
+  Directory* platform = getPlatform(platforms, product_platform);
+  if (platform == nullptr) {
+    return nullptr;
+  } else {
+    return dynamic_cast<Directory*>(platform->getChild(product_date));
+  }
 }
 } // namespace
 
@@ -119,6 +141,14 @@ void Directory::addChild(std::shared_ptr<FileSystemNode> child) noexcept {
   content[name] = std::move(child);
 }
 
+void Directory::removeChild(const std::string& child_name) noexcept {
+  boost::unique_lock<boost::shared_mutex> lock(content_mutex);
+  auto it = content.find(child_name);
+  if (it != content.end()) {
+    content.erase(it);
+  }
+}
+
 std::unique_ptr<Directory> Directory::createRemoteStructure(
     const ProductPath& product_path,
     std::string name,
@@ -184,6 +214,17 @@ void Directory::appendProduct(
   boost::unique_lock<boost::shared_mutex> lock(content_mutex);
   auto parent = getOrInsertDateSubtree(content, platform, date);
   parent->addChild(std::move(product));
+}
+
+void Directory::removeProduct(
+    const std::string& product_name,
+    const std::string& platform,
+    const std::string& date) noexcept {
+  boost::unique_lock<boost::shared_mutex> lock(content_mutex);
+  auto parent = getDateSubtree(content, platform, date);
+  if (parent != nullptr) {
+    parent->removeChild(product_name);
+  }
 }
 
 } /* namespace OData */

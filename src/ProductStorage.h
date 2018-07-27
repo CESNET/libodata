@@ -8,6 +8,16 @@ namespace OData {
 
 class Product;
 
+class ProductIterator {
+public:
+  ProductIterator() = default;
+  virtual ~ProductIterator() = default;
+  ProductIterator(const ProductIterator&) = delete;
+  ProductIterator& operator=(const ProductIterator&) = delete;
+
+  virtual std::shared_ptr<Product> next() = 0;
+};
+
 class ProductStorage {
 public:
   ProductStorage() = default;
@@ -19,6 +29,8 @@ public:
   virtual bool productExists(const std::string& product_id) = 0;
   virtual std::shared_ptr<Product> getProduct(
       const std::string& product_id) = 0;
+  virtual void deleteProduct(const std::string& product_id) = 0;
+  virtual std::unique_ptr<ProductIterator> iterator() = 0;
 };
 
 } /* namespace OData */

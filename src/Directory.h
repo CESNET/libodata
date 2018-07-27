@@ -40,6 +40,7 @@ public:
   std::size_t getSize() const noexcept override;
 
   void addChild(std::shared_ptr<FileSystemNode> child) noexcept;
+  void removeChild(const std::string& child_name) noexcept;
   FileSystemNode* getChild(const std::string& name) noexcept;
 
   static std::unique_ptr<Directory> createRemoteStructure(
@@ -51,6 +52,10 @@ public:
   void appendProducts(std::vector<std::shared_ptr<Product>> products) noexcept;
   void appendProduct(
       std::shared_ptr<FileSystemNode> product,
+      const std::string& platform,
+      const std::string& date) noexcept;
+  void removeProduct(
+      const std::string& product_name,
       const std::string& platform,
       const std::string& date) noexcept;
 

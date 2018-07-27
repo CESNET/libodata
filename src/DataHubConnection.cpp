@@ -160,6 +160,14 @@ std::shared_ptr<TemporaryFile> DataHubConnection::getTemporaryFile(
   return temporary_file;
 }
 
+std::vector<std::string> DataHubConnection::getDeletedProducts(
+    std::uint32_t offset) {
+  MemoryCallback callback;
+  pimpl->getQuery(
+      "odata/v1/DeletedProducts?$skip=" + std::to_string(offset), &callback);
+  return pimpl->response_parser.parseDeletedList(callback.body);
+}
+
 std::unique_ptr<Connection> DataHubConnection::clone() const noexcept {
   return std::unique_ptr<Connection>(
       new DataHubConnection(pimpl->url, pimpl->auth_token));

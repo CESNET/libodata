@@ -18,6 +18,8 @@ public:
   void storeProduct(std::shared_ptr<Product> product) override;
   bool productExists(const std::string& product_id) override;
   std::shared_ptr<Product> getProduct(const std::string& product_id) override;
+  void deleteProduct(const std::string& product_id) override;
+  std::unique_ptr<ProductIterator> iterator() override;
 
 private:
   std::map<std::string, std::shared_ptr<Product>> products;

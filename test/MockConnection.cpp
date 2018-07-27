@@ -48,7 +48,7 @@ private:
 } // namespace
 
 MockConnection::MockConnection(std::uint32_t product_count)
-    : product_count(product_count), products_listed(0) {
+    : product_count(product_count), products_listed(0), deleted_products() {
 }
 
 std::vector<std::shared_ptr<Product>> MockConnection::listProducts(
@@ -77,12 +77,25 @@ std::shared_ptr<TemporaryFile> MockConnection::getTemporaryFile(
   return std::make_shared<MockFile>(path.getPath());
 }
 
+std::vector<std::string> MockConnection::getDeletedProducts(
+    std::uint32_t offset) {
+  std::vector<std::string> result;
+  for (std::uint32_t i = offset; i < deleted_products.size(); ++i) {
+    result.push_back(generateString("TEST_UUID", deleted_products[i]));
+  }
+  return result;
+}
+
 std::unique_ptr<Connection> MockConnection::clone() const noexcept {
   return std::unique_ptr<Connection>(new MockConnection(product_count));
 }
 
 std::uint32_t OData::Test::MockConnection::getProductsListed() const noexcept {
   return products_listed;
+}
+
+void MockConnection::addDeletedProduct(std::uint32_t id) noexcept {
+  deleted_products.push_back(id);
 }
 
 } /* namespace Test */

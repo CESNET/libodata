@@ -48,5 +48,13 @@ TEST(XmlParserTest, TestListResponseParser) {
       *entries[3]);
 }
 
+TEST(XmlParserTest, TestDeleteQueryParser) {
+  XmlParser parser;
+  const auto entries =
+      parser.parseDeletedList(readTestInstance("deletedproducts.xml"));
+  ASSERT_EQ(50, entries.size());
+  ASSERT_EQ("2a7e89c0-67c9-482b-9d59-ecdec4f43ea7", entries[0]);
+}
+
 } /* namespace Test */
 } /* namespace OData */

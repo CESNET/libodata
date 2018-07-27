@@ -12,6 +12,139 @@
 namespace OData {
 namespace Test {
 namespace {
+const auto test_tree = "root {\n"
+                       "\tTEST_PLATFORM {\n"
+                       "\t\t2018-03-08 {\n"
+                       "\t\t\t{\n"
+                       "\t\t\t\tid=TEST_UUID0\n"
+                       "\t\t\t\tname=TEST_NAME0\n"
+                       "\t\t\t\tingestion_date=2018-03-08T10:45:22\n"
+                       "\t\t\t\tplatform=TEST_PLATFORM\n"
+                       "\t\t\t\ttype=TEST_PRODUCT_TYPE\n"
+                       "\t\t\t\tfiles {\n"
+                       "\t\t\t\t\tTEST_FILE0( 1000000000 "
+                       ")^Products('TEST_UUID0')/$value\n"
+                       "\t\t\t\t\textracted {\n"
+                       "\t\t\t\t\t\ttestfile.xml( 44088 "
+                       ")^Products('TEST_UUID0')/Nodes('TEST_FILE0')/"
+                       "Nodes('testfile.xml')/$value\n"
+                       "\t\t\t\t\t\ttestfolder {\n"
+                       "\t\t\t\t\t\t\ttestfile2.xml( 44088 "
+                       ")^Products('TEST_UUID0')/Nodes('TEST_FILE0')/"
+                       "Nodes('testfolder')/Nodes('testfile2.xml')/$value\n"
+                       "\t\t\t\t\t\t}\n"
+                       "\t\t\t\t\t}\n"
+                       "\t\t\t\t\t\n"
+                       "\t\t\t\t}\n"
+                       "\t\t\t}\n"
+                       "\t\t}\n"
+                       "\t\t2018-03-09 {\n"
+                       "\t\t\t{\n"
+                       "\t\t\t\tid=TEST_UUID1\n"
+                       "\t\t\t\tname=TEST_NAME1\n"
+                       "\t\t\t\tingestion_date=2018-03-09T10:45:22\n"
+                       "\t\t\t\tplatform=TEST_PLATFORM\n"
+                       "\t\t\t\ttype=TEST_PRODUCT_TYPE\n"
+                       "\t\t\t\tfiles {\n"
+                       "\t\t\t\t\tTEST_FILE1( 1000000000 "
+                       ")^Products('TEST_UUID1')/$value\n"
+                       "\t\t\t\t\textracted {\n"
+                       "\t\t\t\t\t\ttestfile.xml( 44088 "
+                       ")^Products('TEST_UUID1')/Nodes('TEST_FILE1')/"
+                       "Nodes('testfile.xml')/$value\n"
+                       "\t\t\t\t\t\ttestfolder {\n"
+                       "\t\t\t\t\t\t\ttestfile2.xml( 44088 "
+                       ")^Products('TEST_UUID1')/Nodes('TEST_FILE1')/"
+                       "Nodes('testfolder')/Nodes('testfile2.xml')/$value\n"
+                       "\t\t\t\t\t\t}\n"
+                       "\t\t\t\t\t}\n"
+                       "\t\t\t\t\t\n"
+                       "\t\t\t\t}\n"
+                       "\t\t\t}\n"
+                       "\t\t}\n"
+                       "\t\t2018-03-10 {\n"
+                       "\t\t\t{\n"
+                       "\t\t\t\tid=TEST_UUID2\n"
+                       "\t\t\t\tname=TEST_NAME2\n"
+                       "\t\t\t\tingestion_date=2018-03-10T10:45:22\n"
+                       "\t\t\t\tplatform=TEST_PLATFORM\n"
+                       "\t\t\t\ttype=TEST_PRODUCT_TYPE\n"
+                       "\t\t\t\tfiles {\n"
+                       "\t\t\t\t\tTEST_FILE2( 1000000000 "
+                       ")^Products('TEST_UUID2')/$value\n"
+                       "\t\t\t\t\textracted {\n"
+                       "\t\t\t\t\t\ttestfile.xml( 44088 "
+                       ")^Products('TEST_UUID2')/Nodes('TEST_FILE2')/"
+                       "Nodes('testfile.xml')/$value\n"
+                       "\t\t\t\t\t\ttestfolder {\n"
+                       "\t\t\t\t\t\t\ttestfile2.xml( 44088 "
+                       ")^Products('TEST_UUID2')/Nodes('TEST_FILE2')/"
+                       "Nodes('testfolder')/Nodes('testfile2.xml')/$value\n"
+                       "\t\t\t\t\t\t}\n"
+                       "\t\t\t\t\t}\n"
+                       "\t\t\t\t\t\n"
+                       "\t\t\t\t}\n"
+                       "\t\t\t}\n"
+                       "\t\t}\n"
+                       "\t}\n"
+                       "}\n";
+
+const auto removed_product1_tree =
+    "root {\n"
+    "\tTEST_PLATFORM {\n"
+    "\t\t2018-03-08 {\n"
+    "\t\t\t{\n"
+    "\t\t\t\tid=TEST_UUID0\n"
+    "\t\t\t\tname=TEST_NAME0\n"
+    "\t\t\t\tingestion_date=2018-03-08T10:45:22\n"
+    "\t\t\t\tplatform=TEST_PLATFORM\n"
+    "\t\t\t\ttype=TEST_PRODUCT_TYPE\n"
+    "\t\t\t\tfiles {\n"
+    "\t\t\t\t\tTEST_FILE0( 1000000000 "
+    ")^Products('TEST_UUID0')/$value\n"
+    "\t\t\t\t\textracted {\n"
+    "\t\t\t\t\t\ttestfile.xml( 44088 "
+    ")^Products('TEST_UUID0')/Nodes('TEST_FILE0')/"
+    "Nodes('testfile.xml')/$value\n"
+    "\t\t\t\t\t\ttestfolder {\n"
+    "\t\t\t\t\t\t\ttestfile2.xml( 44088 "
+    ")^Products('TEST_UUID0')/Nodes('TEST_FILE0')/"
+    "Nodes('testfolder')/Nodes('testfile2.xml')/$value\n"
+    "\t\t\t\t\t\t}\n"
+    "\t\t\t\t\t}\n"
+    "\t\t\t\t\t\n"
+    "\t\t\t\t}\n"
+    "\t\t\t}\n"
+    "\t\t}\n"
+    "\t\t2018-03-09 {\n"
+    "\t\t}\n"
+    "\t\t2018-03-10 {\n"
+    "\t\t\t{\n"
+    "\t\t\t\tid=TEST_UUID2\n"
+    "\t\t\t\tname=TEST_NAME2\n"
+    "\t\t\t\tingestion_date=2018-03-10T10:45:22\n"
+    "\t\t\t\tplatform=TEST_PLATFORM\n"
+    "\t\t\t\ttype=TEST_PRODUCT_TYPE\n"
+    "\t\t\t\tfiles {\n"
+    "\t\t\t\t\tTEST_FILE2( 1000000000 "
+    ")^Products('TEST_UUID2')/$value\n"
+    "\t\t\t\t\textracted {\n"
+    "\t\t\t\t\t\ttestfile.xml( 44088 "
+    ")^Products('TEST_UUID2')/Nodes('TEST_FILE2')/"
+    "Nodes('testfile.xml')/$value\n"
+    "\t\t\t\t\t\ttestfolder {\n"
+    "\t\t\t\t\t\t\ttestfile2.xml( 44088 "
+    ")^Products('TEST_UUID2')/Nodes('TEST_FILE2')/"
+    "Nodes('testfolder')/Nodes('testfile2.xml')/$value\n"
+    "\t\t\t\t\t\t}\n"
+    "\t\t\t\t\t}\n"
+    "\t\t\t\t\t\n"
+    "\t\t\t\t}\n"
+    "\t\t\t}\n"
+    "\t\t}\n"
+    "\t}\n"
+    "}\n";
+
 struct DataHubTest : public ::testing::Test {
   DataHubTest(std::uint32_t product_count = 3)
       : connection(product_count),
@@ -20,7 +153,8 @@ struct DataHubTest : public ::testing::Test {
             {"TEST_PLATFORM"},
             std::make_shared<MockStorage>(),
             "/tmp/odata",
-            10) {
+            10,
+            5) {
     while (connection.getProductsListed() < product_count) {
       std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
@@ -37,86 +171,22 @@ struct DataHubTest : public ::testing::Test {
 } // namespace
 
 TEST_F(DataHubTest, GetDataTest) {
-  const auto filesystem = data_hub.getData();
-  std::stringstream str;
-  filesystem->toString(str);
-  const auto test_tree = "root {\n"
-                         "\tTEST_PLATFORM {\n"
-                         "\t\t2018-03-08 {\n"
-                         "\t\t\t{\n"
-                         "\t\t\t\tid=TEST_UUID0\n"
-                         "\t\t\t\tname=TEST_NAME0\n"
-                         "\t\t\t\tingestion_date=2018-03-08T10:45:22\n"
-                         "\t\t\t\tplatform=TEST_PLATFORM\n"
-                         "\t\t\t\ttype=TEST_PRODUCT_TYPE\n"
-                         "\t\t\t\tfiles {\n"
-                         "\t\t\t\t\tTEST_FILE0( 1000000000 "
-                         ")^Products('TEST_UUID0')/$value\n"
-                         "\t\t\t\t\textracted {\n"
-                         "\t\t\t\t\t\ttestfile.xml( 44088 "
-                         ")^Products('TEST_UUID0')/Nodes('TEST_FILE0')/"
-                         "Nodes('testfile.xml')/$value\n"
-                         "\t\t\t\t\t\ttestfolder {\n"
-                         "\t\t\t\t\t\t\ttestfile2.xml( 44088 "
-                         ")^Products('TEST_UUID0')/Nodes('TEST_FILE0')/"
-                         "Nodes('testfolder')/Nodes('testfile2.xml')/$value\n"
-                         "\t\t\t\t\t\t}\n"
-                         "\t\t\t\t\t}\n"
-                         "\t\t\t\t\t\n"
-                         "\t\t\t\t}\n"
-                         "\t\t\t}\n"
-                         "\t\t}\n"
-                         "\t\t2018-03-09 {\n"
-                         "\t\t\t{\n"
-                         "\t\t\t\tid=TEST_UUID1\n"
-                         "\t\t\t\tname=TEST_NAME1\n"
-                         "\t\t\t\tingestion_date=2018-03-09T10:45:22\n"
-                         "\t\t\t\tplatform=TEST_PLATFORM\n"
-                         "\t\t\t\ttype=TEST_PRODUCT_TYPE\n"
-                         "\t\t\t\tfiles {\n"
-                         "\t\t\t\t\tTEST_FILE1( 1000000000 "
-                         ")^Products('TEST_UUID1')/$value\n"
-                         "\t\t\t\t\textracted {\n"
-                         "\t\t\t\t\t\ttestfile.xml( 44088 "
-                         ")^Products('TEST_UUID1')/Nodes('TEST_FILE1')/"
-                         "Nodes('testfile.xml')/$value\n"
-                         "\t\t\t\t\t\ttestfolder {\n"
-                         "\t\t\t\t\t\t\ttestfile2.xml( 44088 "
-                         ")^Products('TEST_UUID1')/Nodes('TEST_FILE1')/"
-                         "Nodes('testfolder')/Nodes('testfile2.xml')/$value\n"
-                         "\t\t\t\t\t\t}\n"
-                         "\t\t\t\t\t}\n"
-                         "\t\t\t\t\t\n"
-                         "\t\t\t\t}\n"
-                         "\t\t\t}\n"
-                         "\t\t}\n"
-                         "\t\t2018-03-10 {\n"
-                         "\t\t\t{\n"
-                         "\t\t\t\tid=TEST_UUID2\n"
-                         "\t\t\t\tname=TEST_NAME2\n"
-                         "\t\t\t\tingestion_date=2018-03-10T10:45:22\n"
-                         "\t\t\t\tplatform=TEST_PLATFORM\n"
-                         "\t\t\t\ttype=TEST_PRODUCT_TYPE\n"
-                         "\t\t\t\tfiles {\n"
-                         "\t\t\t\t\tTEST_FILE2( 1000000000 "
-                         ")^Products('TEST_UUID2')/$value\n"
-                         "\t\t\t\t\textracted {\n"
-                         "\t\t\t\t\t\ttestfile.xml( 44088 "
-                         ")^Products('TEST_UUID2')/Nodes('TEST_FILE2')/"
-                         "Nodes('testfile.xml')/$value\n"
-                         "\t\t\t\t\t\ttestfolder {\n"
-                         "\t\t\t\t\t\t\ttestfile2.xml( 44088 "
-                         ")^Products('TEST_UUID2')/Nodes('TEST_FILE2')/"
-                         "Nodes('testfolder')/Nodes('testfile2.xml')/$value\n"
-                         "\t\t\t\t\t\t}\n"
-                         "\t\t\t\t\t}\n"
-                         "\t\t\t\t\t\n"
-                         "\t\t\t\t}\n"
-                         "\t\t\t}\n"
-                         "\t\t}\n"
-                         "\t}\n"
-                         "}\n";
-  ASSERT_EQ(test_tree, str.str());
+  {
+    const auto filesystem = data_hub.getData();
+    std::stringstream str;
+    filesystem->toString(str);
+    ASSERT_EQ(test_tree, str.str());
+  }
+
+  connection.addDeletedProduct(1);
+  std::this_thread::sleep_for(std::chrono::milliseconds(10));
+
+  {
+    const auto filesystem = data_hub.getData();
+    std::stringstream str;
+    filesystem->toString(str);
+    ASSERT_EQ(removed_product1_tree, str.str());
+  }
 }
 
 TEST_F(DataHubTest, GetFileTest) {
