@@ -8,12 +8,14 @@ Following libraries are needed:
   * [glog](https://github.com/google/glog)
   * [tinyxml2](https://github.com/leethomason/tinyxml2)
   * [libdb++](https://github.com/berkeleydb/libdb)
-  * boost (filesystem, thread, serialization, iostreams program_options)
+  * boost (filesystem, thread, serialization, iostreams, program_options)
   * optionally google test (needed only for unit tests)
   * optionally fuse (needed only for fuse filesystem implementation)
 
-i.e. on debian buster just run:
+i.e. on debian just run:
 
     # apt-get install libcurl4-openssl-dev libtinyxml2-dev libdb++-dev libgoogle-glog-dev libboost-all-dev libfuse-dev
     $ cd libodata
     $ cmake . && make
+    $ cpack
+    # dpkg -i *.deb

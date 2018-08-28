@@ -1,6 +1,7 @@
 #ifndef SRC_FUSEADAPTER_H_
 #define SRC_FUSEADAPTER_H_
 
+#include "Config.h"
 #include "DataHub.h"
 #include "DataHubConnection.h"
 #include <fuse.h>
@@ -8,17 +9,17 @@
 
 namespace OData {
 
-class Config;
-
 class FuseAdapter {
 public:
-  static FuseAdapter& createInstance(const Config& config);
+  static FuseAdapter& createInstance(Config config);
   static FuseAdapter& getInstance();
   FuseAdapter(const FuseAdapter&) = default;
   FuseAdapter(FuseAdapter&&) = default;
   ~FuseAdapter();
 
   struct fuse_operations* getFuseOperations();
+  void init();
+  void destroy();
   int getattr(const char*, struct stat*);
   int access(const char* path, int mask);
   int open(const char*, fuse_file_info*);
@@ -28,10 +29,11 @@ public:
   int release(const char*, fuse_file_info*);
 
 private:
-  FuseAdapter(const Config& config);
+  FuseAdapter(Config config);
   static std::unique_ptr<FuseAdapter> singleton;
-  DataHubConnection connection;
-  DataHub data_hub;
+  Config config;
+  std::unique_ptr<DataHubConnection> connection;
+  std::unique_ptr<DataHub> data_hub;
   struct fuse_operations operations;
 };
 

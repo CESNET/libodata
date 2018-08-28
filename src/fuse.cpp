@@ -79,13 +79,14 @@ int main(int argc, char* argv[]) {
     OData::printHelp();
     return 1;
   }
-  OData::Config config(std::getenv("HOME"), arguments.config_file);
+  OData::Config config(argv[0], std::getenv("HOME"), arguments.config_file);
   if (!config.isValid()) {
     std::cerr << "Invalid configuration file '" << arguments.config_file
               << "': " << config.getErrorMessage() << std::endl;
     std::cout << config.getHelp() << std::endl;
     return 1;
   }
-  OData::FuseAdapter& fuse = OData::FuseAdapter::createInstance(config);
+  OData::FuseAdapter& fuse =
+      OData::FuseAdapter::createInstance(std::move(config));
   return fuse_main(args.argc, args.argv, fuse.getFuseOperations(), nullptr);
 }

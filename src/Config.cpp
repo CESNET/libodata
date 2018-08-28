@@ -34,6 +34,7 @@ void validate(
 } // namespace
 
 struct Config::Impl {
+  std::string program_name;
   std::string url;
   std::string username;
   std::string password;
@@ -46,8 +47,11 @@ struct Config::Impl {
   std::uint32_t cache_size;
   boost::program_options::options_description options;
 
-  Impl(boost::program_options::options_description options)
-      : url(),
+  Impl(
+      boost::program_options::options_description options,
+      std::string program_name)
+      : program_name(std::move(program_name)),
+        url(),
         username(),
         password(),
         missions(),
@@ -65,8 +69,10 @@ struct Config::Impl {
       int argc,
       char** argv,
       bool allow_unknown_arguments)
-      : Impl(createCommandLineOptions(
-            user_home, std::string("Usage: ") + argv[0] + " [options]")) {
+      : Impl(
+            createCommandLineOptions(
+                user_home, std::string("Usage: ") + argv[0] + " [options]"),
+            argv[0]) {
     try {
       if (allow_unknown_arguments) {
         initialize(boost::program_options::command_line_parser(argc, argv)
@@ -82,8 +88,11 @@ struct Config::Impl {
     }
   }
 
-  Impl(const std::string& user_home, const std::string& config_file)
-      : Impl(createOptions(user_home, "")) {
+  Impl(
+      std::string program_name,
+      const std::string& user_home,
+      const std::string& config_file)
+      : Impl(createOptions(user_home, ""), std::move(program_name)) {
     try {
       initialize(boost::program_options::parse_config_file<char>(
           config_file.c_str(), options, false));
@@ -165,11 +174,21 @@ Config::Config(
 }
 
 Config::Config(
-    const std::string& user_home, const std::string& config_file) noexcept
-    : pimpl(new Impl(user_home, config_file)) {
+    std::string program_name,
+    const std::string& user_home,
+    const std::string& config_file) noexcept
+    : pimpl(new Impl(std::move(program_name), user_home, config_file)) {
 }
 
+Config::Config(Config&&) = default;
+
 Config::~Config() = default;
+
+Config& Config::operator=(Config&&) = default;
+
+const std::string& Config::getProgramName() const noexcept {
+  return pimpl->program_name;
+}
 
 const std::string& Config::getDbPath() const noexcept {
   return pimpl->db_path;

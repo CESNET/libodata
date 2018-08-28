@@ -19,7 +19,7 @@ struct ConfigTest : public ::testing::Test {
 } // namespace
 
 TEST_F(ConfigTest, FileConfigTest) {
-  Config instance("test_home", "examples/test.cfg");
+  Config instance("unitest", "test_home", "examples/test.cfg");
   ASSERT_TRUE(instance.isValid());
   ASSERT_EQ("http://test.url:8089", instance.getUrl());
   ASSERT_EQ("testname", instance.getUsername());

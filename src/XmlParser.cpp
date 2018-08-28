@@ -39,8 +39,7 @@ public:
   explicit XmlDocument(const std::vector<char>& xml) : doc() {
     tinyxml2::XMLError xml_status = doc.Parse(xml.data(), xml.size());
     if (tinyxml2::XML_SUCCESS != xml_status) {
-      throw DataHubException(
-          "XML parsing error", doc.ErrorIDToName(xml_status));
+      throw DataHubException("XML parsing error", doc.ErrorName());
     }
   }
 

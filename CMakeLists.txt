@@ -22,7 +22,9 @@ find_package(BerkeleyDB REQUIRED)
 
 
 # library project
-set(LIB_NAME odata)
+set(LIB_NAME "odata")
+set(LIB_COMPONENT_NAME "libodata")
+set(DEVEL_COMPONENT_NAME "libodata-dev")
 add_library(${LIB_NAME} SHARED
     src/BerkeleyDBStorage.cpp src/BerkeleyDBStorage.h
     src/CachedStorage.cpp src/CachedStorage.h
@@ -75,16 +77,16 @@ configure_package_config_file(
     INSTALL_DESTINATION ${CONFIG_INSTALL_DIR})
 install(TARGETS ${LIB_NAME} 
     EXPORT ${TARGETS_EXPORT_NAME}
-    LIBRARY DESTINATION ${LIB_INSTALL_DIR}
-    ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
-    INCLUDES DESTINATION ${INCLUDE_INSTALL_DIR})
+    LIBRARY DESTINATION ${LIB_INSTALL_DIR} COMPONENT ${LIB_COMPONENT_NAME}
+    ARCHIVE DESTINATION ${LIB_INSTALL_DIR} COMPONENT ${LIB_COMPONENT_NAME}
+    INCLUDES DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT ${LIB_COMPONENT_NAME})
 install(
-    DIRECTORY include/odata DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
+    DIRECTORY include/odata DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT ${DEVEL_COMPONENT_NAME})
 install(
     FILES ${PROJECT_CONFIG} ${VERSION_CONFIG}
-    DESTINATION ${CONFIG_INSTALL_DIR} COMPONENT Devel)
+    DESTINATION ${CONFIG_INSTALL_DIR} COMPONENT ${DEVEL_COMPONENT_NAME})
 install(
-    EXPORT ${TARGETS_EXPORT_NAME} DESTINATION ${CONFIG_INSTALL_DIR} COMPONENT Devel)
+    EXPORT ${TARGETS_EXPORT_NAME} DESTINATION ${CONFIG_INSTALL_DIR} COMPONENT ${DEVEL_COMPONENT_NAME})
 
 # test client
 set(TEST_CLIENT odata-client)
@@ -99,6 +101,7 @@ if(FUSE_FOUND)
   add_executable(${FUSE_BINARY} src/fuse.cpp src/FuseAdapter.cpp src/FuseAdapter.h)
   target_link_libraries(${FUSE_BINARY} ${LIB_NAME})
   target_link_libraries(${FUSE_BINARY} ${FUSE_LIBRARIES})
+  install(TARGETS ${FUSE_BINARY} RUNTIME DESTINATION bin COMPONENT ${FUSE_BINARY})
 else(FUSE_FOUND)
   message(STATUS "FUSE package not found, skipping odatafs")
 endif(FUSE_FOUND)
@@ -136,3 +139,25 @@ if(GTEST_FOUND)
 else(GTEST_FOUND)
     message(STATUS "GTEST package not found, tests are disabled")
 endif(GTEST_FOUND)
+
+#cpak definitions to make debian package
+set(CPACK_GENERATOR "DEB")
+set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Jakub Valenta")
+set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "https://github.com/jakub-valenta/libodata")
+set(
+  CPACK_COMPONENT_LIBODATA_DESCRIPTION
+  "Library providing access to data stored in Copernicus Data Hub through Open Search and OData APIs.")
+set(
+  CPACK_COMPONENT_LIBODATA-DEV_DESCRIPTION
+  "Development package for libodata.")
+set(
+  CPACK_COMPONENT_ODATAFS_DESCRIPTION
+  "Filesystem based on fuse providing access to data stored in Copernicus Data Hub through Open Search and OData APIs.")
+set(CPACK_DEBIAN_LIBODATA-DEV_PACKAGE_DEPENDS "libboost-all-dev")
+set(CPACK_DEBIAN_ODATAFS_PACKAGE_DEPENDS "odata-libodata")
+set(CPACK_DEB_PACKAGE_COMPONENT ON)
+set(CPACK_DEB_COMPONENT_INSTALL ON)
+set(CPACK_DEBIAN_ENABLE_COMPONENT_DEPENDS ON)
+
+include(CPack)

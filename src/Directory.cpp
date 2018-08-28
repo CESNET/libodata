@@ -137,8 +137,8 @@ std::size_t Directory::getSize() const noexcept {
 
 void Directory::addChild(std::shared_ptr<FileSystemNode> child) noexcept {
   boost::unique_lock<boost::shared_mutex> lock(content_mutex);
-  const auto name = child->getName();
-  content[name] = std::move(child);
+  auto name = child->getName();
+  content[std::move(name)] = std::move(child);
 }
 
 void Directory::removeChild(const std::string& child_name) noexcept {

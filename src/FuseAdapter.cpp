@@ -4,11 +4,21 @@
 #include "FileSystemNode.h"
 #include <cstring>
 #include <functional>
+#include <glog/logging.h>
 #include <map>
 #include <string>
 #include <sys/stat.h>
 
 extern "C" {
+
+static void* odata_init(struct fuse_conn_info*) {
+  OData::FuseAdapter::getInstance().init();
+  return nullptr;
+}
+
+void odata_destroy(void*) {
+  return OData::FuseAdapter::getInstance().destroy();
+}
 
 static int odata_getattr(const char* path, struct stat* stats) {
   return OData::FuseAdapter::getInstance().getattr(path, stats);
@@ -49,6 +59,8 @@ static int odata_release(const char* path, fuse_file_info* info) {
 struct fuse_operations getOdataOperations() {
   struct fuse_operations ret;
   memset(&ret, 0, sizeof(fuse_operations));
+  ret.init = odata_init;
+  ret.destroy = odata_destroy;
   ret.getattr = odata_getattr;
   ret.access = odata_access;
   ret.open = odata_open;
@@ -63,11 +75,11 @@ namespace OData {
 
 std::unique_ptr<FuseAdapter> FuseAdapter::singleton;
 
-FuseAdapter& FuseAdapter::createInstance(const Config& config) {
+FuseAdapter& FuseAdapter::createInstance(Config config) {
   if (singleton) {
     assert(false);
   }
-  singleton.reset(new FuseAdapter(config));
+  singleton.reset(new FuseAdapter(std::move(config)));
   return *singleton;
 }
 
@@ -79,7 +91,7 @@ FuseAdapter& FuseAdapter::getInstance() {
 }
 
 int FuseAdapter::getattr(const char* path, struct stat* attr) {
-  const auto file = data_hub.getFile(path);
+  const auto file = data_hub->getFile(path);
   if (file == nullptr) {
     return -ENOENT;
   }
@@ -96,7 +108,7 @@ int FuseAdapter::getattr(const char* path, struct stat* attr) {
 }
 
 int FuseAdapter::access(const char* path, int) {
-  if (data_hub.getFile(path) == nullptr) {
+  if (data_hub->getFile(path) == nullptr) {
     return -ENOENT;
   } else {
     return 0;
@@ -105,7 +117,7 @@ int FuseAdapter::access(const char* path, int) {
 
 int FuseAdapter::open(const char* path, fuse_file_info*) {
   try {
-    data_hub.getFile(path, 0, 0);
+    data_hub->getFile(path, 0, 0);
     return 0;
   } catch (...) {
     return -ENOENT;
@@ -119,7 +131,7 @@ int FuseAdapter::read(
     off_t offset,
     fuse_file_info*) {
   try {
-    const auto content = data_hub.getFile(path, offset, size);
+    const auto content = data_hub->getFile(path, offset, size);
     std::memcpy(buffer, content.data(), content.size());
     return content.size();
   } catch (...) {
@@ -137,7 +149,7 @@ int FuseAdapter::readdir(
     fuse_fill_dir_t filler,
     off_t,
     struct fuse_file_info*) {
-  const auto directory = data_hub.getFile(path);
+  const auto directory = data_hub->getFile(path);
   if (directory == nullptr) {
     return -ENOENT;
   } else if (directory->isDirectory()) {
@@ -154,14 +166,30 @@ int FuseAdapter::readdir(
   }
 }
 
-FuseAdapter::FuseAdapter(const Config& config)
-    : connection(config.getUrl(), config.getUsername(), config.getPassword()),
-      data_hub(
-          connection,
-          config.getMissions(),
-          config.getDbPath(),
-          config.getTmpPath(),
-          config.getCacheSize()),
+void FuseAdapter::init() {
+  google::InitGoogleLogging(config.getProgramName().c_str());
+  LOG(INFO) << "Initializing filesystem.";
+  connection.reset(new DataHubConnection(
+      config.getUrl(), config.getUsername(), config.getPassword()));
+  data_hub.reset(new DataHub(
+      *connection,
+      config.getMissions(),
+      config.getDbPath(),
+      config.getTmpPath(),
+      config.getCacheSize()));
+}
+
+void FuseAdapter::destroy() {
+  LOG(INFO) << "Destroying filesystem.";
+  data_hub.reset();
+  connection.reset();
+  google::ShutdownGoogleLogging();
+}
+
+FuseAdapter::FuseAdapter(Config config)
+    : config(std::move(config)),
+      connection(),
+      data_hub(),
       operations(getOdataOperations()) {
 }
 

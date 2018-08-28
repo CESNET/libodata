@@ -15,9 +15,14 @@ public:
       char** argv,
       bool allow_unknown_arguments = false) noexcept;
   explicit Config(
-      const std::string& user_home, const std::string& config_file) noexcept;
+      std::string program_name,
+      const std::string& user_home,
+      const std::string& config_file) noexcept;
+  Config(Config&&);
   ~Config();
+  Config& operator=(Config&&);
 
+  const std::string& getProgramName() const noexcept;
   const std::string& getDbPath() const noexcept;
   const std::vector<std::string>& getMissions() const noexcept;
   const std::string& getPassword() const noexcept;
