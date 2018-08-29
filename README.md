@@ -19,3 +19,15 @@ i.e. on debian just run:
     $ cmake . && make
     $ cpack
     # dpkg -i *.deb
+
+## ODatafs
+ODatafs combines libodata nad fuse library to create unix filesystem containing data stored in data hub. Filesystem metadata are stored in local database to improve performance. Last access files are also stored locally.
+
+Filesystem options are provided in configuration file. All options are written as key value pairs (key=value).
+  * url - data hub address
+  * username - data hub username
+  * password - data hub password
+  * missions - comma separated list of missions to be downloaded (i.e. Sentinel-1,Sentinel-2)
+  * db_path - database file location for storing products metadata
+  * tmp_path - folder where temporary files will be stored
+  * tmp_size - maximum temporary files count
