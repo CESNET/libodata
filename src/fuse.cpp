@@ -1,5 +1,6 @@
 #include "Config.h"
 #include "FuseAdapter.h"
+#include "Version.h"
 #include <cassert>
 #include <cstddef>
 #include <cstdlib>
@@ -52,8 +53,7 @@ int processOptions(void*, const char*, int key, struct fuse_args* outargs) {
     std::exit(1);
   }
   case VERSION: {
-    std::cout << "odatfs version "
-              << "0.0" << std::endl;
+    std::cout << "odatfs version " << OData::getVersion() << std::endl;
     fuse_opt_add_arg(outargs, "--version");
     fuse_operations dummy;
     memset(&dummy, 0, sizeof(fuse_operations));

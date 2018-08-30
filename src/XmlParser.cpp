@@ -4,6 +4,7 @@
 #include "Product.h"
 #include <algorithm>
 #include <boost/algorithm/string.hpp>
+#include <cstdlib>
 #include <functional>
 #include <tinyxml2.h>
 
@@ -164,7 +165,7 @@ std::vector<std::pair<boost::filesystem::path, std::size_t>> XmlParser::
         const auto* location = doc.getChild(node, "fileLocation");
         return std::make_pair(
             boost::filesystem::path(location->Attribute("href") + 2),
-            static_cast<std::size_t>(stream->Int64Attribute("size")));
+            static_cast<std::size_t>(std::atoll(stream->Attribute("size"))));
       };
   return doc.filterMap("dataObject", map);
 }

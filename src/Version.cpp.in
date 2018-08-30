@@ -1,0 +1,10 @@
+#include "@CMAKE_CURRENT_SOURCE_DIR@/src/Version.h"
+
+namespace OData {
+
+std::string getVersion() noexcept
+{
+    return "@PROJECT_VERSION@";
+}
+
+}

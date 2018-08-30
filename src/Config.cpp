@@ -1,5 +1,6 @@
 #include "Config.h"
 
+#include "Version.h"
 #include <boost/algorithm/string.hpp>
 #include <boost/any.hpp>
 #include <boost/filesystem.hpp>
@@ -233,7 +234,7 @@ std::string Config::getHelp() const noexcept {
 }
 
 std::string Config::getVersion() const noexcept {
-  return "Not implemented yet";
+  return getVersion();
 }
 
 std::string Config::getErrorMessage() const noexcept {

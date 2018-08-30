@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project (odata VERSION 0.0.1)
+project (odata VERSION 0.1.2)
 
 #project definition
 set(CMAKE_CXX_STANDARD 11)
@@ -20,6 +20,9 @@ endif (NOT TINYXML2_LIBRARIES)
 find_package(Boost REQUIRED COMPONENTS filesystem thread serialization iostreams program_options)
 find_package(BerkeleyDB REQUIRED)
 
+
+# generate version file
+configure_file(src/Version.cpp.in Version.cpp)
 
 # library project
 set(LIB_NAME "odata")
@@ -47,6 +50,7 @@ add_library(${LIB_NAME} SHARED
     src/SearchQuery.cpp src/SearchQuery.h
     src/SearchQueryBuilder.cpp src/SearchQueryBuilder.h
     src/TemporaryFile.cpp src/TemporaryFile.h
+    ${CMAKE_CURRENT_BINARY_DIR}/Version.cpp src/Version.h
     src/XmlParser.cpp src/XmlParser.h
     )
 target_include_directories(${LIB_NAME} PUBLIC 
@@ -96,14 +100,14 @@ target_link_libraries(${TEST_CLIENT} ${LIB_NAME})
 # fuse binary
 find_package(FUSE)
 if(FUSE_FOUND)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FILE_OFFSET_BITS=64 -DFUSE_USE_VERSION=26")
-  set(FUSE_BINARY odatafs)
-  add_executable(${FUSE_BINARY} src/fuse.cpp src/FuseAdapter.cpp src/FuseAdapter.h)
-  target_link_libraries(${FUSE_BINARY} ${LIB_NAME})
-  target_link_libraries(${FUSE_BINARY} ${FUSE_LIBRARIES})
-  install(TARGETS ${FUSE_BINARY} RUNTIME DESTINATION bin COMPONENT ${FUSE_BINARY})
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FILE_OFFSET_BITS=64 -DFUSE_USE_VERSION=26")
+    set(FUSE_BINARY odatafs)
+    add_executable(${FUSE_BINARY} src/fuse.cpp src/FuseAdapter.cpp src/FuseAdapter.h)
+    target_link_libraries(${FUSE_BINARY} ${LIB_NAME})
+    target_link_libraries(${FUSE_BINARY} ${FUSE_LIBRARIES})
+    install(TARGETS ${FUSE_BINARY} RUNTIME DESTINATION bin COMPONENT ${FUSE_BINARY})
 else(FUSE_FOUND)
-  message(STATUS "FUSE package not found, skipping odatafs")
+    message(STATUS "FUSE package not found, skipping odatafs")
 endif(FUSE_FOUND)
 
 #test - enable only if gtest library is found
@@ -145,15 +149,16 @@ set(CPACK_GENERATOR "DEB")
 set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Jakub Valenta")
 set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "https://github.com/jakub-valenta/libodata")
+set(CPACK_DEBIAN_PACKAGE_VERSION ${PROJECT_VERSION})
 set(
-  CPACK_COMPONENT_LIBODATA_DESCRIPTION
-  "Library providing access to data stored in Copernicus Data Hub through Open Search and OData APIs.")
+    CPACK_COMPONENT_LIBODATA_DESCRIPTION
+    "Library providing access to data stored in Copernicus Data Hub through Open Search and OData APIs.")
 set(
-  CPACK_COMPONENT_LIBODATA-DEV_DESCRIPTION
-  "Development package for libodata.")
+    CPACK_COMPONENT_LIBODATA-DEV_DESCRIPTION
+    "Development package for libodata.")
 set(
-  CPACK_COMPONENT_ODATAFS_DESCRIPTION
-  "Filesystem based on fuse providing access to data stored in Copernicus Data Hub through Open Search and OData APIs.")
+    CPACK_COMPONENT_ODATAFS_DESCRIPTION
+    "Filesystem based on fuse providing access to data stored in Copernicus Data Hub through Open Search and OData APIs.")
 set(CPACK_DEBIAN_LIBODATA-DEV_PACKAGE_DEPENDS "libboost-all-dev")
 set(CPACK_DEBIAN_ODATAFS_PACKAGE_DEPENDS "odata-libodata")
 set(CPACK_DEB_PACKAGE_COMPONENT ON)
