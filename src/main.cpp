@@ -40,7 +40,8 @@ int main(int argc, char** argv) {
       config.getMissions(),
       config.getDbPath(),
       config.getTmpPath(),
-      config.getCacheSize());
+      config.getCacheSize(),
+      config.getPathBuilder());
   while (true) {
     std::cout << "> ";
     std::string line;

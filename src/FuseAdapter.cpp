@@ -178,7 +178,8 @@ void FuseAdapter::init() {
       config.getMissions(),
       config.getDbPath(),
       config.getTmpPath(),
-      config.getCacheSize());
+      config.getCacheSize(),
+      config.getPathBuilder());
 }
 
 void FuseAdapter::destroy() {

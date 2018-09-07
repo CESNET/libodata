@@ -66,6 +66,30 @@ TEST(ProductTest, AttributesTest) {
     ASSERT_TRUE(type.is_initialized());
     ASSERT_EQ("type", type.get());
   }
+
+  {
+    const auto type = instance->getAttribute("year");
+    ASSERT_TRUE(type.is_initialized());
+    ASSERT_EQ("2018", type.get());
+  }
+
+  {
+    const auto type = instance->getAttribute("month");
+    ASSERT_TRUE(type.is_initialized());
+    ASSERT_EQ("11", type.get());
+  }
+
+  {
+    const auto type = instance->getAttribute("day");
+    ASSERT_TRUE(type.is_initialized());
+    ASSERT_EQ("16", type.get());
+  }
+
+  {
+    const auto type = instance->getAttribute("date");
+    ASSERT_TRUE(type.is_initialized());
+    ASSERT_EQ("2018-11-16", type.get());
+  }
 }
 
 } // namespace Test

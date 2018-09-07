@@ -13,53 +13,6 @@
 BOOST_CLASS_EXPORT_IMPLEMENT(OData::Directory)
 
 namespace OData {
-namespace {
-Directory* getOrInsertPlatform(
-    Directory::Content& platforms, const std::string& platform) {
-  auto platform_tree = platforms.find(platform);
-  if (platform_tree == platforms.end()) {
-    platforms[platform] = std::make_shared<Directory>(platform);
-    platform_tree = platforms.find(platform);
-  }
-  return static_cast<Directory*>(platform_tree->second.get());
-}
-
-Directory* getPlatform(
-    Directory::Content& platforms, const std::string& platform) {
-  auto platform_tree = platforms.find(platform);
-  if (platform_tree == platforms.end()) {
-    return nullptr;
-  } else {
-    return static_cast<Directory*>(platform_tree->second.get());
-  }
-}
-
-Directory* getOrInsertDateSubtree(
-    Directory::Content& platforms,
-    const std::string& product_platform,
-    const std::string& product_date) {
-  Directory* platform = getOrInsertPlatform(platforms, product_platform);
-  auto date_tree = dynamic_cast<Directory*>(platform->getChild(product_date));
-  if (date_tree == nullptr) {
-    auto sub_tree = std::make_shared<Directory>(product_date);
-    date_tree = sub_tree.get();
-    platform->addChild(sub_tree);
-  }
-  return date_tree;
-}
-
-Directory* getDateSubtree(
-    Directory::Content& platforms,
-    const std::string& product_platform,
-    const std::string& product_date) {
-  Directory* platform = getPlatform(platforms, product_platform);
-  if (platform == nullptr) {
-    return nullptr;
-  } else {
-    return dynamic_cast<Directory*>(platform->getChild(product_date));
-  }
-}
-} // namespace
 
 Directory::Directory(std::string name, Content content) noexcept
     : name(std::move(name)), content(std::move(content)), content_mutex() {
@@ -103,18 +56,14 @@ std::shared_ptr<FileSystemNode> Directory::getFile(
     boost::filesystem::path::const_iterator end) const noexcept {
   boost::shared_lock<boost::shared_mutex> lock(content_mutex);
   if (begin == end) {
-    return nullptr;
-  }
-  auto sub_dir_iter = content.find(begin->string());
-  if (sub_dir_iter == content.end()) {
     return {};
   }
+  const auto child = getChild(begin->string());
   const auto next = ++begin;
-  if (next == end) {
-    return sub_dir_iter->second;
-  } else {
-    return sub_dir_iter->second->getFile(next, end);
+  if (child != nullptr) {
+    return (next == end) ? child : child->getFile(next, end);
   }
+  return {};
 }
 
 std::vector<std::string> OData::Directory::readDir() const noexcept {
@@ -182,47 +131,44 @@ std::unique_ptr<Directory> Directory::createRemoteStructure(
   return std::make_unique<Directory>(std::move(name), std::move(dir_content));
 }
 
-FileSystemNode* Directory::getChild(const std::string& name) noexcept {
+std::shared_ptr<FileSystemNode> Directory::getChild(
+    const std::string& name) const noexcept {
   boost::shared_lock<boost::shared_mutex> lock(content_mutex);
   const auto it = content.find(name);
   if (it == content.end()) {
-    return nullptr;
+    return {};
   } else {
-    return it->second.get();
+    return it->second;
   }
+}
+
+std::shared_ptr<FileSystemNode> Directory::getOrCreateChild(
+    const boost::filesystem::path& path) noexcept {
+  auto child = getFile(path.begin(), path.end());
+  if (child == nullptr) {
+    auto it= path.begin();
+    ++it;
+    child = getChild(it->string());
+    if(child == nullptr) {
+      child = std::make_shared<Directory>(it->string());
+      addChild(child);
+    }
+    for(++it; it != path.end(); ++it) {
+      auto direct_child = child->getChild(it->string());
+      if (direct_child == nullptr) {
+        direct_child = std::make_shared<Directory>(it->string());
+        child->addChild(direct_child);
+      }
+      child = direct_child;
+    }
+  }
+  return child;
 }
 
 std::ostream& operator<<(
     std::ostream& ostr, const Directory& directory) noexcept {
   directory.toString(ostr);
   return ostr;
-}
-
-void Directory::appendProducts(
-    std::vector<std::shared_ptr<Product>> products) noexcept {
-  for (auto product : products) {
-    appendProduct(product, product->getPlatform(), product->getDate());
-  }
-}
-
-void Directory::appendProduct(
-    std::shared_ptr<FileSystemNode> product,
-    const std::string& platform,
-    const std::string& date) noexcept {
-  boost::unique_lock<boost::shared_mutex> lock(content_mutex);
-  auto parent = getOrInsertDateSubtree(content, platform, date);
-  parent->addChild(std::move(product));
-}
-
-void Directory::removeProduct(
-    const std::string& product_name,
-    const std::string& platform,
-    const std::string& date) noexcept {
-  boost::unique_lock<boost::shared_mutex> lock(content_mutex);
-  auto parent = getDateSubtree(content, platform, date);
-  if (parent != nullptr) {
-    parent->removeChild(product_name);
-  }
 }
 
 } /* namespace OData */

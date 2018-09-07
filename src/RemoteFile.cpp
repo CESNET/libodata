@@ -46,4 +46,15 @@ ProductPath RemoteFile::getProductPath() const noexcept {
   return path;
 }
 
+std::shared_ptr<FileSystemNode> RemoteFile::getChild(const std::string&) const
+    noexcept {
+  return {};
+}
+
+void RemoteFile::removeChild(const std::string&) noexcept {
+}
+
+void RemoteFile::addChild(std::shared_ptr<FileSystemNode>) noexcept {
+}
+
 } /* namespace OData */

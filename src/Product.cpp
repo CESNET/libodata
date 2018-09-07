@@ -2,6 +2,7 @@
 
 #include "File.h"
 #include "RemoteFile.h"
+#include <boost/algorithm/string.hpp>
 #include <glog/logging.h>
 #include <ostream>
 #include <sstream>
@@ -32,6 +33,9 @@ std::size_t parseSize(const std::string& size_property) {
   }
   return static_cast<std::size_t>(size);
 }
+
+enum DateValue { YEAR = 0, MONTH = 1, DAY = 2 };
+
 } // namespace
 
 Product::Product(std::map<std::string, std::string> attributes) noexcept
@@ -120,15 +124,11 @@ std::shared_ptr<FileSystemNode> Product::getFile(
   const auto name = begin->string();
   const auto next = ++begin;
   const bool is_last = next == end;
-  if (name == archive->getName()) {
-    return is_last ? archive : archive->getFile(next, end);
-  } else if (name == directory->getName()) {
-    return is_last ? directory : directory->getFile(next, end);
-  } else if (name == manifest->getName()) {
-    return is_last ? manifest : manifest->getFile(next, end);
-  } else {
-    return {};
+  const auto child = getChild(name);
+  if (child != nullptr) {
+    return is_last ? child : child->getFile(next, end);
   }
+  return {};
 }
 
 std::vector<std::string> Product::readDir() const noexcept {
@@ -147,6 +147,9 @@ std::size_t Product::getSize() const noexcept {
   return archive->getSize();
 }
 
+void Product::removeChild(const std::string&) noexcept {
+}
+
 std::string Product::getFilename() const noexcept {
   return archive->getName();
 }
@@ -162,6 +165,18 @@ std::string Product::getId() const noexcept {
 
 boost::optional<std::string> Product::getAttribute(
     const std::string& name) const noexcept {
+  if (name == "year") {
+    return getDateAttribute(YEAR);
+  }
+  if (name == "month") {
+    return getDateAttribute(MONTH);
+  }
+  if (name == "day") {
+    return getDateAttribute(DAY);
+  }
+  if (name == "date") {
+    return boost::optional<std::string>(getDate());
+  }
   const auto it = attributes.find(name);
   if (it == attributes.end()) {
     return boost::optional<std::string>();
@@ -188,6 +203,35 @@ std::string Product::getRequiredAttribute(const std::string& name) const
     LOG(WARNING) << "Product attribute '" << name << "' not set.";
     return std::string();
   }
+}
+
+boost::optional<std::string> Product::getDateAttribute(unsigned attribute) const
+    noexcept {
+  std::vector<std::string> splited;
+  const auto date = getDate();
+  boost::split(splited, date, [](char c) { return c == '-'; });
+  if (splited.size() > attribute) {
+    return boost::optional<std::string>(splited[attribute]);
+  } else {
+    return boost::optional<std::string>();
+  }
+}
+
+std::shared_ptr<FileSystemNode> Product::getChild(const std::string& name) const
+    noexcept {
+  if (isArchiveSet()) {
+    if (name == archive->getName()) {
+      return archive;
+    } else if (name == directory->getName()) {
+      return directory;
+    } else if (name == manifest->getName()) {
+      return manifest;
+    }
+  }
+  return {};
+}
+
+void Product::addChild(std::shared_ptr<FileSystemNode>) noexcept {
 }
 
 } /* namespace OData */

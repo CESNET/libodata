@@ -31,3 +31,5 @@ Filesystem options are provided in configuration file. All options are written a
   * db_path - database file location for storing products metadata
   * tmp_path - folder where temporary files will be stored
   * tmp_size - maximum temporary files count
+  * custom_path - template defining filesystem structure i.e. /${platformname}/${year}/${mont}/${day}. 
+    Product attributes are specified in "${}" and you can use any product attribute or additional attributes computed by odata (date, year, month, day).

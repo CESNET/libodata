@@ -7,6 +7,8 @@
 
 namespace OData {
 
+class PathBuilder;
+
 class Config {
 public:
   Config(
@@ -36,6 +38,7 @@ public:
   std::string getVersion() const noexcept;
   std::string getErrorMessage() const noexcept;
   std::uint32_t getCacheSize() const noexcept;
+  const PathBuilder& getPathBuilder() const noexcept;
 
 private:
   struct Impl;

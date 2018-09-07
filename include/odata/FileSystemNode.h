@@ -63,6 +63,24 @@ public:
   virtual std::size_t getSize() const noexcept = 0;
 
   /**
+   * Find node direct child.
+   * @param name child name
+   * @return child or null if not exist
+   */
+  virtual std::shared_ptr<FileSystemNode> getChild(
+      const std::string& name) const noexcept = 0;
+
+  /**
+   * Remove node direct child.
+   */
+  virtual void removeChild(const std::string& child_name) noexcept = 0;
+
+  /**
+   * Add child into filesystem node (if node supports it)
+   */
+  virtual void addChild(std::shared_ptr<FileSystemNode> child) noexcept = 0;
+
+  /**
    * Helper function for toString method. Indents line to specified level.
    * @param ostr destination
    * @param level indent level

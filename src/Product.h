@@ -46,6 +46,10 @@ public:
   std::vector<std::string> readDir() const noexcept override;
   bool isDirectory() const noexcept override;
   std::size_t getSize() const noexcept override;
+  std::shared_ptr<FileSystemNode> getChild(
+      const std::string& name) const noexcept override;
+  void removeChild(const std::string& child_name) noexcept override;
+  void addChild(std::shared_ptr<FileSystemNode> child) noexcept override;
   std::string getPlatform() const noexcept;
   std::string getManifestFilename() const noexcept;
   std::string getFilename() const noexcept;
@@ -57,6 +61,8 @@ public:
 private:
   bool isArchiveSet() const;
   std::string getRequiredAttribute(const std::string& name) const noexcept;
+  boost::optional<std::string> getDateAttribute(unsigned attribute) const
+      noexcept;
 
   friend class boost::serialization::access;
   template <typename Archive> void serialize(Archive& ar, const unsigned int) {

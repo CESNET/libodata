@@ -28,6 +28,10 @@ public:
   bool isDirectory() const noexcept override;
   std::size_t getSize() const noexcept override;
   ProductPath getProductPath() const noexcept override;
+  std::shared_ptr<FileSystemNode> getChild(const std::string& name) const
+      noexcept override;
+  void removeChild(const std::string& child_name) noexcept override;
+  void addChild(std::shared_ptr<FileSystemNode> child) noexcept override;
 
 private:
   friend class boost::serialization::access;

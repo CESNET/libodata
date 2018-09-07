@@ -3,6 +3,7 @@
 #include "Directory.h"
 #include "File.h"
 #include "FileSystemNode.h"
+#include "PathBuilder.h"
 #include "Product.h"
 #include <fstream>
 #include <sstream>
@@ -27,7 +28,7 @@ std::unique_ptr<Product> createProduct(
   auto product = std::make_unique<Product>(
       std::map<std::string, std::string>{{"uuid", std::move(id)},
                                          {"identifier", "name"},
-                                         {"beginposition", "date"},
+                                         {"beginposition", "2018-11-16T09:47:53.618"},
                                          {"filename", "filename"},
                                          {"platformname", std::move(platform)},
                                          {"producttype", "type"},
@@ -46,7 +47,10 @@ std::unique_ptr<Product> createProduct(
 std::unique_ptr<Directory> createFilesystem(
     std::vector<std::shared_ptr<Product>> products) noexcept {
   auto filesystem = std::make_unique<Directory>("root");
-  filesystem->appendProducts(std::move(products));
+  PathBuilder path_builder("/${platformname}/${date}");
+  for(auto product: products) {
+    filesystem->getOrCreateChild(path_builder.createPath(*product))->addChild(product);
+  }
   return filesystem;
 }
 

@@ -3,6 +3,7 @@
 #include "FileSystemNode.h"
 #include "MockConnection.h"
 #include "MockStorage.h"
+#include "PathBuilder.h"
 #include <chrono>
 #include <gtest/gtest.h>
 #include <sstream>
@@ -153,12 +154,14 @@ const auto removed_product1_tree =
 struct DataHubTest : public ::testing::Test {
   DataHubTest(std::uint32_t product_count = 3)
       : connection(product_count),
+        path_builder("/${platformname}/${date}"),
         data_hub(
             connection,
             {"TEST_PLATFORM"},
             std::make_shared<MockStorage>(),
             "/tmp/odata",
             10,
+            path_builder,
             5) {
     while (connection.getProductsListed() < product_count) {
       std::this_thread::sleep_for(std::chrono::milliseconds(10));
@@ -171,6 +174,7 @@ struct DataHubTest : public ::testing::Test {
   void TearDown() override {
   }
   MockConnection connection;
+  PathBuilder path_builder;
   DataHub data_hub;
 };
 } // namespace

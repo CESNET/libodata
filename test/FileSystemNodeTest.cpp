@@ -23,14 +23,14 @@ TEST(FileSystemNodeTest, FileTreeTraverseTest) {
   ASSERT_EQ(
       RemoteFile(
           "manifest.xml", ProductPath("uuid", "filename", "manifest.xml"), 10),
-      *testGetFile(*test_tree, "platform1/date/name/extracted/manifest.xml"));
+      *testGetFile(*test_tree, "platform1/2018-11-16/name/extracted/manifest.xml"));
   ASSERT_EQ(
       *Directory::createRemoteStructure(
           ProductPath("uuid", "filename", "subdir"), "subdir", {{"xxx", 20}}),
-      *testGetFile(*test_tree, "platform1/date/name/extracted/subdir"));
+      *testGetFile(*test_tree, "platform1/2018-11-16/name/extracted/subdir"));
   ASSERT_EQ(
       *createProduct("id", "platform1"),
-      *testGetFile(*test_tree, "platform1/date/name"));
+      *testGetFile(*test_tree, "platform1/2018-11-16/name"));
 }
 
 } // namespace Test

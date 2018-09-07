@@ -1,5 +1,6 @@
 #include "Config.h"
 
+#include "PathBuilder.h"
 #include "Version.h"
 #include <boost/algorithm/string.hpp>
 #include <boost/any.hpp>
@@ -32,6 +33,7 @@ void validate(
   boost::split(splited, s, [](char c) { return c == ','; });
   v = boost::any(Missions(std::move(splited)));
 }
+
 } // namespace
 
 struct Config::Impl {
@@ -46,6 +48,7 @@ struct Config::Impl {
   bool print_version;
   bool print_help;
   std::uint32_t cache_size;
+  PathBuilder path_builder;
   boost::program_options::options_description options;
 
   Impl(
@@ -62,6 +65,7 @@ struct Config::Impl {
         print_version(false),
         print_help(false),
         cache_size(0),
+        path_builder(),
         options(std::move(options)) {
   }
 
@@ -127,7 +131,11 @@ struct Config::Impl {
         "temporary files path on local filesystem")(
         "tmp_size",
         boost::program_options::value(&cache_size)->default_value(10),
-        "how many temporary files will be used");
+        "how many temporary files will be used")(
+        "custom_path",
+        boost::program_options::value<std::string>()->default_value(
+            "/${platformname}/${year}/${month}/${day}"),
+        "Custom path specification");
     return options;
   }
 
@@ -146,6 +154,9 @@ struct Config::Impl {
     boost::program_options::notify(values);
     if (values.count("missions")) {
       missions = std::move(values["missions"].as<Missions>().missions);
+    }
+    if (values.count("custom_path")) {
+      path_builder = PathBuilder(values["custom_path"].as<std::string>());
     }
     print_help = values.count("help");
     print_version = values.count("version");
@@ -236,7 +247,7 @@ std::string Config::getHelp() const noexcept {
 }
 
 std::string Config::getVersion() const noexcept {
-  return getVersion();
+  return OData::getVersion();
 }
 
 std::string Config::getErrorMessage() const noexcept {
@@ -263,6 +274,10 @@ std::string Config::getErrorMessage() const noexcept {
 
 std::uint32_t Config::getCacheSize() const noexcept {
   return pimpl->cache_size;
+}
+
+const PathBuilder &Config::getPathBuilder() const noexcept {
+  return pimpl->path_builder;
 }
 
 } /* namespace OData */

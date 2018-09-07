@@ -1,5 +1,8 @@
 #include "Config.h"
 
+#include "PathBuilder.h"
+#include "Product.h"
+#include "Utils.h"
 #include <boost/filesystem.hpp>
 #include <gtest/gtest.h>
 
@@ -31,6 +34,11 @@ TEST_F(ConfigTest, FileConfigTest) {
   ASSERT_EQ(20, instance.getCacheSize());
   ASSERT_TRUE(boost::filesystem::exists("path/to/db/directory"));
   ASSERT_TRUE(boost::filesystem::exists("path/to/tmp/directory"));
+  ASSERT_EQ(
+      boost::filesystem::path("/type/2018/11/16/id").string(),
+      instance.getPathBuilder()
+          .createPath(*createProduct("id", "platform"))
+          .string());
 }
 
 TEST_F(ConfigTest, CommandLineArgumentsTest) {

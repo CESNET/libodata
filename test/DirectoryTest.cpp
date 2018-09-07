@@ -110,19 +110,6 @@ TEST(DirectoryTest, ReaddirTest) {
   }
 }
 
-TEST(DirectoryTest, RemoveProductTest) {
-  auto instance = createFilesystem(
-      {createProduct("id1", "platform1"), createProduct("id2", "platform2")});
-
-  ASSERT_EQ(
-      *createProduct("id1", "platform1"),
-      *testGetFile(*instance, "platform1/date/name"));
-
-  instance->removeProduct("name", "platform1", "date");
-
-  ASSERT_EQ(nullptr, testGetFile(*instance, "platform1/date/name"));
-}
-
 TEST(DirectoryTest, SerializeTest) {
   std::stringstream sstream(
       std::ios_base::in | std::ios_base::out | std::ios_base::binary);

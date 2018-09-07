@@ -81,4 +81,28 @@ std::shared_ptr<Product> ProductPlaceHolder::getInstance() const noexcept {
   }
 }
 
+std::shared_ptr<FileSystemNode> ProductPlaceHolder::getChild(
+    const std::string& name) const noexcept {
+  auto instance = getInstance();
+  if (instance != nullptr) {
+    return instance->getChild(name);
+  }
+  return {};
+}
+
+void ProductPlaceHolder::removeChild(const std::string& name) noexcept {
+  auto instance = getInstance();
+  if (instance != nullptr) {
+    instance->removeChild(name);
+  }
+}
+
+void ProductPlaceHolder::addChild(
+    std::shared_ptr<FileSystemNode> child) noexcept {
+  auto instance = getInstance();
+  if (instance != nullptr) {
+    instance->addChild(std::move(child));
+  }
+}
+
 } /* namespace OData */

@@ -37,26 +37,19 @@ public:
   std::vector<std::string> readDir() const noexcept override;
   bool isDirectory() const noexcept override;
   std::size_t getSize() const noexcept override;
+  std::shared_ptr<FileSystemNode> getChild(const std::string& name) const
+      noexcept override;
+  void removeChild(const std::string& child_name) noexcept override;
+  void addChild(std::shared_ptr<FileSystemNode> child) noexcept override;
 
-  void addChild(std::shared_ptr<FileSystemNode> child) noexcept;
-  void removeChild(const std::string& child_name) noexcept;
-  FileSystemNode* getChild(const std::string& name) noexcept;
+  std::shared_ptr<FileSystemNode> getOrCreateChild(
+      const boost::filesystem::path& path) noexcept;
 
   static std::unique_ptr<Directory> createRemoteStructure(
       const ProductPath& product_path,
       std::string name,
       const std::vector<std::pair<boost::filesystem::path, std::size_t>>&
           files) noexcept;
-
-  void appendProducts(std::vector<std::shared_ptr<Product>> products) noexcept;
-  void appendProduct(
-      std::shared_ptr<FileSystemNode> product,
-      const std::string& platform,
-      const std::string& date) noexcept;
-  void removeProduct(
-      const std::string& product_name,
-      const std::string& platform,
-      const std::string& date) noexcept;
 
 private:
   friend class boost::serialization::access;

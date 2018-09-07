@@ -10,6 +10,7 @@ namespace OData {
 
 class Connection;
 class FileSystemNode;
+class PathBuilder;
 class ProductStorage;
 
 /**
@@ -24,13 +25,15 @@ public:
    * @param db_path path to database file
    * @param tmp_path path to directory for storing temporary files
    * @param cache_size maximum number of temporary files
+   * @param path_builder product path builder
    */
   explicit DataHub(
       Connection& connection,
       const std::vector<std::string>& missions,
       boost::filesystem::path db_path,
       boost::filesystem::path tmp_path,
-      std::uint32_t cache_size);
+      std::uint32_t cache_size,
+      const PathBuilder& path_builder);
 
   /**
    * Creates instance of data hub which uses specified data storage
@@ -39,6 +42,7 @@ public:
    * @param product_storage storage of product metadata
    * @param tmp_path path to directory for storing temporary files
    * @param cache_size maximum number of temporary files
+   * @param path_builder product path builder
    * @param timeout_duration_ms timeout in milliseconds for periodic discovery
    * of deleted and added products
    */
@@ -48,6 +52,7 @@ public:
       std::shared_ptr<ProductStorage> product_storage,
       boost::filesystem::path tmp_path,
       std::uint32_t cache_size,
+      const PathBuilder& path_builder,
       std::uint32_t timeout_duration_ms);
 
   ~DataHub();
@@ -64,7 +69,7 @@ public:
    * @exception OData::DataHubException if error occurs
    */
   std::shared_ptr<FileSystemNode> getFile(
-      const boost::filesystem::path& file_path);
+      const boost::filesystem::path& file_path) const;
 
   /**
    * Get content of file from data hub filesystem
@@ -78,7 +83,7 @@ public:
   std::vector<char> getFile(
       const boost::filesystem::path& file_path,
       std::size_t offset,
-      std::size_t length);
+      std::size_t length) const;
 
 private:
   struct Impl;

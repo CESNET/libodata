@@ -45,4 +45,15 @@ const std::vector<char>& File::getData() const noexcept {
   return data;
 }
 
+std::shared_ptr<FileSystemNode> File::getChild(const std::string&) const
+    noexcept {
+  return {};
+}
+
+void File::removeChild(const std::string&) noexcept {
+}
+
+void File::addChild(std::shared_ptr<FileSystemNode>) noexcept {
+}
+
 } /* namespace OData */

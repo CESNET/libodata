@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project (odata VERSION 0.2.2)
+project (odata VERSION 0.3.0)
 
 #project definition
 set(CMAKE_CXX_STANDARD 14)
@@ -40,6 +40,7 @@ add_library(${LIB_NAME} SHARED
     src/File.cpp src/File.h
     src/FileSystemNode.cpp include/odata/FileSystemNode.h
     src/LRUCache.h
+    src/PathBuilder.cpp src/PathBuilder.h
     src/Product.cpp src/Product.h
     src/ProductFile.h
     src/ProductPath.cpp src/ProductPath.h
@@ -126,6 +127,7 @@ if(GTEST_FOUND)
         test/main.cpp
         test/MockConnection.cpp test/MockConnection.h
         test/MockStorage.h test/MockStorage.cpp
+        test/PathBuilderTest.cpp
         test/ProductPathTest.cpp
         test/ProductPlaceHolderTest.cpp
         test/ProductTest.cpp
