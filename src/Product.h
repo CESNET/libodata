@@ -5,6 +5,7 @@
 #include "FileSystemNode.h"
 #include "ProductPath.h"
 #include <atomic>
+#include <boost/optional/optional.hpp>
 #include <boost/serialization/base_object.hpp>
 #include <boost/serialization/export.hpp>
 #include <boost/serialization/shared_ptr.hpp>
@@ -25,14 +26,7 @@ class RemoteFile;
 class Product : public FileSystemNode {
 public:
   Product() = default;
-  Product(
-      std::string id,
-      std::string name,
-      std::string ingestion_date,
-      std::string filename,
-      std::string platform,
-      std::string type,
-      std::size_t size) noexcept;
+  Product(std::map<std::string, std::string> attributes) noexcept;
   Product(const Product&) = delete;
   virtual ~Product() = default;
   Product& operator=(const Product&) = delete;
@@ -53,33 +47,31 @@ public:
   std::vector<std::string> readDir() const noexcept override;
   bool isDirectory() const noexcept override;
   std::size_t getSize() const noexcept override;
-  const std::string& getPlatform() const noexcept;
+  std::string getPlatform() const noexcept;
   std::string getManifestFilename() const noexcept;
   std::string getFilename() const noexcept;
   std::string getDate() const noexcept;
-  const std::string& getId() const;
+  std::string getId() const noexcept;
+  boost::optional<std::string> getAttribute(const std::string& name) const
+      noexcept;
 
 private:
   bool isArchiveSet() const;
+  std::string getRequiredAttribute(const std::string& name) const noexcept;
 
   friend class boost::serialization::access;
   template <typename Archive> void serialize(Archive& ar, const unsigned int) {
     ar& boost::serialization::base_object<FileSystemNode>(*this);
-    ar& id;
-    ar& name;
-    ar& ingestion_date;
-    ar& platform;
-    ar& type;
-    ar& directory;
-    ar& manifest;
-    ar& archive;
+    std::uint32_t version = 1;
+    ar& version;
+    if (version == 1) {
+      ar& attributes;
+      ar& directory;
+      ar& manifest;
+      ar& archive;
+    }
   }
-
-  std::string id;
-  std::string name;
-  std::string ingestion_date;
-  std::string platform;
-  std::string type;
+  std::map<std::string, std::string> attributes;
   std::shared_ptr<FileSystemNode> directory;
   std::shared_ptr<File> manifest;
   std::shared_ptr<RemoteFile> archive;

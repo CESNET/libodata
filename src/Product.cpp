@@ -2,30 +2,46 @@
 
 #include "File.h"
 #include "RemoteFile.h"
+#include <glog/logging.h>
 #include <ostream>
 #include <sstream>
 
 BOOST_CLASS_EXPORT_IMPLEMENT(OData::Product)
 
 namespace OData {
+namespace {
+// attribute names used by datahub server
+constexpr const char* ATTRIBUTE_ID = "uuid";
+constexpr const char* ATTRIBUTE_FILENAME = "filename";
+constexpr const char* ATTRIBUTE_SIZE = "size";
+constexpr const char* ATTRIBUTE_PLATFORM = "platformname";
+constexpr const char* ATTRIBUTE_NAME = "identifier";
+constexpr const char* ATTRIBUTE_INGESTION_DATE = "ingestiondate";
 
-Product::Product(
-    std::string id,
-    std::string name,
-    std::string ingestion_date,
-    std::string filename,
-    std::string platform,
-    std::string type,
-    std::size_t size) noexcept
-    : id(std::move(id)),
-      name(std::move(name)),
-      ingestion_date(std::move(ingestion_date)),
-      platform(std::move(platform)),
-      type(type),
+std::size_t parseSize(const std::string& size_property) {
+  std::stringstream stream(size_property);
+  double size;
+  std::string unit;
+  stream >> size >> unit;
+  if (unit == "GB") {
+    size *= 1000 * 1000 * 1000;
+  } else if (unit == "MB") {
+    size *= 1000 * 1000;
+  } else if (unit == "KB") {
+    size *= 1000;
+  }
+  return static_cast<std::size_t>(size);
+}
+} // namespace
+
+Product::Product(std::map<std::string, std::string> attributes) noexcept
+    : attributes(std::move(attributes)),
       directory(),
       manifest(),
       archive(std::make_shared<RemoteFile>(
-          std::move(filename), ProductPath(this->id), size)) {
+          this->attributes[ATTRIBUTE_FILENAME],
+          ProductPath(this->attributes[ATTRIBUTE_ID]),
+          parseSize(this->attributes[ATTRIBUTE_SIZE]))) {
 }
 
 void Product::setArchiveStructure(
@@ -41,17 +57,16 @@ ProductPath Product::getProductPath() const noexcept {
 }
 
 ProductPath Product::getArchivePath() const noexcept {
-  return ProductPath(id, archive->getName());
+  return ProductPath(getRequiredAttribute(ATTRIBUTE_ID), archive->getName());
 }
 
 void Product::toString(std::ostream& ostr, unsigned indent_level) const
     noexcept {
   indent(ostr, indent_level) << "{\n";
-  indent(ostr, indent_level + 1) << "id=" << id << "\n";
-  indent(ostr, indent_level + 1) << "name=" << name << "\n";
-  indent(ostr, indent_level + 1) << "ingestion_date=" << ingestion_date << "\n";
-  indent(ostr, indent_level + 1) << "platform=" << platform << "\n";
-  indent(ostr, indent_level + 1) << "type=" << type << "\n";
+  for (const auto& property : attributes) {
+    indent(ostr, indent_level + 1)
+        << property.first << "=" << property.second << "\n";
+  }
   indent(ostr, indent_level + 1) << "files {\n";
   archive->toString(ostr, indent_level + 2);
   if (directory != nullptr) {
@@ -64,11 +79,12 @@ void Product::toString(std::ostream& ostr, unsigned indent_level) const
   indent(ostr, indent_level) << "}\n";
 }
 
-const std::string& Product::getPlatform() const noexcept {
-  return platform;
+std::string Product::getPlatform() const noexcept {
+  return getRequiredAttribute(ATTRIBUTE_PLATFORM);
 }
 
 std::string Product::getManifestFilename() const noexcept {
+  const auto platform = getRequiredAttribute(ATTRIBUTE_PLATFORM);
   if (platform == "Sentinel-1" || platform == "Sentinel-2") {
     return "manifest.safe";
   } else if (platform == "Sentinel-3") {
@@ -80,8 +96,7 @@ std::string Product::getManifestFilename() const noexcept {
 
 bool Product::compare(const FileSystemNode& node) const noexcept {
   const auto* entry = dynamic_cast<const Product*>(&node);
-  if (entry == nullptr || id != entry->id || name != entry->name
-      || ingestion_date != entry->ingestion_date || platform != entry->platform
+  if (entry == nullptr || attributes != entry->attributes
       || *archive != *entry->archive) {
     return false;
   } else if (isArchiveSet() == entry->isArchiveSet()) {
@@ -94,7 +109,7 @@ bool Product::compare(const FileSystemNode& node) const noexcept {
 }
 
 std::string Product::getName() const noexcept {
-  return name;
+  return getRequiredAttribute(ATTRIBUTE_NAME);
 }
 
 std::shared_ptr<FileSystemNode> Product::getFile(
@@ -138,11 +153,22 @@ std::string Product::getFilename() const noexcept {
 }
 
 std::string Product::getDate() const noexcept {
+  const auto ingestion_date = getRequiredAttribute(ATTRIBUTE_INGESTION_DATE);
   return std::string(ingestion_date, 0, ingestion_date.find("T"));
 }
 
-const std::string& Product::getId() const {
-  return id;
+std::string Product::getId() const noexcept {
+  return getRequiredAttribute(ATTRIBUTE_ID);
+}
+
+boost::optional<std::string> Product::getAttribute(
+    const std::string& name) const noexcept {
+  const auto it = attributes.find(name);
+  if (it == attributes.end()) {
+    return boost::optional<std::string>();
+  } else {
+    return boost::optional<std::string>(it->second);
+  }
 }
 
 std::ostream& operator<<(std::ostream& ostr, const Product& product) noexcept {
@@ -152,6 +178,17 @@ std::ostream& operator<<(std::ostream& ostr, const Product& product) noexcept {
 
 bool Product::isArchiveSet() const {
   return manifest != nullptr && directory != nullptr;
+}
+
+std::string Product::getRequiredAttribute(const std::string& name) const
+    noexcept {
+  const auto attribute = getAttribute(name);
+  if (attribute) {
+    return *attribute;
+  } else {
+    LOG(WARNING) << "Product attribute '" << name << "' not set.";
+    return std::string();
+  }
 }
 
 } /* namespace OData */

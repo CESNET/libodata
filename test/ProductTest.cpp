@@ -3,6 +3,7 @@
 #include "Directory.h"
 #include "File.h"
 #include "RemoteFile.h"
+#include "Utils.h"
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/filesystem/path.hpp>
@@ -15,7 +16,13 @@ namespace Test {
 TEST(ProductTest, SerializeTest) {
   std::stringstream sstream(
       std::ios_base::in | std::ios_base::out | std::ios_base::binary);
-  Product expected("id", "name", "date", "file", "platform", "type", 10);
+  Product expected({{"uuid", "id"},
+                    {"identifier", "name"},
+                    {"ingestiondate", "date"},
+                    {"filename", "file"},
+                    {"platformname", "platform"},
+                    {"producttype", "type"},
+                    {"size", "1KB"}});
   expected.setArchiveStructure(
       std::make_shared<Directory>(),
       std::make_shared<File>(
@@ -44,6 +51,21 @@ TEST(ProductTest, SerializeTest) {
   }
 
   ASSERT_EQ(expected, deserialized);
+}
+
+TEST(ProductTest, AttributesTest) {
+  const auto instance = createProduct("test_id", "test_platform");
+
+  {
+    const auto invalid = instance->getAttribute("invalid");
+    ASSERT_FALSE(invalid.is_initialized());
+  }
+
+  {
+    const auto type = instance->getAttribute("producttype");
+    ASSERT_TRUE(type.is_initialized());
+    ASSERT_EQ("type", type.get());
+  }
 }
 
 } // namespace Test

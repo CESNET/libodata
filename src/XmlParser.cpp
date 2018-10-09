@@ -98,23 +98,6 @@ public:
         ->GetText();
   }
 
-  std::size_t getSizeProperty(
-      const tinyxml2::XMLElement* entry_node,
-      const std::string& property_name) {
-    std::stringstream stream(getPropertyValue(entry_node, property_name));
-    double size;
-    std::string unit;
-    stream >> size >> unit;
-    if (unit == "GB") {
-      size *= 1000 * 1000 * 1000;
-    } else if (unit == "MB") {
-      size *= 1000 * 1000;
-    } else if (unit == "KB") {
-      size *= 1000;
-    }
-    return static_cast<std::size_t>(size);
-  }
-
   const tinyxml2::XMLElement* getChild(
       const tinyxml2::XMLElement* node, const std::string& name) const {
     return filterOne(node, [&](const tinyxml2::XMLElement& element) {
@@ -133,6 +116,18 @@ public:
     });
   }
 
+  std::map<std::string, std::string> getProductProperties(
+      const tinyxml2::XMLElement* node) const {
+    std::map<std::string, std::string> properties;
+    for (const auto& node :
+         filter(node, [&](const tinyxml2::XMLElement& element) {
+           return element.Attribute("name") != nullptr;
+         })) {
+      properties[node->Attribute("name")] = node->GetText();
+    }
+    return properties;
+  }
+
   tinyxml2::XMLDocument doc;
 };
 
@@ -143,14 +138,8 @@ std::vector<std::shared_ptr<Product>> XmlParser::parseList(
   XmlDocument doc(xml);
   std::vector<std::shared_ptr<Product>> products;
   for (const auto& entry_node : doc.getEntries()) {
-    products.push_back(std::make_shared<Product>(
-        doc.getPropertyValue(entry_node, "uuid"),
-        doc.getPropertyValue(entry_node, "identifier"),
-        doc.getPropertyValue(entry_node, "ingestiondate"),
-        doc.getPropertyValue(entry_node, "filename"),
-        doc.getPropertyValue(entry_node, "platformname"),
-        doc.getPropertyValue(entry_node, "producttype"),
-        doc.getSizeProperty(entry_node, "size")));
+    products.push_back(
+        std::make_shared<Product>(doc.getProductProperties(entry_node)));
   }
   return products;
 }

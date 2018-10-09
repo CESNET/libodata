@@ -24,14 +24,14 @@ std::vector<char> readTestInstance(const std::string& filename) {
 
 std::unique_ptr<Product> createProduct(
     std::string id, std::string platform) noexcept {
-  std::unique_ptr<Product> product(new Product(
-      std::move(id),
-      "name",
-      "date",
-      "filename",
-      std::move(platform),
-      "type",
-      1000UL));
+  std::unique_ptr<Product> product(
+      new Product({{"uuid", std::move(id)},
+                   {"identifier", "name"},
+                   {"ingestiondate", "date"},
+                   {"filename", "filename"},
+                   {"platformname", std::move(platform)},
+                   {"producttype", "type"},
+                   {"size", "1KB"}}));
 
   product->setArchiveStructure(
       Directory::createRemoteStructure(
@@ -57,4 +57,4 @@ std::shared_ptr<FileSystemNode> testGetFile(
 }
 
 } /* namespace Test */
-} /* namespace OData */
+} // namespace OData

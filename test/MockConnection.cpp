@@ -55,14 +55,14 @@ std::vector<std::shared_ptr<Product>> MockConnection::listProducts(
     SearchQuery, std::uint32_t offset, std::uint32_t count) {
   std::vector<std::shared_ptr<Product>> products;
   for (auto i = offset; i < count && product_count != 0; ++i, --product_count) {
-    products.push_back(std::make_shared<Product>(
-        generateString("TEST_UUID", i),
-        generateString("TEST_NAME", i),
-        generateTimestamp(i),
-        generateString("TEST_FILE", i),
-        "TEST_PLATFORM",
-        "TEST_PRODUCT_TYPE",
-        1000000000UL));
+    products.push_back(
+        std::make_shared<Product>(std::map<std::string, std::string>{
+            {"uuid", generateString("TEST_UUID", i)},
+            {"identifier", generateString("TEST_NAME", i)},
+            {"ingestiondate", generateTimestamp(i)},
+            {"filename", generateString("TEST_FILE", i)},
+            {"platformname", "TEST_PLATFORM"},
+            {"size", "1000000KB"}}));
     ++products_listed;
   }
   return products;
@@ -99,4 +99,4 @@ void MockConnection::addDeletedProduct(std::uint32_t id) noexcept {
 }
 
 } /* namespace Test */
-} /* namespace OData */
+} // namespace OData
