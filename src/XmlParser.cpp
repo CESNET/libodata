@@ -119,11 +119,11 @@ public:
   std::map<std::string, std::string> getProductProperties(
       const tinyxml2::XMLElement* node) const {
     std::map<std::string, std::string> properties;
-    for (const auto& node :
+    for (const auto& property_node :
          filter(node, [&](const tinyxml2::XMLElement& element) {
            return element.Attribute("name") != nullptr;
          })) {
-      properties[node->Attribute("name")] = node->GetText();
+      properties[property_node->Attribute("name")] = property_node->GetText();
     }
     return properties;
   }
