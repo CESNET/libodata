@@ -10,7 +10,7 @@ File::File(std::string name, std::vector<char> data) noexcept
     : name(std::move(name)), data(std::move(data)) {
 }
 
-void File::toString(std::ostream& ostr, unsigned indent_level) const noexcept {
+void File::toString(std::ostream& ostr, unsigned indent_level) const {
   indent(ostr, indent_level) << name << "\n";
 }
 

@@ -60,8 +60,7 @@ ProductPath Product::getArchivePath() const noexcept {
   return ProductPath(getRequiredAttribute(ATTRIBUTE_ID), archive->getName());
 }
 
-void Product::toString(std::ostream& ostr, unsigned indent_level) const
-    noexcept {
+void Product::toString(std::ostream& ostr, unsigned indent_level) const {
   indent(ostr, indent_level) << "{\n";
   for (const auto& property : attributes) {
     indent(ostr, indent_level + 1)

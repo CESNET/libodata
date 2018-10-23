@@ -19,6 +19,7 @@
 #include <boost/asio/deadline_timer.hpp>
 #include <boost/asio/io_service.hpp>
 #include <boost/thread.hpp>
+#include <exception>
 #include <glog/logging.h>
 #include <mutex>
 #include <string>
@@ -66,7 +67,7 @@ struct DataHub::Impl {
     timer_thread.join();
   }
 
-  void initializeProductDetails(std::shared_ptr<Product> product) {
+  bool initializeProductDetails(std::shared_ptr<Product> product) {
     auto manifest_path = product->getArchivePath();
     const auto manifest_filename = product->getManifestFilename();
     manifest_path.append(manifest_filename);
@@ -81,10 +82,12 @@ struct DataHub::Impl {
           std::move(content),
           std::make_shared<File>(
               std::move(manifest_filename), std::move(manifest)));
-    } catch (DataHubException& ex) {
-      LOG(ERROR) << "Product details unavailable: " << ex.what();
+      product_storage->storeProduct(product);
+      return true;
+    } catch (std::exception& ex) {
+      LOG(ERROR) << "Product initialization failed: " << ex.what();
+      return false;
     }
-    product_storage->storeProduct(product);
   }
 
   void removeDeletedProducts() {
@@ -100,7 +103,11 @@ struct DataHub::Impl {
           const auto product = product_storage->getProduct(deleted_product);
           data->removeProduct(
               product->getName(), product->getPlatform(), product->getDate());
-          product_storage->deleteProduct(deleted_product);
+          try {
+            product_storage->deleteProduct(deleted_product);
+          } catch (std::exception& ex) {
+            LOG(ERROR) << "Deleted product not removed: " << ex.what();
+          }
         }
       }
     } while (!deleted_products.empty() && !stop);
@@ -147,12 +154,13 @@ struct DataHub::Impl {
                       << "' already in local database";
           } else {
             LOG(INFO) << "New product '" << product->getId() << "' found";
-            initializeProductDetails(product);
-            data->appendProduct(
-                std::make_shared<ProductPlaceHolder>(
-                    product->getId(), product->getName(), product_storage),
-                product->getPlatform(),
-                product->getDate());
+            if (initializeProductDetails(product)) {
+              data->appendProduct(
+                  std::make_shared<ProductPlaceHolder>(
+                      product->getId(), product->getName(), product_storage),
+                  product->getPlatform(),
+                  product->getDate());
+            }
           }
         }
       }
@@ -167,7 +175,7 @@ struct DataHub::Impl {
         loadDatabase();
       }
       addNewProducts();
-    } catch (DataHubException& ex) {
+    } catch (std::exception& ex) {
       LOG(ERROR) << "Error occured during product discovery: " << ex.what();
     }
     this->timer.expires_from_now(

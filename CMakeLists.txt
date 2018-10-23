@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project (odata VERSION 0.2.0)
+project (odata VERSION 0.2.1)
 
 #project definition
 set(CMAKE_CXX_STANDARD 11)
@@ -127,6 +127,7 @@ if(GTEST_FOUND)
         test/MockConnection.cpp test/MockConnection.h
         test/MockStorage.h test/MockStorage.cpp
         test/ProductPathTest.cpp
+        test/ProductPlaceHolderTest.cpp
         test/ProductTest.cpp
         test/RemoteFileTest.cpp
         test/SearchQueryTest.cpp

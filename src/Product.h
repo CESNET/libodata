@@ -37,8 +37,7 @@ public:
   ProductPath getProductPath() const noexcept;
   ProductPath getArchivePath() const noexcept;
 
-  void toString(std::ostream& ostr, unsigned indent_level = 0) const
-      noexcept override;
+  void toString(std::ostream& ostr, unsigned indent_level = 0) const override;
   bool compare(const FileSystemNode& node) const noexcept override;
   std::string getName() const noexcept override;
   std::shared_ptr<FileSystemNode> getFile(

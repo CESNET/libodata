@@ -1,6 +1,9 @@
 #include "MockStorage.h"
 
+#include "DataHubException.h"
+
 namespace OData {
+namespace Test {
 namespace {
 class Iterator : public ProductIterator {
 public:
@@ -26,16 +29,21 @@ private:
 };
 } // namespace
 
+MockStorage::MockStorage() : products(), fail(false) {
+}
+
 void MockStorage::storeProduct(std::shared_ptr<Product> product) {
+  doFail();
   products[product->getId()] = product;
 }
 
-bool MockStorage::productExists(const std::string& product_id) {
+bool MockStorage::productExists(const std::string& product_id) noexcept {
   return products.find(product_id) != products.end();
 }
 
 std::shared_ptr<Product> MockStorage::getProduct(
     const std::string& product_id) {
+  doFail();
   if (productExists(product_id)) {
     return products[product_id];
   } else {
@@ -44,6 +52,7 @@ std::shared_ptr<Product> MockStorage::getProduct(
 }
 
 void MockStorage::deleteProduct(const std::string& product_id) {
+  doFail();
   const auto it = products.find(product_id);
   if (it != products.end()) {
     products.erase(it);
@@ -51,8 +60,20 @@ void MockStorage::deleteProduct(const std::string& product_id) {
 }
 
 std::unique_ptr<ProductIterator> MockStorage::iterator() {
+  doFail();
   return std::unique_ptr<ProductIterator>(
       new Iterator(products.begin(), products.end()));
 }
 
+void MockStorage::setFail(bool fail) noexcept {
+  this->fail = fail;
+}
+
+void MockStorage::doFail() {
+  if (fail) {
+    throw DataHubException("Test operation failed.");
+  }
+}
+
+} // namespace Test
 } /* namespace OData */

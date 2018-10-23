@@ -25,11 +25,35 @@ public:
   ProductStorage(const ProductStorage&) = delete;
   ProductStorage& operator=(const ProductStorage&) = delete;
 
+  /**
+   * Store product into storage
+   * @param product to store
+   * @exception OData::DataHubException if operation fails
+   */
   virtual void storeProduct(std::shared_ptr<Product> product) = 0;
-  virtual bool productExists(const std::string& product_id) = 0;
+  /**
+   * Check if product exists
+   * @param product_id
+   * @return if product is stored in storage
+   */
+  virtual bool productExists(const std::string& product_id) noexcept = 0;
+  /**
+   * Load product from storage
+   * @param product_id
+   * @exception OData::DataHubException if operation fails or product does not
+   * exist
+   */
   virtual std::shared_ptr<Product> getProduct(
       const std::string& product_id) = 0;
+  /**
+   * Delete product from storage
+   * @param product_id
+   * @exception OData::DataHubException if operation fails
+   */
   virtual void deleteProduct(const std::string& product_id) = 0;
+  /**
+   * @return iterator over all stored records
+   */
   virtual std::unique_ptr<ProductIterator> iterator() = 0;
 };
 

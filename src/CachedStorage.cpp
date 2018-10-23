@@ -13,7 +13,7 @@ void CachedStorage::storeProduct(std::shared_ptr<Product> product) {
   cache.put(product->getId(), product);
 }
 
-bool CachedStorage::productExists(const std::string& product_id) {
+bool CachedStorage::productExists(const std::string& product_id) noexcept {
   if (cache.get(product_id).is_initialized()) {
     return true;
   } else {

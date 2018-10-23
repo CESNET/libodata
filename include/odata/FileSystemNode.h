@@ -24,8 +24,8 @@ public:
   bool operator==(const FileSystemNode& node) const;
   bool operator!=(const FileSystemNode& node) const;
 
-  virtual void toString(std::ostream& ostr, unsigned indent_level = 0) const
-      noexcept = 0;
+  virtual void toString(
+      std::ostream& ostr, unsigned indent_level = 0) const = 0;
   virtual bool compare(const FileSystemNode& node) const noexcept = 0;
   virtual std::string getName() const noexcept = 0;
   virtual std::shared_ptr<FileSystemNode> getFile(

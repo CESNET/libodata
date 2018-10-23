@@ -65,8 +65,7 @@ Directory::Directory(std::string name, Content content) noexcept
     : name(std::move(name)), content(std::move(content)), content_mutex() {
 }
 
-void Directory::toString(std::ostream& ostr, unsigned indent_level) const
-    noexcept {
+void Directory::toString(std::ostream& ostr, unsigned indent_level) const {
   boost::shared_lock<boost::shared_mutex> lock(content_mutex);
   indent(ostr, indent_level) << name << " {\n";
   for (const auto& sub_dir : content) {

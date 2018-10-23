@@ -18,8 +18,7 @@ public:
       std::shared_ptr<ProductStorage> product_storage);
   virtual ~ProductPlaceHolder() = default;
 
-  void toString(std::ostream& ostr, unsigned indent_level = 0) const
-      noexcept override;
+  void toString(std::ostream& ostr, unsigned indent_level = 0) const override;
   bool compare(const FileSystemNode& node) const noexcept override;
   std::string getName() const noexcept override;
   std::shared_ptr<FileSystemNode> getFile(
@@ -30,6 +29,8 @@ public:
   std::size_t getSize() const noexcept override;
 
 private:
+  std::shared_ptr<Product> getInstance() const noexcept;
+
   std::string id;
   std::string name;
   std::shared_ptr<ProductStorage> product_storage;

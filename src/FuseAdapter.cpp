@@ -119,7 +119,8 @@ int FuseAdapter::open(const char* path, fuse_file_info*) {
   try {
     data_hub->getFile(path, 0, 0);
     return 0;
-  } catch (...) {
+  } catch (std::exception& ex) {
+    LOG(WARNING) << "open failed: " << ex.what();
     return -ENOENT;
   }
 }
@@ -134,7 +135,8 @@ int FuseAdapter::read(
     const auto content = data_hub->getFile(path, offset, size);
     std::memcpy(buffer, content.data(), content.size());
     return content.size();
-  } catch (...) {
+  } catch (std::exception& ex) {
+    LOG(WARNING) << "read failed: " << ex.what();
     return -ENOENT;
   }
 }

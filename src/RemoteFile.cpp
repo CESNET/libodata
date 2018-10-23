@@ -9,8 +9,7 @@ RemoteFile::RemoteFile(
     : name(std::move(name)), path(std::move(path)), size(size) {
 }
 
-void RemoteFile::toString(std::ostream& ostr, unsigned indent_level) const
-    noexcept {
+void RemoteFile::toString(std::ostream& ostr, unsigned indent_level) const {
   indent(ostr, indent_level) << name << "( " << size << " )"
                              << "^" << path.getPath() << "\n";
 }

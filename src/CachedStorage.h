@@ -15,7 +15,7 @@ public:
   CachedStorage& operator=(const CachedStorage&) = delete;
 
   void storeProduct(std::shared_ptr<Product> product) override;
-  bool productExists(const std::string& product_id) override;
+  bool productExists(const std::string& product_id) noexcept override;
   std::shared_ptr<Product> getProduct(const std::string& product_id) override;
   void deleteProduct(const std::string& product_id) override;
   std::unique_ptr<ProductIterator> iterator() override;

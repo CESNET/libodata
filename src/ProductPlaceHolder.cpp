@@ -2,6 +2,8 @@
 
 #include "Product.h"
 #include "ProductStorage.h"
+#include <exception>
+#include <glog/logging.h>
 
 namespace OData {
 
@@ -15,7 +17,7 @@ ProductPlaceHolder::ProductPlaceHolder(
 }
 
 void ProductPlaceHolder::toString(
-    std::ostream& ostr, unsigned indent_level) const noexcept {
+    std::ostream& ostr, unsigned indent_level) const {
   product_storage->getProduct(id)->toString(ostr, indent_level);
 }
 
@@ -25,8 +27,9 @@ bool ProductPlaceHolder::compare(const FileSystemNode& node) const noexcept {
     return entry->id == id && entry->name == name;
   }
   const auto* product = dynamic_cast<const Product*>(&node);
-  if (product != nullptr) {
-    return product->compare(*product_storage->getProduct(id));
+  const auto instance = getInstance();
+  if (product != nullptr && instance != nullptr) {
+    return product->compare(*instance);
   }
   return false;
 }
@@ -38,13 +41,21 @@ std::string ProductPlaceHolder::getName() const noexcept {
 std::shared_ptr<FileSystemNode> ProductPlaceHolder::getFile(
     boost::filesystem::path::const_iterator begin,
     boost::filesystem::path::const_iterator end) const noexcept {
-  auto instance = product_storage->getProduct(id);
-  return instance->getFile(std::move(begin), std::move(end));
+  auto instance = getInstance();
+  if (instance != nullptr) {
+    return instance->getFile(std::move(begin), std::move(end));
+  } else {
+    return {};
+  }
 }
 
 std::vector<std::string> ProductPlaceHolder::readDir() const noexcept {
-  auto instance = product_storage->getProduct(id);
-  return instance->readDir();
+  auto instance = getInstance();
+  if (instance != nullptr) {
+    return instance->readDir();
+  } else {
+    return {};
+  }
 }
 
 bool ProductPlaceHolder::isDirectory() const noexcept {
@@ -52,8 +63,22 @@ bool ProductPlaceHolder::isDirectory() const noexcept {
 }
 
 std::size_t ProductPlaceHolder::getSize() const noexcept {
-  auto instance = product_storage->getProduct(id);
-  return instance->getSize();
+  auto instance = getInstance();
+  if (instance != nullptr) {
+    return instance->getSize();
+  } else {
+    return 0;
+  }
+}
+
+std::shared_ptr<Product> ProductPlaceHolder::getInstance() const noexcept {
+  try {
+    return product_storage->getProduct(id);
+  } catch (std::exception& ex) {
+    LOG(ERROR) << "ProductPlaceHolder: Product '" << id
+               << "' not found: " << ex.what();
+    return {};
+  }
 }
 
 } /* namespace OData */
