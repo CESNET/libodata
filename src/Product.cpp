@@ -16,7 +16,7 @@ constexpr const char* ATTRIBUTE_FILENAME = "filename";
 constexpr const char* ATTRIBUTE_SIZE = "size";
 constexpr const char* ATTRIBUTE_PLATFORM = "platformname";
 constexpr const char* ATTRIBUTE_NAME = "identifier";
-constexpr const char* ATTRIBUTE_INGESTION_DATE = "ingestiondate";
+constexpr const char* ATTRIBUTE_CREATION_DATE = "beginposition";
 
 std::size_t parseSize(const std::string& size_property) {
   std::stringstream stream(size_property);
@@ -152,8 +152,8 @@ std::string Product::getFilename() const noexcept {
 }
 
 std::string Product::getDate() const noexcept {
-  const auto ingestion_date = getRequiredAttribute(ATTRIBUTE_INGESTION_DATE);
-  return std::string(ingestion_date, 0, ingestion_date.find("T"));
+  const auto creation_date = getRequiredAttribute(ATTRIBUTE_CREATION_DATE);
+  return std::string(creation_date, 0, creation_date.find("T"));
 }
 
 std::string Product::getId() const noexcept {

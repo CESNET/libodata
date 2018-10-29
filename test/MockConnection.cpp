@@ -59,7 +59,7 @@ std::vector<std::shared_ptr<Product>> MockConnection::listProducts(
         std::make_shared<Product>(std::map<std::string, std::string>{
             {"uuid", generateString("TEST_UUID", i)},
             {"identifier", generateString("TEST_NAME", i)},
-            {"ingestiondate", generateTimestamp(i)},
+            {"beginposition", generateTimestamp(i)},
             {"filename", generateString("TEST_FILE", i)},
             {"platformname", "TEST_PLATFORM"},
             {"size", "1000000KB"}}));

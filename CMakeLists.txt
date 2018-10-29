@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project (odata VERSION 0.2.1)
+project (odata VERSION 0.2.2)
 
 #project definition
 set(CMAKE_CXX_STANDARD 11)

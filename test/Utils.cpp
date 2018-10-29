@@ -27,7 +27,7 @@ std::unique_ptr<Product> createProduct(
   std::unique_ptr<Product> product(
       new Product({{"uuid", std::move(id)},
                    {"identifier", "name"},
-                   {"ingestiondate", "date"},
+                   {"beginposition", "date"},
                    {"filename", "filename"},
                    {"platformname", std::move(platform)},
                    {"producttype", "type"},
