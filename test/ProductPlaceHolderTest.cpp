@@ -11,7 +11,7 @@ namespace OData {
 namespace Test {
 
 TEST(ProductPlaceHolderTest, StorageErrorsTest) {
-  auto storage = std::shared_ptr<MockStorage>(new MockStorage());
+  auto storage = std::make_shared<MockStorage>();
   ProductPlaceHolder instance("id", "name", storage);
 
   storage->setFail(true);

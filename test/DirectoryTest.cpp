@@ -40,10 +40,10 @@ TEST(DirectoryTest, CreateDirectoryTest) {
     const auto only_files = Directory::createRemoteStructure(
         createTestPath(), "files", {{"manifest.xml", 100}, {"file1.xml", 200}});
     Directory::Content test_content;
-    test_content["manifest.xml"] = std::unique_ptr<RemoteFile>(
-        new RemoteFile("manifest.xml", createTestPath("manifest.xml"), 100));
-    test_content["file1.xml"] = std::unique_ptr<RemoteFile>(
-        new RemoteFile("file1.xml", createTestPath("file1.xml"), 200));
+    test_content["manifest.xml"] = std::make_unique<RemoteFile>(
+        "manifest.xml", createTestPath("manifest.xml"), 100);
+    test_content["file1.xml"] = std::make_unique<RemoteFile>(
+        "file1.xml", createTestPath("file1.xml"), 200);
     ASSERT_EQ(Directory("files", std::move(test_content)), *only_files);
   }
 

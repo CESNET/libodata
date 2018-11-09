@@ -11,7 +11,7 @@ namespace Test {
 
 TEST(CachedStorageTest, CRUDTest) {
   const std::shared_ptr<Product> test_product = createProduct("id", "platform");
-  CachedStorage instance(std::unique_ptr<ProductStorage>(new MockStorage()));
+  CachedStorage instance(std::make_unique<MockStorage>());
   ASSERT_EQ(false, instance.productExists(test_product->getId()));
   instance.storeProduct(test_product);
   ASSERT_EQ(true, instance.productExists(test_product->getId()));

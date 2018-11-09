@@ -152,7 +152,7 @@ std::unique_ptr<ProductIterator> BerkeleyDBStorage::iterator() {
   if (ret != 0 || cursor == nullptr) {
     throwException("", "create cursor", ret);
   }
-  return std::unique_ptr<ProductIterator>(new Cursor(cursor, db_access_mutex));
+  return std::make_unique<Cursor>(cursor, db_access_mutex);
 } // namespace OData
 
 } /* namespace OData */

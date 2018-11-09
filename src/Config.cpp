@@ -171,14 +171,16 @@ Config::Config(
     int argc,
     char** argv,
     bool allow_unknown_arguments) noexcept
-    : pimpl(new Impl(user_home, argc, argv, allow_unknown_arguments)) {
+    : pimpl(std::make_unique<Impl>(
+          user_home, argc, argv, allow_unknown_arguments)) {
 }
 
 Config::Config(
     std::string program_name,
     const std::string& user_home,
     const std::string& config_file) noexcept
-    : pimpl(new Impl(std::move(program_name), user_home, config_file)) {
+    : pimpl(std::make_unique<Impl>(
+          std::move(program_name), user_home, config_file)) {
 }
 
 Config::Config(Config&&) = default;

@@ -120,11 +120,11 @@ struct DataHubConnection::Impl {
 
 DataHubConnection::DataHubConnection(
     std::string url, const std::string& username, const std::string& password)
-    : pimpl(new Impl(std::move(url), username + ":" + password)) {
+    : pimpl(std::make_unique<Impl>(std::move(url), username + ":" + password)) {
 }
 
 DataHubConnection::DataHubConnection(std::string url, std::string auth_token)
-    : pimpl(new Impl(std::move(url), std::move(auth_token))) {
+    : pimpl(std::make_unique<Impl>(std::move(url), std::move(auth_token))) {
 }
 
 DataHubConnection::~DataHubConnection() = default;
@@ -169,8 +169,7 @@ std::vector<std::string> DataHubConnection::getDeletedProducts(
 }
 
 std::unique_ptr<Connection> DataHubConnection::clone() const noexcept {
-  return std::unique_ptr<Connection>(
-      new DataHubConnection(pimpl->url, pimpl->auth_token));
+  return std::make_unique<DataHubConnection>(pimpl->url, pimpl->auth_token);
 }
 
 } /* namespace OData */

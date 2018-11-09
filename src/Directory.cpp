@@ -179,8 +179,7 @@ std::unique_ptr<Directory> Directory::createRemoteStructure(
         sub_dir.first,
         sub_dir.second);
   }
-  return std::unique_ptr<Directory>(
-      new Directory(std::move(name), std::move(dir_content)));
+  return std::make_unique<Directory>(std::move(name), std::move(dir_content));
 }
 
 FileSystemNode* Directory::getChild(const std::string& name) noexcept {

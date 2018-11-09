@@ -13,6 +13,9 @@ class ProductPath;
 class SearchQuery;
 class TemporaryFile;
 
+/**
+ * Connection for downloading product metadata and files.
+ */
 class Connection {
 public:
   Connection() = default;

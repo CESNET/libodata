@@ -87,7 +87,7 @@ std::vector<std::string> MockConnection::getDeletedProducts(
 }
 
 std::unique_ptr<Connection> MockConnection::clone() const noexcept {
-  return std::unique_ptr<Connection>(new MockConnection(product_count));
+  return std::make_unique<MockConnection>(product_count);
 }
 
 std::uint32_t OData::Test::MockConnection::getProductsListed() const noexcept {

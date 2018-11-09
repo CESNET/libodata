@@ -171,14 +171,14 @@ int FuseAdapter::readdir(
 void FuseAdapter::init() {
   google::InitGoogleLogging(config.getProgramName().c_str());
   LOG(INFO) << "Initializing filesystem.";
-  connection.reset(new DataHubConnection(
-      config.getUrl(), config.getUsername(), config.getPassword()));
-  data_hub.reset(new DataHub(
+  connection = std::make_unique<DataHubConnection>(
+      config.getUrl(), config.getUsername(), config.getPassword());
+  data_hub = std::make_unique<DataHub>(
       *connection,
       config.getMissions(),
       config.getDbPath(),
       config.getTmpPath(),
-      config.getCacheSize()));
+      config.getCacheSize());
 }
 
 void FuseAdapter::destroy() {

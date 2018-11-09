@@ -216,8 +216,8 @@ DataHub::DataHub(
     : DataHub(
           connection,
           missions,
-          std::make_shared<CachedStorage>(std::unique_ptr<ProductStorage>(
-              new BerkeleyDBStorage(std::move(db_path)))),
+          std::make_shared<CachedStorage>(
+              std::make_unique<BerkeleyDBStorage>(std::move(db_path))),
           std::move(tmp_path),
           cache_size,
           60000) {
@@ -230,7 +230,7 @@ DataHub::DataHub(
     boost::filesystem::path tmp_path,
     std::uint32_t cache_size,
     std::uint32_t timeout_duration_ms)
-    : pimpl(new Impl(
+    : pimpl(std::make_unique<Impl>(
           connection,
           missions,
           std::move(product_storage),
@@ -277,7 +277,7 @@ std::vector<char> DataHub::getFile(
 
 DataHub::~DataHub() = default;
 
-std::shared_ptr<FileSystemNode> DataHub::getData() {
+std::shared_ptr<FileSystemNode> DataHub::getData() noexcept {
   return pimpl->data;
 }
 

@@ -61,8 +61,7 @@ void MockStorage::deleteProduct(const std::string& product_id) {
 
 std::unique_ptr<ProductIterator> MockStorage::iterator() {
   doFail();
-  return std::unique_ptr<ProductIterator>(
-      new Iterator(products.begin(), products.end()));
+  return std::make_unique<Iterator>(products.begin(), products.end());
 }
 
 void MockStorage::setFail(bool fail) noexcept {

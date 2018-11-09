@@ -4,8 +4,7 @@
 
 namespace OData {
 namespace {
-// TODO constexpr in C++14
-const char* getOperatorString(SearchQuery::Operator op) {
+constexpr const char* getOperatorString(SearchQuery::Operator op) {
   switch (op) {
   case SearchQuery::Operator::AND:
     return "AND";
@@ -20,8 +19,7 @@ const char* getOperatorString(SearchQuery::Operator op) {
   }
 }
 
-// TODO constexpr in C++14
-const char* getKeywordString(SearchQuery::Keyword word) {
+constexpr const char* getKeywordString(SearchQuery::Keyword word) {
   switch (word) {
   case SearchQuery::Keyword::PLATFORM:
     return "platformname";

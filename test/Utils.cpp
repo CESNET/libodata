@@ -24,14 +24,14 @@ std::vector<char> readTestInstance(const std::string& filename) {
 
 std::unique_ptr<Product> createProduct(
     std::string id, std::string platform) noexcept {
-  std::unique_ptr<Product> product(
-      new Product({{"uuid", std::move(id)},
-                   {"identifier", "name"},
-                   {"beginposition", "date"},
-                   {"filename", "filename"},
-                   {"platformname", std::move(platform)},
-                   {"producttype", "type"},
-                   {"size", "1KB"}}));
+  auto product = std::make_unique<Product>(
+      std::map<std::string, std::string>{{"uuid", std::move(id)},
+                                         {"identifier", "name"},
+                                         {"beginposition", "date"},
+                                         {"filename", "filename"},
+                                         {"platformname", std::move(platform)},
+                                         {"producttype", "type"},
+                                         {"size", "1KB"}});
 
   product->setArchiveStructure(
       Directory::createRemoteStructure(
@@ -45,7 +45,7 @@ std::unique_ptr<Product> createProduct(
 
 std::unique_ptr<Directory> createFilesystem(
     std::vector<std::shared_ptr<Product>> products) noexcept {
-  std::unique_ptr<Directory> filesystem(new Directory("root"));
+  auto filesystem = std::make_unique<Directory>("root");
   filesystem->appendProducts(std::move(products));
   return filesystem;
 }

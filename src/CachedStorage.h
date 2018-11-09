@@ -9,7 +9,7 @@ namespace OData {
 
 class CachedStorage : public ProductStorage {
 public:
-  CachedStorage(std::unique_ptr<ProductStorage> storage);
+  explicit CachedStorage(std::unique_ptr<ProductStorage> storage);
   virtual ~CachedStorage() = default;
   CachedStorage(const CachedStorage&) = delete;
   CachedStorage& operator=(const CachedStorage&) = delete;

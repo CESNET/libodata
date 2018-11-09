@@ -10,7 +10,7 @@ namespace OData {
 
 class BerkeleyDBStorage : public ProductStorage {
 public:
-  BerkeleyDBStorage(boost::filesystem::path db_path);
+  explicit BerkeleyDBStorage(boost::filesystem::path db_path);
   virtual ~BerkeleyDBStorage();
   BerkeleyDBStorage(const BerkeleyDBStorage&) = delete;
   BerkeleyDBStorage& operator=(const BerkeleyDBStorage&) = delete;

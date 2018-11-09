@@ -21,6 +21,7 @@ public:
       std::string url,
       const std::string& username,
       const std::string& password);
+  explicit DataHubConnection(std::string url, std::string auth_token);
   virtual ~DataHubConnection();
   DataHubConnection(const DataHubConnection&) = delete;
   DataHubConnection& operator=(const DataHubConnection&) = delete;
@@ -34,8 +35,6 @@ public:
   std::unique_ptr<Connection> clone() const noexcept override;
 
 private:
-  DataHubConnection(std::string url, std::string auth_token);
-
   struct Impl;
   std::unique_ptr<Impl> pimpl;
 };

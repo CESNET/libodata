@@ -120,7 +120,7 @@ public:
       const tinyxml2::XMLElement* node) const {
     std::map<std::string, std::string> properties;
     for (const auto& property_node :
-         filter(node, [&](const tinyxml2::XMLElement& element) {
+         filter(node, [](const tinyxml2::XMLElement& element) {
            return element.Attribute("name") != nullptr;
          })) {
       properties[property_node->Attribute("name")] = property_node->GetText();
