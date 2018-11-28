@@ -41,6 +41,7 @@ add_library(${LIB_NAME} SHARED
     src/FileSystemNode.cpp include/odata/FileSystemNode.h
     src/LRUCache.h
     src/PathBuilder.cpp src/PathBuilder.h
+    src/PathSerializer.h
     src/Product.cpp src/Product.h
     src/ProductFile.h
     src/ProductPath.cpp src/ProductPath.h

@@ -1,20 +1,11 @@
 #ifndef SRC_PRODUCTPATH_H_
 #define SRC_PRODUCTPATH_H_
 
+#include "PathSerializer.h"
 #include <boost/filesystem/path.hpp>
 #include <string>
 
 namespace boost {
-namespace filesystem {
-// TODO workaround, put somewhere else
-template <class Archive>
-void serialize(Archive& ar, boost::filesystem::path& path, const unsigned int) {
-  std::string raw = path.string();
-  ar& raw;
-  path = boost::filesystem::path(raw);
-}
-} // namespace filesystem
-
 namespace serialization {
 class access;
 } // namespace serialization
@@ -46,9 +37,10 @@ public:
 private:
   friend class boost::serialization::access;
   template <typename Archive> void serialize(Archive& ar, const unsigned int) {
+    PathSerializer path_serializer(path);
     ar& uuid;
     ar& filename;
-    ar& path;
+    ar& path_serializer;
   }
 
   std::string uuid;
