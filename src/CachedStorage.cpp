@@ -25,7 +25,7 @@ std::shared_ptr<Product> CachedStorage::getProduct(
     const std::string& product_id) {
   auto cached_product = cache.get(product_id);
   if (cached_product.is_initialized()) {
-    return cached_product.value();
+    return *cached_product;
   } else {
     auto product = storage->getProduct(product_id);
     cache.put(product_id, product);
