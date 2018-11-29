@@ -172,7 +172,10 @@ void FuseAdapter::init() {
   google::InitGoogleLogging(config.getProgramName().c_str());
   LOG(INFO) << "Initializing filesystem.";
   connection = std::make_unique<DataHubConnection>(
-      config.getUrl(), config.getUsername(), config.getPassword());
+      config.getUrl(),
+      config.getUsername(),
+      config.getPassword(),
+      config.validateCertificate());
   data_hub = std::make_unique<DataHub>(
       *connection,
       config.getMissions(),

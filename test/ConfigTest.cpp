@@ -32,6 +32,7 @@ TEST_F(ConfigTest, FileConfigTest) {
   ASSERT_EQ("path/to/db/directory/file.db", instance.getDbPath());
   ASSERT_EQ("path/to/tmp/directory", instance.getTmpPath());
   ASSERT_EQ(20, instance.getCacheSize());
+  ASSERT_TRUE(instance.validateCertificate());
   ASSERT_TRUE(boost::filesystem::exists("path/to/db/directory"));
   ASSERT_TRUE(boost::filesystem::exists("path/to/tmp/directory"));
   ASSERT_EQ(
@@ -57,7 +58,9 @@ TEST_F(ConfigTest, CommandLineArgumentsTest) {
                                "--missions",
                                "mission1,mission2,mission3",
                                "--tmp_size",
-                               "30"};
+                               "30",
+                               "--validate_certificate",
+                               "0"};
     Config instance(
         "test_home",
         sizeof(arguments) / sizeof(*arguments),
@@ -71,6 +74,7 @@ TEST_F(ConfigTest, CommandLineArgumentsTest) {
     ASSERT_EQ("path/to/db/directory/file.db", instance.getDbPath());
     ASSERT_EQ("path/to/tmp/directory", instance.getTmpPath());
     ASSERT_EQ(30, instance.getCacheSize());
+    ASSERT_FALSE(instance.validateCertificate());
     ASSERT_TRUE(!instance.printHelp());
     ASSERT_TRUE(!instance.printVersion());
     ASSERT_TRUE(boost::filesystem::exists("path/to/db/directory"));
@@ -85,7 +89,9 @@ TEST_F(ConfigTest, CommandLineArgumentsTest) {
                                "--password",
                                "testpassword",
                                "--missions",
-                               "mission1"};
+                               "mission1",
+                               "--validate_certificate",
+                               "1"};
     Config instance(
         "test_home",
         sizeof(arguments) / sizeof(*arguments),
@@ -96,6 +102,7 @@ TEST_F(ConfigTest, CommandLineArgumentsTest) {
     ASSERT_EQ("test_home/.db/products.db", instance.getDbPath());
     ASSERT_EQ("test_home/.cache/odata", instance.getTmpPath());
     ASSERT_EQ(10, instance.getCacheSize());
+    ASSERT_TRUE(instance.validateCertificate());
     ASSERT_TRUE(boost::filesystem::exists("test_home/.db"));
     ASSERT_TRUE(boost::filesystem::exists("test_home/.cache/odata"));
   }

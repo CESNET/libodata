@@ -33,7 +33,10 @@ int main(int argc, char** argv) {
   google::InitGoogleLogging(argv[0]);
   LOG(INFO) << "Application started";
   OData::DataHubConnection connection(
-      config.getUrl(), config.getUsername(), config.getPassword());
+      config.getUrl(),
+      config.getUsername(),
+      config.getPassword(),
+      config.validateCertificate());
   boost::filesystem::path home(std::getenv("HOME"));
   OData::DataHub hub(
       connection,

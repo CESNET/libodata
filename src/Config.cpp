@@ -49,6 +49,7 @@ struct Config::Impl {
   bool print_help;
   std::uint32_t cache_size;
   PathBuilder path_builder;
+  bool validate_certificate;
   boost::program_options::options_description options;
 
   Impl(
@@ -66,6 +67,7 @@ struct Config::Impl {
         print_help(false),
         cache_size(0),
         path_builder(),
+        validate_certificate(true),
         options(std::move(options)) {
   }
 
@@ -135,7 +137,11 @@ struct Config::Impl {
         "custom_path",
         boost::program_options::value<std::string>()->default_value(
             "/${platformname}/${year}/${month}/${day}"),
-        "Custom path specification");
+        "Custom path specification")(
+        "validate_certificate",
+        boost::program_options::value(&validate_certificate)
+            ->default_value(true),
+        "Check server certificate validity.");
     return options;
   }
 
@@ -276,8 +282,12 @@ std::uint32_t Config::getCacheSize() const noexcept {
   return pimpl->cache_size;
 }
 
-const PathBuilder &Config::getPathBuilder() const noexcept {
+const PathBuilder& Config::getPathBuilder() const noexcept {
   return pimpl->path_builder;
+}
+
+bool Config::validateCertificate() const noexcept {
+  return pimpl->validate_certificate;
 }
 
 } /* namespace OData */

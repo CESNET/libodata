@@ -48,6 +48,17 @@ std::shared_ptr<Product> decodeProductRecord(const Dbt& record) {
   return product;
 }
 
+std::shared_ptr<Product> throwException(
+    const std::string& product_id, const std::string& operation, int error) {
+  std::stringstream str;
+  str << "DB:";
+  if (!product_id.empty()) {
+    str << " Product '" << product_id << "'";
+  }
+  str << " " << operation << " failed: " << error;
+  throw DataHubException(str.str());
+}
+
 class Cursor : public ProductIterator {
 public:
   explicit Cursor(Dbc* cursor, std::mutex& db_access_mutex)
@@ -61,11 +72,15 @@ public:
     std::unique_lock<std::mutex> lock(db_access_mutex);
     Dbt key;
     Dbt data;
-    if (cursor->get(&key, &data, DB_NEXT) == 0) {
+    const auto error = cursor->get(&key, &data, DB_NEXT);
+    switch (error) {
+    case 0:
       return decodeProductRecord(data);
-    } else {
-      // TODO handle error
+    case DB_NOTFOUND:
+      // no more records in database
       return nullptr;
+    default:
+      return throwException("", "Cursor::next", error);
     }
   }
 
@@ -73,17 +88,6 @@ private:
   Dbc* cursor;
   std::mutex& db_access_mutex;
 };
-
-std::shared_ptr<Product> throwException(
-    const std::string& product_id, const std::string& operation, int error) {
-  std::stringstream str;
-  str << "DB:";
-  if (!product_id.empty()) {
-    str << " Product '" << product_id << "'";
-  }
-  str << " " << operation << " failed: " << error;
-  throw DataHubException(str.str());
-}
 } // namespace
 
 BerkeleyDBStorage::BerkeleyDBStorage(boost::filesystem::path db_path)

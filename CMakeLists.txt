@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project (odata VERSION 0.3.0)
+project (odata VERSION 0.3.1)
 
 #project definition
 set(CMAKE_CXX_STANDARD 14)
@@ -50,6 +50,7 @@ add_library(${LIB_NAME} SHARED
     src/ScopeGuard.h
     src/SearchQuery.cpp src/SearchQuery.h
     src/SearchQueryBuilder.cpp src/SearchQueryBuilder.h
+    src/SerializationHelpers.h
     src/TemporaryFile.cpp src/TemporaryFile.h
     ${CMAKE_CURRENT_BINARY_DIR}/Version.cpp src/Version.h
     src/XmlParser.cpp src/XmlParser.h

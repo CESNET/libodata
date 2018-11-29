@@ -20,8 +20,12 @@ public:
   explicit DataHubConnection(
       std::string url,
       const std::string& username,
-      const std::string& password);
-  explicit DataHubConnection(std::string url, std::string auth_token);
+      const std::string& password,
+      bool validate_certificate);
+  explicit DataHubConnection(
+      std::string url,
+      std::string auth_token,
+      bool validate_certificate);
   virtual ~DataHubConnection();
   DataHubConnection(const DataHubConnection&) = delete;
   DataHubConnection& operator=(const DataHubConnection&) = delete;

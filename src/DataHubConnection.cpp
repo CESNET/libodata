@@ -62,10 +62,11 @@ struct MemoryCallback {
 };
 
 struct DataHubConnection::Impl {
-  Impl(std::string url, std::string auth_token)
+  Impl(std::string url, std::string auth_token, bool validate_certificate)
       : curl_handle(curl_easy_init(), curl_easy_cleanup),
         url(std::move(url)),
         auth_token(std::move(auth_token)),
+        validate_certificate(validate_certificate),
         response_parser() {
     if (this->url.back() != '/') {
       this->url.push_back('/');
@@ -86,9 +87,9 @@ struct DataHubConnection::Impl {
     curl_easy_setopt(curl_handle.get(), CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
     curl_easy_setopt(curl_handle.get(), CURLOPT_USERPWD, auth_token.c_str());
     curl_easy_setopt(curl_handle.get(), CURLOPT_FOLLOWLOCATION, 1L);
-    // TODO remove workaround for testing environment, add configuration option
-    // for loading certificates from custom location
-    curl_easy_setopt(curl_handle.get(), CURLOPT_SSL_VERIFYPEER, 0L);
+    if (!validate_certificate) {
+      curl_easy_setopt(curl_handle.get(), CURLOPT_SSL_VERIFYPEER, 0L);
+    }
     const auto ret = curl_easy_perform(curl_handle.get());
     if (ret == CURLE_OK) {
       int64_t http_code = 0;
@@ -115,16 +116,23 @@ struct DataHubConnection::Impl {
   std::unique_ptr<CURL, std::function<void(CURL*)>> curl_handle;
   std::string url;
   std::string auth_token;
+  bool validate_certificate;
   XmlParser response_parser;
 };
 
 DataHubConnection::DataHubConnection(
-    std::string url, const std::string& username, const std::string& password)
-    : pimpl(std::make_unique<Impl>(std::move(url), username + ":" + password)) {
+    std::string url,
+    const std::string& username,
+    const std::string& password,
+    bool validate_certificate)
+    : pimpl(std::make_unique<Impl>(
+          std::move(url), username + ":" + password, validate_certificate)) {
 }
 
-DataHubConnection::DataHubConnection(std::string url, std::string auth_token)
-    : pimpl(std::make_unique<Impl>(std::move(url), std::move(auth_token))) {
+DataHubConnection::DataHubConnection(
+    std::string url, std::string auth_token, bool validate_certificate)
+    : pimpl(std::make_unique<Impl>(
+          std::move(url), std::move(auth_token), validate_certificate)) {
 }
 
 DataHubConnection::~DataHubConnection() = default;
@@ -169,7 +177,8 @@ std::vector<std::string> DataHubConnection::getDeletedProducts(
 }
 
 std::unique_ptr<Connection> DataHubConnection::clone() const noexcept {
-  return std::make_unique<DataHubConnection>(pimpl->url, pimpl->auth_token);
+  return std::make_unique<DataHubConnection>(
+      pimpl->url, pimpl->auth_token, pimpl->validate_certificate);
 }
 
 } /* namespace OData */
