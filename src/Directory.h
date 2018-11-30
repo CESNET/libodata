@@ -19,6 +19,9 @@ namespace OData {
 class Product;
 class ProductPath;
 
+/**
+ * Filesystem directory implementation
+ */
 class Directory : public FileSystemNode {
 public:
   using Content = std::map<std::string, std::shared_ptr<FileSystemNode>>;
@@ -43,9 +46,19 @@ public:
   void removeChild(const std::string& child_name) noexcept override;
   void addChild(std::shared_ptr<FileSystemNode> child) noexcept override;
 
-  std::shared_ptr<FileSystemNode> getOrCreateChild(
+  /**
+   * @return requested subdirectory. Missing directories are created.
+   */
+  std::shared_ptr<FileSystemNode> getOrCreateSubdirectory(
       const boost::filesystem::path& path) noexcept;
 
+  /**
+   * Generate filesystem structure based on data hub product content
+   * @param product_path data hub product path
+   * @param name product name
+   * @param files product files
+   * @return product archive content
+   */
   static std::unique_ptr<Directory> createRemoteStructure(
       const ProductPath& product_path,
       std::string name,

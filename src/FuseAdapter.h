@@ -9,15 +9,31 @@
 
 namespace OData {
 
+/**
+ * Fuse filesystem C++ adapter.
+ */
 class FuseAdapter {
 public:
+  /**
+   * @param config program configuration
+   * @return singleton instance
+   */
   static FuseAdapter& createInstance(Config config);
+
+  /**
+   * @return singleton instance
+   */
   static FuseAdapter& getInstance();
   FuseAdapter(const FuseAdapter&) = default;
   FuseAdapter(FuseAdapter&&) = default;
   ~FuseAdapter();
 
+  /**
+   * @return initialized C fuse structure
+   */
   struct fuse_operations* getFuseOperations();
+
+  // fuse operations
   void init();
   void destroy();
   int getattr(const char*, struct stat*);

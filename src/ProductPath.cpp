@@ -18,10 +18,10 @@ ProductPath::ProductPath(std::string uuid, std::string filename) noexcept
 ProductPath::ProductPath(
     std::string uuid,
     std::string filename,
-    boost::filesystem::path path) noexcept
+    boost::filesystem::path file_path) noexcept
     : uuid(std::move(uuid)),
       filename(std::move(filename)),
-      path(std::move(path)) {
+      file_path(std::move(file_path)) {
 }
 
 ProductPath::ProductPath(
@@ -31,7 +31,7 @@ ProductPath::ProductPath(
 }
 
 void ProductPath::append(std::string path) noexcept {
-  this->path /= path;
+  this->file_path /= std::move(path);
 }
 
 std::string ProductPath::getPath() const noexcept {
@@ -40,7 +40,7 @@ std::string ProductPath::getPath() const noexcept {
   if (!filename.empty()) {
     uri << "/Nodes('" << filename << "')";
   }
-  for (const auto& item : path) {
+  for (const auto& item : file_path) {
     uri << "/Nodes('" << item.string() << "')";
   }
   uri << "/$value";
@@ -48,7 +48,7 @@ std::string ProductPath::getPath() const noexcept {
 }
 
 bool ProductPath::operator==(const ProductPath& other) const noexcept {
-  return uuid == other.uuid && filename == other.filename && path == other.path;
+  return uuid == other.uuid && filename == other.filename && file_path == other.file_path;
 }
 
 bool OData::ProductPath::operator<(const ProductPath& other) const noexcept {

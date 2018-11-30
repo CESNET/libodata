@@ -146,8 +146,8 @@ std::shared_ptr<FileSystemNode> Directory::getChild(
   }
 }
 
-std::shared_ptr<FileSystemNode> Directory::getOrCreateChild(
-    const boost::filesystem::path& path) noexcept {
+std::shared_ptr<FileSystemNode> Directory::getOrCreateSubdirectory(
+        const boost::filesystem::path &path) noexcept {
   auto child = getFile(path.begin(), path.end());
   if (child == nullptr) {
     auto it= path.begin();
