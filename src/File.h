@@ -10,6 +10,9 @@
 
 namespace OData {
 
+/**
+ * In memory stored file.
+ */
 class File : public FileSystemNode {
 public:
   File() = default;

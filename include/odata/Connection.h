@@ -30,7 +30,8 @@ public:
    * @param offset index of first product to be fetched
    * @param count how many product should be listed
    * @return list of discovered products
-   * @exception if service is not available or response is invalid
+   * @exception OData::DataHubException if service is not available or response
+   * is invalid
    */
   virtual std::vector<std::shared_ptr<Product>> listProducts(
       SearchQuery query, std::uint32_t offset, std::uint32_t count) = 0;
@@ -39,7 +40,8 @@ public:
    * Download file into memory
    * @param path path to requested file
    * @return file content
-   * @exception if service is not available or response is invalid
+   * @exception OData::DataHubException if service is not available or response
+   * is invalid
    */
   virtual std::vector<char> getFile(const ProductPath& path) = 0;
 
@@ -48,7 +50,8 @@ public:
    * @param path path to requested file
    * @param tmp_file temporary file location
    * @return temporary file
-   * @exception if service is not available or response is invalid
+   * @exception OData::DataHubException if service is not available or response
+   * is invalid
    */
   virtual std::shared_ptr<TemporaryFile> getTemporaryFile(
       const ProductPath& path, boost::filesystem::path tmp_file) = 0;
@@ -58,6 +61,8 @@ public:
    * List size depends on server and it is not configurable.
    * @param offset offset of first element from server deleted list
    * @return deleted products or empty list if end of server list was reached
+   * @exception OData::DataHubException if service is not available or response
+   * is invalid
    */
   virtual std::vector<std::string> getDeletedProducts(std::uint32_t offset) = 0;
 

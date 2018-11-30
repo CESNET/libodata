@@ -27,8 +27,18 @@ public:
   bool operator==(const FileSystemNode& node) const;
   bool operator!=(const FileSystemNode& node) const;
 
+  /**
+   * Create text representation
+   * @param ostr stream to print on
+   * @param indent_level line indentation level
+   */
   virtual void toString(
       std::ostream& ostr, unsigned indent_level = 0) const = 0;
+
+  /**
+   * @param node node to compare with
+   * @return if nodes are equal
+   */
   virtual bool compare(const FileSystemNode& node) const noexcept = 0;
 
   /**

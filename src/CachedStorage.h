@@ -7,6 +7,10 @@
 
 namespace OData {
 
+/**
+ * In memory product storage which caches 1000 last accessed products.
+ * Uncached products are fetched from underlying storage.
+ */
 class CachedStorage : public ProductStorage {
 public:
   explicit CachedStorage(std::unique_ptr<ProductStorage> storage);
