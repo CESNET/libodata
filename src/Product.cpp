@@ -1,6 +1,7 @@
 #include "Product.h"
 
 #include "File.h"
+#include "ProductAttribute.h"
 #include "RemoteFile.h"
 #include <boost/algorithm/string.hpp>
 #include <glog/logging.h>
@@ -11,13 +12,6 @@ BOOST_CLASS_EXPORT_IMPLEMENT(OData::Product)
 
 namespace OData {
 namespace {
-// attribute names used by datahub server
-constexpr const char* ATTRIBUTE_ID = "uuid";
-constexpr const char* ATTRIBUTE_FILENAME = "filename";
-constexpr const char* ATTRIBUTE_SIZE = "size";
-constexpr const char* ATTRIBUTE_PLATFORM = "platformname";
-constexpr const char* ATTRIBUTE_NAME = "identifier";
-constexpr const char* ATTRIBUTE_CREATION_DATE = "beginposition";
 
 std::size_t parseSize(const std::string& size_property) {
   std::stringstream stream(size_property);
@@ -43,9 +37,9 @@ Product::Product(std::map<std::string, std::string> attributes) noexcept
       directory(),
       manifest(),
       archive(std::make_shared<RemoteFile>(
-          this->attributes[ATTRIBUTE_FILENAME],
-          ProductPath(this->attributes[ATTRIBUTE_ID]),
-          parseSize(this->attributes[ATTRIBUTE_SIZE]))) {
+          getRequiredAttribute(Attribute::NAME) + ".zip",
+          ProductPath(getRequiredAttribute(Attribute::ID)),
+          parseSize(getRequiredAttribute(Attribute::SIZE)))) {
 }
 
 void Product::setArchiveStructure(
@@ -61,7 +55,9 @@ ProductPath Product::getProductPath() const noexcept {
 }
 
 ProductPath Product::getArchivePath() const noexcept {
-  return ProductPath(getRequiredAttribute(ATTRIBUTE_ID), archive->getName());
+  return ProductPath(
+      getRequiredAttribute(Attribute::ID),
+      getRequiredAttribute(Attribute::FILENAME));
 }
 
 void Product::toString(std::ostream& ostr, unsigned indent_level) const {
@@ -83,11 +79,11 @@ void Product::toString(std::ostream& ostr, unsigned indent_level) const {
 }
 
 std::string Product::getPlatform() const noexcept {
-  return getRequiredAttribute(ATTRIBUTE_PLATFORM);
+  return getRequiredAttribute(Attribute::PLATFORM);
 }
 
 std::string Product::getManifestFilename() const noexcept {
-  const auto platform = getRequiredAttribute(ATTRIBUTE_PLATFORM);
+  const auto platform = getPlatform();
   if (platform == "Sentinel-1" || platform == "Sentinel-2") {
     return "manifest.safe";
   } else if (platform == "Sentinel-3") {
@@ -112,7 +108,12 @@ bool Product::compare(const FileSystemNode& node) const noexcept {
 }
 
 std::string Product::getName() const noexcept {
-  return getRequiredAttribute(ATTRIBUTE_NAME);
+  return getRequiredAttribute(Attribute::NAME);
+}
+
+
+void Product::setName(std::string) noexcept {
+  //nothing to do
 }
 
 std::shared_ptr<FileSystemNode> Product::getFile(
@@ -155,12 +156,12 @@ std::string Product::getFilename() const noexcept {
 }
 
 std::string Product::getDate() const noexcept {
-  const auto creation_date = getRequiredAttribute(ATTRIBUTE_CREATION_DATE);
+  const auto creation_date = getRequiredAttribute(Attribute::CREATION_DATE);
   return std::string(creation_date, 0, creation_date.find("T"));
 }
 
 std::string Product::getId() const noexcept {
-  return getRequiredAttribute(ATTRIBUTE_ID);
+  return getRequiredAttribute(Attribute::ID);
 }
 
 boost::optional<std::string> Product::getAttribute(
@@ -207,11 +208,11 @@ std::string Product::getRequiredAttribute(const std::string& name) const
 
 boost::optional<std::string> Product::getDateAttribute(unsigned attribute) const
     noexcept {
-  std::vector<std::string> splited;
+  std::vector<std::string> split;
   const auto date = getDate();
-  boost::split(splited, date, [](char c) { return c == '-'; });
-  if (splited.size() > attribute) {
-    return boost::optional<std::string>(splited[attribute]);
+  boost::split(split, date, [](char c) { return c == '-'; });
+  if (split.size() > attribute) {
+    return boost::optional<std::string>(split[attribute]);
   } else {
     return boost::optional<std::string>();
   }
@@ -232,6 +233,11 @@ std::shared_ptr<FileSystemNode> Product::getChild(const std::string& name) const
 }
 
 void Product::addChild(std::shared_ptr<FileSystemNode>) noexcept {
+}
+
+void Product::updateVersion() {
+  archive->setName(getRequiredAttribute(Attribute::NAME) + ".zip");
+  directory->setName(getRequiredAttribute(Attribute::FILENAME));
 }
 
 } /* namespace OData */

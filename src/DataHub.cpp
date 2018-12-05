@@ -10,6 +10,7 @@
 #include "LRUCache.h"
 #include "PathBuilder.h"
 #include "Product.h"
+#include "ProductAttribute.h"
 #include "ProductPath.h"
 #include "ProductPlaceHolder.h"
 #include "ProductStorage.h"
@@ -79,7 +80,7 @@ struct DataHub::Impl {
       auto content =
           std::shared_ptr<Directory>(Directory::createRemoteStructure(
               product->getArchivePath(),
-              "extracted",
+              *product->getAttribute(Attribute::FILENAME),
               response_parser.parseManifest(manifest)));
       product->setArchiveStructure(
           std::move(content),
@@ -142,9 +143,7 @@ struct DataHub::Impl {
       continue_synchronously = 0;
       for (auto& mission : missions) {
         auto products = service_connection.listProducts(
-            {OData::SearchQuery::Keyword::PLATFORM, mission.first},
-            mission.second,
-            100);
+            {Attribute::PLATFORM, mission.first}, mission.second, 100);
         continue_synchronously += products.size();
         mission.second += products.size();
 
