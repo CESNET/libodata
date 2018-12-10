@@ -21,6 +21,7 @@ public:
   void toString(std::ostream& ostr, unsigned indent_level = 0) const override;
   bool compare(const FileSystemNode& node) const noexcept override;
   std::string getName() const noexcept override;
+  void setName(std::string name) noexcept override;
   std::shared_ptr<FileSystemNode> getFile(
       boost::filesystem::path::const_iterator begin,
       boost::filesystem::path::const_iterator end) const noexcept override;

@@ -33,7 +33,7 @@ TEST(XmlParserTest, TestListResponseParser) {
   ASSERT_EQ("2018-01-21", entries[0]->getDate());
   ASSERT_EQ(
       "S1B_IW_SLC__1SDV_20180121T165029_20180121T165056_009272_010A05_11E9."
-      "SAFE",
+      "zip",
       entries[0]->getFilename());
   ASSERT_EQ(7700000000UL, entries[0]->getSize());
 
@@ -45,7 +45,7 @@ TEST(XmlParserTest, TestListResponseParser) {
   ASSERT_EQ("2018-01-21", entries[3]->getDate());
   ASSERT_EQ(
       "S1B_IW_SLC__1SDV_20180121T165053_20180121T165120_009272_010A05_A393."
-      "SAFE",
+      "zip",
       entries[3]->getFilename());
   ASSERT_EQ(7700000UL, entries[3]->getSize());
 }

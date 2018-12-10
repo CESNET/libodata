@@ -38,6 +38,13 @@ std::string ProductPlaceHolder::getName() const noexcept {
   return name;
 }
 
+void ProductPlaceHolder::setName(std::string name) noexcept {
+  auto instance = getInstance();
+  if (instance != nullptr) {
+    return instance->setName(std::move(name));
+  }
+}
+
 std::shared_ptr<FileSystemNode> ProductPlaceHolder::getFile(
     boost::filesystem::path::const_iterator begin,
     boost::filesystem::path::const_iterator end) const noexcept {

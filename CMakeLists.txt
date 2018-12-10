@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project (odata VERSION 0.3.1)
+project (odata VERSION 0.4.0)
 
 #project definition
 set(CMAKE_CXX_STANDARD 14)
@@ -42,6 +42,7 @@ add_library(${LIB_NAME} SHARED
     src/LRUCache.h
     src/PathBuilder.cpp src/PathBuilder.h
     src/Product.cpp src/Product.h
+    src/ProductAttribute.h
     src/ProductFile.h
     src/ProductPath.cpp src/ProductPath.h
     src/ProductPlaceHolder.cpp src/ProductPlaceHolder.h

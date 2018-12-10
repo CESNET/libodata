@@ -23,6 +23,10 @@ std::string File::getName() const noexcept {
   return name;
 }
 
+void File::setName(std::string name) noexcept {
+  this->name = std::move(name);
+}
+
 std::shared_ptr<FileSystemNode> File::getFile(
     boost::filesystem::path::const_iterator,
     boost::filesystem::path::const_iterator) const noexcept {

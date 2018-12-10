@@ -51,6 +51,10 @@ std::string Directory::getName() const noexcept {
   return name;
 }
 
+void Directory::setName(std::string name) noexcept {
+  this->name = std::move(name);
+}
+
 std::shared_ptr<FileSystemNode> Directory::getFile(
     boost::filesystem::path::const_iterator begin,
     boost::filesystem::path::const_iterator end) const noexcept {

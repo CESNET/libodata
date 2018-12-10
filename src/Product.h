@@ -40,14 +40,15 @@ public:
   void toString(std::ostream& ostr, unsigned indent_level = 0) const override;
   bool compare(const FileSystemNode& node) const noexcept override;
   std::string getName() const noexcept override;
+  void setName(std::string name) noexcept override;
   std::shared_ptr<FileSystemNode> getFile(
       boost::filesystem::path::const_iterator begin,
       boost::filesystem::path::const_iterator end) const noexcept override;
   std::vector<std::string> readDir() const noexcept override;
   bool isDirectory() const noexcept override;
   std::size_t getSize() const noexcept override;
-  std::shared_ptr<FileSystemNode> getChild(
-      const std::string& name) const noexcept override;
+  std::shared_ptr<FileSystemNode> getChild(const std::string& name) const
+      noexcept override;
   void removeChild(const std::string& child_name) noexcept override;
   void addChild(std::shared_ptr<FileSystemNode> child) noexcept override;
   std::string getPlatform() const noexcept;
@@ -63,17 +64,19 @@ private:
   std::string getRequiredAttribute(const std::string& name) const noexcept;
   boost::optional<std::string> getDateAttribute(unsigned attribute) const
       noexcept;
+  void updateVersion();
 
   friend class boost::serialization::access;
   template <typename Archive> void serialize(Archive& ar, const unsigned int) {
     ar& boost::serialization::base_object<FileSystemNode>(*this);
-    std::uint32_t version = 1;
+    std::uint32_t version = 2;
     ar& version;
+    ar& attributes;
+    ar& directory;
+    ar& manifest;
+    ar& archive;
     if (version == 1) {
-      ar& attributes;
-      ar& directory;
-      ar& manifest;
-      ar& archive;
+      updateVersion();
     }
   }
   std::map<std::string, std::string> attributes;

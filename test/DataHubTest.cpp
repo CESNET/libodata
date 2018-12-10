@@ -24,9 +24,9 @@ const auto test_tree = "root {\n"
                        "\t\t\t\tsize=1000000KB\n"
                        "\t\t\t\tuuid=TEST_UUID0\n"
                        "\t\t\t\tfiles {\n"
-                       "\t\t\t\t\tTEST_FILE0( 1000000000 "
+                       "\t\t\t\t\tTEST_NAME0.zip( 1000000000 "
                        ")^Products('TEST_UUID0')/$value\n"
-                       "\t\t\t\t\textracted {\n"
+                       "\t\t\t\t\tTEST_FILE0 {\n"
                        "\t\t\t\t\t\ttestfile.xml( 44088 "
                        ")^Products('TEST_UUID0')/Nodes('TEST_FILE0')/"
                        "Nodes('testfile.xml')/$value\n"
@@ -49,9 +49,9 @@ const auto test_tree = "root {\n"
                        "\t\t\t\tsize=1000000KB\n"
                        "\t\t\t\tuuid=TEST_UUID1\n"
                        "\t\t\t\tfiles {\n"
-                       "\t\t\t\t\tTEST_FILE1( 1000000000 "
+                       "\t\t\t\t\tTEST_NAME1.zip( 1000000000 "
                        ")^Products('TEST_UUID1')/$value\n"
-                       "\t\t\t\t\textracted {\n"
+                       "\t\t\t\t\tTEST_FILE1 {\n"
                        "\t\t\t\t\t\ttestfile.xml( 44088 "
                        ")^Products('TEST_UUID1')/Nodes('TEST_FILE1')/"
                        "Nodes('testfile.xml')/$value\n"
@@ -74,9 +74,9 @@ const auto test_tree = "root {\n"
                        "\t\t\t\tsize=1000000KB\n"
                        "\t\t\t\tuuid=TEST_UUID2\n"
                        "\t\t\t\tfiles {\n"
-                       "\t\t\t\t\tTEST_FILE2( 1000000000 "
+                       "\t\t\t\t\tTEST_NAME2.zip( 1000000000 "
                        ")^Products('TEST_UUID2')/$value\n"
-                       "\t\t\t\t\textracted {\n"
+                       "\t\t\t\t\tTEST_FILE2 {\n"
                        "\t\t\t\t\t\ttestfile.xml( 44088 "
                        ")^Products('TEST_UUID2')/Nodes('TEST_FILE2')/"
                        "Nodes('testfile.xml')/$value\n"
@@ -105,9 +105,9 @@ const auto removed_product1_tree =
     "\t\t\t\tsize=1000000KB\n"
     "\t\t\t\tuuid=TEST_UUID0\n"
     "\t\t\t\tfiles {\n"
-    "\t\t\t\t\tTEST_FILE0( 1000000000 "
+    "\t\t\t\t\tTEST_NAME0.zip( 1000000000 "
     ")^Products('TEST_UUID0')/$value\n"
-    "\t\t\t\t\textracted {\n"
+    "\t\t\t\t\tTEST_FILE0 {\n"
     "\t\t\t\t\t\ttestfile.xml( 44088 "
     ")^Products('TEST_UUID0')/Nodes('TEST_FILE0')/"
     "Nodes('testfile.xml')/$value\n"
@@ -132,9 +132,9 @@ const auto removed_product1_tree =
     "\t\t\t\tsize=1000000KB\n"
     "\t\t\t\tuuid=TEST_UUID2\n"
     "\t\t\t\tfiles {\n"
-    "\t\t\t\t\tTEST_FILE2( 1000000000 "
+    "\t\t\t\t\tTEST_NAME2.zip( 1000000000 "
     ")^Products('TEST_UUID2')/$value\n"
-    "\t\t\t\t\textracted {\n"
+    "\t\t\t\t\tTEST_FILE2 {\n"
     "\t\t\t\t\t\ttestfile.xml( 44088 "
     ")^Products('TEST_UUID2')/Nodes('TEST_FILE2')/"
     "Nodes('testfile.xml')/$value\n"
@@ -206,12 +206,12 @@ TEST_F(DataHubTest, GetFileTest) {
   ASSERT_FALSE(
       data_hub
           .getFile(
-              "/TEST_PLATFORM/2018-03-08/TEST_NAME0/extracted/testfile.xml")
+              "/TEST_PLATFORM/2018-03-08/TEST_NAME0/TEST_FILE0/testfile.xml")
           ->isDirectory());
   ASSERT_EQ(
       (std::vector<char>{'o', 'd', 'u', 'c', 't'}),
       data_hub.getFile(
-          "/TEST_PLATFORM/2018-03-08/TEST_NAME0/extracted/testfile.xml", 2, 5));
+          "/TEST_PLATFORM/2018-03-08/TEST_NAME0/TEST_FILE0/testfile.xml", 2, 5));
 }
 } // namespace Test
 } // namespace OData

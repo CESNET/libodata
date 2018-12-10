@@ -24,6 +24,10 @@ std::string RemoteFile::getName() const noexcept {
   return name;
 }
 
+void RemoteFile::setName(std::string name) noexcept {
+  this->name = std::move(name);
+}
+
 std::shared_ptr<FileSystemNode> RemoteFile::getFile(
     boost::filesystem::path::const_iterator,
     boost::filesystem::path::const_iterator) const noexcept {

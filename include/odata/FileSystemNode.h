@@ -37,6 +37,11 @@ public:
   virtual std::string getName() const noexcept = 0;
 
   /**
+   * Set new node name
+   */
+  virtual void setName(std::string name) noexcept = 0;
+
+  /**
    * Search for child file
    * @param begin direct child name
    * @param end end of the path
