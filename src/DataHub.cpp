@@ -203,21 +203,14 @@ struct DataHub::Impl {
     if (path_it == end) {
       return data;
     }
-    auto file = data->getFile(path_it, end);
+    std::shared_ptr<FileSystemNode> file;
+    if (create_missing) {
+      file = data->getOrCreateSubdirectory(path_it, end);
+    } else {
+      file = data->getFile(path_it, end);
+    }
     if (file == nullptr) {
-      if (create_missing) {
-        file = data;
-        for (; path_it != end; ++path_it) {
-          auto child = file->getChild(path_it->string());
-          if (child == nullptr) {
-            child = std::make_shared<Directory>(path_it->string());
-            file->addChild(child);
-          }
-          file = child;
-        }
-      } else {
-        LOG(INFO) << "Invalid file '" << file_path << "' requested";
-      }
+      LOG(INFO) << "Invalid file '" << file_path << "' requested";
     }
     return file;
   }

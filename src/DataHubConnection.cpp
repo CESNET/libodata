@@ -3,7 +3,6 @@
 #include "DataHubException.h"
 #include "Product.h"
 #include "ProductAttribute.h"
-#include "ScopeGuard.h"
 #include "SearchQueryBuilder.h"
 #include "TemporaryFile.h"
 #include "XmlParser.h"

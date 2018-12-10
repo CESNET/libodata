@@ -49,7 +49,8 @@ std::unique_ptr<Directory> createFilesystem(
   auto filesystem = std::make_unique<Directory>("root");
   PathBuilder path_builder("/${platformname}/${date}");
   for (auto product : products) {
-    filesystem->getOrCreateSubdirectory(path_builder.createPath(*product))
+    const auto path = path_builder.createPath(*product);
+    filesystem->getOrCreateSubdirectory(++path.begin(), path.end())
         ->addChild(product);
   }
   return filesystem;

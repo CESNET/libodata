@@ -50,7 +50,8 @@ public:
    * @return requested subdirectory. Missing directories are created.
    */
   std::shared_ptr<FileSystemNode> getOrCreateSubdirectory(
-      const boost::filesystem::path& path) noexcept;
+      boost::filesystem::path::const_iterator begin,
+      boost::filesystem::path::const_iterator end) noexcept;
 
   /**
    * Generate filesystem structure based on data hub product content
