@@ -8,6 +8,9 @@ namespace OData {
 
 class Product;
 
+/**
+ * Iterator over products stored in storage
+ */
 class ProductIterator {
 public:
   ProductIterator() = default;
@@ -15,9 +18,16 @@ public:
   ProductIterator(const ProductIterator&) = delete;
   ProductIterator& operator=(const ProductIterator&) = delete;
 
+  /**
+   * @return next product or null if last product was reached
+   * @exception if storage error occurs
+   */
   virtual std::shared_ptr<Product> next() = 0;
 };
 
+/**
+ * Product storage interface. All operations must be thread safe.
+ */
 class ProductStorage {
 public:
   ProductStorage() = default;

@@ -10,6 +10,10 @@
 
 namespace OData {
 
+/**
+ * Product file which is not locally cached and content needs to be downloaded
+ * for data hub.
+ */
 class RemoteFile : public FileSystemNode, public ProductFile {
 public:
   RemoteFile() = default;

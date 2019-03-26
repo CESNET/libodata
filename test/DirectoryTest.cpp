@@ -134,5 +134,26 @@ TEST(DirectoryTest, SerializeTest) {
   ASSERT_EQ(*expected, deserialized);
 }
 
+TEST(DirectoryTest, GetOrCreateSubdirectoryTest) {
+  Directory instance("test");
+
+  boost::filesystem::path abc("a/b/c");
+  boost::filesystem::path abx("a/b/x");
+  ASSERT_EQ(
+      "c", instance.getOrCreateSubdirectory(abc.begin(), abc.end())->getName());
+  ASSERT_EQ(
+      "c", instance.getOrCreateSubdirectory(abc.begin(), abc.end())->getName());
+  ASSERT_EQ(
+      "x", instance.getOrCreateSubdirectory(abx.begin(), abx.end())->getName());
+
+  std::stringstream sstream(
+      std::ios_base::in | std::ios_base::out | std::ios_base::binary);
+  sstream << instance;
+  ASSERT_EQ(
+      "test {\n\ta {\n\t\tb {\n\t\t\tc {\n\t\t\t}\n\t\t\tx "
+      "{\n\t\t\t}\n\t\t}\n\t}\n}\n",
+      sstream.str());
+}
+
 } // namespace Test
 } // namespace OData

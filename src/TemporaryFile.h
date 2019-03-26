@@ -16,10 +16,21 @@ public:
   TemporaryFile(const TemporaryFile&) = delete;
   virtual ~TemporaryFile() = default;
   TemporaryFile& operator=(const TemporaryFile&) = delete;
+
+  /**
+   * Read file content
+   * @param offset position of first byte to read
+   * @param length how many bytes to read
+   * @return up to length bytes read from file or empty vector if offset is out
+   * of bounds
+   */
   virtual std::vector<char> read(
       off64_t offset, std::size_t length) noexcept = 0;
 };
 
+/**
+ * File cached on local filesystem. File is deleted on object destruction.
+ */
 class TemporaryFileImpl : public TemporaryFile {
 public:
   TemporaryFileImpl(

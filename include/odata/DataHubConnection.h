@@ -17,15 +17,26 @@ class SearchQuery;
  */
 class DataHubConnection : public Connection {
 public:
+  /**
+   * Constructor
+   * @param url data hub server url
+   * @param username data hub user name
+   * @param password data hub password
+   * @param validate_certificate if server certificate should be validated
+   */
   explicit DataHubConnection(
       std::string url,
       const std::string& username,
       const std::string& password,
       bool validate_certificate);
+  /**
+   * Constructor
+   * @param url data hub server url
+   * @param auth_token data hub server authentication token
+   * @param validate_certificate if server certificate should be validated
+   */
   explicit DataHubConnection(
-      std::string url,
-      std::string auth_token,
-      bool validate_certificate);
+      std::string url, std::string auth_token, bool validate_certificate);
   virtual ~DataHubConnection();
   DataHubConnection(const DataHubConnection&) = delete;
   DataHubConnection& operator=(const DataHubConnection&) = delete;

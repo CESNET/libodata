@@ -48,7 +48,6 @@ add_library(${LIB_NAME} SHARED
     src/ProductPlaceHolder.cpp src/ProductPlaceHolder.h
     src/ProductStorage.h
     src/RemoteFile.cpp src/RemoteFile.h
-    src/ScopeGuard.h
     src/SearchQuery.cpp src/SearchQuery.h
     src/SearchQueryBuilder.cpp src/SearchQueryBuilder.h
     src/SerializationHelpers.h
@@ -134,6 +133,7 @@ if(GTEST_FOUND)
         test/ProductPlaceHolderTest.cpp
         test/ProductTest.cpp
         test/RemoteFileTest.cpp
+        test/ScopeGuard.h
         test/SearchQueryTest.cpp
         test/SearchQueryBuilderTest.cpp
         test/TemporaryFileTest.cpp

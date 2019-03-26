@@ -10,8 +10,19 @@ namespace OData {
 class Product;
 class ProductStorage;
 
+/**
+ * Product placeholder is used to represent product in filesystem tree without a
+ * need to allocate all memory needed for product data. When product details are
+ * requested product data are fetched from specified product storage.
+ */
 class ProductPlaceHolder : public FileSystemNode {
 public:
+  /**
+   * Constructor
+   * @param id product identifier
+   * @param name product name
+   * @param product_storage storage where all product data are stored
+   */
   ProductPlaceHolder(
       std::string id,
       std::string name,

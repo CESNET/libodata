@@ -4,6 +4,10 @@
 #include <functional>
 
 namespace OData {
+
+/**
+ * Simple scope guard implementaion.
+ */
 struct ScopeGuard {
   ScopeGuard(std::function<void()> cleanup) : cleanup(std::move(cleanup)) {
   }

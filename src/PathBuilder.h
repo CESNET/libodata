@@ -9,6 +9,11 @@ namespace OData {
 
 class Product;
 
+/**
+ * Product filesystem path builder based on configuration template.
+ * String ${keyword} are replaced by property "keyword" value or by string
+ * "unknown" if there is no such property.
+ */
 class PathBuilder {
 public:
   PathBuilder();
@@ -17,6 +22,10 @@ public:
   ~PathBuilder();
   PathBuilder& operator=(PathBuilder&&);
 
+  /**
+   * Create product path
+   * @return product parent directory
+   */
   boost::filesystem::path createPath(const Product& product) const noexcept;
 
 private:

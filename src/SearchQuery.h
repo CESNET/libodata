@@ -26,6 +26,9 @@ public:
   SearchQuery& operator=(const SearchQuery&) = default;
   SearchQuery& operator=(SearchQuery&&) = default;
 
+  /**
+   * @return sorl query encoded for usage in URI
+   */
   const std::string& getQuery() const noexcept;
 
 private:

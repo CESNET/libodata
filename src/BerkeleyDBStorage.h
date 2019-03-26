@@ -8,6 +8,10 @@
 
 namespace OData {
 
+/**
+ * Product storage which stores products in embedded BerkeleyDB.
+ * Database is used as key/value storage.
+ */
 class BerkeleyDBStorage : public ProductStorage {
 public:
   explicit BerkeleyDBStorage(boost::filesystem::path db_path);

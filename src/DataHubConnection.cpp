@@ -2,7 +2,7 @@
 
 #include "DataHubException.h"
 #include "Product.h"
-#include "ScopeGuard.h"
+#include "ProductAttribute.h"
 #include "SearchQueryBuilder.h"
 #include "TemporaryFile.h"
 #include "XmlParser.h"
@@ -105,9 +105,9 @@ struct DataHubConnection::Impl {
   std::vector<char> sendListQuery(SearchQuery query, std::uint32_t offset) {
     SearchQueryBuilder query_builder;
     query_builder.setQuery(std::move(query));
-    query_builder.setStart(offset);
-    query_builder.setRows(100);
-    query_builder.setOrder("ingestiondate", true);
+    query_builder.setOffset(offset);
+    query_builder.setResultCount(100);
+    query_builder.setOrder(Attribute::INGESTION_DATE, true);
     MemoryCallback callback;
     getQuery(query_builder.build(), &callback);
     return std::move(callback.body);
